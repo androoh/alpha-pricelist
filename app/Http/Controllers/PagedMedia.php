@@ -35,7 +35,7 @@ class PagedMedia extends Controller
         $showCross = $showCross === 'true';
         $priceList = PriceList::find('6109a81ec49f065d5b658576');
         config(['app.template.locale' => $locale]);
-        return view('priceList', [
+        return view('pricelist', [
             'priceList' => $priceList,
             'locale' => $locale,
             'pageSize' => $pageSize,
