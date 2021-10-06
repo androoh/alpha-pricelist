@@ -1,0 +1,32 @@
+<div class="btn-group" *ngIf="fields && fields.length" dropdown placement="bottom right" container="body" [insideClick]="true">
+  <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+          aria-controls="dropdown-basic" title="Filter">
+    <i class="bi bi-funnel"></i> <span class="caret"></span>
+    <span *ngIf="nrFilters > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{nrFilters}}
+    </span>
+  </button>
+  <div id="dropdown-basic" *dropdownMenu class="dropdown-menu p-2 filter-dropdown dropdown-menu-right"
+       role="menu" aria-labelledby="button-basic">
+    <ng-container *ngIf="form && fields">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+      </form>
+      <button class="btn btn-danger mt-2 w-100" (click)="reset()">Reset</button>
+    </ng-container>
+  </div>
+</div>
+<!--<button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"-->
+<!--        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">-->
+<!--  <i class="bi bi-funnel"></i>-->
+<!--  <i class="bi bi-caret-down-fill"></i>-->
+<!--</button>-->
+<!--<div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">-->
+<!--  <ng-container *ngIf="form && fields">-->
+<!--    <form [formGroup]="form" (ngSubmit)="submit()">-->
+<!--      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>-->
+<!--      <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-funnel"></i></button>-->
+<!--    </form>-->
+<!--  </ng-container>-->
+<!--</div>-->
+

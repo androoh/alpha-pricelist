@@ -1,0 +1,10 @@
+<textarea
+  class="form-control"
+  *ngIf="!to?.html"
+  [formControl]="valueControl"
+  [cols]="to.cols"
+  [rows]="to.rows"
+  [class.is-invalid]="showError"
+  [formlyAttributes]="field"
+></textarea>
+<quill-editor *ngIf="to?.html" [formControl]="valueControl"></quill-editor>

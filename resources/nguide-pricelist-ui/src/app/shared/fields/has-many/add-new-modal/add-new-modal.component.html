@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <h5 class="modal-title">Add new items</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="bsModalRef.hide()"></button>
+</div>
+<div class="modal-body">
+  <input [formControl]="searchControl" placeholder="Search..." class="form-control">
+  <ngx-datatable
+    *ngIf="!loadingIndicator"
+    class="material h-100"
+    [rows]="rows"
+    [headerHeight]="'auto'"
+    [footerHeight]="'auto'"
+    [rowHeight]="'auto'"
+    [columnMode]="columnMode"
+    [limit]="listResponse.per_page"
+    [count]="listResponse.total"
+    [offset]="listResponse.current_page - 1"
+    (sort)="onSort($event)"
+    (page)="onPaginate($event)"
+    [externalSorting]="true"
+    [externalPaging]="true"
+    [loadingIndicator]="loadingIndicator"
+    [selected]="selected"
+    [selectionType]="SelectionType.checkbox"
+    [selectAllRowsOnPage]="false"
+    (select)="onSelect($event)"
+  >
+    <ngx-datatable-column
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="false"
+      [headerCheckboxable]="true"
+      [checkboxable]="true"
+    ></ngx-datatable-column>
+    <ngx-datatable-column
+      *ngFor="let column of columns"
+      [name]="column.name"
+      [path]="column.path"
+      [prop]="column.prop"
+      [draggable]="column.draggable"
+      [resizeable]="column.resizeable"
+      [sortable]="column.sortable"
+      [flexGrow]="column.flexGrow"
+    >
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        <ng-container *ngIf="column?.translatable; then thenBlock else elseBlock"></ng-container>
+        <ng-template #thenBlock>
+          <div class="text-truncate pr-2" [title]="getTranslatedValue(value)">{{getTranslatedValue(value)}}</div>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div class="text-truncate pr-2" [title]="value">{{value}}</div>
+        </ng-template>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="addItems()">Add</button>
+  <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Cancel</button>
+</div>

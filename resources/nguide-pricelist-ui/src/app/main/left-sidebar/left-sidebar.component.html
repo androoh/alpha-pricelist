@@ -1,0 +1,12 @@
+<ul class="nav flex-column">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['dashboard']" routerLinkActive="active"><i class="bi bi-house-door"></i> Dashboard</a>
+  </li>
+  <li class="nav-item" *ngFor="let item of resources">
+    <a class="nav-link" [routerLink]="['resources', item.name]" routerLinkActive="active">
+      <span *ngIf="item.icon" [innerHTML]="item.icon"></span>
+      {{item.pluralLabel}}
+    </a>
+  </li>
+</ul>
+

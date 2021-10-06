@@ -1,0 +1,33 @@
+
+.scroll-vertical {
+  overflow: hidden;
+  overflow-y: auto;
+}
+.layout {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+
+  grid-template-rows: 56px 33px auto 40px;
+  grid-template-columns: 150px auto;
+  grid-template-areas:
+    "header header header header"
+    "sidebar breadcrum breadcrum breadcrum"
+    "sidebar container container container"
+    "sidebar footer footer footer";
+  .layout-header {
+    grid-area: header;
+  }
+  .layout-sidebar {
+    grid-area: sidebar;
+  }
+  .layout-container {
+    grid-area: container;
+  }
+  .layout-footer {
+    grid-area: footer;
+  }
+  .layout-breadcrumb {
+    grid-area: breadcrum;
+  }
+}

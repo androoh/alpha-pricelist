@@ -1,0 +1,25 @@
+<div class="form-group" [class.has-error]="showError">
+  <label *ngIf="to.label && to.hideLabel !== true" [attr.for]="id">
+    {{ to.label }}
+    <span *ngIf="to.required && to.hideRequiredMarker !== true">*</span>
+  </label>
+  <div class="input-group">
+    <ng-template #fieldComponent></ng-template>
+    <button class="btn btn-outline-secondary"
+            *ngIf="getImg()"
+            type="button"
+            triggers="focus"
+            container="body"
+            placement="auto"
+            [adaptivePosition]="true"
+            [popover]="popTemplate"
+            title="Preview">
+      <i class="bi bi-eye"></i>
+    </button>
+  </div>
+  <div *ngIf="showError" class="invalid-feedback" [style.display]="'block'">
+    <formly-validation-message [field]="field"></formly-validation-message>
+  </div>
+  <small *ngIf="to.description" class="form-text text-muted">{{ to.description }}</small>
+</div>
+<ng-template #popTemplate><img class="d-block w-100" *ngIf="getImg()" [src]="getImg()" /></ng-template>

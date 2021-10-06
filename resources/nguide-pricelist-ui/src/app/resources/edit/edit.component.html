@@ -1,0 +1,35 @@
+<ng-container *ngIf="form && fields && resourceInfo">
+  <div class="pt-4 row sticky-top bg-white overflow-hidden border-bottom pb-2">
+    <h2 class="col-6 mb-0">{{action === 'create' ? 'Create' : 'Edit'}} {{resourceInfo.label}}</h2>
+    <div class="col-6 text-end row g-3 m-0">
+      <select class="form-select col me-2 mt-0" [formControl]="languageControl">
+        <option *ngFor="let locale of locales" [value]="locale.key">{{locale.value}}</option>
+      </select>
+      <button *ngIf="isPriceList"
+              type="button"
+              (click)="preview()"
+              class="btn btn-primary submit-button me-2 col mt-0">
+        <i class="bi bi-eye"></i> Preview
+      </button>
+      <button *ngIf="isPriceList"
+              type="button"
+              (click)="setPrices()"
+              class="btn btn-primary submit-button me-2 col mt-0">
+        <i class="bi bi-currency-euro"></i> Set Prices
+      </button>
+      <button *ngIf="form"
+              type="button"
+              class="btn btn-primary submit-button col mt-0"
+              (click)="submit()"
+              [disabled]="!form.valid">
+        <i class="bi bi-save"></i> Save
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="mt-2">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+  </form>
+</ng-container>
+<!--<pre [innerHTML]="model | json">-->
+
+<!--</pre>-->

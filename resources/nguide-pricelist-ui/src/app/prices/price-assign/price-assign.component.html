@@ -1,0 +1,24 @@
+<div class="pt-4 row sticky-top bg-white overflow-hidden pb-2 border-bottom">
+  <h2 class="col-9">Assign Prices</h2>
+  <div class="col-3 text-end">
+    <button type="button" class="btn btn-primary submit-button" (click)="submit()" [disabled]="!priceListId"><i
+      class="bi bi-save"></i> Save
+    </button>
+  </div>
+</div>
+<table class="table mt-2" *ngIf="priceLists.length > 0">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Sku</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let priceList of priceLists">
+    <td>{{priceList.name[defaultLocale] || '-'}}</td>
+    <td>{{priceList.sku}}</td>
+    <td><input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id]"/></td>
+  </tr>
+  </tbody>
+</table>

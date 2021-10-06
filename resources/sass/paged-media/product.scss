@@ -1,0 +1,807 @@
+$purple: #EC008C;
+$gray: #58595B;
+$gray1: #95A1A8;
+$gray2: #808284;
+$gray3: #8F989B;
+.product-page {
+    page: productPage;
+    position: relative;
+
+    .main-photo {
+        .info-note {
+            font-family: 'Neo Sans Pro Light Italic', sans-serif;
+            font-size: 10pt;
+            color: $purple;
+        }
+    }
+
+    .product-title {
+        font-family: 'Neo Sans Pro Bold', sans-serif;
+        font-size: 35pt;
+        color: $purple;
+    }
+
+    .standard-equipment {
+        .title {
+            font-size: 12pt;
+            font-family: 'Neo Sans Pro Light', sans-serif;
+            border-bottom: 1px #929294 solid;
+        }
+
+        .description {
+            font-family: 'Neo Sans Pro Light', sans-serif;
+            font-size: 10pt;
+
+        }
+    }
+}
+
+@page productPage {
+
+}
+
+table.options-table {
+    font-family: 'Neo Sans Pro Light', sans-serif;
+    color: $gray2;
+
+    thead tr, tr.thead {
+        font-size: 8pt;
+        color: white;
+        background-color: #A7B2B8 !important;
+        height: 11pt;
+    }
+
+    thead, tr.thead {
+        page-break-after: avoid;
+    }
+
+    tr {
+        font-size: 10pt;
+    }
+
+    tr:nth-child(even) {
+        background: #F2F3F5;
+    }
+
+    tr:nth-child(odd) {
+        background: #DFE4E7;
+    }
+
+    tr.even {
+        background: #F2F3F5 !important;
+    }
+
+    tr.odd {
+        background: #DFE4E7 !important;
+    }
+
+    tr.group-row {
+        background-color: white !important;
+        font-family: "Neo Sans Pro Regular", sans-serif;
+    }
+
+    td, th {
+        padding: 4pt 2pt 0 2pt;
+    }
+
+    .images-column {
+        padding: 0 !important;
+        background-color: white !important;
+        vertical-align: top;
+    }
+
+    .title-row {
+        background-color: white !important;
+        font-size: 11pt;
+    }
+}
+
+.product-sections {
+    .product-section {
+        .product-section-title {
+            font-size: 10pt;
+            color: white;
+            background-color: $gray1;
+            padding-top: 2pt;
+        }
+    }
+}
+
+.layout-1, .layout-2 {
+    .photo-gallery-3 {
+        //display: flex;
+        //flex-flow: row wrap;
+        //justify-content: space-between;
+
+        .photo-gallery-item {
+            width: 100%;
+
+            .img {
+                display: block;
+                width: 100%;
+                height: 128pt;
+                background-repeat: no-repeat;
+                background-position: top;
+                background-size: contain;
+                overflow: hidden;
+            }
+
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.photo-gallery-2 {
+    //display: flex;
+    //flex-flow: row wrap;
+    //justify-content: space-between;
+
+    .photo-gallery-item {
+        width: 100%;
+
+        .img {
+            display: block;
+            width: 100%;
+            height: 100pt;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.photo-gallery {
+    //display: flex;
+    //flex-flow: row wrap;
+    //justify-content: space-between;
+
+    .photo-gallery-item {
+        width: 100%;
+
+        .img {
+            display: block;
+            width: 100%;
+            height: 100pt;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+.product-grid-2 {
+    //display: flex;
+    //flex-flow: row wrap;
+    //justify-content: space-between;
+
+    .product-item {
+        width: 100%;
+        overflow: hidden;
+
+        .product-item-img {
+            display: block;
+            width: 100%;
+            height: 100pt;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            overflow: hidden;
+            position: relative;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .product-item-title {
+            position: absolute;
+            top: 5pt;
+            left: 0;
+            font-size: 11pt;
+            text-transform: uppercase;
+            color: white;
+            width: 70%;
+            padding: 3pt 4pt 0 4pt;
+            background: rgb(149, 161, 168);
+            background: linear-gradient(90deg, rgba(149, 161, 168, 1) 36%, rgba(234, 239, 243, 0) 100%);
+        }
+
+        .product-item-footer {
+            width: 60%;
+            font-size: 10pt;
+            padding: 3pt 4pt 0 4pt;
+            font-family: "Neo Sans Pro Light", sans-serif;
+            background: #C9D1D6;
+            color: $gray2;
+        }
+    }
+}
+
+.product-grid-3 {
+    //display: flex;
+    //flex-flow: row wrap;
+    //justify-content: space-between;
+    .product-item {
+        width: 100%;
+
+        .product-item-img {
+            display: block;
+            width: 100%;
+            height: 100pt;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .product-item-title {
+            font-size: 10pt;
+            font-family: "Neo Sans Pro Light", sans-serif;
+            padding: 3pt 4pt 0 4pt;
+            color: $gray2;
+            background-color: #F2F3F5;
+            height: 30pt;
+        }
+    }
+}
+
+.product-options-group-grid-2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    .product-options-group {
+        width: 49%;
+    }
+}
+
+.product-info {
+    position: relative;
+    color: $gray;
+
+    .info-icons {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.price {
+    color: #EC008C;
+    font-family: "Neo Sans Pro Regular", sans-serif;
+}
+
+.packaging-transport {
+    width: 100%;
+
+    .packaging-transport-item {
+        .packaging-transport-title {
+            background: rgb(143,152,155);
+            background: linear-gradient(90deg, rgba(143,152,155,1) 48%, rgba(255,255,255,1) 100%);
+            color: white;
+            font-size: 8pt;
+            page-break-after: avoid;
+        }
+        .packaging-transport-info {
+            width: 100%;
+            color: #808284;
+
+            .packaging-transport-label {
+                font-family: "Neo Sans Pro Light", sans-serif;
+                font-size: 12pt;
+            }
+
+            .packaging-notice {
+                font-family: "Neo Sans Pro Italic", sans-serif;
+                font-size: 9pt;
+                color: $purple;
+            }
+        }
+
+        table.packaging-transport-info {
+            th {
+                font-family: "Neo Sans Pro Light", sans-serif;
+                font-size: 8pt;
+            }
+
+            tbody {
+                font-family: "Neo Sans Pro Bold", sans-serif;
+                font-size: 8pt;
+            }
+        }
+    }
+}
+
+.second-page {
+    page: secondPage;
+    color: white;
+    position: relative;
+
+    .page-info {
+        position: absolute;
+        right: 31pt;
+        top: 27pt;
+        width: 225pt;
+
+        .title {
+            font-size: 64pt;
+            font-family: "Neo Sans Pro Bold", sans-serif;
+        }
+
+        .short-description {
+            font-size: 27pt;
+            font-family: "Neo Sans Pro Bold", sans-serif;
+        }
+    }
+}
+
+.icons-page-left {
+    page: iconsPageLeft;
+    color: white;
+    position: relative;
+
+    .page-info {
+        position: absolute;
+        left: 31pt;
+        top: 27pt;
+        width: 225pt;
+
+        .title {
+            font-size: 64pt;
+            font-family: "Neo Sans Pro Bold", sans-serif;
+        }
+
+        .short-description {
+            font-size: 27pt;
+            font-family: "Neo Sans Pro Bold", sans-serif;
+        }
+    }
+}
+
+.icons-page-right {
+    page: iconsPageRight;
+
+    .background-image {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0.5;
+    }
+
+    .info-icon-description {
+        font-size: 8pt;
+        font-family: "Neo Sans Pro Light", sans-serif;
+    }
+
+    .info-icon-img {
+        height: 40pt;
+    }
+}
+
+.category-page-left {
+    page: categoryPageLeft;
+    break-before: left;
+}
+
+.category-page-right {
+    page: categoryPageRight;
+    position: relative;
+    color: white;
+
+    .title {
+        position: absolute;
+        font-size: 50pt;
+        font-family: "Neo Sans Pro Regular", sans-serif;
+        bottom: 50pt;
+        right: 30pt;
+        width: auto;
+        text-align: right;
+        text-transform: uppercase;
+    }
+}
+
+.toc-page {
+    page: tocPage;
+    color: $gray;
+    padding-right: 10pt;
+    padding-left: 10pt;
+
+    h1 {
+        font-family: "Neo Sans Pro Light", sans-serif;
+        font-size: 24pt;
+        border-bottom: 1pt $gray solid;
+
+        strong {
+            font-family: "Neo Sans Pro Bold", sans-serif;
+        }
+    }
+
+    .category-section {
+        .category-title {
+            font-size: 12pt;
+            font-family: "Neo Sans Pro Bold", sans-serif;
+            border-bottom: 1pt $gray solid;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 5pt;
+        }
+
+        .category-item {
+            padding-left: 15pt;
+            color: #97999C;
+            position: relative;
+
+            &::after {
+                content: "................................................";
+                float: left;
+                width: 0;
+                padding-left: 5pt;
+                letter-spacing: 2pt;
+                font-size: 10pt;
+            }
+
+            a {
+                font-size: 10pt;
+                text-decoration: none;
+                color: #97999C;
+                background-color: white;
+
+                &::after {
+                    position: absolute;
+                    right: 0;
+                    background-color: white;
+                    padding-left: 3pt;
+                    content: target-counter(attr(href), page);
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+.product-page {
+    page: productPage;
+
+    .page-body {
+        position: relative;
+    }
+}
+
+.product-options-page {
+    page: productOptionsPage;
+}
+
+.category-page-left, .category-page-right, .first-page, .second-page, .icons-page-left, .icons-page-right {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.first-page {
+    position: relative;
+    color: white;
+    font-size: 38pt;
+
+    .page-info {
+        position: absolute;
+        left: 0;
+        bottom: 100pt;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+
+        .title {
+
+        }
+
+        .type {
+            font-weight: lighter;
+        }
+    }
+}
+
+@page :first {
+    margin: 0;
+    padding: 0;
+}
+
+@page categoryPageLeft {
+    margin: 0;
+    padding: 0;
+}
+
+@page categoryPageRight {
+    margin: 0;
+    padding: 0;
+}
+
+@page secondPage {
+
+}
+
+@page iconsPageLeft {
+    break-before: left;
+}
+
+@page iconsPageRight {
+    break-before: right;
+}
+
+@page tocPage {
+    margin-left: 30pt;
+    margin-right: 20pt;
+    @top-right-corner {
+        background-color: $purple;
+        overflow: hidden;
+        content: "";
+    }
+    @right-top {
+        background-color: $purple;
+        content: "";
+    }
+    @bottom-right-corner {
+        background-color: $purple;
+        content: "";
+    }
+}
+
+@page productPage {
+    margin-top: 50pt;
+    margin-bottom: 36pt;
+    @top-center {
+        text-align: left;
+    }
+    @top-left {
+        width: 0;
+    }
+    @top-right {
+        width: 0;
+    }
+    @bottom-left {
+        width: 0
+    }
+    @bottom-right {
+        width: 0;
+    }
+    @bottom-center {
+        content: element(productPageFooter);
+        text-align: left;
+    }
+}
+
+@page productPage:left {
+    @top-center {
+        content: element(leftHeader);
+    }
+    @bottom-left-corner {
+        background-color: #A9B1B6;
+        content: "";
+    }
+    @bottom-left {
+        width: 20pt;
+        background-color: #A9B1B6;
+        font-size: 8pt;
+        color: white;
+        padding-right: 5pt;
+        text-align: right;
+        content: counter(page);
+    }
+}
+
+@page productPage:right {
+    @top-center {
+        content: element(rightHeader);
+    }
+    @right-top {
+        content: element(rightBadge);
+    }
+    @bottom-right-corner {
+        background-color: #A9B1B6;
+        content: "";
+    }
+    @bottom-right {
+        width: 20pt;
+        background-color: #A9B1B6;
+        font-size: 8pt;
+        color: white;
+        text-align: left;
+        padding-left: 5pt;
+        content: counter(page);
+    }
+}
+
+@page productOptionsPage {
+    margin-top: 50pt;
+    margin-bottom: 36pt;
+    @top-center {
+        text-align: left;
+    }
+    @top-left {
+        width: 0;
+    }
+    @top-right {
+        width: 0;
+    }
+    @bottom-left {
+        width: 0
+    }
+    @bottom-right {
+        width: 0;
+    }
+    @bottom-center {
+        content: element(productOptionsPageFooter);
+        text-align: left;
+    }
+}
+
+@page productOptionsPage:left {
+    @top-center {
+        content: element(leftHeader);
+    }
+    @bottom-left-corner {
+        background-color: #A9B1B6;
+        content: "";
+    }
+    @bottom-left {
+        width: 20pt;
+        background-color: #A9B1B6;
+        font-size: 8pt;
+        color: white;
+        padding-right: 5pt;
+        text-align: right;
+        content: counter(page);
+    }
+}
+
+@page productOptionsPage:right {
+    @top-center {
+        content: element(rightHeader);
+    }
+    @bottom-right-corner {
+        background-color: #A9B1B6;
+        content: "";
+    }
+    @bottom-right {
+        width: 20pt;
+        background-color: #A9B1B6;
+        font-size: 8pt;
+        color: white;
+        text-align: left;
+        padding-left: 5pt;
+        content: counter(page);
+    }
+}
+
+.left-header {
+    position: running(leftHeader);
+    font-family: "Neo Sans Pro Light", sans-serif;
+    margin-left: -36pt;
+
+    .price-list-type {
+        background-color: #4D4E4D;
+        color: white;
+        font-size: 13pt;
+        padding: 5pt 15pt 0 65pt;
+        text-transform: uppercase;
+        position: relative;
+        overflow: visible;
+
+        &::after {
+            content: "";
+            background-color: #4D4E4D;
+            width: 5pt;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: -8pt;
+        }
+    }
+
+    .product-complexity {
+        color: $purple;
+        font-size: 16pt;
+        padding-top: 3pt;
+    }
+
+    .category-name {
+        font-size: 16pt;
+        color: #797A7D;
+        padding-top: 3pt;
+    }
+}
+
+
+.right-header {
+    position: running(rightHeader);
+    font-family: "Neo Sans Pro Light", sans-serif;
+    margin-right: -36pt;
+
+    .product-complexity {
+        color: #A9B1B6;
+        font-size: 16pt;
+        padding-top: 3pt;
+    }
+
+    .category-name {
+        font-size: 16pt;
+        color: white;
+        background-color: #A9B1B6;
+        position: relative;
+        padding: 3pt 65pt 0 12pt;
+
+        &::before {
+            content: "";
+            background-color: #A9B1B6;
+            width: 5pt;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: -8pt;
+        }
+    }
+}
+
+.right-badge {
+    background-color: $purple;
+    color: white;
+    font-size: 17pt;
+    overflow: hidden;
+    margin-top: 250pt;
+    padding: 10pt 2pt 10pt 8pt;
+    text-transform: uppercase;
+    writing-mode: tb-rl;
+    transform: rotate(-180deg);
+    float: right;
+    position: running(rightBadge);
+}
+
+.product-page-footer {
+    position: running(productPageFooter);
+    font-size: 8pt;
+    color: #808284;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    i {
+        font-family: "Neo Sans Pro Italic", sans-serif;
+    }
+}
+.product-options-page-footer {
+    position: running(productOptionsPageFooter);
+    font-size: 8pt;
+    color: #808284;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    i {
+        font-family: "Neo Sans Pro Italic", sans-serif;
+    }
+}
+ul {
+    padding-left: 10pt;
+}

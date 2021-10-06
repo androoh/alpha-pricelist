@@ -1,0 +1,13 @@
+<div class="layout">
+  <app-header class="layout-header"></app-header>
+  <app-left-sidebar class="layout-sidebar pt-2 bg-light scroll-vertical border-end"></app-left-sidebar>
+  <app-breadcrumbs class="layout-breadcrumb"></app-breadcrumbs>
+  <div class="layout-container scroll-vertical">
+    <div class="container-fluid h-100">
+      <app-alerts></app-alerts>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-footer class="layout-footer"></app-footer>
+</div>
+<app-loading></app-loading>

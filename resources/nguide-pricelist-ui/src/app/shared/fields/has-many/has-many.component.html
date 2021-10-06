@@ -1,0 +1,61 @@
+<div class="card mt-3">
+  <h5 class="card-header mb-0">
+    {{ to.label }}
+    <button type="button" class="btn btn-success btn-sm float-end" (click)="openModalWithComponent()">
+      <i class="bi bi-plus-circle"></i>
+      Add
+    </button>
+  </h5>
+  <div class="card-body p-0">
+    <ngx-datatable
+      class="material h-100"
+      [rows]="table.rows"
+      [headerHeight]="'auto'"
+      [footerHeight]="'auto'"
+      [rowHeight]="'auto'"
+      [columnMode]="columnMode"
+      [limit]="table.perPage"
+      [count]="table.total"
+      [offset]="table.currentPage"
+      (sort)="table.onSort($event)"
+      (page)="table.onPaginate($event)"
+      [externalSorting]="true"
+      [externalPaging]="true"
+      [loadingIndicator]="table.loadingIndicator"
+    >
+      <ngx-datatable-column
+        *ngFor="let column of table.columns"
+        [name]="column.name"
+        [path]="column.path"
+        [prop]="column.prop"
+        [draggable]="column.draggable"
+        [resizeable]="column.resizeable"
+        [sortable]="column.sortable"
+        [flexGrow]="column.flexGrow"
+      >
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <ng-container *ngIf="column?.translatable; then thenBlock else elseBlock"></ng-container>
+          <ng-template #thenBlock>
+            <div class="text-truncate pr-2" [title]="table.getTranslatedValue(value)">{{table.getTranslatedValue(value)}}</div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="text-truncate pr-2" [title]="value">{{value}}</div>
+          </ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [draggable]="false"
+        [resizeable]="false"
+        [sortable]="false"
+        [flexGrow]="1"
+      >
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+          <button class="btn btn-danger btn-sm float-end" type="button" (click)="remove(row.id)">
+            <i class="bi bi-trash"></i>
+            Remove
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

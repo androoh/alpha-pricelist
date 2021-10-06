@@ -1,0 +1,75 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/themes/bootstrap.css';
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
+@import "~bootstrap/scss/alert";
+
+@import '~quill/dist/quill.core.css';
+//@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+.ngx-datatable.material {
+  box-shadow: none;
+}
+.h-100 {
+  height: 100%;
+}
+.nav-link {
+  &.active {
+    color: #333333;
+  }
+}
+.bg-blue {
+  background-color: #1976d2;
+}
+.alert {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
+}
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: .75rem 1.25rem;
+  color: inherit;
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+}
+.filter-dropdown {
+  min-width: 15rem !important;
+}

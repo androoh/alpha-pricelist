@@ -1,0 +1,17 @@
+<input
+  *ngIf="type !== 'number'; else numberTmp"
+  [type]="type"
+  [formControl]="valueControl"
+  class="form-control"
+  [formlyAttributes]="field"
+  [class.is-invalid]="showError"
+/>
+<ng-template #numberTmp>
+  <input
+    type="number"
+    [formControl]="valueControl"
+    class="form-control"
+    [formlyAttributes]="field"
+    [class.is-invalid]="showError"
+  />
+</ng-template>

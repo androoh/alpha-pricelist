@@ -1,0 +1,17 @@
+<accordion class="mt-2" closeOthers="true" [isAnimated]="true">
+  <div class="card">
+    <h5 class="card-header">{{ to.label }}</h5>
+    <div class="card-body">
+      <accordion-group *ngFor="let field of field.fieldGroup; let i = index;">
+        <div class="clearfix" accordion-heading>
+          <a class="float-start">{{to.label + ' #' + (i + 1)}}</a>
+          <button type="button" class="btn btn-danger btn-sm float-end" (click)="remove(i)"><i class="bi bi-trash"></i> Remove</button>
+        </div>
+        <formly-field [field]="field"></formly-field>
+      </accordion-group>
+    </div>
+  </div>
+</accordion>
+<div class="mt-2 mb-2">
+  <button class="btn btn-primary" type="button" (click)="add()">{{ to.addText }}</button>
+</div>

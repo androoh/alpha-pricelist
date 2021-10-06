@@ -1,0 +1,10 @@
+.pages-container {
+  background-color: #333333;
+  padding: 10px;
+  ::ng-deep {
+    .pagedjs_page {
+      background-color: #ffffff;
+      margin: 10px auto;
+    }
+  }
+}

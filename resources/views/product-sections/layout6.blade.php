@@ -1,0 +1,75 @@
+<div class="layout-6">
+    @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
+        <div class="mb-1">
+            @php
+                $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
+                $photoGalleryUrls = [];
+                foreach($photoGallery as $photo) {
+                    $photoUrl = data_get($photo, 'url', false);
+                    if ($photoUrl) {
+                        $photoGalleryUrls[] = $photoUrl;
+                    }
+                }
+            @endphp
+            <div class="photo-gallery-2">
+                <table>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach($photoGalleryUrls as $url)
+                        @php
+                            $i++;
+                        @endphp
+                        @if($i === 1)
+                            <tr class="page-break-inside-avoid">
+                                @endif
+                                <td class="@if($i === 1) pe-1 @endif @if($i === 2) ps-1 @endif">
+                                    <div class="photo-gallery-item">
+                                        <img src="{{$url}}"/>
+                                    </div>
+                                </td>
+                                @if($i === 3)
+                            </tr>
+                        @endif
+                        @php
+                            if($i === 2) {
+                                $i = 0;
+                            }
+                        @endphp
+                    @endforeach
+                </table>
+            </div>
+            <table class="options-table w-100">
+                <thead>
+                <tr>
+                    <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
+                    <th class="text-start">Art. No.</th>
+                    <th class="text-end">TP</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach(data_get($productOptionSection, 'product_options', []) as $productOption)
+                    @php
+                        $productOptionData = null;
+                        $productOptionId = data_get($productOption, 'id', false);
+                        if ($productOptionId) {
+                            $productOptionData = \App\Models\Product::find($productOptionId);
+                        }
+                    @endphp
+                    @if($productOptionData)
+                        @php
+                            $price = data_get($prices, $productOptionId, 0);
+                            $formatType = data_get($productOptionData, 'price_options.type', null);
+                        @endphp
+                        <tr>
+                            <td class="text-start">@t($productOptionData, 'name', '')</td>
+                            <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
+                            <td class="price text-end">@price($price, $formatType)</td>
+                        </tr>
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endforeach
+</div>

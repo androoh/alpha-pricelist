@@ -1,0 +1,138 @@
+@extends('layouts.app')
+@section('styles')
+    <style>
+        @media print {
+            @page {
+                size: {{$pageSize}} {{$pageOrientation}};
+                margin: 36pt;
+                @if ($showCropBorders || $showCross)
+                    marks: @if($showCropBorders) crop @endif @if($showCross) cross @endif;
+                @endif
+            }
+        }
+    </style>
+@endsection
+@section('content')
+    @php
+        $productTree = [];
+        $infoIconIds = [];
+        foreach (data_get($priceList, 'mainProductsPage.main_products') as $product) {
+            if ($productId = data_get($product, 'id', false)) {
+                if ($productData = \App\Models\Product::find($productId)) {
+                    $categoryId = data_get($productData, 'mainProductFields.category', false);
+                    if ($categoryId && $categoryData = \App\Models\Category::find($categoryId)) {
+                        if (!isset($productTree[$categoryId])) {
+                            $productTree[$categoryId]['category'] = $categoryData;
+                            $productTree[$categoryId]['products'] = [];
+                        }
+                        $productTree[$categoryId]['products'][] = $productData;
+                        $infoIconIds = array_merge($infoIconIds, data_get($productData, 'mainProductFields.info_icons', []));
+                    }
+                }
+            }
+        }
+        $optionsAndAccessoriesPage = data_get($priceList, 'optionsAndAccessoriesPage', false);
+        $currency = data_get($priceList, 'currency', 'EUR');
+        setGlobalCurrency($currency);
+    @endphp
+    <div class="first-page"
+         style="background-image: url('{{data_get($priceList, 'firstPage.photo.0.url', null)}}')">
+        <div class="page-info">
+            <div class="title">@t($priceList, 'firstPage.name', 'Price list')</div>
+            <div class="type">@t($priceList, 'firstPage.type', 'Trade')</div>
+            <div class="language">@t($priceList, 'firstPage.language', 'En')</div>
+        </div>
+    </div>
+    <div class="second-page" style="background-image: url('{{data_get($priceList, 'secondPage.photo.0.url', null)}}')">
+        <div class="page-info">
+            <h2 class="title p-0 m-0">@t($priceList, 'secondPage.title', 'Title placeholder')</h2>
+            <p class="short-description p-0 m-0">@t($priceList, 'secondPage.short_description', 'Title placeholder')</p>
+        </div>
+    </div>
+    <div class="toc-page">
+        <h1>Table of <strong>CONTENTS</strong></h1>
+        <div class="columns-count-2">
+            @foreach($productTree as $categoryId => $treeItem)
+                <div class="category-section">
+                    <h3 class="category-title">@t($treeItem['category'], 'name', '')</h3>
+                    @foreach($treeItem['products'] as $product)
+                        <div class="category-item"><a
+                                href="#product-{{$product->getKey()}}">@t($product, 'name', '')</a></div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="icons-page-left page-break-before"
+         style="background-image: url('{{data_get($priceList, 'iconsPage.photo_left_page.0.url', null)}}')">
+        <div class="page-info">
+            <h2 class="title p-0 m-0">@t($priceList, 'iconsPage.title', 'Title placeholder')</h2>
+            <p class="short-description p-0 m-0">@t($priceList, 'iconsPage.short_description', 'Title placeholder')</p>
+        </div>
+    </div>
+    <div class="icons-page-right">
+        @php
+            if (count($infoIconIds) > 0) {
+                $infoIcons = \App\Models\InfoIcon::find($infoIconIds);
+            }
+        @endphp
+        <table style="height: 100%; width: 100%;">
+            <tr>
+                <td class="w-50" style="vertical-align: top;">
+                    @if(count($infoIcons) > 0)
+                        <table>
+                            @foreach($infoIcons as $infoIcon)
+                                <tr>
+                                    <td class="text-center"><img src="{{data_get($infoIcon, 'iconPhoto.0.url', null)}}"
+                                                                 class="info-icon-img"/></td>
+                                    <td style="vertical-align: top;">
+                                        <div
+                                            class="info-icon-description text-start ms-2 me-2">@t($infoIcon,
+                                            'description', '-')
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @endif
+                </td>
+                <td class="w-50">
+                    <div class="background-image"
+                         style="background-image: url('{{data_get($priceList, 'iconsPage.photo_right_page.0.url', null)}}')"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    @foreach($productTree as $categoryId => $treeItem)
+        <div class="category-page-left"
+             style="background-image: url('{{data_get($treeItem['category'], 'left_page_photo.0.url')}}')">
+        </div>
+        <div class="category-page-right"
+             style="background-image: url('{{data_get($treeItem['category'], 'right_page_photo.0.url')}}')">
+            <div class="title">@t($treeItem, 'category.name')</div>
+        </div>
+        @foreach($treeItem['products'] as $product)
+            @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $treeItem['category']])
+        @endforeach
+    @endforeach
+    @if ($optionsAndAccessoriesPage)
+        <div class="category-page-left"
+             style="background-image: url('{{data_get($optionsAndAccessoriesPage, 'left_page_photo.0.url')}}')">
+        </div>
+        <div class="category-page-right"
+             style="background-image: url('{{data_get($optionsAndAccessoriesPage, 'right_page_photo.0.url')}}')">
+            <div class="title">@t($optionsAndAccessoriesPage, 'title')</div>
+        </div>
+        <div class="product-options-page">
+            <div class="left-header">
+            </div>
+            <div class="right-header">
+                <div class="d-flex justify-content-end">
+                    <div class="category-name">@t($priceList, 'firstPage.type', 'Trade')</div>
+                </div>
+            </div>
+            <div class="product-options-page-footer">@t($priceList, 'mainProductsPage.footer_text', '-')</div>
+            @include('product-sections', ['productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+        </div>
+    @endif
+@endsection

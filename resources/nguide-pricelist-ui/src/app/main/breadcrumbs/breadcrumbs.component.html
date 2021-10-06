@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb" *ngIf="breadcrumb && breadcrumb.length > 0" class="container-fluid mt-2">
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item" *ngFor="let breadcrumbItem of breadcrumb; let i = index">
+      <a *ngIf="i < (breadcrumb.length - 1)"
+         class="breadcrumb-item text-truncate"
+         [title]="breadcrumbItem.label"
+         [routerLink]="breadcrumbItem.path"
+         routerLinkActive="active">{{breadcrumbItem.label}}</a>
+      <span *ngIf="i === (breadcrumb.length - 1)"
+            class="text-truncate"
+            [title]="breadcrumbItem.label"
+      >{{breadcrumbItem.label}}</span>
+    </li>
+  </ol>
+</nav>

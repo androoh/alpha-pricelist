@@ -1,0 +1,58 @@
+@import "../fonts";
+@import "../../../node_modules/bootstrap/scss/bootstrap-utilities";
+@media print {
+    //.pagedjs_pages {
+    //    background-color: transparent;
+    //}
+    //.pagedjs_page {
+    //    margin : 0;
+    //    background-color: transparent;
+    //}
+}
+
+@media screen {
+    body {
+        background-color: #4a5568;
+    }
+    .pagedjs_page {
+        background-color: white;
+        margin: 10px auto;
+    }
+    .pagedjs_page {
+        margin : 10px auto;
+        background-color: white;
+    }
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Neo Sans Pro Regular', sans-serif;
+}
+.page-break-after {
+    page-break-after: always;
+}
+.page-break-after-avoid {
+    break-after: avoid !important;
+}
+.page-break-before {
+    page-break-before: always;
+}
+.page-break-inside-avoid {
+    break-inside: avoid !important;
+}
+.break-inside-avoid-region {
+    break-inside: avoid-region;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.d-block {
+    display: block;
+}
+.columns-count-2 {
+    column-count: 2;
+    column-gap: 20pt;
+}
+@import "product";

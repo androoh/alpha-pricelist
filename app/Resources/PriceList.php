@@ -1,0 +1,532 @@
+<?php
+
+
+namespace App\Resources;
+
+
+use App\Formly\FormlyFieldConfig;
+use Money\Currencies\ISOCurrencies;
+
+class PriceList extends ResourceAbstract
+{
+    protected static $label = 'Price list';
+    protected static $model = \App\Models\PriceList::class;
+    protected static $searchBy = ['name'];
+    protected static $icon = '<i class="bi bi-currency-dollar"></i>';
+    protected $curencies = [];
+    protected $currenciesMap = [
+        'ALL' => 'Albania Lek',
+        'AFN' => 'Afghanistan Afghani',
+        'ARS' => 'Argentina Peso',
+        'AWG' => 'Aruba Guilder',
+        'AUD' => 'Australia Dollar',
+        'AZN' => 'Azerbaijan New Manat',
+        'BSD' => 'Bahamas Dollar',
+        'BBD' => 'Barbados Dollar',
+        'BDT' => 'Bangladeshi taka',
+        'BYR' => 'Belarus Ruble',
+        'BZD' => 'Belize Dollar',
+        'BMD' => 'Bermuda Dollar',
+        'BOB' => 'Bolivia Boliviano',
+        'BAM' => 'Bosnia and Herzegovina Convertible Marka',
+        'BWP' => 'Botswana Pula',
+        'BGN' => 'Bulgaria Lev',
+        'BRL' => 'Brazil Real',
+        'BND' => 'Brunei Darussalam Dollar',
+        'KHR' => 'Cambodia Riel',
+        'CAD' => 'Canada Dollar',
+        'KYD' => 'Cayman Islands Dollar',
+        'CLP' => 'Chile Peso',
+        'CNY' => 'China Yuan Renminbi',
+        'COP' => 'Colombia Peso',
+        'CRC' => 'Costa Rica Colon',
+        'HRK' => 'Croatia Kuna',
+        'CUP' => 'Cuba Peso',
+        'CZK' => 'Czech Republic Koruna',
+        'DKK' => 'Denmark Krone',
+        'DOP' => 'Dominican Republic Peso',
+        'XCD' => 'East Caribbean Dollar',
+        'EGP' => 'Egypt Pound',
+        'SVC' => 'El Salvador Colon',
+        'EEK' => 'Estonia Kroon',
+        'EUR' => 'Euro Member Countries',
+        'FKP' => 'Falkland Islands (Malvinas) Pound',
+        'FJD' => 'Fiji Dollar',
+        'GHC' => 'Ghana Cedis',
+        'GIP' => 'Gibraltar Pound',
+        'GTQ' => 'Guatemala Quetzal',
+        'GGP' => 'Guernsey Pound',
+        'GYD' => 'Guyana Dollar',
+        'HNL' => 'Honduras Lempira',
+        'HKD' => 'Hong Kong Dollar',
+        'HUF' => 'Hungary Forint',
+        'ISK' => 'Iceland Krona',
+        'INR' => 'India Rupee',
+        'IDR' => 'Indonesia Rupiah',
+        'IRR' => 'Iran Rial',
+        'IMP' => 'Isle of Man Pound',
+        'ILS' => 'Israel Shekel',
+        'JMD' => 'Jamaica Dollar',
+        'JPY' => 'Japan Yen',
+        'JEP' => 'Jersey Pound',
+        'KZT' => 'Kazakhstan Tenge',
+        'KPW' => 'Korea (North) Won',
+        'KRW' => 'Korea (South) Won',
+        'KGS' => 'Kyrgyzstan Som',
+        'LAK' => 'Laos Kip',
+        'LVL' => 'Latvia Lat',
+        'LBP' => 'Lebanon Pound',
+        'LRD' => 'Liberia Dollar',
+        'LTL' => 'Lithuania Litas',
+        'MKD' => 'Macedonia Denar',
+        'MYR' => 'Malaysia Ringgit',
+        'MUR' => 'Mauritius Rupee',
+        'MXN' => 'Mexico Peso',
+        'MNT' => 'Mongolia Tughrik',
+        'MZN' => 'Mozambique Metical',
+        'NAD' => 'Namibia Dollar',
+        'NPR' => 'Nepal Rupee',
+        'ANG' => 'Netherlands Antilles Guilder',
+        'NZD' => 'New Zealand Dollar',
+        'NIO' => 'Nicaragua Cordoba',
+        'NGN' => 'Nigeria Naira',
+        'NOK' => 'Norway Krone',
+        'OMR' => 'Oman Rial',
+        'PKR' => 'Pakistan Rupee',
+        'PAB' => 'Panama Balboa',
+        'PYG' => 'Paraguay Guarani',
+        'PEN' => 'Peru Nuevo Sol',
+        'PHP' => 'Philippines Peso',
+        'PLN' => 'Poland Zloty',
+        'QAR' => 'Qatar Riyal',
+        'RON' => 'Romania New Leu',
+        'RUB' => 'Russia Ruble',
+        'SHP' => 'Saint Helena Pound',
+        'SAR' => 'Saudi Arabia Riyal',
+        'RSD' => 'Serbia Dinar',
+        'SCR' => 'Seychelles Rupee',
+        'SGD' => 'Singapore Dollar',
+        'SBD' => 'Solomon Islands Dollar',
+        'SOS' => 'Somalia Shilling',
+        'ZAR' => 'South Africa Rand',
+        'LKR' => 'Sri Lanka Rupee',
+        'SEK' => 'Sweden Krona',
+        'CHF' => 'Switzerland Franc',
+        'SRD' => 'Suriname Dollar',
+        'SYP' => 'Syria Pound',
+        'TWD' => 'Taiwan New Dollar',
+        'THB' => 'Thailand Baht',
+        'TTD' => 'Trinidad and Tobago Dollar',
+        'TRY' => 'Turkey Lira',
+        'TRL' => 'Turkey Lira',
+        'TVD' => 'Tuvalu Dollar',
+        'UAH' => 'Ukraine Hryvna',
+        'GBP' => 'United Kingdom Pound',
+        'USD' => 'United States Dollar',
+        'UYU' => 'Uruguay Peso',
+        'UZS' => 'Uzbekistan Som',
+        'VEF' => 'Venezuela Bolivar',
+        'VND' => 'Viet Nam Dong',
+        'YER' => 'Yemen Rial',
+        'ZWD' => 'Zimbabwe Dollar'
+    ];
+
+    protected function getCurrenciesOptions()
+    {
+        $isoCurrencies = new ISOCurrencies();
+        $options = [];
+        foreach ($isoCurrencies as $isoCurrency) {
+            if (isset($this->currenciesMap[$isoCurrency->getCode()]) && $label = $this->currenciesMap[$isoCurrency->getCode()]) {
+                $options[] = [
+                    'label' => $label,
+                    'value' => $isoCurrency->getCode()
+                ];
+            }
+        }
+        return $options;
+    }
+
+    public function fields($request)
+    {
+        $languages = config('app.locales');
+        $languageList = [];
+        foreach ($languages as $key => $value) {
+            $languageList[] = [
+                'label' => $value,
+                'value' => $key
+            ];
+        }
+        return [
+            new FormlyFieldConfig([
+                'key' => 'name',
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'templateOptions' => [
+                    'label' => 'Price list name',
+                    'translatable' => true,
+                    'filterable' => true,
+                    'required' => true,
+                    'sortable' => true,
+                    'showInGrid' => true
+                ],
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'layout',
+                'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                'defaultValue' => 'layout1',
+                'templateOptions' => [
+                    'label' => 'Layout',
+                    'required' => true,
+                    'showInGrid' => true,
+                    'options' => [
+                        [
+                            'label' => 'Layout 1',
+                            'value' => 'layout1'
+                        ],
+                    ]
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'language',
+                'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                'defaultValue' => 'en',
+                'templateOptions' => [
+                    'label' => 'Language',
+                    'required' => true,
+                    'showInGrid' => true,
+                    'multiple' => true,
+                    'options' => $languageList
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'type',
+                'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                'defaultValue' => 'Trade',
+                'templateOptions' => [
+                    'label' => 'Type',
+                    'required' => true,
+                    'showInGrid' => true,
+                    'options' => [
+                        [
+                            'label' => 'Trade',
+                            'value' => 'Trade'
+                        ],
+                    ]
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'year',
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'defaultValue' => date('Y'),
+                'templateOptions' => [
+                    'label' => 'Year',
+                    'required' => true,
+                    'showInGrid' => true
+                ],
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'currency',
+                'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                'defaultValue' => 'EUR',
+                'templateOptions' => [
+                    'label' => 'Currency',
+                    'required' => true,
+                    'showInGrid' => true,
+                    'options' => $this->getCurrenciesOptions()
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'firstPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'First page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'photo',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'First page photo',
+                            'accept' => ['image/*']
+                        ]
+                    ]),
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'secondPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Second page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'photo',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Second page photo',
+                            'accept' => ['image/*']
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'title',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'templateOptions' => [
+                            'label' => 'Title',
+                            'translatable' => true,
+                            'required' => true
+                        ],
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'short_description',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'templateOptions' => [
+                            'label' => 'Short Description',
+                            'translatable' => true,
+                            'required' => true,
+                            'html' => true
+                        ],
+                    ]),
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'iconsPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Icons page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'photo_left_page',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Photo left page',
+                            'accept' => ['image/*']
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'photo_right_page',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Photo right page',
+                            'accept' => ['image/*']
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'title',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'templateOptions' => [
+                            'label' => 'Title',
+                            'translatable' => true,
+                            'required' => true
+                        ],
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'short_description',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'templateOptions' => [
+                            'label' => 'Short Description',
+                            'translatable' => true,
+                            'required' => true,
+                            'html' => true
+                        ],
+                    ]),
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'mainProductsPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Main products page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'templateOptions' => [
+                            'label' => 'Footer text',
+                            'translatable' => true,
+                            'required' => true,
+                            'html' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'main_products',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
+                        'templateOptions' => [
+                            'label' => 'Main Products',
+                            'resource' => 'product',
+                            'displayColumnLabel' => 'Product name',
+                            'displayColumn' => 'name',
+                            'searchBy' => 'name',
+                            'filter' => [
+                                'column' => 'type',
+                                'comparator' => '=',
+                                'value' => \App\Models\Product::PRODUCT_TYPE_MAIN
+                            ]
+                        ]
+                    ]),
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'optionsAndAccessoriesPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Options and Accessories page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'title',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'templateOptions' => [
+                            'label' => 'Title',
+                            'translatable' => true,
+                            'required' => true,
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'left_page_photo',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Left page photo'
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'right_page_photo',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Right page photo'
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'product_options_sections',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                        'templateOptions' => [
+                            'label' => 'Product Options Sections',
+                            'addText' => 'Add Product Options Section',
+                        ],
+                        'fieldArray' => new FormlyFieldConfig([
+                            'fieldGroup' => [
+                                new FormlyFieldConfig([
+                                    'key' => 'title',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                    'templateOptions' => [
+                                        'label' => 'Title',
+                                        'translatable' => true,
+                                        'required' => true,
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'hideTitle',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                    'templateOptions' => [
+                                        'label' => 'Hide section title'
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'layout',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                    'defaultValue' => 'layout1',
+                                    'templateOptions' => [
+                                        'label' => 'Section Layout',
+                                        'options' => $this->generateLayoutOptions(13),
+                                        'required' => true
+                                    ],
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'photo_gallery',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                                    'templateOptions' => [
+                                        'label' => 'Photo gallery',
+                                        'accept' => ['image/*'],
+                                        'multiple' => true
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'product_option_sections',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                                    'templateOptions' => [
+                                        'label' => 'Product Option Sections',
+                                        'addText' => 'Add Product Option Section',
+                                    ],
+                                    'fieldArray' => new FormlyFieldConfig([
+                                        'fieldGroup' => [
+                                            new FormlyFieldConfig([
+                                                'key' => 'title',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                                'templateOptions' => [
+                                                    'label' => 'Title',
+                                                    'translatable' => true,
+                                                    'required' => true
+                                                ]
+                                            ]),
+                                            new FormlyFieldConfig([
+                                                'key' => 'info_note',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                                                'templateOptions' => [
+                                                    'label' => 'Info note',
+                                                    'translatable' => true,
+                                                    'html' => true
+                                                ]
+                                            ]),
+                                            new FormlyFieldConfig([
+                                                'key' => 'product_options_group_photo',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                                                'templateOptions' => [
+                                                    'label' => 'Options Group Photo',
+                                                    'accept' => ['image/*'],
+                                                    'multiple' => true
+                                                ]
+                                            ]),
+                                            new FormlyFieldConfig([
+                                                'key' => 'displayMinOrderQty',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                                'templateOptions' => [
+                                                    'label' => 'Display Min. Order Qty.'
+                                                ]
+                                            ]),
+                                            new FormlyFieldConfig([
+                                                'key' => 'displayPhotoInsteadTitle',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                                'templateOptions' => [
+                                                    'label' => 'Display option photo instead of title'
+                                                ]
+                                            ]),
+                                            new FormlyFieldConfig([
+                                                'key' => 'product_options',
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
+                                                'templateOptions' => [
+                                                    'label' => 'Product Options',
+                                                    'resource' => 'product',
+                                                    'displayColumnLabel' => 'Product option name',
+                                                    'displayColumn' => 'name',
+                                                    'searchBy' => 'name',
+                                                    'filter' => [
+                                                        'column' => 'type',
+                                                        'comparator' => '=',
+                                                        'value' => \App\Models\Product::PRODUCT_TYPE_OPTION
+                                                    ]
+                                                ]
+                                            ]),
+                                        ]
+                                    ])
+                                ])
+                            ]
+                        ])
+                    ]),
+                ]
+            ]),
+
+        ];
+    }
+
+    private function generateLayoutOptions($nr)
+    {
+        $result = [];
+        for ($i = 1; $i <= $nr; $i++) {
+            $result[] = [
+                'label' => 'Layout ' . $i,
+                'value' => 'layout' . $i
+            ];
+        }
+        return $result;
+    }
+}

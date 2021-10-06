@@ -1,0 +1,13 @@
+nav {
+  height: 45px;
+}
+
+li.breadcrumb-item {
+  max-width: 300px;
+
+  a.breadcrumb-item, span {
+    max-width: 100%;
+    display: inline-block;
+  }
+
+}

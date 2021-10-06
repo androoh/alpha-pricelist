@@ -1,0 +1,33 @@
+<div class="d-flex flex-column h-100">
+  <div class="pt-4 row sticky-top bg-white overflow-hidden border-bottom pb-2">
+    <h2 class="col-3 mb-0">Preview {{resourceInfo?.label}}</h2>
+    <div class="col-9 text-end row g-3 m-0">
+      <select class="form-select col me-2 mt-0" [formControl]="form.get('locale')">
+        <option *ngFor="let locale of locales" [value]="locale.key">{{locale.value}}</option>
+      </select>
+      <select class="form-select col me-2 mt-0" [formControl]="form.get('pageSize')">
+        <option *ngFor="let pageSize of pageSizes" [value]="pageSize">{{pageSize}}</option>
+      </select>
+      <select class="form-select col me-2 mt-0" [formControl]="form.get('pageOrientation')">
+        <option *ngFor="let pageOrientation of pageOrientations"
+                [value]="pageOrientation">{{pageOrientation}}</option>
+      </select>
+      <div class="form-check col me-2 mt-2" title="Show Crop Borders">
+        <input class="form-check-input" type="checkbox" id="showCropBorders"
+               [formControl]="form.get('showCropBorders')">
+        <label class="form-check-label text-truncate" for="showCropBorders">
+          Show Crop Borders
+        </label>
+      </div>
+      <div class="form-check col me-2 mt-2" title="Show Crop Cross">
+        <input class="form-check-input" type="checkbox" id="showCross" [formControl]="form.get('showCross')">
+        <label class="form-check-label text-truncate" for="showCross">
+          Show Crop Cross
+        </label>
+      </div>
+      <button class="btn btn-primary col me-2 mt-0" type="button" (click)="print()"><i class="bi bi-printer"></i> Print
+      </button>
+    </div>
+  </div>
+  <iframe #iframe (load)="setIframeLoaded()" [src]="getPreviewURL()" class="mt-3 flex-grow-1"></iframe>
+</div>
