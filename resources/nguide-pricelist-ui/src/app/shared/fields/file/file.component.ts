@@ -5,8 +5,8 @@ import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
-export const API_URL = 'http://127.0.0.1:8000/api/files';
-export const API_GET_FILE_URL = 'http://127.0.0.1:8000/api/files/n/';
+export const API_URL = '/api/files';
+export const API_GET_FILE_URL = '/api/files/n/';
 
 export interface ImageResponse {
   id: string;
