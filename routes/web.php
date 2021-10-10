@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Resource;
+use App\Http\Controllers\AngularController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('/{any}', [AngularController::class, 'index'])
+    ->where('any', '^(?!(api|login|register|logout)).*$')
+    ->middleware('auth');
+
+require __DIR__.'/auth.php';
 
