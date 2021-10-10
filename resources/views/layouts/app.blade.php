@@ -1,36 +1,294 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html>
+<head>
+    <title>Hello World</title>
+    <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <script>
+        class RepeatingTableHeaders extends Paged.Handler {
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            constructor(chunker, polisher, caller) {
+                super(chunker, polisher, caller);
+                this.splitTablesRefs = [];
+            }
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+            afterPageLayout(pageElement, page, breakToken, chunker) {
+                this.chunker = chunker;
+                this.splitTablesRefs = [];
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+                if (breakToken) {
+                    const node = breakToken.node;
+                    const tables = this.findAllAncestors(node, "table");
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+                    if (tables.length > 0) {
+                        this.splitTablesRefs = tables.map(t => t.dataset.ref);
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+                        //checks if split inside thead and if so, set breakToken to next sibling element
+                        let thead = node.tagName === "THEAD" ? node : this.findFirstAncestor(node, "thead");
+                        if (thead) {
+                            breakToken.node = this.nodeAfter(thead, chunker.source);
+                        }
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+                        this.hideEmptyTables(pageElement);
+                    }
+                }
+            }
+
+            hideEmptyTables(pageElement) {
+                this.splitTablesRefs.forEach(ref => {
+                    let table = pageElement.querySelector("[data-ref='" + ref + "']");
+                    let sourceBody = table.querySelector("tbody > tr");
+                    if (!sourceBody) {
+                        table.style.visibility = "hidden";
+                        table.style.position = "absolute";
+                        let lineSpacer = table.nextSibling;
+                        if (lineSpacer) {
+                            lineSpacer.style.visibility = "hidden";
+                            lineSpacer.style.position = "absolute";
+                        }
+                    }
+                });
+            }
+
+            findFirstAncestor(element, selector) {
+                while (element.parentNode && element.parentNode.nodeType === 1) {
+                    if (element.parentNode.matches(selector)) {
+                        return element.parentNode;
+                    }
+                    element = element.parentNode;
+                }
+                return null;
+            }
+
+            findAllAncestors(element, selector) {
+                const ancestors = [];
+                while (element.parentNode && element.parentNode.nodeType === 1) {
+                    if (element.parentNode.matches(selector)) {
+                        ancestors.unshift(element.parentNode);
+                    }
+                    element = element.parentNode;
+                }
+                return ancestors;
+            }
+
+            // The addition of repeating Table Headers is done here because this hook is triggered before overflow handling
+            layout(rendered, layout) {
+                this.splitTablesRefs.forEach(ref => {
+                    const renderedTable = rendered.querySelector("[data-ref='" + ref + "']");
+
+                    // this event can be triggered multiple times
+                    // added a flag repeated-headers to control when table headers already repeated in current page.
+                    if (!renderedTable.getAttribute("repeated-headers")) {
+                        const sourceTable = this.chunker.source.querySelector("[data-ref='" + ref + "']");
+                        this.repeatColgroup(sourceTable, renderedTable);
+                        this.repeatTHead(sourceTable, renderedTable);
+                        renderedTable.setAttribute("repeated-headers", true);
+                    }
+                });
+            }
+
+            repeatColgroup(sourceTable, renderedTable) {
+                let colgroup = sourceTable.querySelectorAll("colgroup");
+                let firstChild = renderedTable.firstChild;
+                colgroup.forEach((colgroup) => {
+                    let clonedColgroup = colgroup.cloneNode(true);
+                    renderedTable.insertBefore(clonedColgroup, firstChild);
+                });
+            }
+
+            repeatTHead(sourceTable, renderedTable) {
+                let thead = sourceTable.querySelector("thead");
+                let clonedThead = thead.cloneNode(true);
+                renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+            }
+
+            // copied this from pagedjs
+            nodeAfter(node, limiter) {
+                if (limiter && node === limiter) {
+                    return;
+                }
+                let significantNode = this.nextSignificantNode(node);
+                if (significantNode) {
+                    return significantNode;
+                }
+                if (node.parentNode) {
+                    while ((node = node.parentNode)) {
+                        if (limiter && node === limiter) {
+                            return;
+                        }
+                        significantNode = this.nextSignificantNode(node);
+                        if (significantNode) {
+                            return significantNode;
+                        }
+                    }
+                }
+            }
+
+            nextSignificantNode(sib) {
+                while ((sib = sib.nextSibling)) {
+                    if (!this.isIgnorable(sib)) return sib;
+                }
+                return null;
+            }
+
+            isIgnorable(node) {
+                return (node.nodeType === 8) || // A comment node
+                    ((node.nodeType === 3) && this.isAllWhitespace(node)); // a text node, all whitespace
+            }
+
+            isAllWhitespace(node) {
+                return !(/[^\t\n\r ]/.test(node.textContent));
+            }
+
+        }
+        //////////////////////////////////////////////////////////////
+        class RepeatingAnyHeaders extends Paged.Handler {
+
+            constructor(chunker, polisher, caller) {
+                super(chunker, polisher, caller);
+                this.splitTablesRefs = [];
+            }
+
+            afterPageLayout(pageElement, page, breakToken, chunker) {
+                this.chunker = chunker;
+                this.splitTablesRefs = [];
+
+                if (breakToken) {
+                    const node = breakToken.node;
+                    const tables = this.findAllAncestors(node, ".repeating-container");
+
+                    if (tables.length > 0) {
+                        this.splitTablesRefs = tables.map(t => t.dataset.ref);
+
+                        //checks if split inside thead and if so, set breakToken to next sibling element
+                        let hasClassName = false;
+                        if (node.className) {
+                            hasClassName = node.className.split(" ").indexOf("repeating-header") > -1;
+                        }
+                        let thead = hasClassName ? node : this.findFirstAncestor(node, ".repeating-header");
+                        if (thead) {
+                            breakToken.node = this.nodeAfter(thead, chunker.source);
+                        }
+
+                        this.hideEmptyTables(pageElement);
+                    }
+                }
+            }
+
+            hideEmptyTables(pageElement) {
+                this.splitTablesRefs.forEach(ref => {
+                    let table = pageElement.querySelector("[data-ref='" + ref + "']");
+                    let sourceBody = table.querySelector(".repeating-container-body");
+                    if (!sourceBody || sourceBody.innerText.trim() === '') {
+                        table.style.visibility = "hidden";
+                        table.style.position = "absolute";
+                        let lineSpacer = table.nextSibling;
+                        if (lineSpacer) {
+                            lineSpacer.style.visibility = "hidden";
+                            lineSpacer.style.position = "absolute";
+                        }
+                    }
+                });
+            }
+
+            findFirstAncestor(element, selector) {
+                while (element.parentNode && element.parentNode.nodeType === 1) {
+                    if (element.parentNode.matches(selector)) {
+                        return element.parentNode;
+                    }
+                    element = element.parentNode;
+                }
+                return null;
+            }
+
+            findAllAncestors(element, selector) {
+                const ancestors = [];
+                while (element.parentNode && element.parentNode.nodeType === 1) {
+                    if (element.parentNode.matches(selector)) {
+                        ancestors.unshift(element.parentNode);
+                    }
+                    element = element.parentNode;
+                }
+                return ancestors;
+            }
+
+            // The addition of repeating Table Headers is done here because this hook is triggered before overflow handling
+            layout(rendered, layout) {
+                this.splitTablesRefs.forEach(ref => {
+                    const renderedTable = rendered.querySelector("[data-ref='" + ref + "']");
+
+                    // this event can be triggered multiple times
+                    // added a flag repeated-headers to control when table headers already repeated in current page.
+                    if (!renderedTable.getAttribute("repeated-headers")) {
+                        const sourceTable = this.chunker.source.querySelector("[data-ref='" + ref + "']");
+                        this.repeatColgroup(sourceTable, renderedTable);
+                        this.repeatTHead(sourceTable, renderedTable);
+                        renderedTable.setAttribute("repeated-headers", true);
+                    }
+                });
+            }
+
+            repeatColgroup(sourceTable, renderedTable) {
+                let colgroup = sourceTable.querySelectorAll("colgroup");
+                let firstChild = renderedTable.firstChild;
+                colgroup.forEach((colgroup) => {
+                    let clonedColgroup = colgroup.cloneNode(true);
+                    renderedTable.insertBefore(clonedColgroup, firstChild);
+                });
+            }
+
+            repeatTHead(sourceTable, renderedTable) {
+                let thead = sourceTable.querySelector(".repeating-header");
+                let clonedThead = thead.cloneNode(true);
+                renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+            }
+
+            // copied this from pagedjs
+            nodeAfter(node, limiter) {
+                if (limiter && node === limiter) {
+                    return;
+                }
+                let significantNode = this.nextSignificantNode(node);
+                if (significantNode) {
+                    return significantNode;
+                }
+                if (node.parentNode) {
+                    while ((node = node.parentNode)) {
+                        if (limiter && node === limiter) {
+                            return;
+                        }
+                        significantNode = this.nextSignificantNode(node);
+                        if (significantNode) {
+                            return significantNode;
+                        }
+                    }
+                }
+            }
+
+            nextSignificantNode(sib) {
+                while ((sib = sib.nextSibling)) {
+                    if (!this.isIgnorable(sib)) return sib;
+                }
+                return null;
+            }
+
+            isIgnorable(node) {
+                return (node.nodeType === 8) || // A comment node
+                    ((node.nodeType === 3) && this.isAllWhitespace(node)); // a text node, all whitespace
+            }
+
+            isAllWhitespace(node) {
+                return !(/[^\t\n\r ]/.test(node.textContent));
+            }
+
+        }
+        Paged.registerHandlers(RepeatingAnyHeaders);
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('styles')
+</head>
+<body>
+<div id="documentContent">
+    @yield('content')
+</div>
+</body>
 </html>
