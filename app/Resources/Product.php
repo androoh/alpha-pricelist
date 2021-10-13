@@ -233,7 +233,7 @@ class Product extends ResourceAbstract
                     'resource' => 'product',
                     'displayColumnLabel' => 'Product name',
                     'displayColumn' => 'name',
-                    'searchBy' => 'name.' . config('app.locale'),
+                    'searchBy' => ['name.' . config('app.locale'), 'sku'],
                     'filter' => [
                         'column' => 'type',
                         'comparator' => '=',
@@ -344,7 +344,7 @@ class Product extends ResourceAbstract
                                             'resource' => 'product',
                                             'displayColumnLabel' => 'Product option name',
                                             'displayColumn' => 'name',
-                                            'searchBy' => 'name.' . config('app.locale'),
+                                            'searchBy' => ['name.' . config('app.locale'), 'sku'],
                                             'filter' => [
                                                 'column' => 'type',
                                                 'comparator' => '=',

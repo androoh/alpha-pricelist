@@ -31,8 +31,8 @@ export class AddNewModalComponent extends Table implements OnInit {
 
   ngOnInit(): void {
     this.resourceName = this.field?.templateOptions?.resource || null;
-    const filter: { column: string; value: any; comparator: string; } = this.field?.templateOptions?.filter || null;
-    const searchBy: string = this.field?.templateOptions?.searchBy || null;
+    const filter: { column: string; value: any; comparator: string; } | any = this.field?.templateOptions?.filter || null;
+    const searchBy: string[] = this.field?.templateOptions?.searchBy || [];
     const filters: any = {};
     if (filter) {
       filters[filter.column] = filter.value;
@@ -51,7 +51,13 @@ export class AddNewModalComponent extends Table implements OnInit {
       .subscribe((value: any) => {
         if (this.resourceName && filters) {
           let filter: any = {};
-          filter[searchBy] = value;
+          let searchByExp: any = [];
+          for (let searchByKey of searchBy) {
+            let exp: any = {};
+            exp[searchByKey] = { '$regex' : '.*' + value + '.*'};
+            searchByExp.push(exp);
+          }
+          filter['$or'] = searchByExp;
           this.onFilter(filter, true);
         }
       });

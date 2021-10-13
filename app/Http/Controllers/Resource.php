@@ -53,9 +53,9 @@ class Resource extends Controller
         $columns = $resource->getGridColumns($request);
         $projections = $this->getProjections($columns);
         if ($filters) {
-            $filters = json_decode($filters);
-            foreach ($filters as $filterPath => $filterValue) {
-                $model = $model->where($filterPath, 'like', '%' . $filterValue . '%');
+            $filters = json_decode($filters, true);
+            if ($filters) {
+                $model = $model->whereRaw($filters);
             }
         }
         $result = $model->orderBy($sortBy, $sortDir)->paginate(self::PAGE_LIMIT, $projections)->toArray();

@@ -96,12 +96,15 @@ export class TableRequestData {
   page: number;
   filters?: { [key: string]: any };
   resourceIds?: string;
+  searchBy?: { [key: string]: any };
 
   constructor(props?: any) {
     this.resource = props?.resource || null;
     this.sorting = props?.sorting || null;
     this.page = props?.page || 0;
     this.filters = props?.filters || null;
+    this.searchBy = props?.searchBy || null;
+
     this.resourceIds = props?.resourceIds || null;
   }
 }

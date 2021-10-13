@@ -356,7 +356,7 @@ class PriceList extends ResourceAbstract
                             'resource' => 'product',
                             'displayColumnLabel' => 'Product name',
                             'displayColumn' => 'name',
-                            'searchBy' => 'name',
+                            'searchBy' => ['name.' . config('app.locale'), 'sku'],
                             'filter' => [
                                 'column' => 'type',
                                 'comparator' => '=',
@@ -427,7 +427,7 @@ class PriceList extends ResourceAbstract
                                     'defaultValue' => 'layout1',
                                     'templateOptions' => [
                                         'label' => 'Section Layout',
-                                        'options' => $this->generateLayoutOptions(13),
+                                        'options' => $this->generateLayoutOptions(),
                                         'required' => true
                                     ],
                                 ]),
@@ -498,7 +498,7 @@ class PriceList extends ResourceAbstract
                                                     'resource' => 'product',
                                                     'displayColumnLabel' => 'Product option name',
                                                     'displayColumn' => 'name',
-                                                    'searchBy' => 'name',
+                                                    'searchBy' => ['name.' . config('app.locale'), 'sku'],
                                                     'filter' => [
                                                         'column' => 'type',
                                                         'comparator' => '=',
@@ -518,15 +518,64 @@ class PriceList extends ResourceAbstract
         ];
     }
 
-    private function generateLayoutOptions($nr)
+    private function generateLayoutOptions()
     {
-        $result = [];
-        for ($i = 1; $i <= $nr; $i++) {
-            $result[] = [
-                'label' => 'Layout ' . $i,
-                'value' => 'layout' . $i
-            ];
-        }
-        return $result;
+        return [
+            [
+                'label' => 'Options',
+                'value' => 'layout14',
+                'img' => asset('images/resize_layout14.png')
+            ],
+            [
+                'label' => 'Options + Photos',
+                'value' => 'layout1',
+                'img' => asset('images/resize_layout1.png')
+            ],
+            [
+                'label' => 'Only Photos',
+                'value' => 'layout2',
+                'img' => asset('images/resize_layout2.png')
+            ],
+            [
+                'label' => 'Grouped Options in table',
+                'value' => 'layout3',
+                'img' => asset('images/resize_layout3.png')
+            ],
+            [
+                'label' => 'Options grid view 2/1',
+                'value' => 'layout5',
+                'img' => asset('images/resize_layout5.png')
+            ],
+            [
+                'label' => 'Grouped Options in table with photos on top',
+                'value' => 'layout6',
+                'img' => asset('images/resize_layout6.png')
+            ],
+            [
+                'label' => 'Options grid view 3/1',
+                'value' => 'layout7',
+                'img' => asset('images/resize_layout7.png')
+            ],
+            [
+                'label' => 'Grouped Options in table with photos on left',
+                'value' => 'layout8',
+                'img' => asset('images/resize_layout8.png')
+            ],
+            [
+                'label' => 'Options with details',
+                'value' => 'layout11',
+                'img' => asset('images/resize_layout11.png')
+            ],
+            [
+                'label' => 'Grouped Options in table with photo group on top',
+                'value' => 'layout12',
+                'img' => asset('images/resize_layout12.png')
+            ],
+            [
+                'label' => 'Options grid view 2/1 - type 2',
+                'value' => 'layout13',
+                'img' => asset('images/resize_layout13.png')
+            ]
+        ];
     }
 }
