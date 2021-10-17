@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {FormArray, FormControl} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {SelectionType} from '@swimlane/ngx-datatable';
@@ -6,6 +6,7 @@ import {ResourceListListResponse, ResourcesService, TableRequestData} from '../.
 import {TableService} from '../../../services/table.service';
 import {Table} from '../../../libs/table';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class AddNewModalComponent extends Table implements OnInit {
   public resourceName: string | null = null;
   public loadingIndicator = true;
   public listResponse: ResourceListListResponse | null = null;
+  public onAddData: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(public bsModalRef: BsModalRef, public resourcesService: ResourcesService, public tableService: TableService) {
     super(resourcesService, tableService);
@@ -66,6 +68,7 @@ export class AddNewModalComponent extends Table implements OnInit {
   public addItems(): void {
     const toAdd = [];
     const currentValue = this.formControl.value || [];
+    let index = currentValue.length;
     for (let selectedItem of this.selected) {
       const exists = currentValue.find((item: any) => {
         return item.id === selectedItem.id
@@ -73,13 +76,13 @@ export class AddNewModalComponent extends Table implements OnInit {
       if (exists === undefined) {
         const itemToSave: any = {
           id: selectedItem.id,
-          name: selectedItem[this.to.displayColumn],
+          order: index++,
           resource: this.resourceName
         };
         toAdd.push(itemToSave);
       }
     }
-    this.formControl.setValue([...currentValue, ...toAdd]);
+    this.onAddData.next(toAdd);
     this.bsModalRef.hide();
   }
 

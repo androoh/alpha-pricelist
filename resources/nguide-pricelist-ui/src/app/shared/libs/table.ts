@@ -31,7 +31,8 @@ export class Table {
       this.resourcesService.onTableData.next(new TableRequestData({
         resource: this.resourceName,
         resourceIds: tableData.resourceIds || null,
-        filters: tableData.filters || this.filtersData
+        filters: tableData.filters || this.filtersData,
+        sorting: tableData.sorting || null
       }));
     }
   }

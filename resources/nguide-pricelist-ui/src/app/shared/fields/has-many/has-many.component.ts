@@ -7,6 +7,8 @@ import {environment} from '../../../../environments/environment';
 import {Table} from '../../libs/table';
 import {ResourcesService, TableRequestData} from '../../services/resources.service';
 import {TableService} from '../../services/table.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {get} from 'lodash';
 
 @Component({
   selector: 'app-has-many',
@@ -19,6 +21,8 @@ export class HasManyComponent extends FieldType implements OnInit {
   public table: Table;
   public resourceName: string | null = null;
   public rows: any[] = [];
+  public sorting: { sortBy: string; sortDir: string } = {sortBy: 'order', sortDir: 'asc'};
+
   defaultLocale = environment.defaultLocale;
 
   constructor(
@@ -28,7 +32,6 @@ export class HasManyComponent extends FieldType implements OnInit {
   ) {
     super();
     this.table = new Table(resourcesService, tableService);
-
   }
 
   ngOnInit(): void {
@@ -42,6 +45,17 @@ export class HasManyComponent extends FieldType implements OnInit {
   }
 
   loadTable(value: any[]): void {
+    value = value.sort((a, b) => {
+      const orderA = a?.order || 0;
+      const orderB = b?.order || 0;
+      if (orderA < orderB) {
+        return -1;
+      }
+      if (orderA > orderB) {
+        return 1;
+      }
+      return 0;
+    });
     const resourceIds = [];
     for (const row of value) {
       resourceIds.push(row.id);
@@ -50,7 +64,8 @@ export class HasManyComponent extends FieldType implements OnInit {
     if (this.resourceName) {
       this.table.loadData(this.resourceName, new TableRequestData({
         resource: this.resourceName,
-        resourceIds: resourceIdsJoined.length > 0 ? resourceIdsJoined : 'empty'
+        resourceIds: resourceIdsJoined.length > 0 ? resourceIdsJoined : 'empty',
+        sorting: this.sorting
       }));
     }
   }
@@ -71,6 +86,28 @@ export class HasManyComponent extends FieldType implements OnInit {
       field: this.field,
       formControl: this.formControl
     };
+    const currentValue = this.formControl.value || [];
     this.bsModalRef = this.modalService.show(AddNewModalComponent, {initialState, class: 'modal-lg'});
+    this.bsModalRef.content.onAddData.subscribe((toAdd: any) => {
+      this.formControl.setValue([...currentValue, ...toAdd]);
+    })
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.table.rows, event.previousIndex, event.currentIndex);
+    const currentValues = this.formControl.value.map((item: any) => {
+      const order = this.table.rows.findIndex((itm: any) => itm.id === item.id);
+      if (order !== -1) {
+        item['order'] = order;
+      } else {
+        item['order'] = 0;
+      }
+      return item;
+    });
+    this.formControl.setValue(currentValues, {emitEvent: false})
+  }
+
+  getValue(obj: any, path: string): any {
+    return get(obj, path);
   }
 }

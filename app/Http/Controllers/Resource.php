@@ -8,6 +8,7 @@ use App\Resources\Category;
 use App\Resources\InfoIcon;
 use App\Resources\PriceList;
 use App\Resources\Product;
+use function GuzzleHttp\json_decode;
 
 class Resource extends Controller
 {
@@ -58,7 +59,17 @@ class Resource extends Controller
                 $model = $model->whereRaw($filters);
             }
         }
-        $result = $model->orderBy($sortBy, $sortDir)->paginate(self::PAGE_LIMIT, $projections)->toArray();
+        if (!$resourceIds) {
+            $result = $model->orderBy($sortBy, $sortDir)->paginate(self::PAGE_LIMIT, $projections)->toArray();
+        } else {
+            $result = $model->paginate(self::PAGE_LIMIT, $projections);
+            $result->setCollection($result->getCollection()->map(function(&$item) use ($resourceIds) {
+                    $order = array_search($item->getKey(), $resourceIds) ?? 0;
+                    $item['order'] = $order;
+                    return $item;
+                })->sortBy(['order', 'desc']));
+            $result = $result->toArray();
+        }
         $result['filters'] = $filters;
         $result['columns'] = $columns;
         $result['defaultLocale'] = config('app.locale');
@@ -124,12 +135,12 @@ class Resource extends Controller
         $model = $model::find($id);
         $model = $model::find($id)->fill($clearedArray);
         $resource->beforeSave($request, $model);
-        $resourceData = $model->save();
+        $model->save();
         $resource->afterSave($request, $model);
 
         return response([
             'schema' => $request->getResource($resourceName)->fieldsToArray($request),
-            'data' => $resourceData
+            'data' => $model
         ]);
     }
 

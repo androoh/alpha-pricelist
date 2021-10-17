@@ -7,55 +7,39 @@
     </button>
   </h5>
   <div class="card-body p-0">
-    <ngx-datatable
-      class="material h-100"
-      [rows]="table.rows"
-      [headerHeight]="'auto'"
-      [footerHeight]="'auto'"
-      [rowHeight]="'auto'"
-      [columnMode]="columnMode"
-      [limit]="table.perPage"
-      [count]="table.total"
-      [offset]="table.currentPage"
-      (sort)="table.onSort($event)"
-      (page)="table.onPaginate($event)"
-      [externalSorting]="true"
-      [externalPaging]="true"
-      [loadingIndicator]="table.loadingIndicator"
-    >
-      <ngx-datatable-column
-        *ngFor="let column of table.columns"
-        [name]="column.name"
-        [path]="column.path"
-        [prop]="column.prop"
-        [draggable]="column.draggable"
-        [resizeable]="column.resizeable"
-        [sortable]="column.sortable"
-        [flexGrow]="column.flexGrow"
-      >
-        <ng-template let-value="value" ngx-datatable-cell-template>
+    <table class="table mb-0">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" *ngFor="let column of table.columns">{{column.name}}</th>
+        <th scope="col" class="text-end">Actions</th>
+      </tr>
+      </thead>
+      <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+      <tr *ngFor="let row of table.rows; let i = index" cdkDrag cdkDragLockAxis="y">
+        <td style="width: 2%">
+          <div class="pointer-grab">
+            <i class="bi bi-list"></i>
+          </div>
+        </td>
+        <td *ngFor="let column of table.columns">
           <ng-container *ngIf="column?.translatable; then thenBlock else elseBlock"></ng-container>
           <ng-template #thenBlock>
-            <div class="text-truncate pr-2" [title]="table.getTranslatedValue(value)">{{table.getTranslatedValue(value)}}</div>
+            <div class="text-truncate pr-2"
+                 [title]="table.getTranslatedValue(getValue(row, column.path))">{{table.getTranslatedValue(getValue(row, column.path))}}</div>
           </ng-template>
           <ng-template #elseBlock>
-            <div class="text-truncate pr-2" [title]="value">{{value}}</div>
+            <div class="text-truncate pr-2" [title]="getValue(row, column.path)">{{getValue(row, column.path)}}</div>
           </ng-template>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column
-        [draggable]="false"
-        [resizeable]="false"
-        [sortable]="false"
-        [flexGrow]="1"
-      >
-        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        </td>
+        <td style="width: 10%">
           <button class="btn btn-danger btn-sm float-end" type="button" (click)="remove(row.id)">
             <i class="bi bi-trash"></i>
             Remove
           </button>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

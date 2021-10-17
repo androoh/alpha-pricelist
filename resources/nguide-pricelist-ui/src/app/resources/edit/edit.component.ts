@@ -7,7 +7,6 @@ import {CreateEditResponse, ResourcesResponse, ResourcesService} from '../../sha
 import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
 import {BehaviorSubject} from 'rxjs';
-import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-edit',

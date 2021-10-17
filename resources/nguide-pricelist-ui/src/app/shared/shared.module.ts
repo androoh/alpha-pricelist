@@ -22,13 +22,14 @@ import {TableService} from './services/table.service';
 import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {TextareaComponent} from './fields/textarea/textarea.component';
 import {QuillModule} from 'ngx-quill';
-import { DropdownWrapperComponent } from './wrappers/dropdown-wrapper/dropdown-wrapper.component';
+import {DropdownWrapperComponent} from './wrappers/dropdown-wrapper/dropdown-wrapper.component';
 import {PopoverModule} from 'ngx-bootstrap/popover';
 import {BreadcrumbService} from './services/breadcrumb.service';
 import {LoadingService} from './services/loading.service';
 import {LoadingInterceptorService} from './interceptors/loading-interceptor.service';
-import { TranslatableComponent } from './wrappers/translatable/translatable.component';
-import { InputComponent } from './fields/input/input.component';
+import {TranslatableComponent} from './wrappers/translatable/translatable.component';
+import {InputComponent} from './fields/input/input.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { InputComponent } from './fields/input/input.component';
     FormsModule,
     ReactiveFormsModule,
     FormlyModule,
+    DragDropModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
     TypeaheadModule.forRoot(),

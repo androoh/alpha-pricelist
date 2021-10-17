@@ -1,11 +1,16 @@
 <accordion class="mt-2" closeOthers="true" [isAnimated]="true">
   <div class="card">
     <h5 class="card-header">{{ to.label }}</h5>
-    <div class="card-body">
-      <accordion-group *ngFor="let field of field.fieldGroup; let i = index;">
+    <div class="card-body" cdkDropList (cdkDropListDropped)="drop($event)">
+      <accordion-group *ngFor="let field of field.fieldGroup; let i = index;" cdkDrag cdkDragLockAxis="y">
         <div class="clearfix" accordion-heading>
-          <a class="float-start">{{to.label + ' #' + (i + 1)}}</a>
-          <button type="button" class="btn btn-danger btn-sm float-end" (click)="remove(i)"><i class="bi bi-trash"></i> Remove</button>
+          <div class="float-start">
+            <i class="bi bi-list me-2"></i>
+            <a>{{to.label + ' #' + (i + 1)}}</a>
+          </div>
+          <button type="button" class="btn btn-danger btn-sm float-end" (click)="remove(i)"><i class="bi bi-trash"></i>
+            Remove
+          </button>
         </div>
         <formly-field [field]="field"></formly-field>
       </accordion-group>
