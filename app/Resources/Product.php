@@ -98,7 +98,11 @@ class Product extends ResourceAbstract
                                 [
                                     'label' => 'Price per squared meter',
                                     'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_SQM
-                                ]
+                                ],
+                                [
+                                    'label' => 'Price per linear meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_LM
+                                ],
                             ]
                         ],
                     ]),

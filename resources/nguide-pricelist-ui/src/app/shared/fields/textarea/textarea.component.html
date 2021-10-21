@@ -4,7 +4,7 @@
   [formControl]="valueControl"
   [cols]="to.cols"
   [rows]="to.rows"
-  [class.is-invalid]="showError"
+  [class.is-invalid]="displayError"
   [formlyAttributes]="field"
 ></textarea>
-<quill-editor *ngIf="to?.html" [formControl]="valueControl"></quill-editor>
+<quill-editor *ngIf="to?.html" [formControl]="valueControl" [class.is-invalid]="displayError"></quill-editor>

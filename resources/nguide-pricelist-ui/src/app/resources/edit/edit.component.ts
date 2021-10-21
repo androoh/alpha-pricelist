@@ -43,7 +43,7 @@ export class EditComponent implements OnInit {
       this.loadData();
     });
     this.languageControl.valueChanges.subscribe((language: string) => {
-      if (language && this.fields) {
+      if (language && this.fields && this.fields.length > 0) {
         this.fields = this.mapFields(this.fields, language);
       }
     });
