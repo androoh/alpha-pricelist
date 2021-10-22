@@ -8,9 +8,11 @@ class FormlyFieldConfig extends FormlyAbstract
 {
     const FIELD_TYPE_SELECT = 'select';
     const FIELD_TYPE_INPUT = 'input';
+    const FIELD_TYPE_INPUT_TRANSLATABLE = 'translatable-input';
     const FIELD_TYPE_FILE = 'file';
     const FIELD_TYPE_IMAGES = 'images';
     const FIELD_TYPE_TEXTAREA = 'textarea';
+    const FIELD_TYPE_TEXTAREA_TRANSLATABLE = 'translatable-textarea';
     const FIELD_TYPE_REPEAT = 'repeat';
     const FIELD_TYPE_HAS_MANY = 'hasMany';
     const FIELD_TYPE_CHECKBOX = 'checkbox';

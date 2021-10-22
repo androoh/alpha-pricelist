@@ -26,7 +26,7 @@ export class TableService {
     const mappedColumns: any = {};
     if (columns) {
       columns.forEach((column: Column) => {
-        if (column.type === 'input' || column.type === 'select') {
+        if (column.type === 'translatable-input' || column.type === 'input' || column.type === 'select') {
           mappedColumns[column.key] = {
             prop: column.key,
             path: column.path,

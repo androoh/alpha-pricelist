@@ -159,7 +159,7 @@ class PriceList extends ResourceAbstract
         return [
             new FormlyFieldConfig([
                 'key' => 'name',
-                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Price list name',
                     'translatable' => true,
@@ -268,7 +268,7 @@ class PriceList extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'title',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Title',
                             'translatable' => true,
@@ -277,7 +277,7 @@ class PriceList extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'short_description',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Short Description',
                             'translatable' => true,
@@ -312,7 +312,7 @@ class PriceList extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'title',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Title',
                             'translatable' => true,
@@ -321,7 +321,7 @@ class PriceList extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'short_description',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Short Description',
                             'translatable' => true,
@@ -340,7 +340,7 @@ class PriceList extends ResourceAbstract
                 'fieldGroup' => [
                     new FormlyFieldConfig([
                         'key' => 'footer_text',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Footer text',
                             'translatable' => true,
@@ -375,7 +375,7 @@ class PriceList extends ResourceAbstract
                 'fieldGroup' => [
                     new FormlyFieldConfig([
                         'key' => 'title',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Title',
                             'translatable' => true,
@@ -407,7 +407,7 @@ class PriceList extends ResourceAbstract
                             'fieldGroup' => [
                                 new FormlyFieldConfig([
                                     'key' => 'title',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                                     'templateOptions' => [
                                         'label' => 'Title',
                                         'translatable' => true,
@@ -451,7 +451,7 @@ class PriceList extends ResourceAbstract
                                         'fieldGroup' => [
                                             new FormlyFieldConfig([
                                                 'key' => 'title',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                                                 'templateOptions' => [
                                                     'label' => 'Title',
                                                     'translatable' => true,
@@ -460,7 +460,7 @@ class PriceList extends ResourceAbstract
                                             ]),
                                             new FormlyFieldConfig([
                                                 'key' => 'info_note',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                                                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                                                 'templateOptions' => [
                                                     'label' => 'Info note',
                                                     'translatable' => true,

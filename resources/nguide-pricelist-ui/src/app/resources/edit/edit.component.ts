@@ -64,14 +64,14 @@ export class EditComponent implements OnInit {
               this.locales = this.mapLocales(response.locales);
               this.defaultLocale = response.defaultLocale;
               this.languageControl.setValue(this.defaultLocale);
-              this.model = response.data;
+              this.model = response.data || {};
               this.fields = this.mapFields(response.schema, this.languageControl.value);
             });
           } else {
             this.resourcesService.getCreateResourceSchema(this.resourceName).subscribe((response: CreateEditResponse) => {
               this.locales = this.mapLocales(response.locales);
               this.defaultLocale = response.defaultLocale;
-              this.languageControl.setValue(this.defaultLocale);
+              this.languageControl.setValue(this.defaultLocale, {emitEvent: false});
               this.model = {};
               this.fields = this.mapFields(response.schema, this.languageControl.value);
             });
@@ -110,7 +110,7 @@ export class EditComponent implements OnInit {
         f.fieldArray.fieldGroup = this.mapFields(f.fieldArray.fieldGroup, language);
       }
 
-      if (f?.templateOptions?.translatable === true) {
+      if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {
         if (!f.templateOptions?.language) {
           f.templateOptions.language = new BehaviorSubject(language);
         } else {

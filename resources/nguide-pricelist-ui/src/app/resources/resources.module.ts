@@ -50,8 +50,8 @@ const routes: Routes = [
         { name: 'images', component: FileComponent, wrappers: ['form-field'] },
         { name: 'repeat', component: RepeatComponent },
         { name: 'hasMany', component: HasManyComponent},
-        { name: 'textarea', component: TextareaComponent},
-        { name: 'input', component: InputComponent},
+        { name: 'translatable-textarea', component: TextareaComponent},
+        { name: 'translatable-input', component: InputComponent},
       ],
     }),
   ]

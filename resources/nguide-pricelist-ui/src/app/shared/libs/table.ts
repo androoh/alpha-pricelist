@@ -24,6 +24,7 @@ export class Table {
         this.columns = columns;
         this.defaultLocale = result.defaultLocale;
         this.listResponse = result;
+        console.log(this.columns);
       }
       this.loadingIndicator = false;
     });

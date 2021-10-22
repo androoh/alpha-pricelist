@@ -18,7 +18,7 @@ class Product extends ResourceAbstract
         return [
             new FormlyFieldConfig([
                 'key' => 'name',
-                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Product name',
                     'translatable' => true,
@@ -205,7 +205,7 @@ class Product extends ResourceAbstract
             ]),
             new FormlyFieldConfig([
                 'key' => 'main_photo_info_note',
-                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Main Photo Info Note',
                     'translatable' => true,
@@ -213,7 +213,7 @@ class Product extends ResourceAbstract
             ]),
             new FormlyFieldConfig([
                 'key' => 'standard_equipment',
-                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Standard Equipment',
                     'html' => true,
@@ -222,7 +222,7 @@ class Product extends ResourceAbstract
             ]),
             new FormlyFieldConfig([
                 'key' => 'info_note',
-                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Info Note',
                     'html' => true,
@@ -256,7 +256,7 @@ class Product extends ResourceAbstract
                     'fieldGroup' => [
                         new FormlyFieldConfig([
                             'key' => 'title',
-                            'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                            'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                             'templateOptions' => [
                                 'label' => 'Title',
                                 'translatable' => true,
@@ -301,7 +301,7 @@ class Product extends ResourceAbstract
                                 'fieldGroup' => [
                                     new FormlyFieldConfig([
                                         'key' => 'title',
-                                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                                         'templateOptions' => [
                                             'label' => 'Title',
                                             'translatable' => true,
@@ -310,7 +310,7 @@ class Product extends ResourceAbstract
                                     ]),
                                     new FormlyFieldConfig([
                                         'key' => 'info_note',
-                                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                                         'templateOptions' => [
                                             'label' => 'Info note',
                                             'html' => true,
@@ -487,7 +487,7 @@ class Product extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'other_info',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Other info',
                             'translatable' => true
@@ -527,7 +527,7 @@ class Product extends ResourceAbstract
             ]),
             new FormlyFieldConfig([
                 'key' => 'details',
-                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Details',
                     'html' => true,
