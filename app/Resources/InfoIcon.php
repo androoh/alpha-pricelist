@@ -18,7 +18,7 @@ class InfoIcon extends ResourceAbstract
         return [
             new FormlyFieldConfig([
                 'key' => 'name',
-                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Info icon name',
                     'filterable' => true,
@@ -31,7 +31,7 @@ class InfoIcon extends ResourceAbstract
             ]),
             new FormlyFieldConfig([
                 'key' => 'description',
-                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA,
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Description',
                     'translatable' => true,
