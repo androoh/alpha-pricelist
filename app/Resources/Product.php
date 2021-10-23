@@ -160,7 +160,8 @@ class Product extends ResourceAbstract
                 'templateOptions' => [
                     'label' => 'Category',
                     'required' => true,
-                    'options' => $categories
+                    'options' => $categories,
+                    'placeholder' => 'Please select category'
                 ],
             ]),
             new FormlyFieldConfig([
@@ -169,7 +170,8 @@ class Product extends ResourceAbstract
                 'templateOptions' => [
                     'label' => 'Info icons',
                     'multiple' => true,
-                    'options' => $infoIcons
+                    'options' => $infoIcons,
+                    'placeholder' => 'Please select info icons'
                 ],
             ]),
             new FormlyFieldConfig([
