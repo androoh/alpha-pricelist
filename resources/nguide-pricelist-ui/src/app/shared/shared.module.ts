@@ -30,6 +30,7 @@ import {LoadingInterceptorService} from './interceptors/loading-interceptor.serv
 import {TranslatableComponent} from './wrappers/translatable/translatable.component';
 import {InputComponent} from './fields/input/input.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { HasManyCascadeComponent } from './fields/has-many-cascade/has-many-cascade.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TextareaComponent,
     DropdownWrapperComponent,
     TranslatableComponent,
-    InputComponent
+    InputComponent,
+    HasManyCascadeComponent
   ],
   imports: [
     CommonModule,

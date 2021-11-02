@@ -13,6 +13,7 @@ use function GuzzleHttp\json_decode;
 class Resource extends Controller
 {
     const PAGE_LIMIT = 10;
+    const PAGE_LIMIT_MAX = 1000;
 
     public function resources()
     {
@@ -62,7 +63,7 @@ class Resource extends Controller
         if (!$resourceIds) {
             $result = $model->orderBy($sortBy, $sortDir)->paginate(self::PAGE_LIMIT, $projections)->toArray();
         } else {
-            $result = $model->paginate(self::PAGE_LIMIT, $projections);
+            $result = $model->paginate(self::PAGE_LIMIT_MAX, $projections);
             $result->setCollection($result->getCollection()->map(function(&$item) use ($resourceIds) {
                     $order = array_search($item->getKey(), $resourceIds) ?? 0;
                     $item['order'] = $order;

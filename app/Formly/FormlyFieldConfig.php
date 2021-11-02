@@ -15,6 +15,7 @@ class FormlyFieldConfig extends FormlyAbstract
     const FIELD_TYPE_TEXTAREA_TRANSLATABLE = 'translatable-textarea';
     const FIELD_TYPE_REPEAT = 'repeat';
     const FIELD_TYPE_HAS_MANY = 'hasMany';
+    const FIELD_TYPE_HAS_MANY_CASCADE = 'hasManyCascade';
     const FIELD_TYPE_CHECKBOX = 'checkbox';
     /**
      * The key that relates to the model. This will link the field value to the model

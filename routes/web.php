@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/{any}', [AngularController::class, 'index'])
-    ->where('any', '^(?!(api|login|register|logout)).*$')
+    ->where('any', '^(?!(api|login|register|logout|imgc)).*$')
     ->middleware('auth');
 
 require __DIR__.'/auth.php';

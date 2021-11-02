@@ -4,6 +4,7 @@ import {FileItem, FileUploader} from 'ng2-file-upload';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {environment} from "../../../../environments/environment";
 
 export const API_URL = '/api/files';
 export const API_GET_FILE_URL = '/api/files/n/';
@@ -29,7 +30,7 @@ export class FileComponent extends FieldType implements OnInit {
   constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
     super();
     this.uploader = new FileUploader({
-      url: API_URL,
+      url: environment.fileUploadApiURL,
       removeAfterUpload: true,
       headers: [
         {
@@ -79,7 +80,7 @@ export class FileComponent extends FieldType implements OnInit {
 
   getValueUrl(item: ImageResponse): SafeStyle | null {
     if (item.name) {
-      return this.sanitizer.bypassSecurityTrustStyle(`url('${API_GET_FILE_URL + item.name}')`);
+      return this.sanitizer.bypassSecurityTrustStyle(`url('${environment.filePublicApiURL + 'small/' + item.name}')`);
     }
     return null;
   }
