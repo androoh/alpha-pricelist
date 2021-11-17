@@ -1,13 +1,13 @@
-<div class="card mt-3">
+<div class="card" (click)="$event.stopImmediatePropagation()">
   <h5 class="card-header mb-0">
-    {{ to.label }}
+    {{ to?.label }}
     <button type="button" class="btn btn-success btn-sm float-end" (click)="openModalWithComponent()">
       <i class="bi bi-plus-circle"></i>
       Add
     </button>
   </h5>
   <div class="card-body p-0">
-    <table class="table mb-0 w-100">
+    <table class="table mb-0 w-100" cdkDropList (cdkDropListDropped)="drop($event)" id="has-many-dlist" #hasManyDList>
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -15,10 +15,14 @@
         <th scope="col" class="text-end">Actions</th>
       </tr>
       </thead>
-      <tbody cdkDropList (cdkDropListDropped)="drop($event)">
-      <tr *ngFor="let row of table.rows; let i = index" cdkDrag cdkDragLockAxis="y">
+      <tbody>
+      <tr *ngFor="let row of table.rows; let i = index" cdkDrag cdkDragLockAxis="y" [cdkDragBoundary]="hasManyDList">
         <td>
-          <div class="pointer-grab">
+          <ng-container *ngIf="to?.hideDragHandle === true">
+            <button type="button" class="btn btn-sm" (click)="moveUp(i)"><i class="bi bi-caret-up-fill"></i></button>
+            <button type="button" class="btn btn-sm" (click)="moveDown(i)"><i class="bi bi-caret-down-fill"></i></button>
+          </ng-container>
+          <div class="pointer-grab" cdkDragHandle *ngIf="!to?.hideDragHandle">
             <i class="bi bi-list"></i>
           </div>
         </td>
@@ -29,7 +33,8 @@
                  [title]="table.getTranslatedValue(getValue(row, column.path))">{{table.getTranslatedValue(getValue(row, column.path))}}</div>
           </ng-template>
           <ng-template #elseBlock>
-            <div class="text-truncate pr-2" style="max-width: 200px" [title]="getValue(row, column.path)">{{getValue(row, column.path)}}</div>
+            <div class="text-truncate pr-2" style="max-width: 200px"
+                 [title]="getValue(row, column.path)">{{getValue(row, column.path)}}</div>
           </ng-template>
         </td>
         <td style="width: 10%">

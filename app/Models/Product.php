@@ -14,6 +14,9 @@ class Product extends Model
     const PRODUCT_PRICE_TYPE_PER_UNIT = 'per_unit';
     const PRODUCT_PRICE_TYPE_PER_SQM = 'per_sqm';
     const PRODUCT_PRICE_TYPE_LM = 'per_lm';
+    const PRODUCT_PRICE_TYPE_RM = 'per_rm';
+    const PRODUCT_PRICE_TYPE_KG = 'per_kg';
+
 
     protected $guarded = [];
 

@@ -18,6 +18,7 @@ import {DropdownWrapperComponent} from '../shared/wrappers/dropdown-wrapper/drop
 import {TranslatableComponent} from '../shared/wrappers/translatable/translatable.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {InputComponent} from '../shared/fields/input/input.component';
+import {HasManyCascadeComponent} from "../shared/fields/has-many-cascade/has-many-cascade.component";
 
 const routes: Routes = [
   {path: ':name', component: ListComponent},
@@ -50,6 +51,7 @@ const routes: Routes = [
         { name: 'images', component: FileComponent, wrappers: ['form-field'] },
         { name: 'repeat', component: RepeatComponent },
         { name: 'hasMany', component: HasManyComponent},
+        { name: 'hasManyCascade', component: HasManyCascadeComponent },
         { name: 'translatable-textarea', component: TextareaComponent},
         { name: 'translatable-input', component: InputComponent},
       ],

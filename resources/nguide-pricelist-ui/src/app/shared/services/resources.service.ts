@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {FieldsService} from '../../resources/services/fields.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
@@ -114,6 +114,8 @@ export class TableRequestData {
 })
 export class ResourcesService {
 
+  subscriptions: Subscription[] = [];
+
   currentResource: ResourcesResponse | null = null;
 
   onTableData: BehaviorSubject<TableRequestData | null> = new BehaviorSubject<TableRequestData | null>(null);
@@ -121,19 +123,20 @@ export class ResourcesService {
   resourceList: BehaviorSubject<ResourceListListResponse> = new BehaviorSubject<ResourceListListResponse>(new ResourceListListResponse());
 
   constructor(private fieldService: FieldsService, private http: HttpClient) {
-    this.onTableData
-      .pipe(
-        switchMap((data: TableRequestData | null) => {
-          if (data) {
-            return this.getResourceList(data);
-          }
-          return of(null)
-        })
-      ).subscribe((listResponse: ResourceListListResponse | null) => {
-      if (listResponse) {
-        this.resourceList.next(listResponse);
-      }
-    });
+    this.subscriptions.push(
+      this.onTableData
+        .pipe(
+          switchMap((data: TableRequestData | null) => {
+            if (data) {
+              return this.getResourceList(data);
+            }
+            return of(null)
+          })
+        ).subscribe((listResponse: ResourceListListResponse | null) => {
+        if (listResponse) {
+          this.resourceList.next(listResponse);
+        }
+      }));
   }
 
   setCurrentResource(resource: ResourcesResponse): void {
@@ -246,5 +249,9 @@ export class ResourcesService {
       }
     }
     return nr;
+  }
+
+  clear(): void {
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
   }
 }

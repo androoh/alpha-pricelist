@@ -361,6 +361,7 @@ class PriceList extends ResourceAbstract
                                 'label' => 'Main Products',
                                 'resource' => 'product',
                                 'searchBy' => ['name.' . config('app.locale'), 'sku'],
+                                'relationKey' => 'mainProductFields.category',
                                 'filter' => [
                                     'column' => 'type',
                                     'comparator' => '=',

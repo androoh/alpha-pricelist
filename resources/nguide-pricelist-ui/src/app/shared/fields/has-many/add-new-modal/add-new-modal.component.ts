@@ -15,14 +15,17 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./add-new-modal.component.scss']
 })
 export class AddNewModalComponent extends Table implements OnInit {
-  to: any;
-  field: any;
-  formControl: FormArray = new FormArray([]);
   SelectionType = SelectionType;
   selected: any = [];
-  filter: any = {};
+
   searchControl: FormControl = new FormControl();
+
+  // initial state
   public resourceName: string | null = null;
+  public filter: any = {};
+  public searchBy: string[] = [];
+  public formControl: FormArray = new FormArray([]);
+
   public loadingIndicator = true;
   public listResponse: ResourceListListResponse | null = null;
   public onAddData: BehaviorSubject<any> = new BehaviorSubject<any>([]);
@@ -32,12 +35,14 @@ export class AddNewModalComponent extends Table implements OnInit {
   }
 
   ngOnInit(): void {
-    this.resourceName = this.field?.templateOptions?.resource || null;
-    const filter: { column: string; value: any; comparator: string; } | any = this.field?.templateOptions?.filter || null;
-    const searchBy: string[] = this.field?.templateOptions?.searchBy || [];
     const filters: any = {};
-    if (filter) {
-      filters[filter.column] = filter.value;
+    if (this.filter && !Array.isArray(this.filter)) {
+      filters[this.filter.column] = this.filter.value;
+    }
+    if (this.filter && Array.isArray(this.filter)) {
+      for (const filterItem of this.filter) {
+        filters[filterItem.column] = filterItem.value;
+      }
     }
     if (this.resourceName) {
       this.loadData(this.resourceName, new TableRequestData({
@@ -54,7 +59,7 @@ export class AddNewModalComponent extends Table implements OnInit {
         if (this.resourceName && filters) {
           let filter: any = {};
           let searchByExp: any = [];
-          for (let searchByKey of searchBy) {
+          for (let searchByKey of this.searchBy) {
             let exp: any = {};
             exp[searchByKey] = { '$regex' : '.*' + value + '.*'};
             searchByExp.push(exp);

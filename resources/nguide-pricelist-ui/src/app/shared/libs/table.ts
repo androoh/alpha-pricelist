@@ -1,6 +1,7 @@
 import {ResourceListListResponse, ResourcesService, TableRequestData} from '../services/resources.service';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 import {TableService} from '../services/table.service';
+import {BehaviorSubject} from "rxjs";
 
 export class Table {
 
@@ -11,6 +12,7 @@ export class Table {
   public columns: any[] = [];
   public filtersData: any = {};
   public defaultLocale = 'nl';
+  public onLoaded: BehaviorSubject<ResourceListListResponse | null> = new BehaviorSubject<ResourceListListResponse | null>(null);
 
   constructor(public resourcesService: ResourcesService,
               public tableService: TableService) {
@@ -24,7 +26,7 @@ export class Table {
         this.columns = columns;
         this.defaultLocale = result.defaultLocale;
         this.listResponse = result;
-        console.log(this.columns);
+        this.onLoaded.next(result);
       }
       this.loadingIndicator = false;
     });

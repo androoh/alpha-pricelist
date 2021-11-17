@@ -1,1 +1,58 @@
-<p>has-many-cascade works!</p>
+<div class="card mt-3">
+  <h5 class="card-header mb-0">
+    {{ to?.main?.label }}
+    <button type="button" class="btn btn-success btn-sm float-end" (click)="openModalWithComponent()">
+      <i class="bi bi-plus-circle"></i>
+      Add
+    </button>
+  </h5>
+  <div class="card-body p-0">
+    <table class="table mb-0 w-100" cdkDropList (cdkDropListDropped)="drop($event)" id="has-many-cascade-dlist">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" *ngFor="let column of table.columns">{{column.name}}</th>
+        <th scope="col" class="text-end" style="width: 10%">Actions</th>
+        <th scope="col" class="text-end" style="width: 10%"></th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let row of table.rows; let i = index" cdkDrag cdkDragLockAxis="y">
+      <tr>
+        <td>
+          <div class="pointer-grab" cdkDragHandle>
+            <i class="bi bi-list"></i>
+          </div>
+        </td>
+        <td *ngFor="let column of table.columns">
+          <ng-container *ngIf="column?.translatable; then thenBlock else elseBlock"></ng-container>
+          <ng-template #thenBlock>
+            <div class="text-truncate pr-2" style="max-width: 200px"
+                 [title]="table.getTranslatedValue(getValue(row, column.path))">{{table.getTranslatedValue(getValue(row, column.path))}}</div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="text-truncate pr-2" style="max-width: 200px"
+                 [title]="getValue(row, column.path)">{{getValue(row, column.path)}}</div>
+          </ng-template>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm float-end" type="button" (click)="remove(row.id)">
+            <i class="bi bi-trash"></i>
+            <span class="d-none d-xl-inline-block">Remove</span>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn" (click)="expand(row.id)"><i class="bi bi-caret-down-fill"></i></button>
+        </td>
+      </tr>
+      <tr *ngIf="isExpanded(row.id)"><td [colSpan]="table.columns.length + 3">
+        <formly-form
+          [model]="getModel(row.id)"
+          [fields]="getHasManyFields(row.id)"
+          [form]="formGroup"
+          [options]="options"
+          (modelChange)="childChanges($event, row.id)"></formly-form>
+      </td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
