@@ -370,6 +370,75 @@ class PriceList extends ResourceAbstract
                             ],
                         ]
                     ]),
+                    new FormlyFieldConfig([
+                        'key' => 'categories',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                        'templateOptions' => [
+                            'label' => 'Categories section',
+                            'addText' => 'Add Category Section',
+                        ],
+                        'fieldArray' => new FormlyFieldConfig([
+                            'fieldGroup' => [
+                                new FormlyFieldConfig([
+                                    'key' => 'category',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                    'templateOptions' => [
+                                        'label' => 'Category',
+                                        'placeholder' => '-- Please Select Category --',
+                                        'options' => $this->getCategoryOptions(),
+                                        'required' => true
+                                    ],
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'title',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                                    'templateOptions' => [
+                                        'label' => 'Title',
+                                        'translatable' => true,
+                                        'required' => true,
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'left_page_photo',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                                    'templateOptions' => [
+                                        'label' => 'Left page photo'
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'right_page_photo',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                                    'templateOptions' => [
+                                        'label' => 'Right page photo'
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'main_products',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
+                                    'templateOptions' => [
+                                        'label' => 'Products',
+                                        'resource' => 'product',
+                                        'displayColumnLabel' => 'Product name',
+                                        'displayColumn' => 'name',
+                                        'searchBy' => ['name.' . config('app.locale'), 'sku'],
+                                        'filter' => [
+                                            [
+                                                'column' => 'type',
+                                                'comparator' => '=',
+                                                'value' => \App\Models\Product::PRODUCT_TYPE_MAIN
+                                            ],
+                                            [
+                                                'column' => 'mainProductFields.category',
+                                                'comparator' => '=',
+                                                'valuePath' => 'category'
+                                            ]
+                                        ]
+                                    ]
+                                ]),
+                                $this->getProductOptionSections()
+                            ]
+                        ])
+                    ])
                 ]
             ]),
             new FormlyFieldConfig([
@@ -402,12 +471,75 @@ class PriceList extends ResourceAbstract
                             'label' => 'Right page photo'
                         ]
                     ]),
+                    $this->getProductOptionSections()
+                ]
+            ]),
+
+        ];
+    }
+
+    private function getCategoryOptions()
+    {
+        return \App\Models\Category::all()->map(function ($category) {
+            return [
+                'label' => translateFromPath($category->name),
+                'value' => $category->getKey()
+            ];
+        })->toArray();
+    }
+
+    private function getProductOptionSections()
+    {
+        return new FormlyFieldConfig([
+            'key' => 'product_options_sections',
+            'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+            'templateOptions' => [
+                'label' => 'Product Options Sections',
+                'addText' => 'Add Product Options Section',
+            ],
+            'fieldArray' => new FormlyFieldConfig([
+                'fieldGroup' => [
                     new FormlyFieldConfig([
-                        'key' => 'product_options_sections',
+                        'key' => 'title',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Title',
+                            'translatable' => true,
+                            'required' => true,
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'hideTitle',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                        'templateOptions' => [
+                            'label' => 'Hide section title'
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'layout',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                        'defaultValue' => 'layout1',
+                        'templateOptions' => [
+                            'label' => 'Section Layout',
+                            'options' => $this->generateLayoutOptions(),
+                            'required' => true
+                        ],
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'photo_gallery',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Photo gallery',
+                            'accept' => ['image/*'],
+                            'multiple' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'product_option_sections',
                         'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
                         'templateOptions' => [
-                            'label' => 'Product Options Sections',
-                            'addText' => 'Add Product Options Section',
+                            'label' => 'Product Option Sections',
+                            'addText' => 'Add Product Option Section',
                         ],
                         'fieldArray' => new FormlyFieldConfig([
                             'fieldGroup' => [
@@ -417,111 +549,63 @@ class PriceList extends ResourceAbstract
                                     'templateOptions' => [
                                         'label' => 'Title',
                                         'translatable' => true,
-                                        'required' => true,
-                                    ]
-                                ]),
-                                new FormlyFieldConfig([
-                                    'key' => 'hideTitle',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
-                                    'templateOptions' => [
-                                        'label' => 'Hide section title'
-                                    ]
-                                ]),
-                                new FormlyFieldConfig([
-                                    'key' => 'layout',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
-                                    'defaultValue' => 'layout1',
-                                    'templateOptions' => [
-                                        'label' => 'Section Layout',
-                                        'options' => $this->generateLayoutOptions(),
                                         'required' => true
-                                    ],
+                                    ]
                                 ]),
                                 new FormlyFieldConfig([
-                                    'key' => 'photo_gallery',
+                                    'key' => 'info_note',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                                    'templateOptions' => [
+                                        'label' => 'Info note',
+                                        'translatable' => true,
+                                        'html' => true
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'product_options_group_photo',
                                     'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
                                     'templateOptions' => [
-                                        'label' => 'Photo gallery',
+                                        'label' => 'Options Group Photo',
                                         'accept' => ['image/*'],
                                         'multiple' => true
                                     ]
                                 ]),
                                 new FormlyFieldConfig([
-                                    'key' => 'product_option_sections',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                                    'key' => 'displayMinOrderQty',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
                                     'templateOptions' => [
-                                        'label' => 'Product Option Sections',
-                                        'addText' => 'Add Product Option Section',
-                                    ],
-                                    'fieldArray' => new FormlyFieldConfig([
-                                        'fieldGroup' => [
-                                            new FormlyFieldConfig([
-                                                'key' => 'title',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
-                                                'templateOptions' => [
-                                                    'label' => 'Title',
-                                                    'translatable' => true,
-                                                    'required' => true
-                                                ]
-                                            ]),
-                                            new FormlyFieldConfig([
-                                                'key' => 'info_note',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
-                                                'templateOptions' => [
-                                                    'label' => 'Info note',
-                                                    'translatable' => true,
-                                                    'html' => true
-                                                ]
-                                            ]),
-                                            new FormlyFieldConfig([
-                                                'key' => 'product_options_group_photo',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
-                                                'templateOptions' => [
-                                                    'label' => 'Options Group Photo',
-                                                    'accept' => ['image/*'],
-                                                    'multiple' => true
-                                                ]
-                                            ]),
-                                            new FormlyFieldConfig([
-                                                'key' => 'displayMinOrderQty',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
-                                                'templateOptions' => [
-                                                    'label' => 'Display Min. Order Qty.'
-                                                ]
-                                            ]),
-                                            new FormlyFieldConfig([
-                                                'key' => 'displayPhotoInsteadTitle',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
-                                                'templateOptions' => [
-                                                    'label' => 'Display option photo instead of title'
-                                                ]
-                                            ]),
-                                            new FormlyFieldConfig([
-                                                'key' => 'product_options',
-                                                'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
-                                                'templateOptions' => [
-                                                    'label' => 'Product Options',
-                                                    'resource' => 'product',
-                                                    'displayColumnLabel' => 'Product option name',
-                                                    'displayColumn' => 'name',
-                                                    'searchBy' => ['name.' . config('app.locale'), 'sku'],
-                                                    'filter' => [
-                                                        'column' => 'type',
-                                                        'comparator' => '=',
-                                                        'value' => \App\Models\Product::PRODUCT_TYPE_OPTION
-                                                    ]
-                                                ]
-                                            ]),
+                                        'label' => 'Display Min. Order Qty.'
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'displayPhotoInsteadTitle',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                    'templateOptions' => [
+                                        'label' => 'Display option photo instead of title'
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'product_options',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
+                                    'templateOptions' => [
+                                        'label' => 'Product Options',
+                                        'resource' => 'product',
+                                        'displayColumnLabel' => 'Product option name',
+                                        'displayColumn' => 'name',
+                                        'searchBy' => ['name.' . config('app.locale'), 'sku'],
+                                        'filter' => [
+                                            'column' => 'type',
+                                            'comparator' => '=',
+                                            'value' => \App\Models\Product::PRODUCT_TYPE_OPTION
                                         ]
-                                    ])
-                                ])
+                                    ]
+                                ]),
                             ]
                         ])
-                    ]),
+                    ])
                 ]
-            ]),
-
-        ];
+            ])
+        ]);
     }
 
     private function generateLayoutOptions()

@@ -95,6 +95,9 @@ export class HasManyComponent extends FieldType implements OnInit, OnDestroy {
   openModalWithComponent() {
     const initialState: Partial<any> = {
       resourceName: this.resourceName,
+      to: this.to || null,
+      refField: this,
+      field: this.field || null,
       filter: this.to?.filter || null,
       searchBy: this.to?.searchBy || null,
       formControl: this.formControl

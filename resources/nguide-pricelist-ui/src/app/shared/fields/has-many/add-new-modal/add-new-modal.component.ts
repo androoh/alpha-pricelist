@@ -7,6 +7,7 @@ import {TableService} from '../../../services/table.service';
 import {Table} from '../../../libs/table';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
+import {get} from "lodash";
 
 
 @Component({
@@ -17,6 +18,10 @@ import {BehaviorSubject} from 'rxjs';
 export class AddNewModalComponent extends Table implements OnInit {
   SelectionType = SelectionType;
   selected: any = [];
+
+  to: any;
+  field: any;
+  refField: any;
 
   searchControl: FormControl = new FormControl();
 
@@ -41,7 +46,14 @@ export class AddNewModalComponent extends Table implements OnInit {
     }
     if (this.filter && Array.isArray(this.filter)) {
       for (const filterItem of this.filter) {
-        filters[filterItem.column] = filterItem.value;
+        if (filterItem.hasOwnProperty('valuePath')) {
+          const pathValue = get(this.field.model, filterItem.valuePath);
+          if (pathValue !== undefined) {
+            filters[filterItem.column] = pathValue;
+          }
+        } else if (filterItem.hasOwnProperty('value')) {
+          filters[filterItem.column] = filterItem.value;
+        }
       }
     }
     if (this.resourceName) {
