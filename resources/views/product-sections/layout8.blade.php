@@ -4,7 +4,7 @@
             $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
             $photoGalleryUrls = [];
             foreach($photoGallery as $photo) {
-                $photoUrl = data_get($photo, 'url', false);
+                $photoUrl = data_get($photo, 'name', false);
                 if ($photoUrl) {
                     $photoGalleryUrls[] = $photoUrl;
                 }
@@ -18,16 +18,16 @@
                 @if(count($photoGalleryUrls) > 0)
                     <th rowspan="{{count($productOptions) + 1}}" class="images-column" style="width: 10%">
                         @foreach($photoGalleryUrls as $url)
-                            <img src="{{$url}}" class="w-100 d-block"/>
+                            <img src="/imgc/a4lw/{{$url}}" class="w-100 d-block"/>
                         @endforeach
                     </th>
                 @endif
-                <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
+                <th>@t($productOptionSection, 'title', 'Options')</th>
                 @if ($displayMinOrderQty)
-                    <th class="text-center" style="width: 15%">min. order qty</th>
+                    <th style="width: 15%">min. order qty</th>
                 @endif
-                <th class="text-start" style="width: 15%">Art. No.</th>
-                <th class="text-end" style="width: 15%">TP</th>
+                <th style="width: 15%">Art. No.</th>
+                <th style="width: 15%">TP</th>
             </tr>
             @foreach($productOptions as $productOption)
                 @php
@@ -45,7 +45,7 @@
                         $photoUrl = $productPhoto ? data_get($productPhoto, 'url', null) : null;
                     @endphp
                     <tr>
-                        <td class="text-start">
+                        <td>
                             @if ($displayPhotoInsteadTitle && $photoUrl)
                                 <img src="{{$photoUrl}}" class="w-100 d-block mb-1"/>
                             @else
@@ -53,10 +53,10 @@
                             @endif
                         </td>
                         @if ($displayMinOrderQty)
-                            <td class="text-center">{{data_get($productOptionData, 'min_order_qty', 1)}}</td>
+                            <td>{{data_get($productOptionData, 'min_order_qty', 1)}}</td>
                         @endif
-                        <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                        <td class="price text-end">@price($price, $formatType)</td>
+                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif
             @endforeach

@@ -55,6 +55,11 @@ return [
         'small' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
         'large' => 'Intervention\Image\Templates\Large',
+        'a4lw' => 'App\ImageFilters\A4LargeWidth',
+        'a4lh' => 'App\ImageFilters\A4LargeHeight',
+        'a4mw' => 'App\ImageFilters\A4MediumWidth',
+        'a4mh' => 'App\ImageFilters\A4MediumHeight',
+        'svg' => 'App\ImageFilters\Svg',
     ],
 
     /*

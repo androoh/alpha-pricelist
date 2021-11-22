@@ -90,15 +90,19 @@
                 let colgroup = sourceTable.querySelectorAll("colgroup");
                 let firstChild = renderedTable.firstChild;
                 colgroup.forEach((colgroup) => {
-                    let clonedColgroup = colgroup.cloneNode(true);
-                    renderedTable.insertBefore(clonedColgroup, firstChild);
+                    if (colgroup) {
+                        let clonedColgroup = colgroup.cloneNode(true);
+                        renderedTable.insertBefore(clonedColgroup, firstChild);
+                    }
                 });
             }
 
             repeatTHead(sourceTable, renderedTable) {
                 let thead = sourceTable.querySelector("thead");
-                let clonedThead = thead.cloneNode(true);
-                renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+                if (thead) {
+                    let clonedThead = thead.cloneNode(true);
+                    renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+                }
             }
 
             // copied this from pagedjs
@@ -231,15 +235,19 @@
                 let colgroup = sourceTable.querySelectorAll("colgroup");
                 let firstChild = renderedTable.firstChild;
                 colgroup.forEach((colgroup) => {
-                    let clonedColgroup = colgroup.cloneNode(true);
-                    renderedTable.insertBefore(clonedColgroup, firstChild);
+                    if (colgroup) {
+                        let clonedColgroup = colgroup.cloneNode(true);
+                        renderedTable.insertBefore(clonedColgroup, firstChild);
+                    }
                 });
             }
 
             repeatTHead(sourceTable, renderedTable) {
                 let thead = sourceTable.querySelector(".repeating-header");
-                let clonedThead = thead.cloneNode(true);
-                renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+                if (thead) {
+                    let clonedThead = thead.cloneNode(true);
+                    renderedTable.insertBefore(clonedThead, renderedTable.firstChild);
+                }
             }
 
             // copied this from pagedjs

@@ -1,3 +1,4 @@
+$main: #4D545E;
 @import "../fonts";
 @import "../../../node_modules/bootstrap/scss/bootstrap-utilities";
 @media print {
@@ -9,7 +10,6 @@
     //    background-color: transparent;
     //}
 }
-
 @media screen {
     body {
         background-color: #4a5568;
@@ -24,10 +24,12 @@
     }
 }
 
-body, html {
+body, html, ul, p {
     margin: 0;
     padding: 0;
-    font-family: 'Neo Sans Pro Regular', sans-serif;
+    font-weight: 100;
+    font-family: 'Rubik', sans-serif;
+    color: $main;
 }
 .page-break-after {
     page-break-after: always;

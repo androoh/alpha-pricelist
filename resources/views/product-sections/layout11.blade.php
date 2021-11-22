@@ -3,9 +3,9 @@
         <table class="options-table w-100">
             <thead class="page-break-after-avoid">
                 <tr>
-                    <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
-                    <th class="text-start">Art. No.</th>
-                    <th class="text-end">TP</th>
+                    <th>@t($productOptionSection, 'title', 'Options')</th>
+                    <th>Art. No.</th>
+                    <th>TP</th>
                 </tr>
             </thead>
             @php
@@ -31,9 +31,9 @@
                         <td colspan="3" class="title-row">@t($productOptionData, 'name', '')</td>
                     </tr>
                     <tr class="{{$class}} page-break-inside-avoid">
-                        <td class="text-start">@t($productOptionData, 'optionProductFields.details', '')</td>
-                        <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                        <td class="price text-end">@price($price, $formatType)</td>
+                        <td>@t($productOptionData, 'optionProductFields.details', '')</td>
+                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif
             @endforeach

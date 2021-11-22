@@ -54,7 +54,6 @@ class Resource extends Controller
         }
         $columns = $resource->getGridColumns($request);
         $projections = $this->getProjections($columns);
-//        dd($filters);
         if ($filters) {
             $filters = json_decode($filters, true);
             if ($filters) {

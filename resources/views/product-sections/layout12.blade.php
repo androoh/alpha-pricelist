@@ -5,7 +5,7 @@
                 $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
                 $photoGalleryUrls = [];
                 foreach($photoGallery as $photo) {
-                    $photoUrl = data_get($photo, 'url', false);
+                    $photoUrl = data_get($photo, 'name', false);
                     if ($photoUrl) {
                         $photoGalleryUrls[] = $photoUrl;
                     }
@@ -14,16 +14,16 @@
             <div class="photo-gallery">
                 @foreach($photoGalleryUrls as $url)
                     <div class="photo-gallery-item">
-                        <div class="img" style="background-image: url('{{$url}}')"></div>
+                        <div class="img" style="background-image: url('/imgc/a4lw/{{$url}}')"></div>
                     </div>
                 @endforeach
             </div>
             <table class="options-table w-100">
                 <thead>
                 <tr>
-                    <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
-                    <th class="text-start">Art. No.</th>
-                    <th class="text-end">TP</th>
+                    <th>@t($productOptionSection, 'title', 'Options')</th>
+                    <th>Art. No.</th>
+                    <th>TP</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,9 +41,9 @@
                             $formatType = data_get($productOptionData, 'price_options.type', null);
                         @endphp
                         <tr>
-                            <td class="text-start">@t($productOptionData, 'name', '')</td>
-                            <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                            <td class="price text-end">@price($price, $formatType)</td>
+                            <td>@t($productOptionData, 'name', '')</td>
+                            <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                            <td class="price">@price($price, $formatType)</td>
                         </tr>
                     @endif
                 @endforeach

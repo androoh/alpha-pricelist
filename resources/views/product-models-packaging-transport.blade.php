@@ -16,7 +16,7 @@
                 @php
                     $packagingImages = data_get($packagingTransport, 'technical_design', []);
                 @endphp
-                <div class="packaging-transport-title pt-1 ps-2 mb-1">
+                <div class="packaging-transport-title pt-1 ps-2 pb-1">
                     Model - @t($productModelData, 'name', '')
                 </div>
                 <div class="packaging-transport-images">

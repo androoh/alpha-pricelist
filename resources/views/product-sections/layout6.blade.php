@@ -5,7 +5,7 @@
                 $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
                 $photoGalleryUrls = [];
                 foreach($photoGallery as $photo) {
-                    $photoUrl = data_get($photo, 'url', false);
+                    $photoUrl = data_get($photo, 'name', false);
                     if ($photoUrl) {
                         $photoGalleryUrls[] = $photoUrl;
                     }
@@ -25,7 +25,7 @@
                                 @endif
                                 <td class="@if($i === 1) pe-1 @endif @if($i === 2) ps-1 @endif">
                                     <div class="photo-gallery-item">
-                                        <img src="{{$url}}"/>
+                                        <img src="/imgc/a4lw/{{$url}}"/>
                                     </div>
                                 </td>
                                 @if($i === 3)
@@ -62,9 +62,9 @@
                             $formatType = data_get($productOptionData, 'price_options.type', null);
                         @endphp
                         <tr>
-                            <td class="text-start">@t($productOptionData, 'name', '')</td>
-                            <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                            <td class="price text-end">@price($price, $formatType)</td>
+                            <td>@t($productOptionData, 'name', '')</td>
+                            <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                            <td class="price">@price($price, $formatType)</td>
                         </tr>
                     @endif
                 @endforeach

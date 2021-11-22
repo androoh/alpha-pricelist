@@ -13,7 +13,9 @@
         </div>
     </div>
     <div class="right-badge">
-        <div class="category-name">@t($category, 'name', '-')</div>
+        <div class="badge">
+            <div class="category-name">@t($category, 'name', '-')</div>
+        </div>
     </div>
     <div class="product-page-footer">@t($priceList, 'mainProductsPage.footer_text', '-')</div>
     <div class="page-body">
@@ -21,12 +23,12 @@
             <tr>
                 <td style="width: 50%; vertical-align: top;">
                     @php
-                        $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.url', false);
+                        $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.name', false);
                         $mainPhotoInfoNote = translateFromPath($product, 'mainProductFields.main_photo_info_note', false);
                     @endphp
                     @if($mainPhotoUrl)
                         <div class="main-photo w-100 p-4">
-                            <img src="{{$mainPhotoUrl}}" class="d-block w-100"/>
+                            <img src="/imgc/a4lw/{{$mainPhotoUrl}}" class="d-block w-100"/>
                             @if($mainPhotoInfoNote)
                                 <div class="info-note">{{$mainPhotoInfoNote}}</div>
                             @endif
@@ -37,7 +39,7 @@
                     <h1 class="product-title">@t($product, 'name', '')</h1>
                     <div class="standard-equipment">
                         <h3 class="title">Standard Equipment</h3>
-                        <div class="description">
+                        <div class="description mb-3">
                             @t($product, 'mainProductFields.standard_equipment', '')
                         </div>
                     </div>
@@ -47,7 +49,7 @@
                         foreach($infoIcons as $infoIconId) {
                         $infoIconData = \App\Models\InfoIcon::find($infoIconId);
                         if ($infoIcons) {
-                            $infoIconUrl = data_get($infoIconData, 'iconPhoto.0.url', false);
+                            $infoIconUrl = data_get($infoIconData, 'iconPhoto.0.name', false);
                             if ($infoIconUrl) {
                                 $infoIconsUrl[] = $infoIconUrl;
                             }
@@ -56,7 +58,7 @@
                     @endphp
                     <div class="info-icons">
                         @foreach ($infoIconsUrl as $infoIconUrl)
-                            <img src="{{$infoIconUrl}}" style="height: 40pt"/>
+                            <img src="/imgc/a4lw/{{$infoIconUrl}}" style="height: 40pt"/>
                         @endforeach
                     </div>
                 </td>

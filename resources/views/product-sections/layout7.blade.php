@@ -14,7 +14,7 @@
                             $productOptionData = \App\Models\Product::find($productOptionId);
                             if ($productOptionData) {
                                 $i++;
-                                $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.url');
+                                $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.name');
                             }
                         }
                     @endphp
@@ -30,7 +30,7 @@
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)
-                                             style="background-image: url('{{$productOptionPhotoUrl}}')"
+                                             style="background-image: url('/imgc/a4lw/{{$productOptionPhotoUrl}}')"
                                             @endif
                                         ></div>
                                         <div class="product-item-title text-center">
@@ -39,14 +39,14 @@
                                         <table class="options-table w-100">
                                             <thead>
                                             <tr>
-                                                <th class="text-start">Art. No.</th>
-                                                <th class="text-end">TP</th>
+                                                <th>Art. No.</th>
+                                                <th>TP</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td>{{data_get($productOptionData, 'sku', '')}}</td>
-                                                <td class="price text-end">@price($price, $formatType)</td>
+                                                <td>@price($price, $formatType)</td>
                                             </tr>
                                             </tbody>
                                         </table>

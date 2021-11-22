@@ -71,6 +71,30 @@
   font-weight: normal;
   src: local("Neo Sans Pro Ultra Italic"), url(/fonts/NeoSansProUltIt.woff?c6070ee0d7a99841eaf115718d814365) format("woff");
 }
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/Rubik-Regular.ttf?da39336cfcac7980f2f1d1c4890a9e8e) format("truetype");
+}
+@font-face {
+  font-family: "Rubik";
+  font-style: normal;
+  font-weight: 100;
+  src: url(/fonts/Rubik-Light.ttf?7ee66bf7f540d7bbc3a174527fcb2269) format("truetype");
+}
+@font-face {
+  font-family: "Rajdhani";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/fonts/Rajdhani-Regular.ttf?955ad2c739164f2b01b69724cd0e0041) format("truetype");
+}
+@font-face {
+  font-family: "Rajdhani";
+  font-style: normal;
+  font-weight: bold;
+  src: url(/fonts/Rajdhani-Bold.ttf?0d5cc77aaa325cbb9ce55afb995a10b6) format("truetype");
+}
 /*!
  * Bootstrap Utilities v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -4831,10 +4855,12 @@
     background-color: white;
   }
 }
-body, html {
+body, html, ul, p {
   margin: 0;
   padding: 0;
-  font-family: "Neo Sans Pro Regular", sans-serif;
+  font-weight: 100;
+  font-family: "Rubik", sans-serif;
+  color: #4D545E;
 }
 
 .page-break-after {
@@ -4878,62 +4904,62 @@ table {
 .product-page {
   page: productPage;
   position: relative;
+  page-break-before: always;
+}
+.product-page .page-body {
+  position: relative;
 }
 .product-page .main-photo .info-note {
-  font-family: "Neo Sans Pro Light Italic", sans-serif;
+  font-style: italic;
   font-size: 10pt;
-  color: #EC008C;
 }
 .product-page .product-title {
-  font-family: "Neo Sans Pro Bold", sans-serif;
-  font-size: 35pt;
-  color: #EC008C;
+  font-weight: bold;
+  font-size: 40pt;
+  color: #4D545E;
+  margin-bottom: 0;
+  font-family: Rajdhani, sans-serif;
 }
 .product-page .standard-equipment .title {
-  font-size: 12pt;
-  font-family: "Neo Sans Pro Light", sans-serif;
-  border-bottom: 1px #929294 solid;
+  font-weight: 100;
+  font-size: 14pt;
+  border-bottom: 2px #4D545E solid;
+  margin: 10pt 0;
 }
 .product-page .standard-equipment .description {
-  font-family: "Neo Sans Pro Light", sans-serif;
   font-size: 10pt;
 }
 
-@page productPage {}
 table.options-table {
-  font-family: "Neo Sans Pro Light", sans-serif;
-  color: #808284;
+  font-weight: 100;
+  border-bottom: 2pt #4D545E solid;
 }
 table.options-table thead tr, table.options-table tr.thead {
-  font-size: 8pt;
-  color: white;
-  background-color: #A7B2B8 !important;
-  height: 11pt;
+  font-weight: 100;
 }
 table.options-table thead, table.options-table tr.thead {
   page-break-after: avoid;
 }
 table.options-table tr {
-  font-size: 10pt;
-}
-table.options-table tr:nth-child(even) {
-  background: #F2F3F5;
-}
-table.options-table tr:nth-child(odd) {
-  background: #DFE4E7;
-}
-table.options-table tr.even {
-  background: #F2F3F5 !important;
-}
-table.options-table tr.odd {
-  background: #DFE4E7 !important;
+  font-size: 8pt;
 }
 table.options-table tr.group-row {
   background-color: white !important;
-  font-family: "Neo Sans Pro Regular", sans-serif;
+}
+table.options-table th {
+  font-weight: 100;
+  font-size: 10pt;
 }
 table.options-table td, table.options-table th {
   padding: 4pt 2pt 0 2pt;
+  border-right: 2pt #4D545E solid;
+  text-align: center;
+}
+table.options-table td:first-child, table.options-table th:first-child {
+  text-align: start;
+}
+table.options-table td:last-child, table.options-table th:last-child {
+  border-right: none;
 }
 table.options-table .images-column {
   padding: 0 !important;
@@ -5037,7 +5063,6 @@ table.options-table .title-row {
   width: 60%;
   font-size: 10pt;
   padding: 3pt 4pt 0 4pt;
-  font-family: "Neo Sans Pro Light", sans-serif;
   background: #C9D1D6;
   color: #808284;
 }
@@ -5060,7 +5085,6 @@ table.options-table .title-row {
 }
 .product-grid-3 .product-item .product-item-title {
   font-size: 10pt;
-  font-family: "Neo Sans Pro Light", sans-serif;
   padding: 3pt 4pt 0 4pt;
   color: #808284;
   background-color: #F2F3F5;
@@ -5078,48 +5102,38 @@ table.options-table .title-row {
 
 .product-info {
   position: relative;
-  color: #58595B;
+  color: #4D545E;
 }
-.product-info .info-icons {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
 .price {
-  color: #EC008C;
-  font-family: "Neo Sans Pro Regular", sans-serif;
+  color: #4D545E;
+  font-weight: bold;
 }
 
 .packaging-transport {
   width: 100%;
 }
 .packaging-transport .packaging-transport-item .packaging-transport-title {
-  background: #8f989b;
-  background: linear-gradient(90deg, #8f989b 48%, white 100%);
+  background: #4d545e;
+  background: linear-gradient(90deg, #4d545e 48%, white 100%);
   color: white;
   font-size: 8pt;
   page-break-after: avoid;
 }
 .packaging-transport .packaging-transport-item .packaging-transport-info {
   width: 100%;
-  color: #808284;
 }
 .packaging-transport .packaging-transport-item .packaging-transport-info .packaging-transport-label {
-  font-family: "Neo Sans Pro Light", sans-serif;
   font-size: 12pt;
 }
 .packaging-transport .packaging-transport-item .packaging-transport-info .packaging-notice {
-  font-family: "Neo Sans Pro Italic", sans-serif;
+  font-style: italic;
   font-size: 9pt;
-  color: #EC008C;
 }
 .packaging-transport .packaging-transport-item table.packaging-transport-info th {
-  font-family: "Neo Sans Pro Light", sans-serif;
   font-size: 8pt;
 }
 .packaging-transport .packaging-transport-item table.packaging-transport-info tbody {
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
   font-size: 8pt;
 }
 
@@ -5136,11 +5150,11 @@ table.options-table .title-row {
 }
 .second-page .page-info .title {
   font-size: 64pt;
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
 }
 .second-page .page-info .short-description {
   font-size: 27pt;
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
 }
 
 .icons-page-left {
@@ -5156,11 +5170,11 @@ table.options-table .title-row {
 }
 .icons-page-left .page-info .title {
   font-size: 64pt;
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
 }
 .icons-page-left .page-info .short-description {
   font-size: 27pt;
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
 }
 
 .icons-page-right {
@@ -5177,10 +5191,9 @@ table.options-table .title-row {
 }
 .icons-page-right .info-icon-description {
   font-size: 8pt;
-  font-family: "Neo Sans Pro Light", sans-serif;
 }
 .icons-page-right .info-icon-img {
-  height: 40pt;
+  height: 30pt;
 }
 
 .category-page-left {
@@ -5197,7 +5210,6 @@ table.options-table .title-row {
 .category-page-right .title {
   position: absolute;
   font-size: 50pt;
-  font-family: "Neo Sans Pro Regular", sans-serif;
   bottom: 50pt;
   right: 30pt;
   width: auto;
@@ -5212,16 +5224,15 @@ table.options-table .title-row {
   padding-left: 10pt;
 }
 .toc-page h1 {
-  font-family: "Neo Sans Pro Light", sans-serif;
   font-size: 24pt;
-  border-bottom: 1pt #58595B solid;
+  border-bottom: 1pt #4D545E solid;
 }
 .toc-page h1 strong {
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
 }
 .toc-page .category-section .category-title {
   font-size: 12pt;
-  font-family: "Neo Sans Pro Bold", sans-serif;
+  font-weight: bold;
   border-bottom: 1pt #58595B solid;
   margin: 0;
   padding: 0;
@@ -5255,13 +5266,6 @@ table.options-table .title-row {
   float: right;
 }
 
-.product-page {
-  page: productPage;
-}
-.product-page .page-body {
-  position: relative;
-}
-
 .product-options-page {
   page: productOptionsPage;
 }
@@ -5285,7 +5289,6 @@ table.options-table .title-row {
   left: 0;
   bottom: 100pt;
   text-transform: uppercase;
-  font-family: Arial, sans-serif;
   font-weight: bold;
 }
 .first-page .page-info .type {
@@ -5317,16 +5320,16 @@ table.options-table .title-row {
   margin-left: 30pt;
   margin-right: 20pt;
   @top-right-corner {
-    background-color: #EC008C;
+    background-color: #4D545E;
     overflow: hidden;
     content: "";
   }
   @right-top {
-    background-color: #EC008C;
+    background-color: #4D545E;
     content: "";
   }
   @bottom-right-corner {
-    background-color: #EC008C;
+    background-color: #4D545E;
     content: "";
   }
 }
@@ -5358,14 +5361,12 @@ table.options-table .title-row {
     content: element(leftHeader);
   }
   @bottom-left-corner {
-    background-color: #A9B1B6;
     content: "";
   }
   @bottom-left {
     width: 20pt;
-    background-color: #A9B1B6;
     font-size: 8pt;
-    color: white;
+    color: #4D545E;
     padding-right: 5pt;
     text-align: right;
     content: counter(page);
@@ -5379,14 +5380,12 @@ table.options-table .title-row {
     content: element(rightBadge);
   }
   @bottom-right-corner {
-    background-color: #A9B1B6;
     content: "";
   }
   @bottom-right {
     width: 20pt;
-    background-color: #A9B1B6;
     font-size: 8pt;
-    color: white;
+    color: #4D545E;
     text-align: left;
     padding-left: 5pt;
     content: counter(page);
@@ -5453,21 +5452,20 @@ table.options-table .title-row {
 }
 .left-header {
   position: running(leftHeader);
-  font-family: "Neo Sans Pro Light", sans-serif;
   margin-left: -36pt;
 }
 .left-header .price-list-type {
-  background-color: #4D4E4D;
+  background-color: #4D545E;
   color: white;
   font-size: 13pt;
-  padding: 5pt 15pt 0 65pt;
+  padding: 5pt 15pt 5pt 65pt;
   text-transform: uppercase;
   position: relative;
   overflow: visible;
 }
 .left-header .price-list-type::after {
   content: "";
-  background-color: #4D4E4D;
+  background-color: #4D545E;
   width: 5pt;
   height: 100%;
   position: absolute;
@@ -5475,36 +5473,33 @@ table.options-table .title-row {
   right: -8pt;
 }
 .left-header .product-complexity {
-  color: #EC008C;
+  color: #4D545E;
   font-size: 16pt;
   padding-top: 3pt;
 }
 .left-header .category-name {
   font-size: 16pt;
-  color: #797A7D;
   padding-top: 3pt;
 }
 
 .right-header {
   position: running(rightHeader);
-  font-family: "Neo Sans Pro Light", sans-serif;
   margin-right: -36pt;
 }
 .right-header .product-complexity {
-  color: #A9B1B6;
-  font-size: 16pt;
-  padding-top: 3pt;
+  font-size: 13pt;
+  padding-top: 5pt;
 }
 .right-header .category-name {
-  font-size: 16pt;
+  font-size: 13pt;
   color: white;
-  background-color: #A9B1B6;
+  background-color: #4D545E;
   position: relative;
-  padding: 3pt 65pt 0 12pt;
+  padding: 5pt 80pt 5pt 12pt;
 }
 .right-header .category-name::before {
   content: "";
-  background-color: #A9B1B6;
+  background-color: #4D545E;
   width: 5pt;
   height: 100%;
   position: absolute;
@@ -5513,18 +5508,21 @@ table.options-table .title-row {
 }
 
 .right-badge {
-  background-color: #EC008C;
+  position: running(rightBadge);
+}
+.right-badge .badge {
+  background-color: #4D545E;
   color: white;
   font-size: 17pt;
   overflow: hidden;
-  margin-top: 250pt;
   padding: 10pt 2pt 10pt 8pt;
   text-transform: uppercase;
   -ms-writing-mode: tb-rl;
       writing-mode: tb-rl;
   transform: rotate(-180deg);
-  float: right;
-  position: running(rightBadge);
+  position: absolute;
+  top: 30%;
+  right: 0;
 }
 
 .product-page-footer {
@@ -5535,7 +5533,7 @@ table.options-table .title-row {
   padding-right: 5pt;
 }
 .product-page-footer i {
-  font-family: "Neo Sans Pro Italic", sans-serif;
+  font-style: italic;
 }
 
 .product-options-page-footer {
@@ -5546,7 +5544,7 @@ table.options-table .title-row {
   padding-right: 5pt;
 }
 .product-options-page-footer i {
-  font-family: "Neo Sans Pro Italic", sans-serif;
+  font-style: italic;
 }
 
 ul {

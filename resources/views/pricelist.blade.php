@@ -6,8 +6,9 @@
                 size: {{$pageSize}} {{$pageOrientation}};
                 margin: 36pt;
                 @if ($showCropBorders || $showCross)
-                    marks: @if($showCropBorders) crop @endif @if($showCross) cross @endif;
-                @endif
+                     marks: @if($showCropBorders) crop @endif @if($showCross) cross @endif;
+            @endif
+
             }
         }
     </style>
@@ -36,14 +37,15 @@
         setGlobalCurrency($currency);
     @endphp
     <div class="first-page"
-         style="background-image: url('{{data_get($priceList, 'firstPage.photo.0.url', null)}}')">
+         style="background-image: url('/imgc/a4mw/{{data_get($priceList, 'firstPage.photo.0.name', null)}}')">
         <div class="page-info">
             <div class="title">@t($priceList, 'firstPage.name', 'Price list')</div>
             <div class="type">@t($priceList, 'firstPage.type', 'Trade')</div>
             <div class="language">@t($priceList, 'firstPage.language', 'En')</div>
         </div>
     </div>
-    <div class="second-page" style="background-image: url('{{data_get($priceList, 'secondPage.photo.0.url', null)}}')">
+    <div class="second-page"
+         style="background-image: url('/imgc/a4mw/{{data_get($priceList, 'secondPage.photo.0.name', null)}}')">
         <div class="page-info">
             <h2 class="title p-0 m-0">@t($priceList, 'secondPage.title', 'Title placeholder')</h2>
             <p class="short-description p-0 m-0">@t($priceList, 'secondPage.short_description', 'Title placeholder')</p>
@@ -52,14 +54,30 @@
     <div class="toc-page">
         <h1>Table of <strong>CONTENTS</strong></h1>
         <div class="columns-count-2">
-            @foreach($productTree as $categoryId => $treeItem)
-                <div class="category-section">
-                    <h3 class="category-title">@t($treeItem['category'], 'name', '')</h3>
-                    @foreach($treeItem['products'] as $product)
-                        <div class="category-item"><a
-                                href="#product-{{$product->getKey()}}">@t($product, 'name', '')</a></div>
-                    @endforeach
-                </div>
+            @foreach(data_get($priceList, 'mainProductsPage.categories') as $treeItem)
+                @php
+                    $category = null;
+                    $categoryId = data_get($treeItem, 'category', null);
+                    if ($categoryId) {
+                        $category = \App\Models\Category::find($categoryId);
+                    }
+                @endphp
+                @if($category)
+                    <div class="category-section">
+                        <h3 class="category-title">@t($category, 'name', '')</h3>
+                        @foreach($treeItem['main_products'] as $mainProduct)
+                            @php
+                                $product = null;
+                                $productId = data_get($mainProduct, 'id', null);
+                                if ($productId) {
+                                    $product = \App\Models\Product::find($productId);
+                                }
+                            @endphp
+                            <div class="category-item"><a
+                                    href="#product-{{$product->getKey()}}">@t($product, 'name', '')</a></div>
+                        @endforeach
+                    </div>
+                @endif
             @endforeach
         </div>
     </div>
@@ -83,8 +101,9 @@
                         <table>
                             @foreach($infoIcons as $infoIcon)
                                 <tr>
-                                    <td class="text-center"><img src="{{data_get($infoIcon, 'iconPhoto.0.url', null)}}"
-                                                                 class="info-icon-img"/></td>
+                                    <td class="text-center"><img
+                                            src="/imgc/large/{{data_get($infoIcon, 'iconPhoto.0.name', null)}}"
+                                            class="info-icon-img"/></td>
                                     <td style="vertical-align: top;">
                                         <div
                                             class="info-icon-description text-start ms-2 me-2">@t($infoIcon,
@@ -98,29 +117,45 @@
                 </td>
                 <td class="w-50">
                     <div class="background-image"
-                         style="background-image: url('{{data_get($priceList, 'iconsPage.photo_right_page.0.url', null)}}')"></div>
+                         style="background-image: url('/imgc/a4lw/{{data_get($priceList, 'iconsPage.photo_right_page.0.name', null)}}')"></div>
                 </td>
             </tr>
         </table>
     </div>
-    @foreach($productTree as $categoryId => $treeItem)
-        <div class="category-page-left"
-             style="background-image: url('{{data_get($treeItem['category'], 'left_page_photo.0.url')}}')">
-        </div>
-        <div class="category-page-right"
-             style="background-image: url('{{data_get($treeItem['category'], 'right_page_photo.0.url')}}')">
-            <div class="title">@t($treeItem, 'category.name')</div>
-        </div>
-        @foreach($treeItem['products'] as $product)
-            @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $treeItem['category']])
-        @endforeach
+    @foreach(data_get($priceList, 'mainProductsPage.categories') as $treeItem)
+        @php
+            $category = null;
+            $categoryId = data_get($treeItem, 'category', null);
+            if ($categoryId) {
+                $category = \App\Models\Category::find($categoryId);
+            }
+        @endphp
+        @if($category)
+            <div class="category-page-left"
+                 style="background-image: url('/imgc/a4lw/{{data_get($treeItem, 'left_page_photo.0.name')}}')">
+            </div>
+            <div class="category-page-right"
+                 style="background-image: url('/imgc/a4lw/{{data_get($treeItem, 'right_page_photo.0.name')}}')">
+                <div class="title">@t($treeItem, 'title')</div>
+            </div>
+            @foreach($treeItem['main_products'] as $mainProduct)
+                @php
+                    $product = null;
+                    $productId = data_get($mainProduct, 'id', null);
+                    if ($productId) {
+                        $product = \App\Models\Product::find($productId);
+                    }
+                @endphp
+                @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $category])
+            @endforeach
+        @endif
     @endforeach
     @if ($optionsAndAccessoriesPage)
         <div class="category-page-left"
-             style="background-image: url('{{data_get($optionsAndAccessoriesPage, 'left_page_photo.0.url')}}')">
+             style="background-image: url('/imgc/a4lw/{{data_get($optionsAndAccessoriesPage, 'left_page_photo.0.name')}}')">
         </div>
         <div class="category-page-right"
-             style="background-image: url('{{data_get($optionsAndAccessoriesPage, 'right_page_photo.0.url')}}')">
+             style="background-image: url('/imgc/a4lw/{{data_get($optionsAndAccessoriesPage, 'right_page_photo.0.name')}}')">
             <div class="title">@t($optionsAndAccessoriesPage, 'title')</div>
         </div>
         <div class="product-options-page">

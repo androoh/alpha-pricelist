@@ -94,3 +94,28 @@
     font-weight: normal;
     src: local('Neo Sans Pro Ultra Italic'), url('../fonts/NeoSansProUltIt.woff') format('woff');
 }
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/Rubik/static/Rubik-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 100;
+    src: url('../fonts/Rubik/static/Rubik-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/Rajdhani/Rajdhani-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Rajdhani';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/Rajdhani/Rajdhani-Bold.ttf') format('truetype');
+}

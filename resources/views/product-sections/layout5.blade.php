@@ -15,7 +15,7 @@
                             $productOptionData = \App\Models\Product::find($productOptionId);
                             if ($productOptionData) {
                                 $i++;
-                                $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.url');
+                                $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.name');
                             }
                         }
                     @endphp
@@ -31,7 +31,7 @@
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)
-                                             style="background-image: url('{{$productOptionPhotoUrl}}')"
+                                             style="background-image: url('/imgc/a4lw/{{$productOptionPhotoUrl}}')"
                                             @endif
                                         >
                                             <div class="product-item-title text-truncate">

@@ -6,9 +6,9 @@
         <table class="options-table w-100 mb-4">
             <thead>
             <tr>
-                <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
-                <th class="text-start">Art. No.</th>
-                <th class="text-end">TP</th>
+                <th>@t($productOptionSection, 'title', 'Options')</th>
+                <th>Art. No.</th>
+                <th>TP</th>
             </tr>
             </thead>
             <tbody>
@@ -25,18 +25,18 @@
                         $price = data_get($prices, $productOptionId, 0);
                         $formatType = data_get($productOptionData, 'price_options.type', null);
                         $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                        $photoUrl = $productPhoto ? data_get($productPhoto, 'url', null) : null;
+                        $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                     @endphp
                     <tr>
-                        <td class="text-start">
+                        <td>
                             @if ($displayPhotoInsteadTitle && $photoUrl)
-                                <img src="{{$photoUrl}}" class="w-100 d-block mb-1"/>
+                                <img src="/imgc/a4lw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
                             @else
                                 @t($productOptionData, 'name', '')
                             @endif
                         </td>
-                        <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                        <td class="price text-end">@price($price, $formatType)</td>
+                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif
             @endforeach

@@ -2,9 +2,9 @@
     <table class="options-table w-100">
         <thead>
         <tr>
-            <th class="text-start">Description</th>
-            <th class="text-start">Art. No.</th>
-            <th class="text-end">TP</th>
+            <th>Description</th>
+            <th>Art. No.</th>
+            <th>TP</th>
         </tr>
         </thead>
         <tbody>
@@ -33,9 +33,9 @@
                         $formatType = data_get($productOptionData, 'price_options.type', null);
                     @endphp
                     <tr>
-                        <td class="text-start">@t($productOptionData, 'name', '')</td>
-                        <td class="text-start">{{data_get($productOptionData, 'sku', '')}}</td>
-                        <td class="price text-end">@price($price, $formatType)</td>
+                        <td>@t($productOptionData, 'name', '')</td>
+                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif
             @endforeach

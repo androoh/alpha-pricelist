@@ -32,10 +32,10 @@
         <thead>
         <tr>
             @foreach($columns as $column)
-                <th class="text-start">{{$column}}</th>
+                <th>{{$column}}</th>
             @endforeach
-            <th class="text-start">Art. No.</th>
-            <th class="text-end">TP</th>
+            <th>Art. No.</th>
+            <th>TP</th>
         </tr>
         </thead>
         <tbody>
@@ -56,8 +56,8 @@
                         @endif
                     </td>
                 @endforeach
-                <td class="text-start">{{data_get($row, 'data.sku', '')}}</td>
-                <td class="price text-end">@price($price, $formatType)</td>
+                <td>{{data_get($row, 'data.sku', '')}}</td>
+                <td class="price">@price($price, $formatType)</td>
             </tr>
         @endforeach
         </tbody>
