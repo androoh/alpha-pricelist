@@ -348,28 +348,28 @@ class PriceList extends ResourceAbstract
                             'html' => true
                         ]
                     ]),
-                    new FormlyFieldConfig([
-                        'key' => 'categories_products',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY_CASCADE,
-                        'templateOptions' => [
-                            'main' => [
-                                'label' => 'Categories',
-                                'resource' => 'category',
-                                'searchBy' => ['name.' . config('app.locale')],
-                            ],
-                            'child' => [
-                                'label' => 'Main Products',
-                                'resource' => 'product',
-                                'searchBy' => ['name.' . config('app.locale'), 'sku'],
-                                'relationKey' => 'mainProductFields.category',
-                                'filter' => [
-                                    'column' => 'type',
-                                    'comparator' => '=',
-                                    'value' => \App\Models\Product::PRODUCT_TYPE_MAIN
-                                ]
-                            ],
-                        ]
-                    ]),
+//                    new FormlyFieldConfig([
+//                        'key' => 'categories_products',
+//                        'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY_CASCADE,
+//                        'templateOptions' => [
+//                            'main' => [
+//                                'label' => 'Categories',
+//                                'resource' => 'category',
+//                                'searchBy' => ['name.' . config('app.locale')],
+//                            ],
+//                            'child' => [
+//                                'label' => 'Main Products',
+//                                'resource' => 'product',
+//                                'searchBy' => ['name.' . config('app.locale'), 'sku'],
+//                                'relationKey' => 'mainProductFields.category',
+//                                'filter' => [
+//                                    'column' => 'type',
+//                                    'comparator' => '=',
+//                                    'value' => \App\Models\Product::PRODUCT_TYPE_MAIN
+//                                ]
+//                            ],
+//                        ]
+//                    ]),
                     new FormlyFieldConfig([
                         'key' => 'categories',
                         'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
@@ -519,6 +519,7 @@ class PriceList extends ResourceAbstract
                         'key' => 'layout',
                         'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
                         'defaultValue' => 'layout1',
+                        'wrappers' => ['layout'],
                         'templateOptions' => [
                             'label' => 'Section Layout',
                             'options' => $this->generateLayoutOptions(),

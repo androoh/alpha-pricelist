@@ -4901,6 +4901,14 @@ table {
        column-gap: 20pt;
 }
 
+.w-30 {
+  width: 33.333%;
+}
+
+.valign-bottom {
+  vertical-align: bottom;
+}
+
 .product-page {
   page: productPage;
   position: relative;
@@ -4947,11 +4955,11 @@ table.options-table tr.group-row {
   background-color: white !important;
 }
 table.options-table th {
-  font-weight: 100;
+  font-weight: bold;
   font-size: 10pt;
 }
 table.options-table td, table.options-table th {
-  padding: 4pt 2pt 0 2pt;
+  padding: 4pt 2pt 4pt 2pt;
   border-right: 2pt #4D545E solid;
   text-align: center;
 }
@@ -4964,7 +4972,8 @@ table.options-table td:last-child, table.options-table th:last-child {
 table.options-table .images-column {
   padding: 0 !important;
   background-color: white !important;
-  vertical-align: top;
+  vertical-align: middle;
+  width: 15%;
 }
 table.options-table .title-row {
   background-color: white !important;
@@ -4974,7 +4983,7 @@ table.options-table .title-row {
 .product-sections .product-section .product-section-title {
   font-size: 10pt;
   color: white;
-  background-color: #95A1A8;
+  background-color: #4D545E;
   padding-top: 2pt;
 }
 
@@ -4993,6 +5002,12 @@ table.options-table .title-row {
 .layout-1 .photo-gallery-3 .photo-gallery-item img, .layout-2 .photo-gallery-3 .photo-gallery-item img {
   display: block;
   width: 100%;
+}
+
+.layout-6 .photo-gallery-item {
+  height: 90pt;
+  background: no-repeat center center;
+  background-size: cover;
 }
 
 .photo-gallery-2 .photo-gallery-item {
@@ -5085,10 +5100,10 @@ table.options-table .title-row {
 }
 .product-grid-3 .product-item .product-item-title {
   font-size: 10pt;
-  padding: 3pt 4pt 0 4pt;
+  padding: 3pt 4pt 3pt 4pt;
   color: #808284;
   background-color: #F2F3F5;
-  height: 30pt;
+  min-height: 30pt;
 }
 
 .product-options-group-grid-2 {
@@ -5364,12 +5379,12 @@ table.options-table .title-row {
     content: "";
   }
   @bottom-left {
-    width: 20pt;
+    width: 45pt;
     font-size: 8pt;
-    color: #4D545E;
     padding-right: 5pt;
     text-align: right;
-    content: counter(page);
+    content: element(pageCounter);
+    border-radius: 100%;
   }
 }
 @page productPage:right {
@@ -5383,12 +5398,12 @@ table.options-table .title-row {
     content: "";
   }
   @bottom-right {
-    width: 20pt;
+    width: 45pt;
     font-size: 8pt;
     color: #4D545E;
     text-align: left;
     padding-left: 5pt;
-    content: counter(page);
+    content: element(pageCounter);
   }
 }
 @page productOptionsPage {
@@ -5419,17 +5434,14 @@ table.options-table .title-row {
     content: element(leftHeader);
   }
   @bottom-left-corner {
-    background-color: #A9B1B6;
     content: "";
   }
   @bottom-left {
-    width: 20pt;
-    background-color: #A9B1B6;
+    width: 45pt;
     font-size: 8pt;
-    color: white;
     padding-right: 5pt;
     text-align: right;
-    content: counter(page);
+    content: element(pageCounter);
   }
 }
 @page productOptionsPage:right {
@@ -5437,17 +5449,14 @@ table.options-table .title-row {
     content: element(rightHeader);
   }
   @bottom-right-corner {
-    background-color: #A9B1B6;
     content: "";
   }
   @bottom-right {
-    width: 20pt;
-    background-color: #A9B1B6;
+    width: 45pt;
     font-size: 8pt;
-    color: white;
     text-align: left;
     padding-left: 5pt;
-    content: counter(page);
+    content: element(pageCounter);
   }
 }
 .left-header {
@@ -5507,6 +5516,21 @@ table.options-table .title-row {
   left: -8pt;
 }
 
+.page-counter {
+  position: running(pageCounter);
+}
+.page-counter::after {
+  content: counter(page);
+  background-color: #4D545E;
+  color: white;
+  border-radius: 50pt;
+  padding: 0 5pt;
+  font-size: 20pt;
+  min-width: 15pt;
+  display: inline-block;
+  text-align: center;
+}
+
 .right-badge {
   position: running(rightBadge);
 }
@@ -5527,8 +5551,8 @@ table.options-table .title-row {
 
 .product-page-footer {
   position: running(productPageFooter);
-  font-size: 8pt;
-  color: #808284;
+  font-size: 10pt;
+  color: #4D545E;
   padding-left: 5pt;
   padding-right: 5pt;
 }
@@ -5538,8 +5562,8 @@ table.options-table .title-row {
 
 .product-options-page-footer {
   position: running(productOptionsPageFooter);
-  font-size: 8pt;
-  color: #808284;
+  font-size: 10pt;
+  color: #4D545E;
   padding-left: 5pt;
   padding-right: 5pt;
 }

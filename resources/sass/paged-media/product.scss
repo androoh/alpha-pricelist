@@ -65,12 +65,12 @@ table.options-table {
     }
 
     th {
-        font-weight: 100;
+        font-weight: bold;
         font-size: 10pt;
     }
 
     td, th {
-        padding: 4pt 2pt 0 2pt;
+        padding: 4pt 2pt 4pt 2pt;
         border-right: 2pt $main solid;
         text-align: center;
     }
@@ -86,7 +86,9 @@ table.options-table {
     .images-column {
         padding: 0 !important;
         background-color: white !important;
-        vertical-align: top;
+        vertical-align: middle;
+        width: 15%;
+
     }
 
     .title-row {
@@ -100,7 +102,7 @@ table.options-table {
         .product-section-title {
             font-size: 10pt;
             color: white;
-            background-color: $gray1;
+            background-color: $main;
             padding-top: 2pt;
         }
     }
@@ -130,6 +132,13 @@ table.options-table {
                 width: 100%;
             }
         }
+    }
+}
+.layout-6 {
+    .photo-gallery-item {
+        height: 90pt;
+        background: no-repeat center center;
+        background-size: cover;
     }
 }
 
@@ -255,10 +264,10 @@ table.options-table {
 
         .product-item-title {
             font-size: 10pt;
-            padding: 3pt 4pt 0 4pt;
+            padding: 3pt 4pt 3pt 4pt;
             color: $gray2;
             background-color: #F2F3F5;
-            height: 30pt;
+            min-height: 30pt;
         }
     }
 }
@@ -583,12 +592,12 @@ table.options-table {
         content: "";
     }
     @bottom-left {
-        width: 20pt;
+        width: 45pt;
         font-size: 8pt;
-        color: $main;
         padding-right: 5pt;
         text-align: right;
-        content: counter(page);
+        content: element(pageCounter);
+        border-radius: 100%;
     }
 }
 
@@ -603,12 +612,12 @@ table.options-table {
         content: "";
     }
     @bottom-right {
-        width: 20pt;
+        width: 45pt;
         font-size: 8pt;
         color: $main;
         text-align: left;
         padding-left: 5pt;
-        content: counter(page);
+        content: element(pageCounter);
     }
 }
 
@@ -641,17 +650,14 @@ table.options-table {
         content: element(leftHeader);
     }
     @bottom-left-corner {
-        background-color: #A9B1B6;
         content: "";
     }
     @bottom-left {
-        width: 20pt;
-        background-color: #A9B1B6;
+        width: 45pt;
         font-size: 8pt;
-        color: white;
         padding-right: 5pt;
         text-align: right;
-        content: counter(page);
+        content: element(pageCounter);
     }
 }
 
@@ -660,17 +666,14 @@ table.options-table {
         content: element(rightHeader);
     }
     @bottom-right-corner {
-        background-color: #A9B1B6;
         content: "";
     }
     @bottom-right {
-        width: 20pt;
-        background-color: #A9B1B6;
+        width: 45pt;
         font-size: 8pt;
-        color: white;
         text-align: left;
         padding-left: 5pt;
-        content: counter(page);
+        content: element(pageCounter);
     }
 }
 
@@ -739,6 +742,21 @@ table.options-table {
     }
 }
 
+.page-counter {
+    position: running(pageCounter);
+    &::after {
+        content: counter(page);
+        background-color: $main;
+        color: white;
+        border-radius: 50pt;
+        padding: 0 5pt;
+        font-size: 20pt;
+        min-width: 15pt;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
 .right-badge {
     position: running(rightBadge);
     .badge {
@@ -760,8 +778,8 @@ table.options-table {
 
 .product-page-footer {
     position: running(productPageFooter);
-    font-size: 8pt;
-    color: #808284;
+    font-size: 10pt;
+    color: $main;
     padding-left: 5pt;
     padding-right: 5pt;
 
@@ -772,8 +790,8 @@ table.options-table {
 
 .product-options-page-footer {
     position: running(productOptionsPageFooter);
-    font-size: 8pt;
-    color: #808284;
+    font-size: 10pt;
+    color: $main;
     padding-left: 5pt;
     padding-right: 5pt;
 

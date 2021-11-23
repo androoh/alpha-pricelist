@@ -16,13 +16,13 @@
         <table class="options-table w-100">
             <tr class="thead">
                 @if(count($photoGalleryUrls) > 0)
-                    <th rowspan="{{count($productOptions) + 1}}" class="images-column" style="width: 10%">
+                    <th rowspan="{{count($productOptions) + 1}}" class="images-column">
                         @foreach($photoGalleryUrls as $url)
                             <img src="/imgc/a4lw/{{$url}}" class="w-100 d-block"/>
                         @endforeach
                     </th>
                 @endif
-                <th>@t($productOptionSection, 'title', 'Options')</th>
+                <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
                 @if ($displayMinOrderQty)
                     <th style="width: 15%">min. order qty</th>
                 @endif
@@ -45,7 +45,7 @@
                         $photoUrl = $productPhoto ? data_get($productPhoto, 'url', null) : null;
                     @endphp
                     <tr>
-                        <td>
+                        <td class="text-start">
                             @if ($displayPhotoInsteadTitle && $photoUrl)
                                 <img src="{{$photoUrl}}" class="w-100 d-block mb-1"/>
                             @else

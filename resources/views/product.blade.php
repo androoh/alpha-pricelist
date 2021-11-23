@@ -18,6 +18,7 @@
         </div>
     </div>
     <div class="product-page-footer">@t($priceList, 'mainProductsPage.footer_text', '-')</div>
+    <div class="page-counter"></div>
     <div class="page-body">
         <table class="product-info mb-3">
             <tr>

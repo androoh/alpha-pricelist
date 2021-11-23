@@ -148,6 +148,7 @@
                 @endphp
                 @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $category])
             @endforeach
+            @include('product-sections', ['productSections' => data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @endif
     @endforeach
     @if ($optionsAndAccessoriesPage)

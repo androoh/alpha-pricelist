@@ -11,22 +11,27 @@
                     }
                 }
             @endphp
-            <div class="photo-gallery-2">
-                <table>
+            <div class="photo-gallery-2 w-100">
+                <table class="w-100">
                     @php
                         $i = 0;
                     @endphp
                     @foreach($photoGalleryUrls as $url)
                         @php
                             $i++;
+                            $class = '';
+                            if ($i === 1 && count($photoGalleryUrls) > 1) {
+                                $class = 'pe-1';
+                            }
+                            if ($i === 2) {
+                                $class = 'ps-1';
+                            }
                         @endphp
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">
                                 @endif
-                                <td class="@if($i === 1) pe-1 @endif @if($i === 2) ps-1 @endif">
-                                    <div class="photo-gallery-item">
-                                        <img src="/imgc/a4lw/{{$url}}"/>
-                                    </div>
+                                <td style="width: {{(100/count($photoGalleryUrls))}}%" class="{{$class}}">
+                                    <div class="photo-gallery-item" style="background-image: url('/imgc/a4lw/{{$url}}');"></div>
                                 </td>
                                 @if($i === 3)
                             </tr>
