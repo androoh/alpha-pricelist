@@ -82,7 +82,7 @@
         </div>
     </div>
     <div class="icons-page-left page-break-before"
-         style="background-image: url('{{data_get($priceList, 'iconsPage.photo_left_page.0.url', null)}}')">
+         style="background-image: url('/imgc/large/{{data_get($priceList, 'iconsPage.photo_left_page.0.name', null)}}')">
         <div class="page-info">
             <h2 class="title p-0 m-0">@t($priceList, 'iconsPage.title', 'Title placeholder')</h2>
             <p class="short-description p-0 m-0">@t($priceList, 'iconsPage.short_description', 'Title placeholder')</p>
