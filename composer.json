@@ -38,8 +38,7 @@
         "files": [
             "app/helpers.php",
             "overrides/Intervention/Image/AbstractEncoder.php",
-            "overrides/Intervention/Image/ImageCacheController.php",
-            "overrides/Intervention/Image/AbstractDecoder.php"
+            "overrides/Intervention/Image/ImageCacheController.php"
         ]
     },
     "autoload-dev": {
