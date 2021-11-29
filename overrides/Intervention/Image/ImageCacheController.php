@@ -38,7 +38,8 @@ class ImageCacheController extends BaseController
     public function isXml($filename)
     {
         $path = $this->getImagePath($filename);
-        if (mime_content_type($path) === 'text/xml') {
+        $mime = mime_content_type($path);
+        if ($mime === 'text/xml' || $mime === 'image/svg+xml') {
             return true;
         }
         return false;
