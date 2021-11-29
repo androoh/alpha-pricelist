@@ -26,7 +26,10 @@
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
-        "exclude-from-classmap": ["vendor\\intervention\\image\\src\\Intervention\\Image\\AbstractEncoder.php"],
+        "exclude-from-classmap": [
+            "vendor\\intervention\\image\\src\\Intervention\\Image\\AbstractEncoder.php",
+            "vendor\\intervention\\image\\src\\Intervention\\Image\\ImageCacheController.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
@@ -34,7 +37,8 @@
         },
         "files": [
             "app/helpers.php",
-            "overrides/Intervention/Image/AbstractEncoder.php"
+            "overrides/Intervention/Image/AbstractEncoder.php",
+            "overrides/Intervention/Image/ImageCacheController.php"
         ]
     },
     "autoload-dev": {

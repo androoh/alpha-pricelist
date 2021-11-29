@@ -121,6 +121,7 @@ abstract class AbstractEncoder
 
         switch (strtolower($this->format)) {
             case 'image/svg+xml':
+            case 'text/xml':
                 $this->result = $this->processSvg();
                 break;
             case 'data-url':
@@ -251,6 +252,10 @@ abstract class AbstractEncoder
     {
         if ($format == '' && $this->image instanceof Image) {
             $format = $this->image->mime;
+        }
+        
+        if ($format === 'text/xml') {
+            $format = 'image/svg+xml';
         }
 
         $this->format = $format ? $format : 'jpg';
