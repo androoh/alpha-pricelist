@@ -28,8 +28,20 @@ class ImageCacheController extends BaseController
                 return $this->getDownload($filename);
 
             default:
+                if ($this->isXml($filename)) {
+                    return $this->getOriginal($filename);
+                }
                 return $this->getImage($template, $filename);
         }
+    }
+
+    public function isXml($filename)
+    {
+        $path = $this->getImagePath($filename);
+        if (mime_content_type($path) === 'text/xml') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,7 +60,6 @@ class ImageCacheController extends BaseController
         // image manipulation based on callback
         $manager = new ImageManager(Config::get('image'));
         $content = $manager->cache(function ($image) use ($template, $path) {
-
             if ($template instanceof Closure) {
                 // build from closure callback template
                 $template($image->make($path));
