@@ -31,11 +31,11 @@
     @endphp
     <div class="first-page"
          style="background-image: url('/imgc/a4mw/{{data_get($priceList, 'firstPage.photo.0.name', null)}}')">
-        <div class="page-info">
+        {{-- <div class="page-info">
             <div class="title">@t($priceList, 'firstPage.name', 'Price list')</div>
             <div class="type">@t($priceList, 'firstPage.type', 'Trade')</div>
             <div class="language">@t($priceList, 'firstPage.language', 'En')</div>
-        </div>
+        </div> --}}
     </div>
     <div class="second-page"
          style="background-image: url('/imgc/a4mw/{{data_get($priceList, 'secondPage.photo.0.name', null)}}')">
