@@ -9,9 +9,12 @@
             constructor(chunker, polisher, caller) {
                 super(chunker, polisher, caller);
                 this.splitTablesRefs = [];
+                console.log("albert");
             }
 
             afterPageLayout(pageElement, page, breakToken, chunker) {
+
+                console.log("ok");
                 this.chunker = chunker;
                 this.splitTablesRefs = [];
 
@@ -36,8 +39,11 @@
             hideEmptyTables(pageElement) {
                 this.splitTablesRefs.forEach(ref => {
                     let table = pageElement.querySelector("[data-ref='" + ref + "']");
-                    let sourceBody = table.querySelector("tbody > tr");
-                    if (!sourceBody) {
+                    let sourceBody = table.querySelectorAll("tbody tr");
+                    const firstChild = sourceBody[0];
+                    const lastChild = sourceBody[sourceBody.length - 1];
+
+                    if (!firstChild) {
                         table.style.visibility = "hidden";
                         table.style.position = "absolute";
                         let lineSpacer = table.nextSibling;
@@ -46,7 +52,29 @@
                             lineSpacer.style.position = "absolute";
                         }
                     }
+
+                    if (firstChild && this.emptyRow(firstChild)) {
+                        firstChild.style.visibility = "hidden";
+                        firstChild.style.display = "none";
+                    }
+
+                    if (lastChild && this.emptyRow(lastChild)) {
+                        lastChild.style.visibility = "hidden";
+                        lastChild.style.display = "none";
+                    }
+
                 });
+            }
+
+            emptyRow(tr) {
+                let allTdsEmpty = true;
+                tr.querySelectorAll("td").forEach((td) => {
+                    if (td.innerHTML.trim().length > 0) {
+                        allTdsEmpty = false;
+                    }
+                });
+                console.log(allTdsEmpty, tr);
+                return allTdsEmpty;
             }
 
             findFirstAncestor(element, selector) {
@@ -78,10 +106,10 @@
                     // this event can be triggered multiple times
                     // added a flag repeated-headers to control when table headers already repeated in current page.
                     if (!renderedTable.getAttribute("repeated-headers")) {
-                        const sourceTable = this.chunker.source.querySelector("[data-ref='" + ref + "']");
-                        this.repeatColgroup(sourceTable, renderedTable);
-                        this.repeatTHead(sourceTable, renderedTable);
-                        renderedTable.setAttribute("repeated-headers", true);
+                        // const sourceTable = this.chunker.source.querySelector("[data-ref='" + ref + "']");
+                        // this.repeatColgroup(sourceTable, renderedTable);
+                        // this.repeatTHead(sourceTable, renderedTable);
+                        // renderedTable.setAttribute("repeated-headers", true);
                     }
                 });
             }
@@ -144,6 +172,7 @@
             }
 
         }
+        Paged.registerHandlers(RepeatingTableHeaders);
         //////////////////////////////////////////////////////////////
         class RepeatingAnyHeaders extends Paged.Handler {
 

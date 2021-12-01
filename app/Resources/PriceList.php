@@ -339,12 +339,29 @@ class PriceList extends ResourceAbstract
                 ],
                 'fieldGroup' => [
                     new FormlyFieldConfig([
-                        'key' => 'footer_text',
+                        'key' => 'footer_text_1',
                         'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
-                            'label' => 'Footer text',
+                            'label' => 'Footer text 1',
                             'translatable' => true,
-                            'required' => true,
+                            'html' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text_2',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Footer text 2',
+                            'translatable' => true,
+                            'html' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text_3',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Footer text 3',
+                            'translatable' => true,
                             'html' => true
                         ]
                     ]),
@@ -471,6 +488,33 @@ class PriceList extends ResourceAbstract
                             'label' => 'Right page photo'
                         ]
                     ]),
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text_1',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Footer text 1',
+                            'translatable' => true,
+                            'html' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text_2',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Footer text 2',
+                            'translatable' => true,
+                            'html' => true
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'footer_text_3',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Footer text 3',
+                            'translatable' => true,
+                            'html' => true
+                        ]
+                    ]),
                     $this->getProductOptionSections()
                 ]
             ]),
@@ -553,6 +597,17 @@ class PriceList extends ResourceAbstract
                                         'required' => true
                                     ]
                                 ]),
+                                // new FormlyFieldConfig([
+                                //     'key' => 'layout',
+                                //     'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                //     'defaultValue' => 'layout1',
+                                //     'wrappers' => ['layout'],
+                                //     'templateOptions' => [
+                                //         'label' => 'Section Layout',
+                                //         'options' => $this->generateLayoutOptions(),
+                                //         'required' => true
+                                //     ],
+                                // ]),
                                 new FormlyFieldConfig([
                                     'key' => 'info_note',
                                     'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
@@ -646,6 +701,11 @@ class PriceList extends ResourceAbstract
                 'label' => 'Options grid view 3/1',
                 'value' => 'layout7',
                 'img' => asset('images/resize_layout7.png')
+            ],
+            [
+                'label' => 'Options grid view 4/1',
+                'value' => 'layout15',
+                'img' => asset('images/layout15.png')
             ],
             [
                 'label' => 'Grouped Options in table with photos on left',

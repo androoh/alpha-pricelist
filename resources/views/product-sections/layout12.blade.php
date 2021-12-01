@@ -1,6 +1,17 @@
 <div class="layout-12 product-options-group-grid-2">
+    @php
+        $i = 0;
+    @endphp
+    <table class="w-100">
     @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
-        <div class="mb-1 product-options-group">
+        @php
+            $i++;
+        @endphp
+        @if($i === 1)
+            <tr class="page-break-inside-avoid">
+        @endif
+        <td class="w-50 valign-top @if($i === 1) pe-2 @endif @if($i === 2) ps-2 @endif">
+        <div class="mb-1 w-100">
             @php
                 $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
                 $photoGalleryUrls = [];
@@ -42,7 +53,7 @@
                         @endphp
                         <tr>
                             <td>@t($productOptionData, 'name', '')</td>
-                            <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                            <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                             <td class="price">@price($price, $formatType)</td>
                         </tr>
                     @endif
@@ -50,5 +61,15 @@
                 </tbody>
             </table>
         </div>
+        </td>
+        @if($i === 2)
+                            </tr>
+                        @endif
+                        @php
+                            if($i === 2) {
+                                $i = 0;
+                            }
+                        @endphp
     @endforeach
+    </table>
 </div>

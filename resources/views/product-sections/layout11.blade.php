@@ -32,7 +32,7 @@
                     </tr>
                     <tr class="{{$class}} page-break-inside-avoid">
                         <td>@t($productOptionData, 'optionProductFields.details', '')</td>
-                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td  class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                         <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif

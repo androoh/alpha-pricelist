@@ -35,7 +35,7 @@
                                 @t($productOptionData, 'name', '')
                             @endif
                         </td>
-                        <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                        <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                         <td class="price">@price($price, $formatType)</td>
                     </tr>
                 @endif

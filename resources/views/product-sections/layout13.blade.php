@@ -33,10 +33,10 @@
                                              style="background-image: url('/imgc/a4lw/{{$productOptionPhotoUrl}}')"
                                             @endif
                                         ></div>
-                                        <div class="product-item-title text-center">
+                                        <div class="product-item-title text-start">
                                             @t($productOptionData, 'name', '')
                                         </div>
-                                        <table class="options-table w-100">
+                                        <table class="options-table">
                                             <thead>
                                             <tr>
                                                 <th>Art. No.</th>
@@ -45,7 +45,7 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                                                <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                                                 <td class="price">@price($price, $formatType)</td>
                                             </tr>
                                             </tbody>

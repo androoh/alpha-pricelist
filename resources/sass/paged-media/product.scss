@@ -56,7 +56,7 @@ table.options-table {
     }
 
     tr {
-        font-size: 8pt;
+        font-size: 10pt;
     }
 
 
@@ -73,6 +73,12 @@ table.options-table {
         padding: 4pt 2pt 4pt 2pt;
         border-right: 2pt $main solid;
         text-align: center;
+        &.price {
+            width: 60pt;
+        }
+        &.sku {
+            width: 50pt;
+        }
     }
 
     td:first-child, th:first-child {
@@ -100,10 +106,7 @@ table.options-table {
 .product-sections {
     .product-section {
         .product-section-title {
-            font-size: 10pt;
-            color: white;
-            background-color: $main;
-            padding-top: 2pt;
+            font-size: 15pt;
         }
     }
 }
@@ -240,7 +243,7 @@ table.options-table {
     }
 }
 
-.product-grid-3 {
+.product-grid-3, .product-grid-4 {
     //display: flex;
     //flex-flow: row wrap;
     //justify-content: space-between;
@@ -252,8 +255,8 @@ table.options-table {
             width: 100%;
             height: 100pt;
             background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
+            background-position: center center;
+            background-size: contain;
             overflow: hidden;
         }
 
@@ -265,9 +268,15 @@ table.options-table {
         .product-item-title {
             font-size: 10pt;
             padding: 3pt 4pt 3pt 4pt;
-            color: $gray2;
-            background-color: #F2F3F5;
-            min-height: 30pt;
+            color: $main;
+        }
+    }
+
+    table {
+        .options-table {
+            th, td {
+                padding: 0 2pt;
+            }
         }
     }
 }
@@ -276,10 +285,6 @@ table.options-table {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-
-    .product-options-group {
-        width: 49%;
-    }
 }
 
 .product-info {
@@ -482,6 +487,12 @@ table.options-table {
 
 .product-options-page {
     page: productOptionsPage;
+
+    table.options-table {
+        td {
+            border-bottom: 2pt solid $main;
+        }
+    }
 }
 
 .category-page-left, .category-page-right, .first-page, .second-page, .icons-page-left, .icons-page-right {
@@ -546,23 +557,18 @@ table.options-table {
     margin-left: 30pt;
     margin-right: 20pt;
     @top-right-corner {
-        background-color: $main;
-        overflow: hidden;
-        content: "";
     }
     @right-top {
-        background-color: $main;
-        content: "";
     }
     @bottom-right-corner {
-        background-color: $main;
-        content: "";
     }
 }
 
 @page productPage {
     margin-top: 50pt;
-    margin-bottom: 36pt;
+    margin-bottom: 70pt;
+    padding-bottom: 5pt;
+
     @top-center {
         text-align: left;
     }
@@ -579,8 +585,8 @@ table.options-table {
         width: 0;
     }
     @bottom-center {
-        content: element(productPageFooter);
-        text-align: left;
+        content: "";
+        text-align: right;
     }
 }
 
@@ -588,17 +594,21 @@ table.options-table {
     @top-center {
         content: element(leftHeader);
     }
-    @bottom-left-corner {
-        content: "";
+    @bottom-center {
+        content: element(productPageFooterLeft);
+        text-align: left;
     }
-    @bottom-left {
-        width: 45pt;
-        font-size: 8pt;
-        padding-right: 5pt;
-        text-align: right;
-        content: element(pageCounter);
-        border-radius: 100%;
-    }
+    // @bottom-left-corner {
+    //     content: "";
+    // }
+    // @bottom-left {
+    //     width: 45pt;
+    //     font-size: 8pt;
+    //     padding-right: 5pt;
+    //     text-align: right;
+    //     content: element(pageCounter);
+    //     border-radius: 100%;
+    // }
 }
 
 @page productPage:right {
@@ -608,22 +618,28 @@ table.options-table {
     @right-top {
         content: element(rightBadge);
     }
-    @bottom-right-corner {
-        content: "";
+    @bottom-center {
+        content: element(productPageFooterRight);
+        text-align: right;
     }
-    @bottom-right {
-        width: 45pt;
-        font-size: 8pt;
-        color: $main;
-        text-align: left;
-        padding-left: 5pt;
-        content: element(pageCounter);
-    }
+    // @bottom-right-corner {
+    //     content: "";
+    // }
+    // @bottom-right {
+    //     width: 45pt;
+    //     font-size: 8pt;
+    //     color: $main;
+    //     text-align: left;
+    //     padding-left: 5pt;
+    //     content: element(pageCounter);
+    // }
 }
 
 @page productOptionsPage {
     margin-top: 50pt;
-    margin-bottom: 36pt;
+    margin-bottom: 70pt;
+    padding-bottom: 5pt;
+
     @top-center {
         text-align: left;
     }
@@ -640,8 +656,7 @@ table.options-table {
         width: 0;
     }
     @bottom-center {
-        content: element(productOptionsPageFooter);
-        text-align: left;
+        content: "";
     }
 }
 
@@ -652,12 +667,8 @@ table.options-table {
     @bottom-left-corner {
         content: "";
     }
-    @bottom-left {
-        width: 45pt;
-        font-size: 8pt;
-        padding-right: 5pt;
-        text-align: right;
-        content: element(pageCounter);
+    @bottom-center {
+        content: element(productOptionsPageFooterLeft);
     }
 }
 
@@ -668,18 +679,14 @@ table.options-table {
     @bottom-right-corner {
         content: "";
     }
-    @bottom-right {
-        width: 45pt;
-        font-size: 8pt;
-        text-align: left;
-        padding-left: 5pt;
-        content: element(pageCounter);
+    @bottom-center {
+        content: element(productOptionsPageFooterRight);
     }
 }
 
 .left-header {
     position: running(leftHeader);
-    margin-left: -36pt;
+    margin-left: -26pt;
 
     .price-list-type {
         background-color: $main;
@@ -716,7 +723,7 @@ table.options-table {
 
 .right-header {
     position: running(rightHeader);
-    margin-right: -36pt;
+    margin-right: -26pt;
 
     .product-complexity {
         font-size: 13pt;
@@ -743,15 +750,15 @@ table.options-table {
 }
 
 .page-counter {
-    position: running(pageCounter);
     &::after {
         content: counter(page);
         background-color: $main;
         color: white;
-        border-radius: 50pt;
-        padding: 0 5pt;
+        border-radius: 100%;
+        padding: 0 1pt;
         font-size: 20pt;
-        min-width: 15pt;
+        min-width: 28pt;
+        line-height: 30pt;
         display: inline-block;
         text-align: center;
     }
@@ -777,15 +784,111 @@ table.options-table {
 }
 
 .product-page-footer {
-    position: running(productPageFooter);
+    position: relative;
+    height: 100%;
+    .page-counter {
+        position: absolute;
+    }
+    .footer-text-1, .footer-text-2, .footer-text-3 {
+        position: absolute;
+    }
+}
+
+.product-options-page-footer {
+    position: relative;
+    height: 100%;
+    .page-counter {
+        position: absolute;
+    }
+    .footer-text-1, .footer-text-2, .footer-text-3 {
+        position: absolute;
+    }
+}
+
+.product-page-footer-left {
+    position: running(productPageFooterLeft);
+}
+
+.product-options-page-footer-left {
+    position: running(productOptionsPageFooterLeft);
+}
+
+.product-page-footer-left,  .product-options-page-footer-left {
     font-size: 10pt;
     color: $main;
     padding-left: 5pt;
     padding-right: 5pt;
+    background-image: url('../../../public/images/footer-border-left.svg');
+    background-repeat: no-repeat;
+    background-position-x: 12pt;
+    background-position-y: 15pt;
+    position: relative;
 
     i {
         font-style: italic;
     }
+    .page-counter {
+        left: 0;
+        top: 29pt;
+    }
+
+    .footer-text-1 {
+        left: 50pt;
+    }
+
+
+    .footer-text-2 {
+        top: 22pt;
+        left: 50pt;
+    }
+
+    .footer-text-3 {
+        right: 0;
+    }
+
+}
+
+.product-page-footer-right {
+    position: running(productPageFooterRight);
+}
+
+.product-options-page-footer-right {
+    position: running(productOptionsPageFooterRight);
+}
+
+.product-page-footer-right, .product-options-page-footer-right {
+    font-size: 10pt;
+    color: $main;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    background-image: url('../../../public/images/footer-border-right.svg');
+    background-repeat: no-repeat;
+    background-position-x: 310pt;
+    background-position-y: 15pt;
+
+
+    i {
+        font-style: italic;
+    }
+
+    .page-counter {
+        right: 0;
+        top: 29pt;
+    }
+
+    .footer-text-1 {
+        right: 50pt;
+    }
+
+    .footer-text-2 {
+        top: 22pt;
+        right: 50pt;
+    }
+
+    .footer-text-3 {
+        left: 0;
+    }
+
 }
 
 .product-options-page-footer {

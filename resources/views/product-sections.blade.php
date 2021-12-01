@@ -1,10 +1,11 @@
 <div class="product-sections">
     @foreach($productSections as $productSection)
-        <div class="product-section mb-4 w-100 repeating-container">
-            @php
-                $productSectionTitle = translateFromPath($productSection, 'title', false);
-                $hideTitle = data_get($productSection, 'hideTitle', false);
-            @endphp
+        @php
+            $productSectionTitle = translateFromPath($productSection, 'title', false);
+            $hash = md5($productSectionTitle);
+            $hideTitle = data_get($productSection, 'hideTitle', false);
+        @endphp
+        <div class="product-section mb-4 w-100 repeating-container" id="product-{{$hash}}">
             @if($productSectionTitle && !$hideTitle)
                 <div
                     class="product-section-title text-center text-uppercase repeating-header">{{$productSectionTitle}}</div>
@@ -43,6 +44,9 @@
                     @break
                     @case('layout14')
                     @include('product-sections.layout14', ['productSection' => $productSection, 'prices' => $prices])
+                    @break
+                    @case('layout15')
+                    @include('product-sections.layout15', ['productSection' => $productSection, 'prices' => $prices])
                     @break
                     @default
                 @endswitch

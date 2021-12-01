@@ -56,7 +56,7 @@
                         @endif
                     </td>
                 @endforeach
-                <td>{{data_get($row, 'data.sku', '')}}</td>
+                <td class="sku">{{data_get($row, 'data.sku', '')}}</td>
                 <td class="price">@price($price, $formatType)</td>
             </tr>
         @endforeach

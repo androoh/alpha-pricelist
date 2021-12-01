@@ -240,6 +240,15 @@ class Product extends ResourceAbstract
                 ]
             ]),
             new FormlyFieldConfig([
+                'key' => 'footer_notes',
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                'templateOptions' => [
+                    'label' => 'Footer Notes',
+                    'html' => true,
+                    'translatable' => true,
+                ]
+            ]),
+            new FormlyFieldConfig([
                 'key' => 'product_models',
                 'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
                 'templateOptions' => [
@@ -318,6 +327,17 @@ class Product extends ResourceAbstract
                                             'required' => true
                                         ]
                                     ]),
+                                    // new FormlyFieldConfig([
+                                    //     'key' => 'layout',
+                                    //     'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                    //     'defaultValue' => 'layout1',
+                                    //     'wrappers' => ['layout'],
+                                    //     'templateOptions' => [
+                                    //         'label' => 'Section Layout',
+                                    //         'options' => $this->generateLayoutOptions(),
+                                    //         'required' => true
+                                    //     ],
+                                    // ]),
                                     new FormlyFieldConfig([
                                         'key' => 'info_note',
                                         'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
@@ -596,6 +616,11 @@ class Product extends ResourceAbstract
                 'label' => 'Options grid view 3/1',
                 'value' => 'layout7',
                 'img' => asset('images/resize_layout7.png')
+            ],
+            [
+                'label' => 'Options grid view 4/1',
+                'value' => 'layout15',
+                'img' => asset('images/resize_layout15.png')
             ],
             [
                 'label' => 'Grouped Options in table with photos on left',

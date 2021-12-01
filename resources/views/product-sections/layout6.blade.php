@@ -48,7 +48,7 @@
                 <thead>
                 <tr>
                     <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
-                    <th class="text-start">Art. No.</th>
+                    <th class="text-center">Art. No.</th>
                     <th class="text-end">TP</th>
                 </tr>
                 </thead>
@@ -68,7 +68,7 @@
                         @endphp
                         <tr>
                             <td>@t($productOptionData, 'name', '')</td>
-                            <td>{{data_get($productOptionData, 'sku', '')}}</td>
+                            <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                             <td class="price">@price($price, $formatType)</td>
                         </tr>
                     @endif

@@ -17,8 +17,24 @@
             <div class="category-name">@t($category, 'name', '-')</div>
         </div>
     </div>
-    <div class="product-page-footer">@t($priceList, 'mainProductsPage.footer_text', '-')</div>
-    <div class="page-counter"></div>
+    <div class="product-page-footer-left product-page-footer">
+        <div class="page-counter"></div>
+        <div class="footer-text-1">@t($priceList, 'mainProductsPage.footer_text_1', '')</div>
+        <div class="footer-text-2">
+            <div>@t($priceList, 'mainProductsPage.footer_text_2', '')</div>
+            <div>@t($product, 'mainProductFields.footer_notes', '')</div>
+        </div>
+        <div class="footer-text-3">@t($priceList, 'mainProductsPage.footer_text_3', '')</div>
+    </div>
+    <div class="product-page-footer-right product-page-footer">
+        <div class="footer-text-1">@t($priceList, 'mainProductsPage.footer_text_1', '')</div>
+        <div class="footer-text-2">
+            <div>@t($priceList, 'mainProductsPage.footer_text_2', '')</div>
+            <div>@t($product, 'mainProductFields.footer_notes', '')</div>
+        </div>
+        <div class="footer-text-3">@t($priceList, 'mainProductsPage.footer_text_3', '')</div>
+        <div class="page-counter"></div>
+    </div>
     <div class="page-body">
         <table class="product-info mb-3">
             <tr>

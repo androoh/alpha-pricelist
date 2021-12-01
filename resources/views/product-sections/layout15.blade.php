@@ -1,5 +1,5 @@
-<div class="layout-7">
-    <div class="product-grid-3">
+<div class="layout-15">
+    <div class="product-grid-4">
         @php
             $i = 0;
         @endphp
@@ -26,7 +26,7 @@
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">
                                 @endif
-                                <td class="w-30 valign-top @if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
+                                <td class="w-25 valign-top @if($i === 1) pe-2 @endif @if($i === 4) ps-2 @endif @if($i === 2 || $i == 3) ps-1 pe-1 @endif">
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)
@@ -46,17 +46,17 @@
                                             <tbody>
                                             <tr>
                                                 <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
-                                                <td>@price($price, $formatType)</td>
+                                                <td class="price">@price($price, $formatType)</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </td>
-                                @if($i === 3)
+                                @if($i === 4)
                             </tr>
                         @endif
                         @php
-                            if($i === 3) {
+                            if($i === 4) {
                                 $i = 0;
                             }
                         @endphp

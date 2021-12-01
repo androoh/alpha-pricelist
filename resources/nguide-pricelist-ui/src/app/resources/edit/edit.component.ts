@@ -127,11 +127,11 @@ export class EditComponent implements OnInit {
     if (this.form && this.form.valid) {
       if (this.resourceName) {
         if (this.resourceId) {
-          this.resourcesService.updateResource(this.resourceName, this.resourceId, this.model).subscribe((result) => {
+          this.resourcesService.updateResource(this.resourceName, this.resourceId, this.form.value).subscribe((result) => {
             this.alertsService.show(AlertType.success, 'Resource updated!');
           });
         } else {
-          this.resourcesService.createResource(this.resourceName, this.model).subscribe((result: CreateEditResponse) => {
+          this.resourcesService.createResource(this.resourceName, this.form.value).subscribe((result: CreateEditResponse) => {
             this.router.navigate(['/resources', this.resourceName, result.data._id, 'edit']);
             this.alertsService.show(AlertType.success, 'Resource created!');
           });
