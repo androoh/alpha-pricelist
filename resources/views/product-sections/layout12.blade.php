@@ -25,7 +25,7 @@
             <div class="photo-gallery">
                 @foreach($photoGalleryUrls as $url)
                     <div class="photo-gallery-item">
-                        <div class="img" style="background-image: url('/imgc/a4lw/{{$url}}')"></div>
+                        <div class="img" style="background-image: url('/imgc/a4mw/{{$url}}')"></div>
                     </div>
                 @endforeach
             </div>

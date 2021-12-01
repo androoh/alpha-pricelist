@@ -5263,6 +5263,7 @@ table.options-table .title-row {
 .toc-page h1 {
   font-size: 24pt;
   border-bottom: 1pt #4D545E solid;
+  margin-top: 0;
 }
 .toc-page h1 strong {
   font-weight: bold;
@@ -5357,6 +5358,7 @@ table.options-table .title-row {
        break-before: right;
 }
 @page tocPage {
+  margin-top: 0;
   margin-left: 30pt;
   margin-right: 20pt;
   @top-right-corner {}
@@ -5400,9 +5402,7 @@ table.options-table .title-row {
   @top-center {
     content: element(rightHeader);
   }
-  @right-top {
-    content: element(rightBadge);
-  }
+  @right-top {}
   @bottom-center {
     content: element(productPageFooterRight);
     text-align: right;

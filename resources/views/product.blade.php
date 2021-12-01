@@ -45,7 +45,7 @@
                     @endphp
                     @if($mainPhotoUrl)
                         <div class="main-photo w-100 p-4">
-                            <img src="/imgc/a4lw/{{$mainPhotoUrl}}" class="d-block w-100"/>
+                            <img src="/imgc/a4mw/{{$mainPhotoUrl}}" class="d-block w-100"/>
                             @if($mainPhotoInfoNote)
                                 <div class="info-note">{{$mainPhotoInfoNote}}</div>
                             @endif

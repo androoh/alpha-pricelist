@@ -18,7 +18,7 @@
                 @if(count($photoGalleryUrls) > 0)
                     <th rowspan="{{count($productOptions) + 1}}" class="images-column">
                         @foreach($photoGalleryUrls as $url)
-                            <img src="/imgc/a4lw/{{$url}}" class="w-100 d-block"/>
+                            <img src="/imgc/a4mw/{{$url}}" class="w-100 d-block"/>
                         @endforeach
                     </th>
                 @endif

@@ -30,7 +30,7 @@
                     <tr>
                         <td>
                             @if ($displayPhotoInsteadTitle && $photoUrl)
-                                <img src="/imgc/a4lw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
+                                <img src="/imgc/a4mw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
                             @else
                                 @t($productOptionData, 'name', '')
                             @endif

@@ -31,7 +31,7 @@
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)
-                                             style="background-image: url('/imgc/a4lw/{{$productOptionPhotoUrl}}')"
+                                             style="background-image: url('/imgc/a4mw/{{$productOptionPhotoUrl}}')"
                                             @endif
                                         >
                                             <div class="product-item-title text-truncate">

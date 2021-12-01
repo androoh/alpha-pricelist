@@ -16,16 +16,10 @@
     @php
         $productTree = [];
         $infoIconIds = [];
-        foreach (data_get($priceList, 'mainProductsPage.main_products', []) as $product) {
-            if ($productId = data_get($product, 'id', false)) {
-                if ($productData = \App\Models\Product::find($productId)) {
-                    $categoryId = data_get($productData, 'mainProductFields.category', false);
-                    if ($categoryId && $categoryData = \App\Models\Category::find($categoryId)) {
-                        if (!isset($productTree[$categoryId])) {
-                            $productTree[$categoryId]['category'] = $categoryData;
-                            $productTree[$categoryId]['products'] = [];
-                        }
-                        $productTree[$categoryId]['products'][] = $productData;
+        foreach(data_get($priceList, 'mainProductsPage.categories') as $treeItem) {
+            foreach (data_get($treeItem, 'main_products', []) as $product) {
+                if ($productId = data_get($product, 'id', false)) {
+                    if ($productData = \App\Models\Product::find($productId)) {
                         $infoIconIds = array_merge($infoIconIds, data_get($productData, 'mainProductFields.info_icons', []));
                     }
                 }
@@ -52,7 +46,7 @@
     </div>
     <div class="toc-page">
         <h1>Table of <strong>CONTENTS</strong></h1>
-        <div class="columns-count-2" style="min-height:842pt">
+        <div class="columns-count-2">
             @foreach(data_get($priceList, 'mainProductsPage.categories') as $treeItem)
                 @php
                     $category = null;
@@ -120,10 +114,10 @@
                         <table>
                             @foreach($infoIcons as $infoIcon)
                                 <tr>
-                                    <td class="text-center"><img
+                                    <td class="text-center pb-2"><img
                                             src="/imgc/a4lh/{{data_get($infoIcon, 'iconPhoto.0.name', null)}}"
                                             class="info-icon-img"/></td>
-                                    <td style="vertical-align: top;">
+                                    <td style="vertical-align: top;" class="pb-2">
                                         <div
                                             class="info-icon-description text-start ms-2 me-2">@t($infoIcon,
                                             'description', '-')

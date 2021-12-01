@@ -55,7 +55,7 @@
                     @endif
                     <td class="@if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
                         <div class="photo-gallery-item">
-                            <img src="/imgc/a4lw/{{$url}}"/>
+                            <img src="/imgc/a4mw/{{$url}}"/>
                         </div>
                     </td>
                     @if($i === 3)

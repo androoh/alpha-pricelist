@@ -31,7 +31,7 @@
                             <tr class="page-break-inside-avoid">
                                 @endif
                                 <td style="width: {{(100/count($photoGalleryUrls))}}%" class="{{$class}}">
-                                    <div class="photo-gallery-item" style="background-image: url('/imgc/a4lw/{{$url}}');"></div>
+                                    <div class="photo-gallery-item" style="background-image: url('/imgc/a4mw/{{$url}}');"></div>
                                 </td>
                                 @if($i === 3)
                             </tr>
