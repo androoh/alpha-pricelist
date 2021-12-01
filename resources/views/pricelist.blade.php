@@ -47,7 +47,7 @@
          style="background-image: url('/imgc/a4mw/{{data_get($priceList, 'secondPage.photo.0.name', null)}}')">
         <div class="page-info">
             <h2 class="title p-0 m-0">@t($priceList, 'secondPage.title', 'Title placeholder')</h2>
-            <p class="short-description p-0 m-0">@t($priceList, 'secondPage.short_description', 'Title placeholder')</p>
+            <div class="short-description p-0 m-0">@t($priceList, 'secondPage.short_description', 'Title placeholder')</div>
         </div>
     </div>
     <div class="toc-page">
@@ -103,7 +103,7 @@
          style="background-image: url('/imgc/a4lh/{{data_get($priceList, 'iconsPage.photo_left_page.0.name', null)}}')">
         <div class="page-info">
             <h2 class="title p-0 m-0">@t($priceList, 'iconsPage.title', 'Title placeholder')</h2>
-            <p class="short-description p-0 m-0">@t($priceList, 'iconsPage.short_description', 'Title placeholder')</p>
+            <div class="short-description p-0 m-0">@t($priceList, 'iconsPage.short_description', 'Title placeholder')</div>
         </div>
     </div>
     <div class="icons-page-right">

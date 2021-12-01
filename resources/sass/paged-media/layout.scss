@@ -25,11 +25,17 @@ $main: #4D545E;
 }
 
 body, html, ul, p {
-    margin: 0;
-    padding: 0;
     font-weight: 100;
     font-family: 'Rajdhani', sans-serif;
+}
+body, html, ul {
     color: $main;
+    margin: 0;
+    padding: 0;
+}
+p {
+    margin: 0;
+    padding: 0;
 }
 .page-break-after {
     page-break-after: always;
