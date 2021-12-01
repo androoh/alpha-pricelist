@@ -4970,6 +4970,7 @@ table.options-table thead, table.options-table tr.thead {
 }
 table.options-table tr {
   font-size: 10pt;
+  page-break-inside: avoid;
 }
 table.options-table tr.group-row {
   background-color: white !important;
