@@ -14,7 +14,7 @@
         @if($packagingTransport)
             <div class="packaging-transport-item mb-3">
                 @php
-                    $packagingImages = data_get($packagingTransport, 'technical_design', []);
+                    $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
                 @endphp
                 <div class="packaging-transport-title pt-1 ps-2 pb-1">
                     Model - @t($productModelData, 'name', '')
