@@ -1,7 +1,7 @@
 @php
     $columns = [];
     $rows = [];
-    foreach (data_get($product, 'mainProductFields.product_models', []) as $productModel) {
+    foreach (data_get($product, 'mainProductFields.product_models', []) ?? [] as $productModel) {
         $productModelData = null;
         $productOptionId = data_get($productModel, 'id', false);
         if ($productOptionId) {

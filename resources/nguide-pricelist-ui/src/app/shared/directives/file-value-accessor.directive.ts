@@ -2,7 +2,9 @@ import { Directive } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'input[type=file]',
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '(change)': 'onChange($event.target.files)',
     '(blur)': 'onTouched()',
@@ -12,8 +14,6 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
   ],
 })
 export class FileValueAccessorDirective implements ControlValueAccessor {
-  constructor() {
-  }
   value: any;
   onChange = (_: any) => { };
   onTouched = () => { };

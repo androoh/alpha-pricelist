@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {ResourcesService} from '../../shared/services/resources.service';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { ResourcesService } from '../../shared/services/resources.service';
 declare namespace Paged {
   class Previewer {
     preview(content: any, stylesheets: any, renderTo: any): any;
@@ -10,40 +10,35 @@ declare namespace Paged {
 @Component({
   selector: 'app-pagedjs',
   templateUrl: './pagedjs.component.html',
-  styleUrls: ['./pagedjs.component.scss']
+  styleUrls: ['./pagedjs.component.scss'],
 })
-export class PagedjsComponent implements OnInit, AfterViewInit {
-  @ViewChild('result', {read: ViewContainerRef}) htmlPages: ViewContainerRef;
-  @ViewChild('iframe', {read: ViewContainerRef}) iframe: ViewContainerRef;
+export class PagedjsComponent {
+  @ViewChild('result', { read: ViewContainerRef }) htmlPages: ViewContainerRef;
+  @ViewChild('iframe', { read: ViewContainerRef }) iframe: ViewContainerRef;
 
-  constructor(private resourcesService: ResourcesService) {
-  }
-
-  ngOnInit(): void {
-
-  }
+  constructor(private resourcesService: ResourcesService) {}
 
   reload(): void {
-    this.resourcesService.getHtml().toPromise().then((result: any) => {
-      // this.displayContent(result);
-    })
-  }
-
-  ngAfterViewInit() {
-    // this.reload();
+    this.resourcesService
+      .getHtml()
+      .toPromise()
+      .then((result: any) => {
+        // this.displayContent(result);
+      });
   }
 
   displayContent(result: string): void {
     const previewer = new Paged.Previewer();
-    const html = (new DOMParser()).parseFromString(result, 'text/html');
+    const html = new DOMParser().parseFromString(result, 'text/html');
     //@TODO move to RS
     const style = html.head.querySelector('style');
     if (style) {
-      style.innerHTML = style.innerHTML + ' .hideSection{opacity:0.5; display:block}'
+      style.innerHTML =
+        style.innerHTML + ' .hideSection{opacity:0.5; display:block}';
     }
     const hrefs = previewer.removeStyles(html);
     const content = html.querySelectorAll('body > *');
-    html.querySelectorAll('a').forEach(element => {
+    html.querySelectorAll('a').forEach((element) => {
       element.setAttribute('target', '_target');
     });
     const fragment = document.createDocumentFragment();
@@ -55,20 +50,23 @@ export class PagedjsComponent implements OnInit, AfterViewInit {
     const t0 = performance.now();
     this.htmlPages.element.nativeElement.innerHTML = '';
     try {
-      previewer.preview(fragment, hrefs, this.htmlPages.element.nativeElement).then((flow: any) => {
-
-      });
-    } catch (e) {
-
-    }
+      previewer
+        .preview(fragment, hrefs, this.htmlPages.element.nativeElement)
+        .then((flow: any) => {});
+    } catch (e) {}
   }
 
   print(): void {
-
-    const mywindow: Window | null = window.open('', 'PRINT', 'height=400,width=600');
+    const mywindow: Window | null = window.open(
+      '',
+      'PRINT',
+      'height=400,width=600'
+    );
 
     if (mywindow) {
-      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+      mywindow.document.write(
+        '<html><head><title>' + document.title + '</title>'
+      );
       mywindow.document.write('</head><body >');
       mywindow.document.write(this.htmlPages.element.nativeElement.innerHTML);
       mywindow.document.write('</body></html>');

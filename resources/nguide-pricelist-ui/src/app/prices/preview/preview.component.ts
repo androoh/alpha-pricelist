@@ -21,7 +21,7 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewComponent implements OnInit, AfterViewInit {
+export class PreviewComponent implements OnInit {
   @ViewChild('iframe') iframe: ElementRef;
   private priceListId: string | null = null;
   private resourceName = 'priceList';
@@ -98,9 +98,6 @@ export class PreviewComponent implements OnInit, AfterViewInit {
         this.updateTemplateUrl(parameters);
       }
     });
-  }
-
-  ngAfterViewInit() {
   }
 
   updateTemplateUrl(parameters: any): void {

@@ -1,5 +1,5 @@
 <div class="packaging-transport">
-    @foreach (data_get($product, 'mainProductFields.product_models', []) as $productModel)
+    @foreach (data_get($product, 'mainProductFields.product_models', []) ?? [] as $productModel)
         @php
             $productModelData = null;
             $packagingTransport = null;

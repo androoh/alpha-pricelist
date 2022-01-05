@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FieldWrapper} from '@ngx-formly/core';
 
 @Component({
@@ -6,10 +6,7 @@ import {FieldWrapper} from '@ngx-formly/core';
   templateUrl: './dropdown-wrapper.component.html',
   styleUrls: ['./dropdown-wrapper.component.scss']
 })
-export class DropdownWrapperComponent extends FieldWrapper implements OnInit {
-
-  ngOnInit(): void {
-  }
+export class DropdownWrapperComponent extends FieldWrapper {
 
   getImg(): string | undefined {
     if (this.formControl.value) {
