@@ -161,7 +161,7 @@
                 @endphp
                 @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $category])
             @endforeach
-            @include('product-sections', ['productSections' => data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+            @include('product-sections', ['parentProduct' => null, 'productSections' => data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @endif
     @endforeach
     @if ($optionsAndAccessoriesPage)
@@ -196,7 +196,7 @@
                 <div class="footer-text-3">@t($optionsAndAccessoriesPage, 'footer_text_3', '')</div>
                 <div class="page-counter"></div>
             </div>
-            @include('product-sections', ['productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+            @include('product-sections', ['parentProduct' => null, 'productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         </div>
     @endif
 @endsection

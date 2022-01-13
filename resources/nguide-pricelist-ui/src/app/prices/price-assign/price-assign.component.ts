@@ -51,6 +51,7 @@ export class PriceAssignComponent implements OnInit {
 
   submit() {
     if (this.priceListId) {
+      console.log(this.pricesModel);
       this.pricesService.savePrices(this.priceListId, this.pricesModel).subscribe((result: any) => {
         this.alertsService.show(AlertType.success, 'Prices updated!');
       });

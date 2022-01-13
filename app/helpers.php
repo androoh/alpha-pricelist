@@ -21,3 +21,13 @@ if (!function_exists('translateFromPath')) {
         return data_get($data, $path, $defaultValue);
     }
 }
+
+if (!function_exists('getPriceKey')) {
+    function getPriceKey($childProduct, $parentProduct = null) {
+        $priceKey = $childProduct->getKey();
+        if ($parentProduct && $parentProduct->getKey()) {
+            $priceKey = $parentProduct->getKey() . '#' . $priceKey;
+        }
+        return $priceKey;
+    }
+}

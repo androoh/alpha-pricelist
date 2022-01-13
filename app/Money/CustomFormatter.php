@@ -14,9 +14,19 @@ class CustomFormatter implements \Money\MoneyFormatter
     }
     public function format(\Money\Money $money)
     {
+        $locale = Config::get('money.locale', 'en_US');
+        $currency = $this->getCurrencySymbol($money->getCurrency()->getCode(), $locale);
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_PER_SQM) {
-            $locale = Config::get('money.locale', 'en_US');
-            return $money->getAmount(). ' '. $this->getCurrencySymbol($money->getCurrency()->getCode(), $locale) . '/㎡';
+            return $money->getAmount(). ' '. $currency . '/㎡';
+        }
+        if ($this->formatType === Product::PRODUCT_PRICE_TYPE_KG) {
+            return $money->getAmount(). ' '. $currency . '/kg';
+        }
+        if ($this->formatType === Product::PRODUCT_PRICE_TYPE_LM) {
+            return $money->getAmount(). ' '. $currency . '/m';
+        }
+        if ($this->formatType === Product::PRODUCT_PRICE_TYPE_RM) {
+            return $money->getAmount(). ' '. $currency . '/rm';
         }
         return money($money->getAmount() * 100);
     }

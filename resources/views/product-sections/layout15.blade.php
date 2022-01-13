@@ -20,7 +20,7 @@
                     @endphp
                     @if($productOptionData)
                         @php
-                            $price = data_get($prices, $productOptionId, 0);
+                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0);
                             $formatType = data_get($productOptionData, 'price_options.type', null);
                         @endphp
                         @if($i === 1)

@@ -42,6 +42,7 @@
                     @php
                         $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.name', false);
                         $mainPhotoInfoNote = translateFromPath($product, 'mainProductFields.main_photo_info_note', false);
+                        $infoNote = translateFromPath($product, 'mainProductFields.info_note', false);
                     @endphp
                     @if($mainPhotoUrl)
                         <div class="main-photo w-100 p-4">
@@ -56,10 +57,17 @@
                     <h1 class="product-title">@t($product, 'name', '')</h1>
                     <div class="standard-equipment">
                         <h3 class="title">Standard Equipment</h3>
-                        <div class="description mb-3">
+                        <div class="description mb-2">
                             @t($product, 'mainProductFields.standard_equipment', '')
                         </div>
+                        @if ($infoNote)
+                        <div class="info-note mb-2 fst-italic fw-bolder">
+                            <div>Info Note</div>
+                            {!!$infoNote!!}
+                        </div>
+                        @endif
                     </div>
+
                     @php
                         $infoIcons = data_get($product, 'mainProductFields.info_icons', []);
                         $infoIconsUrl = [];
@@ -82,7 +90,7 @@
             </tr>
         </table>
         @include('product-models', ['product' => $product, 'prices' => data_get($priceList, 'prices', [])])
-        @include('product-sections', ['productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+        @include('product-sections', ['parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @include('product-models-packaging-transport', ['product' => $product])
     </div>
 </div>

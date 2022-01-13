@@ -13,40 +13,40 @@
             <div class="repeating-container-body">
                 @switch(data_get($productSection, 'layout', 'layout1'))
                     @case('layout1')
-                    @include('product-sections.layout1', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout1', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout2')
-                    @include('product-sections.layout2', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout2', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout3')
-                    @include('product-sections.layout3', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout3', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout5')
-                    @include('product-sections.layout5', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout5', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout6')
-                    @include('product-sections.layout6', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout6', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout7')
-                    @include('product-sections.layout7', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout7', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout8')
-                    @include('product-sections.layout8', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout8', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout11')
-                    @include('product-sections.layout11', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout11', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout12')
-                    @include('product-sections.layout12', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout12', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout13')
-                    @include('product-sections.layout13', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout13', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout14')
-                    @include('product-sections.layout14', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout14', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @case('layout15')
-                    @include('product-sections.layout15', ['productSection' => $productSection, 'prices' => $prices])
+                    @include('product-sections.layout15', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                     @break
                     @default
                 @endswitch
