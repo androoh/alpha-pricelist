@@ -41,7 +41,7 @@
         <tbody>
         @foreach($rows as $row)
             @php
-            $price = data_get($prices, data_get($row, 'data._id', null), 0);
+            $price = data_get($prices, getPriceKey($row['data'], $product), 0);
             $formatType = data_get($row, 'price_options.type', '');
             @endphp
             <tr>
