@@ -240,12 +240,30 @@ class Product extends ResourceAbstract
                 ]
             ]),
             new FormlyFieldConfig([
+                'key' => 'client_suply',
+                'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                'templateOptions' => [
+                    'label' => 'The client to suply',
+                    'html' => true,
+                    'translatable' => true,
+                ]
+            ]),
+            new FormlyFieldConfig([
                 'key' => 'footer_notes',
                 'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                 'templateOptions' => [
                     'label' => 'Footer Notes',
                     'html' => true,
                     'translatable' => true,
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'awards_photos',
+                'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                'templateOptions' => [
+                    'label' => 'Awards Photos',
+                    'accept' => ['image/*'],
+                    'multiple' => true
                 ]
             ]),
             new FormlyFieldConfig([
@@ -327,6 +345,30 @@ class Product extends ResourceAbstract
                                             'required' => true
                                         ]
                                     ]),
+                                    new FormlyFieldConfig([
+                                        'key' => 'titleDisplayType',
+                                        'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                        'defaultValue' => 'title',
+                                        'templateOptions' => [
+                                            'label' => 'Product Option Title display as',
+                                            'required' => true,
+                                            'placeholder' => 'Select Display Type',
+                                            'options' => [
+                                                [
+                                                    'label' => 'Display Title',
+                                                    'value' => 'title'
+                                                ],
+                                                [
+                                                    'label' => 'Display Photo',
+                                                    'value' => 'photo'
+                                                ],
+                                                [
+                                                    'label' => 'Display Description',
+                                                    'value' => 'description'
+                                                ]
+                                            ]
+                                        ],
+                                    ]),
                                     // new FormlyFieldConfig([
                                     //     'key' => 'layout',
                                     //     'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
@@ -361,13 +403,6 @@ class Product extends ResourceAbstract
                                         'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
                                         'templateOptions' => [
                                             'label' => 'Display Min. Order Qty.'
-                                        ]
-                                    ]),
-                                    new FormlyFieldConfig([
-                                        'key' => 'displayPhotoInsteadTitle',
-                                        'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
-                                        'templateOptions' => [
-                                            'label' => 'Display option photo instead of title'
                                         ]
                                     ]),
                                     new FormlyFieldConfig([

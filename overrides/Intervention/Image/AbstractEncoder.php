@@ -253,7 +253,7 @@ abstract class AbstractEncoder
         if ($format == '' && $this->image instanceof Image) {
             $format = $this->image->mime;
         }
-        
+
         if ($format === 'text/xml') {
             $format = 'image/svg+xml';
         }

@@ -3,6 +3,7 @@
         @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
             @php
                 $i = 0;
+                $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
             @endphp
             <table class="w-100">
                 <tbody>
@@ -21,8 +22,10 @@
                     @endphp
                     @if($productOptionData)
                         @php
-                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0);
+                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0) * 100;
                             $formatType = data_get($productOptionData, 'price_options.type', null);
+                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
+                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">

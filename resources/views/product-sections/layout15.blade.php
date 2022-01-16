@@ -5,6 +5,10 @@
         @endphp
         <table class="w-100">
             @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
+                @php
+                    $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
+                    $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
+                @endphp
                 @foreach(data_get($productOptionSection, 'product_options', []) as $productOption)
                     @php
                         $productOptionData = null;
@@ -20,8 +24,10 @@
                     @endphp
                     @if($productOptionData)
                         @php
-                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0);
+                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0) * 100;
                             $formatType = data_get($productOptionData, 'price_options.type', null);
+                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
+                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">
@@ -39,12 +45,18 @@
                                         <table class="options-table">
                                             <thead>
                                             <tr>
+                                                @if ($displayMinOrderQty)
+                                                    <th style="width: 15%">Min. order qty</th>
+                                                @endif
                                                 <th>Art. No.</th>
                                                 <th>TP</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
+                                                @if ($displayMinOrderQty)
+                                                    <td>{{data_get($productOptionData, 'optionProductFields.min_order_qty', 1)}}</td>
+                                                @endif
                                                 <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                                                 <td class="price">@price($price, $formatType)</td>
                                             </tr>

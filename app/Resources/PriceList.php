@@ -634,11 +634,28 @@ class PriceList extends ResourceAbstract
                                     ]
                                 ]),
                                 new FormlyFieldConfig([
-                                    'key' => 'displayPhotoInsteadTitle',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                    'key' => 'titleDisplayType',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                                    'defaultValue' => 'title',
                                     'templateOptions' => [
-                                        'label' => 'Display option photo instead of title'
-                                    ]
+                                        'label' => 'Product Option Title display as',
+                                        'required' => true,
+                                        'placeholder' => 'Select Display Type',
+                                        'options' => [
+                                            [
+                                                'label' => 'Display Title',
+                                                'value' => 'title'
+                                            ],
+                                            [
+                                                'label' => 'Display Photo',
+                                                'value' => 'photo'
+                                            ],
+                                            [
+                                                'label' => 'Display Description',
+                                                'value' => 'description'
+                                            ]
+                                        ]
+                                    ],
                                 ]),
                                 new FormlyFieldConfig([
                                     'key' => 'product_options',

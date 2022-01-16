@@ -15,15 +15,21 @@
             <div class="packaging-transport-item mb-3">
                 @php
                     $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
+                    $urls = [];
+                    foreach ($packagingImages as $image) {
+                        $path = data_get($image, 'name', '');
+                        $pathInfo = pathinfo($path);
+                        if ($path && $pathInfo['extension'] !== 'pdf') {
+                            $urls[] = $path;
+                        }
+                    }
                 @endphp
-                <div class="packaging-transport-title pt-1 ps-2 pb-1">
+                <div class="packaging-transport-title pt-1 ps-2 pb-1 mb-2">
                     Model - @t($productModelData, 'name', '')
                 </div>
                 <div class="packaging-transport-images">
-                    @foreach($packagingImages as $image)
-                        @if($url = data_get($image, 'url', false))
-                            <img src="{{$url}}" class="d-block w-100 packaging-transport-image"/>
-                        @endif
+                    @foreach($urls as $url)
+                        <img src="/imgc/a4lw/{{$url}}" class="d-block w-100 packaging-transport-image"/>
                     @endforeach
                 </div>
                 @php
@@ -31,7 +37,7 @@
                 @endphp
                 @if(count($parts) === 1)
                     @foreach($parts as $part)
-                        <table class="packaging-transport-info border-bottom">
+                        <table class="packaging-transport-info border-bottom mt-2">
                             <thead>
                             <tr>
                                 <th></th>

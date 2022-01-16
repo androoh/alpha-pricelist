@@ -43,6 +43,8 @@
                         $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.name', false);
                         $mainPhotoInfoNote = translateFromPath($product, 'mainProductFields.main_photo_info_note', false);
                         $infoNote = translateFromPath($product, 'mainProductFields.info_note', false);
+                        $clientSuply = translateFromPath($product, 'mainProductFields.client_suply', false);
+                        $awardsPhotos = data_get($product, 'mainProductFields.awards_photos', []) ?? [];
                     @endphp
                     @if($mainPhotoUrl)
                         <div class="main-photo w-100 p-4">
@@ -60,6 +62,12 @@
                         <div class="description mb-2">
                             @t($product, 'mainProductFields.standard_equipment', '')
                         </div>
+                        @if ($clientSuply)
+                        <div class="client-suply mb-2">
+                            <strong>The client to supply:</strong>
+                            {!!$clientSuply!!}
+                        </div>
+                        @endif
                         @if ($infoNote)
                         <div class="info-note mb-2 fst-italic fw-bolder">
                             <div>Info Note</div>
@@ -92,5 +100,20 @@
         @include('product-models', ['product' => $product, 'prices' => data_get($priceList, 'prices', [])])
         @include('product-sections', ['parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @include('product-models-packaging-transport', ['product' => $product])
+        @if (count($awardsPhotos) > 0)
+            <div class="awards-photots-section page-break-inside-avoid">
+                <h3>Winner</h3>
+                <div class="awards-photots">
+                @foreach ($awardsPhotos as $awardPhoto)
+                    @php
+                        $awardPhotoUrl = data_get($awardPhoto, 'name', false);
+                    @endphp
+                    @if($awardPhotoUrl)
+                        <img src="/imgc/a4lw/{{$awardPhotoUrl}}" style="max-height: 100pt; display:inline-block;" class="me-2 mb-2"/>
+                    @endif
+                @endforeach
+                </div>
+            </div>
+        @endif
     </div>
 </div>

@@ -11,6 +11,7 @@
         @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
             @php
                 $productOptionSectionTitle = translateFromPath($productOptionSection, 'title', false);
+                $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
             @endphp
             @if($productOptionSectionTitle)
                 <tr class="group-row">
@@ -29,11 +30,31 @@
                 @endphp
                 @if($productOptionData)
                     @php
-                        $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0);
+                        $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0) * 100;
                         $formatType = data_get($productOptionData, 'price_options.type', null);
+                        $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
+                        $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                     @endphp
                     <tr>
-                        <td>@t($productOptionData, 'name', '')</td>
+                        <td>
+                            @switch($displayTitleType)
+                                @case('photo')
+                                        @if ($photoUrl)
+                                            <img src="/imgc/a4mw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
+                                        @else
+                                            @t($productOptionData, 'name', '')
+                                        @endif
+                                    @break
+                                @case('description')
+                                    @t($productOptionData, 'optionProductFields.details', '')
+                                    @break
+                                @case('title')
+                                    @t($productOptionData, 'name', '')
+                                    @break
+                                @default
+                                    @t($productOptionData, 'name', '')
+                            @endswitch
+                        </td>
                         <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                         <td class="price">@price($price, $formatType)</td>
                     </tr>

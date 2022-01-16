@@ -16,19 +16,23 @@ class CustomFormatter implements \Money\MoneyFormatter
     {
         $locale = Config::get('money.locale', 'en_US');
         $currency = $this->getCurrencySymbol($money->getCurrency()->getCode(), $locale);
+        if ($money->getAmount() == 0) {
+            return '';
+        }
+        $floatAmount = number_format($money->getAmount()/100, 2);
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_PER_SQM) {
-            return $money->getAmount(). ' '. $currency . '/㎡';
+            return $floatAmount. ' '. $currency . '/㎡';
         }
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_KG) {
-            return $money->getAmount(). ' '. $currency . '/kg';
+            return $floatAmount. ' '. $currency . '/kg';
         }
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_LM) {
-            return $money->getAmount(). ' '. $currency . '/m';
+            return $floatAmount. ' '. $currency . '/m';
         }
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_RM) {
-            return $money->getAmount(). ' '. $currency . '/rm';
+            return $floatAmount. ' '. $currency . '/rm';
         }
-        return money($money->getAmount() * 100);
+        return money($money->getAmount());
     }
 
     function getCurrencySymbol($currencyCode, $locale = 'en_US')

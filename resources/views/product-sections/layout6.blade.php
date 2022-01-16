@@ -4,12 +4,14 @@
             @php
                 $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
                 $photoGalleryUrls = [];
+                $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
                 foreach($photoGallery as $photo) {
                     $photoUrl = data_get($photo, 'name', false);
                     if ($photoUrl) {
                         $photoGalleryUrls[] = $photoUrl;
                     }
                 }
+                $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
             @endphp
             <div class="photo-gallery-2 w-100">
                 <table class="w-100">
@@ -48,6 +50,9 @@
                 <thead>
                 <tr>
                     <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
+                    @if ($displayMinOrderQty)
+                        <th style="width: 15%">Min. order qty</th>
+                    @endif
                     <th class="text-center">Art. No.</th>
                     <th class="text-end">TP</th>
                 </tr>
@@ -63,11 +68,34 @@
                     @endphp
                     @if($productOptionData)
                         @php
-                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0);
+                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0) * 100;
                             $formatType = data_get($productOptionData, 'price_options.type', null);
+                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
+                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         <tr>
-                            <td>@t($productOptionData, 'name', '')</td>
+                            <td>
+                                @switch($displayTitleType)
+                                    @case('photo')
+                                            @if ($photoUrl)
+                                                <img src="/imgc/a4mw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
+                                            @else
+                                                @t($productOptionData, 'name', '')
+                                            @endif
+                                        @break
+                                    @case('description')
+                                        @t($productOptionData, 'optionProductFields.details', '')
+                                        @break
+                                    @case('title')
+                                        @t($productOptionData, 'name', '')
+                                        @break
+                                    @default
+                                        @t($productOptionData, 'name', '')
+                                @endswitch
+                            </td>
+                            @if ($displayMinOrderQty)
+                                <td>{{data_get($productOptionData, 'optionProductFields.min_order_qty', 1)}}</td>
+                            @endif
                             <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
                             <td class="price">@price($price, $formatType)</td>
                         </tr>
