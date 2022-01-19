@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Hello World</title>
+    <title>{{translateFromPath($priceList, 'name', 'Price List')}}</title>
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
     <script>
@@ -9,12 +9,9 @@
             constructor(chunker, polisher, caller) {
                 super(chunker, polisher, caller);
                 this.splitTablesRefs = [];
-                console.log("albert");
             }
 
             afterPageLayout(pageElement, page, breakToken, chunker) {
-
-                console.log("ok");
                 this.chunker = chunker;
                 this.splitTablesRefs = [];
 

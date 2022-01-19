@@ -211,16 +211,16 @@ export class ResourcesService {
     return this.http.get(environment.apiBaseURL + 'html', {responseType: 'text'});
   }
 
-  getFilters(resourceName: string): Observable<any[]> {
-    return this.http.get<any[]>(environment.apiBaseURL + 'resources/' + resourceName + '/filters').pipe(map((fields: any[]) => {
-      if (fields) {
-        for (let field of fields) {
+  getFilters(resourceName: string): Observable<{schema: any[]; defaultLocale: string}> {
+    return this.http.get<{schema: any[]; defaultLocale: string}>(environment.apiBaseURL + 'resources/' + resourceName + '/filters').pipe(map((result: {schema: any[]; defaultLocale: string}) => {
+      if (result?.schema) {
+        for (let field of result.schema) {
           if (field.templateOptions?.required !== undefined && field.templateOptions?.required === true) {
             field.templateOptions.required = false;
           }
         }
       }
-      return fields;
+      return result;
     }));
   }
 
@@ -233,7 +233,14 @@ export class ResourcesService {
     for (const key in data) {
       if (data.hasOwnProperty(key) && data[key] && fields) {
         const field = this.getFieldById(key, fields);
-        filterObject[field?.path || key] = data[key];
+        let path = field?.path || key;
+        if (field?.templateOptions?.translatable) {
+          const defaultLocale = field.templateOptions?.defaultLocale || 'en';
+          path = path + '.' + defaultLocale;
+          filterObject[path] = {'$regex':'.*' + data[key][defaultLocale] + '.*'};
+        } else {
+          filterObject[path] = data[key];
+        }
       }
     }
     return filterObject;

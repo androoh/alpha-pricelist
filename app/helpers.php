@@ -23,11 +23,15 @@ if (!function_exists('translateFromPath')) {
 }
 
 if (!function_exists('getPriceKey')) {
-    function getPriceKey($childProduct, $parentProduct = null) {
-        $priceKey = $childProduct->getKey();
-        if ($parentProduct && $parentProduct->getKey()) {
-            $priceKey = $parentProduct->getKey() . '#' . $priceKey;
+    function getPriceKey(...$modelsKeys) {
+        $result = [];
+        foreach ($modelsKeys as $modelKey) {
+            if (is_string($modelKey)) {
+                array_push($result, $modelKey);
+            } else if ($modelKey && $modelKey->getKey()) {
+                array_push($result, $modelKey->getKey());
+            }
         }
-        return $priceKey;
+        return implode('#', $result);
     }
 }

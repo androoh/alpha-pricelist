@@ -25,7 +25,7 @@
                     @endphp
                     @if($productOptionData)
                         @php
-                            $price = data_get($prices, getPriceKey($productOptionData, $parentProduct), 0) * 100;
+                            $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                             $formatType = data_get($productOptionData, 'price_options.type', null);
                             $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
                             $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
@@ -59,7 +59,13 @@
                                                     <td>{{data_get($productOptionData, 'optionProductFields.min_order_qty', 1)}}</td>
                                                 @endif
                                                 <td class="sku">{{data_get($productOptionData, 'sku', '')}}</td>
-                                                <td>@price($price, $formatType)</td>
+                                                <td>
+                                                    @if ($price['onDemand'])
+                                                        on demand
+                                                    @else
+                                                        @price($price['value'] * 100, $formatType)
+                                                    @endif
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

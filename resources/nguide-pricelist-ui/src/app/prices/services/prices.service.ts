@@ -10,7 +10,7 @@ export interface PricesResult {
   name: string;
   sku: string;
   type: string;
-  price: any;
+  price: {value: number | string, onDemand: boolean};
 }
 
 export interface PricesResponse {

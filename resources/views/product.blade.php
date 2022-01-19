@@ -80,25 +80,25 @@
                         $infoIcons = data_get($product, 'mainProductFields.info_icons', []);
                         $infoIconsUrl = [];
                         foreach($infoIcons as $infoIconId) {
-                        $infoIconData = \App\Models\InfoIcon::find($infoIconId);
-                        if ($infoIcons) {
-                            $infoIconUrl = data_get($infoIconData, 'iconPhoto.0.name', false);
-                            if ($infoIconUrl) {
-                                $infoIconsUrl[] = $infoIconUrl;
+                            $infoIconData = \App\Models\InfoIcon::find($infoIconId);
+                            if ($infoIcons) {
+                                $infoIconUrl = data_get($infoIconData, 'iconPhoto.0.name', false);
+                                if ($infoIconUrl) {
+                                    $infoIconsUrl[] = $infoIconUrl;
+                                }
                             }
-                        }
                         }
                     @endphp
                     <div class="info-icons">
                         @foreach ($infoIconsUrl as $infoIconUrl)
-                            <img src="/imgc/a4lw/{{$infoIconUrl}}" style="height: 40pt"/>
+                            <img src="/imgc/a4lw/{{$infoIconUrl}}" style="height: 35pt"/>
                         @endforeach
                     </div>
                 </td>
             </tr>
         </table>
-        @include('product-models', ['product' => $product, 'prices' => data_get($priceList, 'prices', [])])
-        @include('product-sections', ['parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+        @include('product-models', ['categoryId' => $categoryId, 'product' => $product, 'prices' => data_get($priceList, 'prices', [])])
+        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @include('product-models-packaging-transport', ['product' => $product])
         @if (count($awardsPhotos) > 0)
             <div class="awards-photots-section page-break-inside-avoid">

@@ -10,25 +10,27 @@ export class TranslatableType extends  FieldType {
   onInit(): void {
     this.translatable = true;
     this.language = this.to.defaultLocale;
-    this.to.language.subscribe((language: string) => {
-      if (language) {
-        const validators = [];
-        this.language = language;
-        if (this.to.required) {
-          validators.push(requiredTranslated(language));
+    if (this.to?.language) {
+      this.to.language.subscribe((language: string) => {
+        if (language) {
+          const validators = [];
+          this.language = language;
+          if (this.to.required) {
+            validators.push(requiredTranslated(language));
+          }
+          this.formControl.setValidators(validators);
+          this.formControl.updateValueAndValidity();
+          let value = '';
+          if (this.formControl.value
+            && typeof this.formControl.value === 'object'
+            && !Array.isArray(this.formControl.value)
+            && this.formControl.value.hasOwnProperty(this.language)) {
+            value = this.formControl.value[this.language] || '';
+          };
+          this.valueControl.setValue(value, {emitEvent: false});
         }
-        this.formControl.setValidators(validators);
-        this.formControl.updateValueAndValidity();
-        let value = '';
-        if (this.formControl.value
-          && typeof this.formControl.value === 'object'
-          && !Array.isArray(this.formControl.value)
-          && this.formControl.value.hasOwnProperty(this.language)) {
-          value = this.formControl.value[this.language] || '';
-        };
-        this.valueControl.setValue(value, {emitEvent: false});
-      }
-    });
+      });
+    }
 
     this.valueControl.valueChanges.subscribe((value: any) => {
       let newValue: any = this.formControl.value && typeof this.formControl.value === 'object' && !Array.isArray(this.formControl.value) ? {...this.formControl.value} : {};

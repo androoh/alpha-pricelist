@@ -16,9 +16,6 @@ class CustomFormatter implements \Money\MoneyFormatter
     {
         $locale = Config::get('money.locale', 'en_US');
         $currency = $this->getCurrencySymbol($money->getCurrency()->getCode(), $locale);
-        if ($money->getAmount() == 0) {
-            return '';
-        }
         $floatAmount = number_format($money->getAmount()/100, 2);
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_PER_SQM) {
             return $floatAmount. ' '. $currency . '/㎡';

@@ -79,10 +79,11 @@
                 @endphp
                 @foreach(data_get($optionsAndAccessoriesPage, 'product_options_sections', []) as $productSection)
                     @php
+                        $hideInToc = data_get($productSection, 'hideInToc', false);
                         $productSectionTitle = translateFromPath($productSection, 'title', false);
                         $hash = md5($productSectionTitle);
                     @endphp
-                    @if($productSectionTitle && $hash !== $prevHash)
+                    @if($productSectionTitle && $hash !== $prevHash && !$hideInToc)
                         <div class="category-item"><a
                                 href="#product-{{$hash}}">{{$productSectionTitle}}</a></div>
                     @endif
@@ -159,9 +160,9 @@
                         $product = \App\Models\Product::find($productId);
                     }
                 @endphp
-                @include('product', ['product' => $product, 'priceList' => $priceList, 'category' => $category])
+                @include('product', ['categoryId' => $categoryId, 'product' => $product, 'priceList' => $priceList, 'category' => $category])
             @endforeach
-            @include('product-sections', ['parentProduct' => null, 'productSections' => data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+            @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' => data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         @endif
     @endforeach
     @if ($optionsAndAccessoriesPage)

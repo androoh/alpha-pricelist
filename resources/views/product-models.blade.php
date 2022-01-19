@@ -41,7 +41,7 @@
         <tbody>
         @foreach($rows as $row)
             @php
-            $price = data_get($prices, getPriceKey($row['data'], $product), 0);
+            $price = data_get($prices, getPriceKey($categoryId, $product, $row['data']), 0);
             $formatType = data_get($row, 'price_options.type', '');
             @endphp
             <tr>
@@ -57,7 +57,13 @@
                     </td>
                 @endforeach
                 <td class="sku">{{data_get($row, 'data.sku', '')}}</td>
-                <td class="price">@price($price, $formatType)</td>
+                <td class="price">
+                    @if ($price['onDemand'])
+                        on demand
+                    @else
+                        @price($price['value'] * 100, $formatType)
+                    @endif
+                </td>
             </tr>
         @endforeach
         </tbody>

@@ -36,7 +36,10 @@ class Resource extends Controller
     {
         $resource = $request->getResource($resourceName);
         $filters = $resource->getFilters($request);
-        return response($filters);
+        return response([
+            'defaultLocale' => config('app.locale'),
+            'schema' => $filters
+        ]);
     }
 
     public function resourceList(ResourceRequest $request, $resourceName)

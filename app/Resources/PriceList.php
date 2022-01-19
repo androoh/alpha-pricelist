@@ -560,6 +560,13 @@ class PriceList extends ResourceAbstract
                         ]
                     ]),
                     new FormlyFieldConfig([
+                        'key' => 'hideInToc',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                        'templateOptions' => [
+                            'label' => 'Hide in table of contents'
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
                         'key' => 'layout',
                         'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
                         'defaultValue' => 'layout1',

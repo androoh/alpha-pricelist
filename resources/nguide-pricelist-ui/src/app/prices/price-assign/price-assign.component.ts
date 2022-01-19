@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
-import {ResourceListListResponse, ResourcesService} from '../../shared/services/resources.service';
-import {map} from 'rxjs/operators';
-import {PRICE_LIST_RESOURCE_NAME, PricesResponse, PricesResult, PricesService} from '../services/prices.service';
+import {ResourcesService} from '../../shared/services/resources.service';
+import {PricesResponse, PricesResult, PricesService} from '../services/prices.service';
 import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {ActivatedRoute} from '@angular/router';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
@@ -36,7 +33,6 @@ export class PriceAssignComponent implements OnInit {
         this.loadData(this.priceListId);
       }
     });
-
   }
 
   loadData(priceListId: string) {
@@ -44,14 +40,17 @@ export class PriceAssignComponent implements OnInit {
       this.priceLists = priceLists.data;
       this.defaultLocale = priceLists.defaultLocale;
       for (let item of this.priceLists) {
-        this.pricesModel[item.id] = item.price;
+        const price: {value: number | string; onDemand: boolean} = {
+          value: item.price?.value || 0,
+          onDemand: item.price?.onDemand || false
+        };
+        this.pricesModel[item.id] = price;
       }
     });
   }
 
   submit() {
     if (this.priceListId) {
-      console.log(this.pricesModel);
       this.pricesService.savePrices(this.priceListId, this.pricesModel).subscribe((result: any) => {
         this.alertsService.show(AlertType.success, 'Prices updated!');
       });

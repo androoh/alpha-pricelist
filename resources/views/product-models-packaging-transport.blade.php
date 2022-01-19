@@ -4,15 +4,17 @@
             $productModelData = null;
             $packagingTransport = null;
             $productOptionId = data_get($productModel, 'id', false);
+            $parts = [];
             if ($productOptionId) {
                 $productModelData = \App\Models\Product::find($productOptionId);
                 if ($productModelData) {
                     $packagingTransport = data_get($productModelData, 'modelProductFields.packagingTransport', null);
+                    $parts = data_get($packagingTransport, 'parts', []);
                 }
             }
         @endphp
-        @if($packagingTransport)
-            <div class="packaging-transport-item mb-3">
+        @if($packagingTransport && count($parts) > 0)
+            <div class="packaging-transport-item mb-3 page-break-inside-avoid">
                 @php
                     $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
                     $urls = [];
@@ -32,9 +34,6 @@
                         <img src="/imgc/a4lw/{{$url}}" class="d-block w-100 packaging-transport-image"/>
                     @endforeach
                 </div>
-                @php
-                    $parts = data_get($packagingTransport, 'parts', []);
-                @endphp
                 @if(count($parts) === 1)
                     @foreach($parts as $part)
                         <table class="packaging-transport-info border-bottom mt-2">

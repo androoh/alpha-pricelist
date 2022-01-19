@@ -3,6 +3,7 @@ import {ResourcesService} from '../../shared/services/resources.service';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -23,6 +24,7 @@ export class FiltersComponent implements OnInit, OnChanges {
   model: any = {};
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] | null = [];
+  defaultLocale = 'nl';
 
   constructor(private resourcesService: ResourcesService) {
   }
@@ -47,10 +49,36 @@ export class FiltersComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.resourceName?.currentValue) {
-      this.resourcesService.getFilters(changes.resourceName.currentValue).subscribe((filters: any[]) => {
-        this.fields = filters;
+      this.resourcesService.getFilters(changes.resourceName.currentValue).subscribe((response: {schema: any[]; defaultLocale: string}) => {
+        this.defaultLocale = response.defaultLocale;
+        this.fields = this.mapFields(response.schema, this.defaultLocale);
       });
     }
+  }
+
+  /**
+   * Adjust the JSON fields loaded from the server.
+   */
+  mapFields(fields: FormlyFieldConfig[], language: string) {
+    return fields.map((f: any) => {
+      if (f.hasOwnProperty('fieldGroup')) {
+
+        f.fieldGroup = this.mapFields(f.fieldGroup, language);
+      } else if (f.type === 'repeat') {
+        f.fieldArray.fieldGroup = this.mapFields(f.fieldArray.fieldGroup, language);
+      }
+
+      if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {
+        if (!f.templateOptions?.language) {
+          f.templateOptions.language = new BehaviorSubject(language);
+        } else {
+          f.templateOptions.language.next(language);
+        }
+        f.wrappers = [...(f.wrappers || []), 'translatable'];
+      }
+      f.templateOptions['defaultLocale'] = this.defaultLocale;
+      return f;
+    });
   }
 
   reset(): void {

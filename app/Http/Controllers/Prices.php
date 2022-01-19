@@ -14,24 +14,40 @@ class Prices extends Controller
         $resource = $request->getResource(self::PRICE_LIST_RESOURCE_NAME);
         $model = $resource::model();
         $priceList = $model::find($priceListId);
-        $mainProducts = data_get($priceList, 'mainProductsPage.main_products', []);
         $result = [];
         $prices = data_get($priceList, 'prices', []);
         foreach(data_get($priceList, 'mainProductsPage.categories') as $treeItem) {
+            $category = null;
+            $categoryId = data_get($treeItem, 'category', null);
+            if ($categoryId) {
+                $category = \App\Models\Category::find($categoryId);
+            }
+            $categoryName = $category ? translateFromPath($category, 'name', null) : null;
             foreach (data_get($treeItem, 'main_products', []) as $product) {
                 if ($productId = data_get($product, 'id', false)) {
-                    if ($product = \App\Models\Product::find($productId)) {
-                        if ($product->child_product_ids) {
-                            $childProducts = Product::find($product->child_product_ids);
+                    if ($productModel = \App\Models\Product::find($productId)) {
+                        if ($productModel->child_product_ids) {
+                            $childProducts = Product::find($productModel->child_product_ids);
                             foreach ($childProducts as $childProduct) {
-                                if (!isset($result[$product->getKey() . '#' . $childProduct->getkey()])) {
-                                    $result[$product->getKey() . '#' . $childProduct->getkey()] = [
-                                        'id' => $product->getKey() . '#' . $childProduct->getkey(),
-                                        'name' =>  $childProduct->name,
-                                        'parent' => $product->name,
+                                $priceKey = getPriceKey($categoryId, $productModel->getKey(), $childProduct->getkey());
+                                $priceId = getPriceKey($childProduct->getkey(), $productModel->getKey(), $categoryId);
+                                if (!isset($result[$priceKey])) {
+                                    $name = [];
+                                    if ($categoryName) {
+                                        $name[] = $categoryName;
+                                    }
+                                    $name[] = translateFromPath($productModel, 'name', '');
+                                    $name[] = translateFromPath($childProduct, 'name', '');
+                                    $result[$priceKey] = [
+                                        'id' => $priceKey,
+                                        'name' =>  implode(' -> ', $name),
                                         'sku' => $childProduct->sku,
                                         'type' => $childProduct->type,
-                                        'price' => data_get($prices, $product->getKey() . '#' . $childProduct->getkey(), 0)
+                                        // 'price' => [
+                                        //     'value' => data_get($prices, $product->getKey() . '#' . $childProduct->getkey(), 0),
+                                        //     'onDemand' => false,
+                                        // ],
+                                        'price' => data_get($prices, $priceKey, 0)
                                     ];
                                 }
                             }
@@ -39,47 +55,49 @@ class Prices extends Controller
                     }
                 }
             }
+            $productSections = data_get($treeItem, 'product_options_sections', []);
+            $this->getFromProductSections($result, $category, $productSections, $prices);
         }
         $productSections = data_get($priceList, 'optionsAndAccessoriesPage.product_options_sections', false);
+        $this->getFromProductSections($result, null, $productSections, $prices);
+        return response([
+            'defaultLocale' => config('app.locale'),
+            'data' => array_values($result)
+        ]);
+    }
+
+    private function getFromProductSections(&$result, $category, $productSections, $prices)
+    {
         foreach ($productSections as $productSection) {
             foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection) {
                 foreach(data_get($productOptionSection, 'product_options', []) as $productOption) {
                     $productOptionId = data_get($productOption, 'id', false);
                     if ($productOptionId) {
                         $productOptionData = \App\Models\Product::find($productOptionId);
-                        $result[$productOptionData->getkey()] = [
-                            'id' => $productOptionData->getkey(),
-                            'name' =>  $productOptionData->name,
-                            'parent' => data_get($productSection, 'title', ''),
+                        $priceKey = getPriceKey($category, $productOptionData->getKey());
+                        $name = [];
+                        if ($category) {
+                            $name[] = translateFromPath($category, 'name', '');
+                        }
+                        if ($title = translateFromPath($productSection, 'title', '')) {
+                            $name[] = $title;
+                        }
+                        $name[] = translateFromPath($productOptionData, 'name');
+                        $result[$priceKey] = [
+                            'id' => $priceKey,
+                            'name' =>  implode(' -> ', $name),
                             'sku' => $productOptionData->sku,
                             'type' => $productOptionData->type,
-                            'price' => data_get($prices, $productOptionData->getkey(), 0)
+                            // 'price' => [
+                            //     'value' => data_get($prices, $productOptionData->getkey(), 0),
+                            //     'onDemand' => false,
+                            // ],
+                            'price' => data_get($prices, $priceKey, 0)
                         ];
                     }
                 }
             }
         }
-        // foreach ($mainProducts as $mainProduct) {
-        //     $product = Product::find(data_get($mainProduct, 'id', null));
-        //     if ($product->child_product_ids) {
-        //         $childProducts = Product::find($product->child_product_ids);
-        //         foreach ($childProducts as $childProduct) {
-        //             if (!isset($result[$childProduct->getkey()])) {
-        //                 $result[$childProduct->getkey()] = [
-        //                     'id' => $childProduct->getkey(),
-        //                     'name' => $childProduct->name,
-        //                     'sku' => $childProduct->sku,
-        //                     'type' => $childProduct->type,
-        //                     'price' => data_get($prices, $childProduct->getkey(), 0)
-        //                 ];
-        //             }
-        //         }
-        //     }
-        // }
-        return response([
-            'defaultLocale' => config('app.locale'),
-            'data' => array_values($result)
-        ]);
     }
 
     public function store(ResourceRequest $request, $priceListId)
