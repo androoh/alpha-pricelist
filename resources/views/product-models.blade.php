@@ -42,7 +42,7 @@
         @foreach($rows as $row)
             @php
             $price = data_get($prices, getPriceKey($categoryId, $product, $row['data']), ['value' => 0, 'onDemand' => false]);
-            $formatType = data_get($row, 'price_options.type', '');
+            $formatType = data_get($row, 'data.price_options.type', '');
             @endphp
             <tr>
                 @foreach($columns as $column)

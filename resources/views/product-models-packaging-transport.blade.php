@@ -12,20 +12,20 @@
                     $parts = data_get($packagingTransport, 'parts', []);
                 }
             }
-        @endphp
-        @if($packagingTransport && count($parts) > 0)
-            <div class="packaging-transport-item mb-3 page-break-inside-avoid">
-                @php
-                    $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
-                    $urls = [];
-                    foreach ($packagingImages as $image) {
-                        $path = data_get($image, 'name', '');
-                        $pathInfo = pathinfo($path);
-                        if ($path && $pathInfo['extension'] !== 'pdf') {
-                            $urls[] = $path;
-                        }
+            if ($packagingTransport) {
+                $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
+                $urls = [];
+                foreach ($packagingImages as $image) {
+                    $path = data_get($image, 'name', '');
+                    $pathInfo = pathinfo($path);
+                    if ($path && $pathInfo['extension'] !== 'pdf') {
+                        $urls[] = $path;
                     }
-                @endphp
+                }
+            }
+        @endphp
+        @if($packagingTransport && (count($parts) > 0 || count($urls) > 0))
+            <div class="packaging-transport-item mb-3 page-break-inside-avoid">
                 <div class="packaging-transport-title pt-1 ps-2 pb-1 mb-2">
                     Model - @t($productModelData, 'name', '')
                 </div>

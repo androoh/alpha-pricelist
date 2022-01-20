@@ -499,76 +499,82 @@ class Product extends ResourceAbstract
                     ]
                 ])
             ]),
-            new FormlyFieldConfig([
-                'key' => 'packagingTransport',
-                'wrappers' => ['panel'],
-                'templateOptions' => [
-                    'label' => 'Packaging & Transport'
-                ],
-                'fieldGroup' => [
-                    new FormlyFieldConfig([
-                        'key' => 'parts',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
-                        'templateOptions' => [
-                            'label' => 'Parts',
-                            'addText' => 'Add part',
-                        ],
-                        'fieldArray' => new FormlyFieldConfig([
-                            'fieldGroup' => [
-                                new FormlyFieldConfig([
-                                    'key' => 'depth',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
-                                    'templateOptions' => [
-                                        'type' => 'number',
-                                        'label' => 'Depth',
-                                    ]
-                                ]),
-                                new FormlyFieldConfig([
-                                    'key' => 'width',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
-                                    'templateOptions' => [
-                                        'label' => 'Width',
-                                        'type' => 'number',
-                                    ]
-                                ]),
-                                new FormlyFieldConfig([
-                                    'key' => 'height',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
-                                    'templateOptions' => [
-                                        'label' => 'Height',
-                                        'type' => 'number',
-                                    ]
-                                ]),
-                                new FormlyFieldConfig([
-                                    'key' => 'weight',
-                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
-                                    'templateOptions' => [
-                                        'label' => 'Weight',
-                                        'type' => 'number',
-                                    ]
-                                ]),
-                            ]
-                        ])
-                    ]),
-                    new FormlyFieldConfig([
-                        'key' => 'other_info',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
-                        'templateOptions' => [
-                            'label' => 'Other info',
-                            'translatable' => true
-                        ]
-                    ]),
-                    new FormlyFieldConfig([
-                        'key' => 'technical_design',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
-                        'templateOptions' => [
-                            'label' => 'Technical Design',
-                            'accept' => ['image/*']
-                        ]
-                    ]),
-                ]
-            ]),
+            $this->getPackagingAndTransport('packagingTransport', 'Packaging & Transport'),
+            $this->getPackagingAndTransport('packagingTransportAdditional', 'Additional Packaging & Transport')
         ];
+    }
+
+    private function getPackagingAndTransport($key, $label)
+    {
+        return new FormlyFieldConfig([
+            'key' => $key,
+            'wrappers' => ['panel'],
+            'templateOptions' => [
+                'label' => $label
+            ],
+            'fieldGroup' => [
+                new FormlyFieldConfig([
+                    'key' => 'parts',
+                    'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                    'templateOptions' => [
+                        'label' => 'Parts',
+                        'addText' => 'Add part',
+                    ],
+                    'fieldArray' => new FormlyFieldConfig([
+                        'fieldGroup' => [
+                            new FormlyFieldConfig([
+                                'key' => 'depth',
+                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                'templateOptions' => [
+                                    'type' => 'number',
+                                    'label' => 'Depth',
+                                ]
+                            ]),
+                            new FormlyFieldConfig([
+                                'key' => 'width',
+                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                'templateOptions' => [
+                                    'label' => 'Width',
+                                    'type' => 'number',
+                                ]
+                            ]),
+                            new FormlyFieldConfig([
+                                'key' => 'height',
+                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                'templateOptions' => [
+                                    'label' => 'Height',
+                                    'type' => 'number',
+                                ]
+                            ]),
+                            new FormlyFieldConfig([
+                                'key' => 'weight',
+                                'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                'templateOptions' => [
+                                    'label' => 'Weight',
+                                    'type' => 'number',
+                                ]
+                            ]),
+                        ]
+                    ])
+                ]),
+                new FormlyFieldConfig([
+                    'key' => 'other_info',
+                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                    'templateOptions' => [
+                        'label' => 'Other info',
+                        'translatable' => true
+                    ]
+                ]),
+                new FormlyFieldConfig([
+                    'key' => 'technical_design',
+                    'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                    'templateOptions' => [
+                        'label' => 'Technical Design',
+                        'accept' => ['image/*']
+                    ]
+                ]),
+            ]
+        ]);
     }
 
     private function getProductOptionFields($request)

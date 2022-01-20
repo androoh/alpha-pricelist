@@ -197,7 +197,7 @@
                 <div class="footer-text-3">@t($optionsAndAccessoriesPage, 'footer_text_3', '')</div>
                 <div class="page-counter"></div>
             </div>
-            @include('product-sections', ['parentProduct' => null, 'productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+            @include('product-sections', ['categoryId' => null, 'parentProduct' => null, 'productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
         </div>
     @endif
 @endsection
