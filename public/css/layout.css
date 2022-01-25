@@ -4946,12 +4946,13 @@ table {
   color: #4D545E;
   margin-bottom: 0;
   font-family: Rajdhani, sans-serif;
+  line-height: 0.9em;
 }
 .product-page .standard-equipment .title {
   font-weight: 100;
   font-size: 14pt;
   border-bottom: 2px #4D545E solid;
-  margin: 10pt 0;
+  margin: 0 0 10pt;
 }
 .product-page .standard-equipment .description {
   font-size: 10pt;
@@ -4979,7 +4980,7 @@ table.options-table th {
   font-size: 10pt;
 }
 table.options-table td, table.options-table th {
-  padding: 4pt 2pt 4pt 2pt;
+  padding: 0 2pt 2pt 2pt;
   border-right: 2pt #4D545E solid;
   text-align: center;
 }
@@ -5309,6 +5310,7 @@ table.options-table .title-row {
 }
 .product-options-page table.options-table td {
   border-bottom: 2pt solid #4D545E;
+  padding-top: 2pt;
 }
 
 .category-page-left, .category-page-right, .first-page, .second-page, .icons-page-left, .icons-page-right {

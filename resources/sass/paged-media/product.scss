@@ -25,6 +25,7 @@ $gray3: #8F989B;
         color: $main;
         margin-bottom: 0;
         font-family: Rajdhani, sans-serif;
+        line-height: 0.9em;
     }
 
     .standard-equipment {
@@ -32,7 +33,7 @@ $gray3: #8F989B;
             font-weight: 100;
             font-size: 14pt;
             border-bottom: 2px $main solid;
-            margin: 10pt 0;
+            margin: 0 0 10pt;
         }
 
         .description {
@@ -71,7 +72,7 @@ table.options-table {
     }
 
     td, th {
-        padding: 4pt 2pt 4pt 2pt;
+        padding: 0 2pt 2pt 2pt;
         border-right: 2pt $main solid;
         text-align: center;
         &.price {
@@ -494,6 +495,7 @@ table.options-table {
     table.options-table {
         td {
             border-bottom: 2pt solid $main;
+            padding-top: 2pt;
         }
     }
 }

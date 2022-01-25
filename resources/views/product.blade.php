@@ -36,9 +36,9 @@
         <div class="page-counter"></div>
     </div>
     <div class="page-body">
-        <table class="product-info mb-3">
+        <table class="product-info mb-2">
             <tr>
-                <td style="width: 50%; vertical-align: top;">
+                <td style="width: 40%; vertical-align: top;">
                     @php
                         $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.name', false);
                         $mainPhotoInfoNote = translateFromPath($product, 'mainProductFields.main_photo_info_note', false);
@@ -63,7 +63,7 @@
                             @t($product, 'mainProductFields.standard_equipment', '')
                         </div>
                         @if ($clientSuply)
-                        <div class="client-suply mb-2">
+                        <div class="client-suply mb-2 description">
                             <strong>The client to supply:</strong>
                             {!!$clientSuply!!}
                         </div>
