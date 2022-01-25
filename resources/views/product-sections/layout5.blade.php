@@ -3,11 +3,13 @@
         @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
             @php
                 $i = 0;
+                $totalCount = 0;
                 $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
+                $productOptions = data_get($productOptionSection, 'product_options', []);
             @endphp
             <table class="w-100">
                 <tbody>
-                @foreach(data_get($productOptionSection, 'product_options', []) as $productOption)
+                @foreach($productOptions as $productOption)
                     @php
                         $productOptionData = null;
                         $productOptionId = data_get($productOption, 'id', false);
@@ -19,6 +21,7 @@
                                 $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.name');
                             }
                         }
+                        $totalCount++;
                     @endphp
                     @if($productOptionData)
                         @php
@@ -53,7 +56,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                @if($i === 2)
+                                @if($i === 2 || $totalCount === count($productOptions))
                             </tr>
                         @endif
                         @php

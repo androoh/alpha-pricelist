@@ -328,6 +328,15 @@ class Product extends ResourceAbstract
                             ]
                         ]),
                         new FormlyFieldConfig([
+                            'key' => 'info_note',
+                            'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                            'templateOptions' => [
+                                'label' => 'Info Note',
+                                'html' => true,
+                                'translatable' => true,
+                            ]
+                        ]),
+                        new FormlyFieldConfig([
                             'key' => 'product_option_sections',
                             'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
                             'templateOptions' => [

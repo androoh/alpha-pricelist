@@ -47,18 +47,22 @@
                     Model - @t($productModelData, 'name', '')
                 </div>
                 @if($packagingTransport)
-                    @include('model-packaging-transport', [
-                        'packagingTransport' => $packagingTransport,
-                        'urls' => $urls,
-                        'parts' => $parts
-                    ])
+                    <div class="mb-4">
+                        @include('model-packaging-transport', [
+                            'packagingTransport' => $packagingTransport,
+                            'urls' => $urls,
+                            'parts' => $parts
+                        ])
+                    </div>
                 @endif
                 @if($packagingTransportAdditional)
-                    @include('model-packaging-transport', [
-                        'packagingTransport' => $packagingTransportAdditional,
-                        'urls' => $urlsAdditional,
-                        'parts' => $partsAdditional
-                    ])
+                    <div class="mb-2">
+                        @include('model-packaging-transport', [
+                            'packagingTransport' => $packagingTransportAdditional,
+                            'urls' => $urlsAdditional,
+                            'parts' => $partsAdditional
+                        ])
+                    </div>
                 @endif
             </div>
         </div>

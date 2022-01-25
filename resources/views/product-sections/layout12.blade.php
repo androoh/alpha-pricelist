@@ -1,11 +1,14 @@
 <div class="layout-12 product-options-group-grid-2">
     @php
         $i = 0;
+        $totalCount = 0;
+        $productOptionSections = data_get($productSection, 'product_option_sections', []);
     @endphp
     <table class="w-100">
-    @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
+    @foreach($productOptionSections as $productOptionSection)
         @php
             $i++;
+            $totalCount++;
             $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
             $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
         @endphp
@@ -96,14 +99,14 @@
             </table>
         </div>
         </td>
-        @if($i === 2)
-                            </tr>
-                        @endif
-                        @php
-                            if($i === 2) {
-                                $i = 0;
-                            }
-                        @endphp
+        @if($i === 2 || $totalCount === count($productOptionSections))
+            </tr>
+        @endif
+        @php
+            if($i === 2) {
+                $i = 0;
+            }
+        @endphp
     @endforeach
     </table>
 </div>

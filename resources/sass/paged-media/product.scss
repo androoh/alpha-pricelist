@@ -110,6 +110,9 @@ table.options-table {
         .product-section-title {
             font-size: 15pt;
         }
+        .section-info-note {
+            font-size: 10pt;
+        }
     }
 }
 
@@ -119,23 +122,24 @@ table.options-table {
         //flex-flow: row wrap;
         //justify-content: space-between;
 
-        .photo-gallery-item {
+        // .photo-gallery-item {
+        //     width: 100%;
+
+
+        // }
+        .img {
+            display: block;
             width: 100%;
+            height: 128pt;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-size: contain;
+            overflow: hidden;
+        }
 
-            .img {
-                display: block;
-                width: 100%;
-                height: 128pt;
-                background-repeat: no-repeat;
-                background-position: top;
-                background-size: contain;
-                overflow: hidden;
-            }
-
-            img {
-                display: block;
-                width: 100%;
-            }
+        img {
+            display: block;
+            width: 100%;
         }
     }
 }

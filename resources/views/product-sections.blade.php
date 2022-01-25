@@ -51,6 +51,14 @@
                         @break
                         @default
                     @endswitch
+                    @php
+                        $infoNote = translateFromPath($productSection, 'info_note', null);
+                    @endphp
+                    @if ($infoNote)
+                    <div class="section-info-note">
+                        {!!$infoNote!!}
+                    </div>
+                    @endif
                 </div>
             </div>
         @endforeach

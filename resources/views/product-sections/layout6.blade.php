@@ -17,6 +17,7 @@
                 <table class="w-100">
                     @php
                         $i = 0;
+                        $totalCount = 0;
                     @endphp
                     @foreach($photoGalleryUrls as $url)
                         @php
@@ -28,6 +29,7 @@
                             if ($i === 2) {
                                 $class = 'ps-1';
                             }
+                            $totalCount++;
                         @endphp
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">
@@ -35,7 +37,7 @@
                                 <td style="width: {{(100/count($photoGalleryUrls))}}%" class="{{$class}}">
                                     <div class="photo-gallery-item" style="background-image: url('/imgc/a4mw/{{$url}}');"></div>
                                 </td>
-                                @if($i === 3)
+                                @if($i === 3 || $totalCount === count($photoGalleryUrls))
                             </tr>
                         @endif
                         @php

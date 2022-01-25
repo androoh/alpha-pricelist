@@ -3,6 +3,7 @@
         @php
             $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
             $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
+            $productOptions = data_get($productOptionSection, 'product_options', []);
         @endphp
         <table class="options-table w-100">
             <thead class="page-break-after-avoid">
@@ -19,7 +20,7 @@
                 $i = 0;
             @endphp
             <tbody>
-            @foreach(data_get($productOptionSection, 'product_options', []) as $productOption)
+            @foreach($productOptions as $productOption)
                 @php
                     $i++;
                     $productOptionData = null;
