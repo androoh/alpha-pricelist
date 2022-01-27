@@ -1,7 +1,7 @@
 @if(count($parts) > 0 || count($photos) > 0)
     <div class="packaging-transport-images">
         @foreach($photos as $photo)
-            @include('render-image', ['photo' => $photo, 'class' => ['d-block', 'packaging-transport-image']])
+            @include('render-image', ['photo' => $photo, 'class' => ['d-block', 'packaging-transport-image', 'w-100']])
         @endforeach
     </div>
     @if(count($parts) === 1)
