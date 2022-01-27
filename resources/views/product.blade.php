@@ -2,13 +2,13 @@
     <div class="left-header">
         <div class="d-flex justify-content-start">
             <div class="price-list-type">@t($priceList, 'firstPage.type', 'Trade')</div>
-            <div class="product-complexity ms-4">@t($product, 'mainProductFields.complexity', 'Basic')</div>
+            <div class="product-complexity ms-4">{{data_get($product, 'mainProductFields.complexity', 'Basic')}}</div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>
         </div>
     </div>
     <div class="right-header">
         <div class="d-flex justify-content-end">
-            <div class="product-complexity me-4">@t($product, 'mainProductFields.complexity', 'Basic')</div>
+            <div class="product-complexity me-4">{{data_get($product, 'mainProductFields.complexity', 'Basic')}}</div>
             <div class="category-name">@t($category, 'name', '-')</div>
         </div>
     </div>
@@ -105,12 +105,7 @@
                 <h3>Winner</h3>
                 <div class="awards-photots">
                 @foreach ($awardsPhotos as $awardPhoto)
-                    @php
-                        $awardPhotoUrl = data_get($awardPhoto, 'name', false);
-                    @endphp
-                    @if($awardPhotoUrl)
-                        <img src="/imgc/a4lw/{{$awardPhotoUrl}}" style="max-height: 100pt; display:inline-block;" class="me-2 mb-2"/>
-                    @endif
+                    @include('render-image', ['photo' => $awardPhoto, 'class' => ['me-2', 'mb-2', 'd-inline-block']])
                 @endforeach
                 </div>
             </div>

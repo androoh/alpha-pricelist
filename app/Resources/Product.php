@@ -210,7 +210,8 @@ class Product extends ResourceAbstract
                 'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
                 'templateOptions' => [
                     'label' => 'Main Photo',
-                    'accept' => ['image/*']
+                    'accept' => ['image/*'],
+                    'showConfig' => true
                 ]
             ]),
             new FormlyFieldConfig([
@@ -263,8 +264,27 @@ class Product extends ResourceAbstract
                 'templateOptions' => [
                     'label' => 'Awards Photos',
                     'accept' => ['image/*'],
-                    'multiple' => true
+                    'multiple' => true,
+                    'showConfig' => true
                 ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'packagingTransportNewPage',
+                'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                'defaultValue' => 'yes',
+                'templateOptions' => [
+                    'label' => 'Show Packaging and Transport on new page',
+                    'options' => [
+                        [
+                            'label' => 'Yes',
+                            'value' => 'yes'
+                        ],
+                        [
+                            'label' => 'No',
+                            'value' => 'no'
+                        ]
+                    ]
+                ],
             ]),
             new FormlyFieldConfig([
                 'key' => 'product_models',
@@ -324,7 +344,8 @@ class Product extends ResourceAbstract
                             'templateOptions' => [
                                 'label' => 'Photo gallery',
                                 'accept' => ['image/*'],
-                                'multiple' => true
+                                'multiple' => true,
+                                'showConfig' => true
                             ]
                         ]),
                         new FormlyFieldConfig([
@@ -404,7 +425,8 @@ class Product extends ResourceAbstract
                                         'templateOptions' => [
                                             'label' => 'Options Group Photo',
                                             'accept' => ['image/*'],
-                                            'multiple' => true
+                                            'multiple' => true,
+                                            'showConfig' => true
                                         ]
                                     ]),
                                     new FormlyFieldConfig([
@@ -579,7 +601,8 @@ class Product extends ResourceAbstract
                     'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
                     'templateOptions' => [
                         'label' => 'Technical Design',
-                        'accept' => ['image/*']
+                        'accept' => ['image/*'],
+                        'showConfig' => true
                     ]
                 ]),
             ]
@@ -643,8 +666,13 @@ class Product extends ResourceAbstract
                 'img' => asset('images/resize_layout1.png')
             ],
             [
-                'label' => 'Only Photos',
+                'label' => 'Only Photos 3/1',
                 'value' => 'layout2',
+                'img' => asset('images/resize_layout2.png')
+            ],
+            [
+                'label' => 'Only Photos - one column',
+                'value' => 'layout4',
                 'img' => asset('images/resize_layout2.png')
             ],
             [

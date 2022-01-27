@@ -1,12 +1,7 @@
-@if(count($parts) > 0 || count($urls) > 0)
+@if(count($parts) > 0 || count($photos) > 0)
     <div class="packaging-transport-images">
-        @foreach($urls as $url)
-            <img src="/imgc/a4lw/{{$url}}"
-            class="d-block packaging-transport-image"
-            style="
-            width: 85%;
-            margin: 0 auto;
-            "/>
+        @foreach($photos as $photo)
+            @include('render-image', ['photo' => $photo, 'class' => ['d-block', 'packaging-transport-image']])
         @endforeach
     </div>
     @if(count($parts) === 1)

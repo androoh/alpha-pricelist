@@ -916,3 +916,13 @@ table.options-table {
 ul {
     padding-left: 10pt;
 }
+.photo-gallery-background {
+    .photo-gallery-item {
+        background-repeat: no-repeat;
+        background-position-x: center;
+        background-position-y: center;
+        background-size: 100%;
+        width: 100%;
+        min-height: 50pt;
+    }
+}

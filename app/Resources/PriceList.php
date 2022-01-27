@@ -639,7 +639,8 @@ class PriceList extends ResourceAbstract
                                     'templateOptions' => [
                                         'label' => 'Options Group Photo',
                                         'accept' => ['image/*'],
-                                        'multiple' => true
+                                        'multiple' => true,
+                                        'showConfig' => true
                                     ]
                                 ]),
                                 new FormlyFieldConfig([
@@ -713,6 +714,11 @@ class PriceList extends ResourceAbstract
             [
                 'label' => 'Only Photos',
                 'value' => 'layout2',
+                'img' => asset('images/resize_layout2.png')
+            ],
+            [
+                'label' => 'Only Photos - one column',
+                'value' => 'layout4',
                 'img' => asset('images/resize_layout2.png')
             ],
             [

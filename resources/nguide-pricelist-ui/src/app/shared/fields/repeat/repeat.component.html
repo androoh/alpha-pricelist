@@ -5,7 +5,7 @@
       <accordion-group *ngFor="let field of field.fieldGroup; let i = index;" cdkDrag cdkDragLockAxis="y">
         <div class="clearfix" accordion-heading>
           <div class="float-start">
-            <i class="bi bi-list me-2"></i>
+            <i class="bi bi-list me-2" style="cursor:move;" cdkDragHandle></i>
             <a>{{to.label + ' #' + (i + 1)}}</a>
           </div>
           <button type="button" class="btn btn-danger btn-sm float-end" (click)="remove(i)"><i class="bi bi-trash"></i>

@@ -1,5 +1,6 @@
 @php
     $i = 0;
+    $pageBreakBefore = data_get($product, 'mainProductFields.packagingTransportNewPage', 'yes');
 @endphp
 @foreach (data_get($product, 'mainProductFields.product_models', []) ?? [] as $productModel)
     @php
@@ -7,6 +8,8 @@
         $packagingTransport = null;
         $urls = [];
         $urlsAdditional = [];
+        $packagingImages = [];
+        $packagingImagesAdditional = [];
         $parts = [];
         $partsAdditional = [];
         $productOptionId = data_get($productModel, 'id', false);
@@ -18,30 +21,16 @@
                 $parts = data_get($packagingTransport, 'parts', []);
                 if ($packagingTransport) {
                     $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
-                    foreach ($packagingImages as $image) {
-                        $path = data_get($image, 'name', '');
-                        $pathInfo = pathinfo($path);
-                        if ($path && $pathInfo['extension'] !== 'pdf') {
-                            $urls[] = $path;
-                        }
-                    }
                 }
                 $partsAdditional = data_get($packagingTransportAdditional, 'parts', []);
                 if ($packagingTransportAdditional) {
-                    $packagingImages = data_get($packagingTransportAdditional, 'technical_design', []) ?? [];
-                    foreach ($packagingImages as $image) {
-                        $path = data_get($image, 'name', '');
-                        $pathInfo = pathinfo($path);
-                        if ($path && $pathInfo['extension'] !== 'pdf') {
-                            $urlsAdditional[] = $path;
-                        }
-                    }
+                    $packagingImagesAdditional = data_get($packagingTransportAdditional, 'technical_design', []) ?? [];
                 }
             }
         }
     @endphp
-    @if (($packagingTransport && (count($parts) > 0 || count($urls) > 0)) || ($packagingTransportAdditional && (count($partsAdditional) > 0 || count($urlsAdditional) > 0)))
-        <div class="packaging-transport @if($i === 0) page-break-before @endif">
+    @if (($packagingTransport && (count($parts) > 0 || count($packagingImages) > 0)) || ($packagingTransportAdditional && (count($partsAdditional) > 0 || count($packagingImagesAdditional) > 0)))
+        <div class="packaging-transport @if($i === 0 && $pageBreakBefore === 'yes') page-break-before @endif">
             <div class="packaging-transport-item mb-3 page-break-inside-avoid">
                 <div class="packaging-transport-title pt-1 ps-2 pb-1 mb-2">
                     Model - @t($productModelData, 'name', '')
@@ -50,7 +39,7 @@
                     <div class="mb-4">
                         @include('model-packaging-transport', [
                             'packagingTransport' => $packagingTransport,
-                            'urls' => $urls,
+                            'photos' => $packagingImages,
                             'parts' => $parts
                         ])
                     </div>
@@ -59,7 +48,7 @@
                     <div class="mb-2">
                         @include('model-packaging-transport', [
                             'packagingTransport' => $packagingTransportAdditional,
-                            'urls' => $urlsAdditional,
+                            'photos' => $packagingImagesAdditional,
                             'parts' => $partsAdditional
                         ])
                     </div>

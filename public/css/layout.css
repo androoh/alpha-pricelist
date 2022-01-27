@@ -9928,6 +9928,11 @@ table {
   vertical-align: top;
 }
 
+img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
 .product-page {
   page: productPage;
   position: relative;
@@ -10651,4 +10656,13 @@ table.options-table .title-row {
 
 ul {
   padding-left: 10pt;
+}
+
+.photo-gallery-background .photo-gallery-item {
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: 100%;
+  width: 100%;
+  min-height: 50pt;
 }

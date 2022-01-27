@@ -68,21 +68,14 @@
             </tbody>
         </table>
         @php
-            $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
-            $photoGalleryUrls = [];
-            foreach($photoGallery as $photo) {
-                $photoUrl = data_get($photo, 'name', false);
-                if ($photoUrl) {
-                    $photoGalleryUrls[] = $photoUrl;
-                }
-            }
+            $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []) ?? [];
         @endphp
         <div class="photo-gallery-3">
             <table>
                 @php
                     $i = 0;
                 @endphp
-                @foreach($photoGalleryUrls as $url)
+                @foreach($photoGallery as $photo)
                     @php
                         $i++;
                     @endphp
@@ -91,7 +84,7 @@
                     @endif
                     <td class="@if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
                         <div class="photo-gallery-item">
-                            <img src="/imgc/a4mw/{{$url}}"/>
+                            @include('render-image', ['photo' => $photo])
                         </div>
                     </td>
                     @if($i === 3)

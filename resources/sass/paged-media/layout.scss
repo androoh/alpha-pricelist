@@ -78,4 +78,8 @@ table {
 .valign-top {
     vertical-align: top;
 }
+img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
 @import "product";

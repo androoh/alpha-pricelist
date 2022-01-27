@@ -22,6 +22,9 @@
                         @case('layout3')
                         @include('product-sections.layout3', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                         @break
+                        @case('layout4')
+                        @include('product-sections.layout4', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
+                        @break
                         @case('layout5')
                         @include('product-sections.layout5', ['productSection' => $productSection, 'prices' => $prices, 'parentProduct' => $parentProduct])
                         @break

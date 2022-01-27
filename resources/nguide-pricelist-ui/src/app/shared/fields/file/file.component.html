@@ -1,66 +1,141 @@
 <div class="mb-2">
-  <input class="visually-hidden" [attr.multiple]="to.multiple" type="file" ng2FileSelect [uploader]="uploader"
-         (change)="onChange($event)" (onFileSelected)="onFileSelected($event)" #file/>
-  <button type="button" class="btn btn-sm btn-success"
-          (click)="file.click()">
-    <span class="bi bi-plus-circle"></span> {{to.multiple ? 'Select files' : 'Select file'}}
+  <input
+    class="visually-hidden"
+    [attr.multiple]="to.multiple"
+    type="file"
+    ng2FileSelect
+    [uploader]="uploader"
+    (change)="onChange($event)"
+    (onFileSelected)="onFileSelected($event)"
+    #file
+  />
+  <button type="button" class="btn btn-sm btn-success" (click)="file.click()">
+    <span class="bi bi-plus-circle"></span>
+    {{ to.multiple ? "Select files" : "Select file" }}
   </button>
   <ng-container *ngIf="to.multiple">
-    <button type="button"
-            class="btn btn-sm btn-success ms-2"
-            *ngIf="uploader.queue.length > 0"
-            (click)="uploader.uploadAll()">
+    <button
+      type="button"
+      class="btn btn-sm btn-success ms-2"
+      *ngIf="uploader.queue.length > 0"
+      (click)="uploader.uploadAll()"
+    >
       <span class="bi bi-plus-circle"></span> Upload All
     </button>
-    <button type="button"
-            class="btn btn-sm btn-warning ms-2"
-            *ngIf="uploader.isUploading"
-            (click)="uploader.cancelAll()">
+    <button
+      type="button"
+      class="btn btn-sm btn-warning ms-2"
+      *ngIf="uploader.isUploading"
+      (click)="uploader.cancelAll()"
+    >
       <span class="bi bi-slash-circle"></span> Cancel All
     </button>
-    <button type="button"
-            class="btn btn-sm btn-danger ms-2"
-            *ngIf="uploader.queue.length > 0"
-            (click)="uploader.clearQueue()">
+    <button
+      type="button"
+      class="btn btn-sm btn-danger ms-2"
+      *ngIf="uploader.queue.length > 0"
+      (click)="uploader.clearQueue()"
+    >
       <span class="bi bi-trash"></span> Remove All
     </button>
   </ng-container>
 </div>
 <div class="d-flex gallery flex-row flex-wrap">
-  <div class="gallery-item mt-2 me-2" style="width: 25%;" *ngFor="let item of currentValue">
-    <div class="border gallery-image"
-         [style.background-image]="getValueUrl(item)"
-         [title]="item.name"
+  <div
+    class="gallery-item mt-2 me-2"
+    style="width: 25%"
+    *ngFor="let item of currentValue"
+  >
+    <div
+      class="border gallery-image"
+      [style.background-image]="getValueUrl(item)"
+      [title]="item.name"
     ></div>
+    <div class="image-config" *ngIf="to?.showConfig">
+      <div class="row mt-2">
+        <label class="form-label col">
+          Label
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            [(ngModel)]="item['label']"
+          />
+        </label>
+      </div>
+      <div class="row">
+        <label class="form-label col">
+          Width
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            [(ngModel)]="item['width']"
+          />
+        </label>
+        <label class="form-label col">
+          Height
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            [(ngModel)]="item['height']"
+          />
+        </label>
+      </div>
+    </div>
     <div class="gallery-image-name">{{ item?.name }}</div>
     <div class="btn-group w-100">
-      <button type="button" class="btn btn-sm btn-danger btn-xs"
-              (click)="removeValue(item)">
+      <button
+        type="button"
+        class="btn btn-sm btn-danger btn-xs"
+        (click)="removeValue(item)"
+      >
         <span class="bi bi-trash"></span> Remove
       </button>
     </div>
   </div>
-  <div class="gallery-item mt-2 me-2" style="width: 25%;" *ngFor="let item of uploader.queue">
-    <div class="border gallery-image"
-         [style.background-image]="getImageUrl(item)"
-         [title]="item?.file?.name"
-         [ngClass]="{'border-success': item.isSuccess, 'border-error': item.isCancel}"
+  <div
+    class="gallery-item mt-2 me-2"
+    style="width: 25%"
+    *ngFor="let item of uploader.queue"
+  >
+    <div
+      class="border gallery-image"
+      [style.background-image]="getImageUrl(item)"
+      [title]="item?.file?.name"
+      [ngClass]="{
+        'border-success': item.isSuccess,
+        'border-error': item.isCancel
+      }"
     ></div>
     <div class="progress" style="height: 1px" *ngIf="uploader.options.isHTML5">
-      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [ngStyle]="{ width: item.progress + '%' }"
+      ></div>
     </div>
     <div class="gallery-image-name">{{ item?.file?.name }}</div>
     <div class="btn-group w-100">
-      <button type="button" class="btn btn-sm btn-success btn-xs"
-              (click)="item.upload()" [disabled]="item.isUploading || item.isSuccess">
+      <button
+        type="button"
+        class="btn btn-sm btn-success btn-xs"
+        (click)="item.upload()"
+        [disabled]="item.isUploading || item.isSuccess"
+      >
         <span class="bi bi-plus-circle"></span> Upload
       </button>
-      <button type="button" class="btn btn-sm btn-warning btn-xs"
-              (click)="item.cancel()" *ngIf="item.isUploading && !item.isSuccess">
+      <button
+        type="button"
+        class="btn btn-sm btn-warning btn-xs"
+        (click)="item.cancel()"
+        *ngIf="item.isUploading && !item.isSuccess"
+      >
         <span class="bi bi-slash-circle"></span> Cancel
       </button>
-      <button type="button" class="btn btn-sm btn-danger btn-xs"
-              (click)="item.remove()">
+      <button
+        type="button"
+        class="btn btn-sm btn-danger btn-xs"
+        (click)="item.remove()"
+      >
         <span class="bi bi-trash"></span> Remove
       </button>
     </div>

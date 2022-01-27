@@ -44,6 +44,7 @@ export class FileComponent extends FieldType implements OnInit {
       ],
     });
 
+
     this.uploader.response.pipe(map((result: string) => JSON.parse(result))).subscribe((response: ImageResponse) => {
       if (this.to.multiple === true) {
         this.currentValue.push(response);
@@ -68,7 +69,6 @@ export class FileComponent extends FieldType implements OnInit {
   }
 
   onChange(data: any) {
-
   }
 
   getImageUrl(item: any): SafeStyle | null {
