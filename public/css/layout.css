@@ -9929,8 +9929,7 @@ table {
 }
 
 img {
-  max-width: 100% !important;
-  max-height: 100% !important;
+  max-height: 600pt !important;
 }
 
 .product-page {
