@@ -10,6 +10,7 @@ import {TableService} from '../../services/table.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {get} from 'lodash';
 import {Subscription} from "rxjs";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-has-many',
@@ -30,6 +31,7 @@ export class HasManyComponent extends FieldType implements OnInit, OnDestroy {
   constructor(
     private changeRef: ChangeDetectorRef,
     private modalService: BsModalService,
+    private route: Router,
     private resourcesService: ResourcesService,
     private tableService: TableService
   ) {
@@ -145,5 +147,12 @@ export class HasManyComponent extends FieldType implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+  }
+
+  edit(row: any): void {
+    const url = this.route.serializeUrl(
+      this.route.createUrlTree(['/resources', this.to?.resource, row.id, 'edit'])
+    );
+    window.open('#' + url, '_blank');
   }
 }

@@ -1,49 +1,96 @@
 <div class="card" (click)="$event.stopImmediatePropagation()">
   <h5 class="card-header mb-0">
     {{ to?.label }}
-    <button type="button" class="btn btn-success btn-sm float-end" (click)="openModalWithComponent()">
+    <button
+      type="button"
+      class="btn btn-success btn-sm float-end"
+      (click)="openModalWithComponent()"
+    >
       <i class="bi bi-plus-circle"></i>
       Add
     </button>
   </h5>
   <div class="card-body p-0">
-    <table class="table mb-0 w-100" cdkDropList (cdkDropListDropped)="drop($event)" id="has-many-dlist" #hasManyDList>
+    <table
+      class="table mb-0 w-100"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      id="has-many-dlist"
+      #hasManyDList
+    >
       <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col" *ngFor="let column of table.columns">{{column.name}}</th>
-        <th scope="col" class="text-end">Actions</th>
-      </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" *ngFor="let column of table.columns">
+            {{ column.name }}
+          </th>
+          <th scope="col" class="text-end">Actions</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let row of table.rows; let i = index" cdkDrag cdkDragLockAxis="y" [cdkDragBoundary]="hasManyDList">
-        <td>
-          <ng-container *ngIf="to?.hideDragHandle === true">
-            <button type="button" class="btn btn-sm" (click)="moveUp(i)"><i class="bi bi-caret-up-fill"></i></button>
-            <button type="button" class="btn btn-sm" (click)="moveDown(i)"><i class="bi bi-caret-down-fill"></i></button>
-          </ng-container>
-          <div class="pointer-grab" cdkDragHandle *ngIf="!to?.hideDragHandle">
-            <i class="bi bi-list"></i>
-          </div>
-        </td>
-        <td *ngFor="let column of table.columns">
-          <ng-container *ngIf="column?.translatable; then thenBlock else elseBlock"></ng-container>
-          <ng-template #thenBlock>
-            <div class="text-truncate pr-2" style="max-width: 200px"
-                 [title]="table.getTranslatedValue(getValue(row, column.path))">{{table.getTranslatedValue(getValue(row, column.path))}}</div>
-          </ng-template>
-          <ng-template #elseBlock>
-            <div class="text-truncate pr-2" style="max-width: 200px"
-                 [title]="getValue(row, column.path)">{{getValue(row, column.path)}}</div>
-          </ng-template>
-        </td>
-        <td style="width: 10%">
-          <button class="btn btn-danger btn-sm float-end" type="button" (click)="remove(row.id)">
-            <i class="bi bi-trash"></i>
-            <span class="d-none d-xl-inline-block">Remove</span>
-          </button>
-        </td>
-      </tr>
+        <tr
+          *ngFor="let row of table.rows; let i = index"
+          cdkDrag
+          cdkDragLockAxis="y"
+          [cdkDragBoundary]="hasManyDList"
+        >
+          <td>
+            <ng-container *ngIf="to?.hideDragHandle === true">
+              <button type="button" class="btn btn-sm" (click)="moveUp(i)">
+                <i class="bi bi-caret-up-fill"></i>
+              </button>
+              <button type="button" class="btn btn-sm" (click)="moveDown(i)">
+                <i class="bi bi-caret-down-fill"></i>
+              </button>
+            </ng-container>
+            <div class="pointer-grab" cdkDragHandle *ngIf="!to?.hideDragHandle">
+              <i class="bi bi-list"></i>
+            </div>
+          </td>
+          <td *ngFor="let column of table.columns">
+            <ng-container
+              *ngIf="column?.translatable; then thenBlock; else elseBlock"
+            ></ng-container>
+            <ng-template #thenBlock>
+              <div
+                class="text-truncate pr-2"
+                style="max-width: 200px"
+                [title]="table.getTranslatedValue(getValue(row, column.path))"
+              >
+                {{ table.getTranslatedValue(getValue(row, column.path)) }}
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div
+                class="text-truncate pr-2"
+                style="max-width: 200px"
+                [title]="getValue(row, column.path)"
+              >
+                {{ getValue(row, column.path) }}
+              </div>
+            </ng-template>
+          </td>
+          <td style="width: 15%">
+            <div class="btn-group float-end">
+              <button
+                class="btn btn-success btn-sm"
+                type="button"
+                (click)="edit(row)"
+              >
+                <i class="bi bi-pencil me-1"></i>
+                <span class="d-none d-xl-inline-block">Edit</span>
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                type="button"
+                (click)="remove(row.id)"
+              >
+                <i class="bi bi-trash me-1"></i>
+                <span class="d-none d-xl-inline-block">Remove</span>
+              </button>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
