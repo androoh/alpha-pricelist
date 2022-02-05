@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FieldArrayType} from '@ngx-formly/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-repeat',
@@ -20,9 +20,20 @@ export class RepeatComponent extends FieldArrayType {
   preview(event: any  ,i: number) {
     event.preventDefault();
     event.stopPropagation();
+    const formElement: HTMLFormElement = document.createElement('form');
+    formElement.setAttribute('target', '_blank');
+    formElement.setAttribute('method', 'POST');
+    formElement.setAttribute('action', environment.apiBaseURL + this.to?.preview);
+    const inputElement: HTMLInputElement = document.createElement('input');
+    inputElement.setAttribute('type', 'hidden');
+    inputElement.setAttribute('name', 'content');
+    formElement.appendChild(inputElement);
     const treeItem = this.formControl.at(i).value;
     if (treeItem !== null && this.to?.preview) {
-      window.open(environment.apiBaseURL + this.to?.preview + '?content=' + encodeURIComponent(JSON.stringify(treeItem)), '_blank')?.focus();
+      inputElement.value = JSON.stringify(treeItem);
+      document.body.appendChild(formElement);
+      formElement.submit();
+      formElement.remove();
     }
   }
 }

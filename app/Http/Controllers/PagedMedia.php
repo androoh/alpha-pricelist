@@ -55,7 +55,7 @@ class PagedMedia extends Controller
         $showCropBorders = $showCropBorders === 'true';
         $showCross = $request->query('showCross');
         $showCross = $showCross === 'true';
-        $treeItem = $request->query('content', null);
+        $treeItem = $request->input('content', null);
         $treeItem = json_decode($treeItem, true);
         config(['app.template.locale' => $locale]);
         return view('category-preview', [

@@ -31,6 +31,6 @@ Route::post('/files', [\App\Http\Controllers\File::class, 'uploadFile']);
 Route::get('/files/{id}', [\App\Http\Controllers\File::class, 'getFileById'])->name('get_file_by_id');
 Route::get('/files/n/{filename}', [\App\Http\Controllers\File::class, 'getFileByFilename'])->name('get_file_by_name');
 Route::get('/html', [\App\Http\Controllers\PagedMedia::class, 'html']);
-Route::get('/category/html', [\App\Http\Controllers\PagedMedia::class, 'category']);
+Route::post('/category/html', [\App\Http\Controllers\PagedMedia::class, 'category']);
 Route::get('/prices/{priceListId}', [\App\Http\Controllers\Prices::class, 'index']);
 Route::put('/prices/{priceListId}', [\App\Http\Controllers\Prices::class, 'store']);
