@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\PriceList;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -43,5 +44,33 @@ class PagedMedia extends Controller
             'showCropBorders' => $showCropBorders,
             'showCross' => $showCross
         ]);
+    }
+
+    public function category(Request $request)
+    {
+        $locale = $request->query('locale', config('app.locale'));
+        $pageSize = $request->query('pageSize', 'A4');
+        $pageOrientation = $request->query('pageOrientation', 'portrait');
+        $showCropBorders = $request->query('showCropBorders');
+        $showCropBorders = $showCropBorders === 'true';
+        $showCross = $request->query('showCross');
+        $showCross = $showCross === 'true';
+        $treeItem = $request->query('content', null);
+        $treeItem = json_decode($treeItem, true);
+        config(['app.template.locale' => $locale]);
+        return view('category-preview', [
+            'priceList' => null,
+            'treeItem' => $treeItem,
+            'locale' => $locale,
+            'pageSize' => $pageSize,
+            'pageOrientation' => $pageOrientation,
+            'showCropBorders' => $showCropBorders,
+            'showCross' => $showCross
+        ]);
+    }
+
+    public function opetionSection(Request $request)
+    {
+
     }
 }

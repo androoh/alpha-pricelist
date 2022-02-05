@@ -8,9 +8,6 @@
         $width = data_get($photo, 'width', null);
         $height = data_get($photo, 'height', null);
         @endphp
-        @if($url)
-        <div class="photo-gallery-item" style="@if($width)width:{{$width}} !important;@endif @if($height)height:{{$height}} !important;@endif background-image: url('/imgc/a4mw/{{$url}}');">
-        </div>
-        @endif
+        @include('render-image', ['photo' => $photo, 'class' => ['w-100', 'd-block']])
     @endforeach
 </div>

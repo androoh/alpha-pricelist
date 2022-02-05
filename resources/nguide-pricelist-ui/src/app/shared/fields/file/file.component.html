@@ -80,6 +80,20 @@
           />
         </label>
       </div>
+      <div class="row">
+        <label class="form-label col">
+          Type
+          <select [(ngModel)]="item['type']" class="form-select form-select-sm">
+            <option *ngFor="let type of displayType" [ngValue]="type.value">{{type.label}}</option>
+          </select>
+        </label>
+        <label class="form-label col" *ngIf="item['type'] === 'cropped'">
+          Position
+          <select [(ngModel)]="item['position']" class="form-select form-select-sm">
+            <option *ngFor="let position of positions" [ngValue]="position">{{position}}</option>
+          </select>
+        </label>
+      </div>
     </div>
     <div class="gallery-image-name">{{ item?.name }}</div>
     <div class="btn-group w-100">

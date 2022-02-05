@@ -11,6 +11,9 @@
           <button type="button" class="btn btn-danger btn-sm float-end" (click)="remove(i)"><i class="bi bi-trash"></i>
             Remove
           </button>
+          <button *ngIf="to.preview" type="button" class="btn btn-success btn-sm float-end me-3" (click)="preview($event, i)"><i class="bi bi-eye"></i>
+            Preview
+          </button>
         </div>
         <formly-field [field]="field"></formly-field>
       </accordion-group>

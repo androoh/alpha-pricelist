@@ -40,15 +40,15 @@
             <tr>
                 <td style="width: 40%; vertical-align: top;">
                     @php
-                        $mainPhotoUrl = data_get($product, 'mainProductFields.main_photo.0.name', false);
+                        $mainPhoto = data_get($product, 'mainProductFields.main_photo.0', false);
                         $mainPhotoInfoNote = translateFromPath($product, 'mainProductFields.main_photo_info_note', false);
                         $infoNote = translateFromPath($product, 'mainProductFields.info_note', false);
                         $clientSuply = translateFromPath($product, 'mainProductFields.client_suply', false);
                         $awardsPhotos = data_get($product, 'mainProductFields.awards_photos', []) ?? [];
                     @endphp
-                    @if($mainPhotoUrl)
+                    @if($mainPhoto)
                         <div class="main-photo w-100 p-4">
-                            <img src="/imgc/a4mw/{{$mainPhotoUrl}}" class="d-block w-100"/>
+                            @include('render-image', ['photo' => $mainPhoto, 'class' => ['w-100', 'd-block']])
                             @if($mainPhotoInfoNote)
                                 <div class="info-note">{{$mainPhotoInfoNote}}</div>
                             @endif

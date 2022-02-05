@@ -9849,11 +9849,6 @@
     background-color: white;
     margin: 10px auto;
   }
-
-  .pagedjs_page {
-    margin: 10px auto;
-    background-color: white;
-  }
 }
 body, html, ul, p {
   font-family: "Rajdhani", sans-serif;
@@ -10668,4 +10663,11 @@ ul {
   background-size: 100%;
   width: 100%;
   min-height: 50pt;
+}
+
+.img-cropped {
+  min-height: 100pt;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }

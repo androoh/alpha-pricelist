@@ -26,6 +26,22 @@ export interface ImageResponse {
 export class FileComponent extends FieldType implements OnInit {
   public uploader: FileUploader;
   public currentValue: ImageResponse[] = [];
+  public displayType: any[] = [
+    {value: 'img', label: 'Full Image'},
+    {value: 'cropped', label: 'Cropped Image'}
+  ];
+
+  public positions: any[] = [
+    'left top',
+    'left center',
+    'left bottom',
+    'right top',
+    'right center',
+    'right bottom',
+    'center top',
+    'center center',
+    'center bottom',
+  ];
 
   constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
     super();

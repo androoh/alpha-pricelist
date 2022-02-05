@@ -393,6 +393,7 @@ class PriceList extends ResourceAbstract
                         'templateOptions' => [
                             'label' => 'Categories section',
                             'addText' => 'Add Category Section',
+                            'preview' => 'category/html'
                         ],
                         'fieldArray' => new FormlyFieldConfig([
                             'fieldGroup' => [
