@@ -10152,6 +10152,9 @@ table.options-table .title-row {
 .packaging-transport {
   width: 100%;
 }
+.packaging-transport .img-cropped {
+  margin: 0 auto;
+}
 .packaging-transport .packaging-transport-item .packaging-transport-title {
   background: #4d545e;
   background: linear-gradient(90deg, #4d545e 48%, white 100%);
