@@ -44,7 +44,7 @@ class FormlyAbstract
                 }
             }
         }
-        if (isset($data['type'])) {
+        if (isset($data['key'])) {
             $data['path'] = $path;
         }
         return $data;

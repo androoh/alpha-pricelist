@@ -7,6 +7,7 @@ import {CreateEditResponse, ResourcesResponse, ResourcesService} from '../../sha
 import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
 import {BehaviorSubject} from 'rxjs';
+import {FormlyFieldConfigCustom} from '../../shared/formly-field-config-custom';
 
 @Component({
   selector: 'app-edit',
@@ -22,7 +23,7 @@ export class EditComponent implements OnInit {
   languageControl = new FormControl('');
   options: FormlyFormOptions = {};
   model: any = {};
-  fields: FormlyFieldConfig[] | null = [];
+  fields: FormlyFieldConfigCustom[] | null = [];
   language = 'en';
   locales: any[] = [];
   defaultLocale = 'nl';
@@ -66,6 +67,7 @@ export class EditComponent implements OnInit {
               this.languageControl.setValue(this.defaultLocale);
               this.model = response.data || {};
               this.fields = this.mapFields(response.schema, this.languageControl.value);
+              console.log(this.fields);
             });
           } else {
             this.resourcesService.getCreateResourceSchema(this.resourceName).subscribe((response: CreateEditResponse) => {
@@ -118,6 +120,8 @@ export class EditComponent implements OnInit {
         }
         f.wrappers = [...(f.wrappers || []), 'translatable'];
       }
+      f.resourceId = this.resourceId;
+      f.resourceName = this.resourceName;
       f.templateOptions['defaultLocale'] = this.defaultLocale;
       return f;
     });

@@ -469,7 +469,6 @@ table.options-table {
                 content: "................................................";
                 float: left;
                 width: 0;
-                padding-left: 5pt;
                 letter-spacing: 2pt;
                 font-size: 10pt;
             }
@@ -479,6 +478,7 @@ table.options-table {
                 text-decoration: none;
                 color: #97999C;
                 background-color: white;
+                padding-right: 7pt;
 
                 &::after {
                     position: absolute;
@@ -514,6 +514,7 @@ table.options-table {
 }
 
 .first-page {
+    page: firstPage;
     position: relative;
     color: white;
     font-size: 38pt;
@@ -535,9 +536,7 @@ table.options-table {
     }
 }
 
-@page :first {
-    margin: 0;
-    padding: 0;
+@page {
 }
 
 @page categoryPageLeft {
@@ -551,15 +550,21 @@ table.options-table {
 }
 
 @page secondPage {
-
+    margin: 36pt;
 }
 
 @page iconsPageLeft {
     break-before: left;
+    margin: 36pt;
 }
 
 @page iconsPageRight {
     break-before: right;
+    margin: 36pt;
+}
+
+@page firstPage {
+    margin:0;
 }
 
 @page tocPage {
@@ -575,6 +580,7 @@ table.options-table {
 }
 
 @page productPage {
+    margin: 36pt;
     margin-top: 50pt;
     margin-bottom: 70pt;
     padding-bottom: 5pt;
@@ -646,6 +652,7 @@ table.options-table {
 }
 
 @page productOptionsPage {
+    margin: 36pt;
     margin-top: 50pt;
     margin-bottom: 70pt;
     padding-bottom: 5pt;

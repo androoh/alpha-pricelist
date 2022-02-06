@@ -51,6 +51,7 @@ export class PreviewComponent implements OnInit {
     'landscape'
   ]
   model: any = {};
+  mainUrl: string = '';
   form: FormGroup = new FormGroup({
     'locale': new FormControl(''),
     'pageSize': new FormControl('A4'),
@@ -79,8 +80,10 @@ export class PreviewComponent implements OnInit {
             this.resourcesService.getEditResourceSchema(this.resourceName, this.priceListId).subscribe((response: CreateEditResponse) => {
               this.defaultLocale = response.defaultLocale;
               this.form.get('locale')?.setValue(this.defaultLocale);
-              this.model = response.data;
+              this.model = response?.data;
               this.locales = this.mapLocales(response.locales, this.model?.language || []);
+              this.mainUrl = environment.apiBaseURL + 'resources/' + this.resourceName + '/' + this.priceListId + '/html?path=&template=pricelist';
+              this.updateTemplateUrl(this.form.value);
             });
           }
         });
@@ -88,26 +91,27 @@ export class PreviewComponent implements OnInit {
     });
     this.form.valueChanges.subscribe((data: any) => {
       if (data) {
-        const parameters = {
-          locale: data?.locale || 'nl',
-          pageSize: data?.pageSize || 'A4',
-          showCropBorders: data?.showCropBorders || false,
-          showCross: data?.showCross || false,
-          pageOrientation: data?.pageOrientation || 'portrait'
-        };
-        this.updateTemplateUrl(parameters);
+        this.updateTemplateUrl(data);
       }
     });
   }
 
-  updateTemplateUrl(parameters: any): void {
+  updateTemplateUrl(data: any): void {
+    const parameters: any = {
+      locale: data?.locale || 'nl',
+      pageSize: data?.pageSize || 'A4',
+      showCropBorders: data?.showCropBorders || false,
+      showCross: data?.showCross || false,
+      pageOrientation: data?.pageOrientation || 'portrait'
+    };
     const options = [];
     this.iframeLoaded = false;
     for (const key in parameters) {
       options.push(key + '=' + parameters[key]);
     }
     this.ref.reattach();
-    this.templateUrl = environment.apiBaseURL + 'html?' + options.join('&');
+
+    this.templateUrl = this.mainUrl + '&' + options.join('&');
   }
 
 

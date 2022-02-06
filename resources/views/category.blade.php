@@ -6,13 +6,17 @@ if ($categoryId) {
 }
 @endphp
 @if ($category)
-    <div class="category-page-left"
-        style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'left_page_photo.0.name') }}')">
-    </div>
-    <div class="category-page-right"
-        style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'right_page_photo.0.name') }}')">
-        <div class="title">@t($treeItem, 'title')</div>
-    </div>
+    @if (data_get($treeItem, 'left_page_photo.0.name'))
+        <div class="category-page-left"
+            style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'left_page_photo.0.name') }}')">
+        </div>
+    @endif
+    @if (data_get($treeItem, 'right_page_photo.0.name'))
+        <div class="category-page-right"
+            style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'right_page_photo.0.name') }}')">
+            <div class="title">@t($treeItem, 'title')</div>
+        </div>
+    @endif
     @foreach ($treeItem['main_products'] as $mainProduct)
         @php
             $product = null;
@@ -21,9 +25,12 @@ if ($categoryId) {
                 $product = \App\Models\Product::find($productId);
             }
         @endphp
-        @include('product', ['categoryId' => $categoryId, 'product' => $product, 'priceList' => $priceList, 'category'
+        @include('product', ['treeItem' => $treeItem, 'categoryId' => $categoryId, 'product' => $product, 'resourceData'
+        => $resourceData, 'category'
         => $category])
     @endforeach
-    @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' =>
-    data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+    <div class="product-page">
+        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' =>
+        data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($resourceData, 'prices', [])])
+    </div>
 @endif

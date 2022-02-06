@@ -2,13 +2,14 @@ import {Component} from '@angular/core';
 import {FieldArrayType} from '@ngx-formly/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { environment } from 'src/environments/environment';
+import {FormlyFieldConfigCustom} from '../../formly-field-config-custom';
 
 @Component({
   selector: 'app-repeat',
   templateUrl: './repeat.component.html',
   styleUrls: ['./repeat.component.scss']
 })
-export class RepeatComponent extends FieldArrayType {
+export class RepeatComponent extends FieldArrayType<FormlyFieldConfigCustom> {
   drop(event: CdkDragDrop<string[]>) {
     if (this.field.fieldGroup) {
       const currentValue = this.formControl.value;
@@ -17,23 +18,14 @@ export class RepeatComponent extends FieldArrayType {
       this.formControl.setValue(currentValue);
     }
   }
+
+
   preview(event: any  ,i: number) {
     event.preventDefault();
     event.stopPropagation();
-    const formElement: HTMLFormElement = document.createElement('form');
-    formElement.setAttribute('target', '_blank');
-    formElement.setAttribute('method', 'POST');
-    formElement.setAttribute('action', environment.apiBaseURL + this.to?.preview);
-    const inputElement: HTMLInputElement = document.createElement('input');
-    inputElement.setAttribute('type', 'hidden');
-    inputElement.setAttribute('name', 'content');
-    formElement.appendChild(inputElement);
-    const treeItem = this.formControl.at(i).value;
-    if (treeItem !== null && this.to?.preview) {
-      inputElement.value = JSON.stringify(treeItem);
-      document.body.appendChild(formElement);
-      formElement.submit();
-      formElement.remove();
-    }
+    let path = this.field.path.join('.');
+    path += '.' + i;
+    const url = environment.apiBaseURL + 'resources/' + this.field.resourceName + '/' + this.field.resourceId + '/html?path=' + path + '&template=' + this.to.preview;
+    window.open(url, '_blank')?.focus();
   }
 }

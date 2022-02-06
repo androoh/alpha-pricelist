@@ -10289,7 +10289,6 @@ table.options-table .title-row {
   content: "................................................";
   float: left;
   width: 0;
-  padding-left: 5pt;
   letter-spacing: 2pt;
   font-size: 10pt;
 }
@@ -10298,6 +10297,7 @@ table.options-table .title-row {
   text-decoration: none;
   color: #97999C;
   background-color: white;
+  padding-right: 7pt;
 }
 .toc-page .category-section .category-item a::after {
   position: absolute;
@@ -10326,6 +10326,7 @@ table.options-table .title-row {
 }
 
 .first-page {
+  page: firstPage;
   position: relative;
   color: white;
   font-size: 38pt;
@@ -10341,10 +10342,7 @@ table.options-table .title-row {
   font-weight: lighter;
 }
 
-@page :first {
-  margin: 0;
-  padding: 0;
-}
+@page {}
 @page categoryPageLeft {
   margin: 0;
   padding: 0;
@@ -10353,14 +10351,21 @@ table.options-table .title-row {
   margin: 0;
   padding: 0;
 }
-@page secondPage {}
+@page secondPage {
+  margin: 36pt;
+}
 @page iconsPageLeft {
   -moz-column-break-before: left;
        break-before: left;
+  margin: 36pt;
 }
 @page iconsPageRight {
   -moz-column-break-before: right;
        break-before: right;
+  margin: 36pt;
+}
+@page firstPage {
+  margin: 0;
 }
 @page tocPage {
   margin-top: 0;
@@ -10371,6 +10376,7 @@ table.options-table .title-row {
   @bottom-right-corner {}
 }
 @page productPage {
+  margin: 36pt;
   margin-top: 50pt;
   margin-bottom: 70pt;
   padding-bottom: 5pt;
@@ -10414,6 +10420,7 @@ table.options-table .title-row {
   }
 }
 @page productOptionsPage {
+  margin: 36pt;
   margin-top: 50pt;
   margin-bottom: 70pt;
   padding-bottom: 5pt;

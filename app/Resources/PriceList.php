@@ -238,7 +238,8 @@ class PriceList extends ResourceAbstract
                 'key' => 'firstPage',
                 'wrappers' => ['panel'],
                 'templateOptions' => [
-                    'label' => 'First page'
+                    'label' => 'First page',
+                    'preview' => 'first-page'
                 ],
                 'fieldGroup' => [
                     new FormlyFieldConfig([
@@ -255,7 +256,8 @@ class PriceList extends ResourceAbstract
                 'key' => 'secondPage',
                 'wrappers' => ['panel'],
                 'templateOptions' => [
-                    'label' => 'Second page'
+                    'label' => 'Second page',
+                    'preview' => 'second-page'
                 ],
                 'fieldGroup' => [
                     new FormlyFieldConfig([
@@ -288,10 +290,20 @@ class PriceList extends ResourceAbstract
                 ]
             ]),
             new FormlyFieldConfig([
+                'key' => 'tocPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Table of contents',
+                    'preview' => 'toc-page'
+                ],
+                'fieldGroup' => []
+            ]),
+            new FormlyFieldConfig([
                 'key' => 'iconsPage',
                 'wrappers' => ['panel'],
                 'templateOptions' => [
-                    'label' => 'Icons page'
+                    'label' => 'Icons page',
+                    'preview' => 'info-icons-page'
                 ],
                 'fieldGroup' => [
                     new FormlyFieldConfig([
@@ -365,35 +377,13 @@ class PriceList extends ResourceAbstract
                             'html' => true
                         ]
                     ]),
-//                    new FormlyFieldConfig([
-//                        'key' => 'categories_products',
-//                        'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY_CASCADE,
-//                        'templateOptions' => [
-//                            'main' => [
-//                                'label' => 'Categories',
-//                                'resource' => 'category',
-//                                'searchBy' => ['name.' . config('app.locale')],
-//                            ],
-//                            'child' => [
-//                                'label' => 'Main Products',
-//                                'resource' => 'product',
-//                                'searchBy' => ['name.' . config('app.locale'), 'sku'],
-//                                'relationKey' => 'mainProductFields.category',
-//                                'filter' => [
-//                                    'column' => 'type',
-//                                    'comparator' => '=',
-//                                    'value' => \App\Models\Product::PRODUCT_TYPE_MAIN
-//                                ]
-//                            ],
-//                        ]
-//                    ]),
                     new FormlyFieldConfig([
                         'key' => 'categories',
                         'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
                         'templateOptions' => [
                             'label' => 'Categories section',
                             'addText' => 'Add Category Section',
-                            'preview' => 'category/html'
+                            'preview' => 'category'
                         ],
                         'fieldArray' => new FormlyFieldConfig([
                             'fieldGroup' => [
@@ -414,6 +404,15 @@ class PriceList extends ResourceAbstract
                                         'label' => 'Title',
                                         'translatable' => true,
                                         'required' => true,
+                                    ]
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'footer_text',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                                    'templateOptions' => [
+                                        'label' => 'Footer text',
+                                        'translatable' => true,
+                                        'html' => true
                                     ]
                                 ]),
                                 new FormlyFieldConfig([
@@ -463,7 +462,8 @@ class PriceList extends ResourceAbstract
                 'key' => 'optionsAndAccessoriesPage',
                 'wrappers' => ['panel'],
                 'templateOptions' => [
-                    'label' => 'Options and Accessories page'
+                    'label' => 'Options and Accessories page',
+                    'preview' => 'options-accessories-page'
                 ],
                 'fieldGroup' => [
                     new FormlyFieldConfig([

@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>{{translateFromPath($priceList, 'name', 'Price List')}}</title>
+    <title>{{translateFromPath($resourceData, 'name', 'Price List')}}</title>
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
     <script>
@@ -321,8 +321,6 @@
     @yield('styles')
 </head>
 <body>
-<div id="documentContent">
     @yield('content')
-</div>
 </body>
 </html>

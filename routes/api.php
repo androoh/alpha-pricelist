@@ -24,6 +24,7 @@ Route::get('/resources/{resourceName}/info', [Resource::class, 'getResourceByNam
 Route::get('/resources/{resourceName}/list', [Resource::class, 'resourceList']);
 Route::get('/resources/{resourceName}', [Resource::class, 'create']);
 Route::get('/resources/{resourceName}/{id}', [Resource::class, 'edit']);
+Route::get('/resources/{resourceName}/{id}/html', [\App\Http\Controllers\PagedMedia::class, 'renderResource']);
 Route::post('/resources/{resourceName}', [Resource::class, 'store']);
 Route::put('/resources/{resourceName}/{id}', [Resource::class, 'update']);
 Route::delete('/resources/{resourceName}/{id}', [Resource::class, 'remove']);

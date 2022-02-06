@@ -1,5 +1,13 @@
 <accordion class="mt-2 mb-2" [isAnimated]="true">
-  <accordion-group [heading]="to.label">
+  <accordion-group>
+    <div class="clearfix" accordion-heading>
+      <div class="float-start">
+        <a>{{to.label}}</a>
+      </div>
+      <button *ngIf="to.preview" type="button" class="btn btn-success btn-sm float-end me-3" (click)="preview($event, i)"><i class="bi bi-eye"></i>
+        Preview
+      </button>
+    </div>
     <ng-container #fieldComponent></ng-container>
   </accordion-group>
 </accordion>

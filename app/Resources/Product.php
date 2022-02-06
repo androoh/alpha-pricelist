@@ -624,8 +624,9 @@ class Product extends ResourceAbstract
                 'key' => 'option_photo',
                 'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
                 'templateOptions' => [
-                    'label' => 'Option Photo',
-                    'accept' => ['image/*']
+                    'label' => 'Option Photos',
+                    'accept' => ['image/*'],
+                    'multiple' => true
                 ]
             ]),
             new FormlyFieldConfig([

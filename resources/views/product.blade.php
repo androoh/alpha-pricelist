@@ -1,7 +1,7 @@
 <div class="product-page" id="product-{{$product->getKey()}}">
     <div class="left-header">
         <div class="d-flex justify-content-start">
-            <div class="price-list-type">@t($priceList, 'firstPage.type', 'Trade')</div>
+            <div class="price-list-type">@t($resourceData, 'firstPage.type', 'Trade')</div>
             <div class="product-complexity ms-4">{{data_get($product, 'mainProductFields.complexity', 'Basic')}}</div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>
         </div>
@@ -19,20 +19,22 @@
     </div>
     <div class="product-page-footer-left product-page-footer">
         <div class="page-counter"></div>
-        <div class="footer-text-1">@t($priceList, 'mainProductsPage.footer_text_1', '')</div>
+        <div class="footer-text-1">@t($resourceData, 'mainProductsPage.footer_text_1', '')</div>
         <div class="footer-text-2">
-            <div>@t($priceList, 'mainProductsPage.footer_text_2', '')</div>
+            <div>@t($resourceData, 'mainProductsPage.footer_text_2', '')</div>
             <div>@t($product, 'mainProductFields.footer_notes', '')</div>
+            <div>@t($treeItem, 'footer_text', '')</div>
         </div>
-        <div class="footer-text-3">@t($priceList, 'mainProductsPage.footer_text_3', '')</div>
+        <div class="footer-text-3">@t($resourceData, 'mainProductsPage.footer_text_3', '')</div>
     </div>
     <div class="product-page-footer-right product-page-footer">
-        <div class="footer-text-1">@t($priceList, 'mainProductsPage.footer_text_1', '')</div>
+        <div class="footer-text-1">@t($resourceData, 'mainProductsPage.footer_text_1', '')</div>
         <div class="footer-text-2">
-            <div>@t($priceList, 'mainProductsPage.footer_text_2', '')</div>
+            <div>@t($resourceData, 'mainProductsPage.footer_text_2', '')</div>
             <div>@t($product, 'mainProductFields.footer_notes', '')</div>
+            <div>@t($treeItem, 'footer_text', '')</div>
         </div>
-        <div class="footer-text-3">@t($priceList, 'mainProductsPage.footer_text_3', '')</div>
+        <div class="footer-text-3">@t($resourceData, 'mainProductsPage.footer_text_3', '')</div>
         <div class="page-counter"></div>
     </div>
     <div class="page-body">
@@ -97,8 +99,8 @@
                 </td>
             </tr>
         </table>
-        @include('product-models', ['categoryId' => $categoryId, 'product' => $product, 'prices' => data_get($priceList, 'prices', [])])
-        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($priceList, 'prices', [])])
+        @include('product-models', ['categoryId' => $categoryId, 'product' => $product, 'prices' => data_get($resourceData, 'prices', [])])
+        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => $product,'productSections' => data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($resourceData, 'prices', [])])
         @include('product-models-packaging-transport', ['product' => $product])
         @if (count($awardsPhotos) > 0)
             <div class="awards-photots-section page-break-inside-avoid">
