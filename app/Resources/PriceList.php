@@ -671,6 +671,10 @@ class PriceList extends ResourceAbstract
                                             [
                                                 'label' => 'Display Description',
                                                 'value' => 'description'
+                                            ],
+                                            [
+                                                'label' => 'Display Title and Description',
+                                                'value' => 'title_description'
                                             ]
                                         ]
                                     ],

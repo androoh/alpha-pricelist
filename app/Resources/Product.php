@@ -395,6 +395,10 @@ class Product extends ResourceAbstract
                                                 [
                                                     'label' => 'Display Description',
                                                     'value' => 'description'
+                                                ],
+                                                [
+                                                    'label' => 'Display Title and Description',
+                                                    'value' => 'title_description'
                                                 ]
                                             ]
                                         ],

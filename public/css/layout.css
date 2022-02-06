@@ -10337,6 +10337,7 @@ table.options-table .title-row {
   bottom: 100pt;
   text-transform: uppercase;
   font-weight: bold;
+  width: 260pt;
 }
 .first-page .page-info .type {
   font-weight: lighter;

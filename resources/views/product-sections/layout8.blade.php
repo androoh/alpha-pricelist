@@ -61,6 +61,10 @@
                                 @case('title')
                                     @t($productOptionData, 'name', '')
                                     @break
+                                @case('title_description')
+                                    @t($productOptionData, 'name', '')<br/>
+                                    @t($productOptionData, 'optionProductFields.details', '')
+                                    @break
                                 @default
                                     @t($productOptionData, 'name', '')
                             @endswitch
