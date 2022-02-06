@@ -10152,7 +10152,7 @@ table.options-table .title-row {
 .packaging-transport {
   width: 100%;
 }
-.packaging-transport .img-cropped {
+.packaging-transport .packaging-transport-item .img-cropped {
   margin: 0 auto;
 }
 .packaging-transport .packaging-transport-item .packaging-transport-title {
