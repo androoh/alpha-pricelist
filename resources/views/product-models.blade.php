@@ -49,10 +49,8 @@
                     <td>
                         @if(isset($row[$column]) && $row[$column])
                             @foreach($row[$column] as $value)
-                                <div>{{data_get($value, 'info_value', '-')}}</div>
+                                <div>{{data_get($value, 'info_value', '')}}</div>
                             @endforeach
-                        @else
-                            -
                         @endif
                     </td>
                 @endforeach
