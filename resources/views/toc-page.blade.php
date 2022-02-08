@@ -13,7 +13,7 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
                 }
             @endphp
             @if ($category)
-                <div class="category-section mb-2 page-break-inside-avoid">
+                <div class="category-section mb-2">
                     <h3 class="category-title">@t($category, 'name', '')</h3>
                     @foreach ($treeItem['main_products'] as $mainProduct)
                         @php

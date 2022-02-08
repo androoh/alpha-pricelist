@@ -10277,13 +10277,12 @@ table.options-table .title-row {
 .toc-page {
   page: tocPage;
   color: #58595b;
-  padding-right: 10pt;
-  padding-left: 10pt;
 }
 .toc-page h1 {
   font-size: 24pt;
   border-bottom: 1pt #4D545E solid;
   margin-top: 0;
+  margin-bottom: 5pt;
 }
 .toc-page h1 strong {
   font-weight: bold;
@@ -10393,6 +10392,7 @@ table.options-table .title-row {
   margin-top: 0;
   margin-left: 30pt;
   margin-right: 20pt;
+  margin-bottom: 0;
   @top-right-corner {}
   @right-top {}
   @bottom-right-corner {}
