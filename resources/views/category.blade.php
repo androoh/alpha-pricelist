@@ -29,8 +29,13 @@ if ($categoryId) {
         => $resourceData, 'category'
         => $category])
     @endforeach
-    <div class="product-page">
-        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' =>
-        data_get($treeItem, 'product_options_sections', []), 'prices' => data_get($resourceData, 'prices', [])])
-    </div>
+    @php
+        $productSections = data_get($treeItem, 'product_options_sections', []) ?? [];
+    @endphp
+    @if (count($productSections) > 0)
+        <div class="product-page">
+            @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' =>
+            $productSections, 'prices' => data_get($resourceData, 'prices', [])])
+        </div>
+    @endif
 @endif
