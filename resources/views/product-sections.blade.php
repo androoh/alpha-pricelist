@@ -5,8 +5,9 @@
                 $productSectionTitle = translateFromPath($productSection, 'title', false);
                 $hash = md5($productSectionTitle);
                 $hideTitle = data_get($productSection, 'hideTitle', false);
+                $pageBreakBefore = data_get($productSection, 'pageBreakBefore', false);
             @endphp
-            <div class="product-section w-100 repeating-container" id="product-{{ $hash }}">
+            <div class="product-section w-100 repeating-container @if($pageBreakBefore) page-break-before @endif" id="product-{{ $hash }}">
                 @if ($productSectionTitle && !$hideTitle)
                     <div class="product-section-title text-center text-uppercase repeating-header">
                         {{ $productSectionTitle }}</div>

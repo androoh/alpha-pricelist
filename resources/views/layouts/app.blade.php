@@ -41,6 +41,7 @@
                     const lastChild = sourceBody[sourceBody.length - 1];
 
                     if (!firstChild) {
+                        console.log("blin", firstChild);
                         table.style.visibility = "hidden";
                         table.style.position = "absolute";
                         let lineSpacer = table.nextSibling;
@@ -51,11 +52,13 @@
                     }
 
                     if (firstChild && this.emptyRow(firstChild)) {
+                        console.log("first child", firstChild);
                         firstChild.style.visibility = "hidden";
                         firstChild.style.display = "none";
                     }
 
                     if (lastChild && this.emptyRow(lastChild)) {
+                        console.log("last child", firstChild);
                         lastChild.style.visibility = "hidden";
                         lastChild.style.display = "none";
                     }
@@ -66,11 +69,10 @@
             emptyRow(tr) {
                 let allTdsEmpty = true;
                 tr.querySelectorAll("td").forEach((td) => {
-                    if (td.innerHTML.trim().length > 0) {
+                    if (td.innerHTML.trim().length > 0 || td.querySelector('img')) {
                         allTdsEmpty = false;
                     }
                 });
-                console.log(allTdsEmpty, tr);
                 return allTdsEmpty;
             }
 
@@ -208,7 +210,7 @@
                 this.splitTablesRefs.forEach(ref => {
                     let table = pageElement.querySelector("[data-ref='" + ref + "']");
                     let sourceBody = table.querySelector(".repeating-container-body");
-                    if (!sourceBody || sourceBody.innerText.trim() === '') {
+                    if (!sourceBody || (sourceBody.textContent.trim() === '' && !sourceBody.querySelector('img'))) {
                         table.style.visibility = "hidden";
                         table.style.position = "absolute";
                         let lineSpacer = table.nextSibling;
