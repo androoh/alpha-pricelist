@@ -38,28 +38,8 @@
                             $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         <tr class="page-break-inside-avoid page-break-after-avoid">
-                            <td colspan="3" class="title-row">
-                                @switch($displayTitleType)
-                                    @case('photo')
-                                        @if ($photoUrl)
-                                            <img src="/imgc/a4mw/{{ $photoUrl }}" class="w-100 d-block mb-1" />
-                                        @else
-                                            @t($productOptionData, 'name', '')
-                                        @endif
-                                    @break
-                                    @case('description')
-                                        @t($productOptionData, 'optionProductFields.details', '')
-                                    @break
-                                    @case('title')
-                                        @t($productOptionData, 'name', '')
-                                    @break
-                                    @case('title_description')
-                                        @t($productOptionData, 'name', '')<br />
-                                        @t($productOptionData, 'optionProductFields.details', '')
-                                    @break
-                                    @default
-                                        @t($productOptionData, 'name', '')
-                                @endswitch
+                            <td colspan="3" class="title-row fw-bold">
+                                @t($productOptionData, 'name', '')
                             </td>
                         </tr>
                         <tr class="{{ $class }} page-break-inside-avoid">
