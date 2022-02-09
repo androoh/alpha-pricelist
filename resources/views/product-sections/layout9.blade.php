@@ -1,4 +1,4 @@
-<div class="layout-2 pt-2">
+<div class="layout-9 pt-2">
     @php
         $photoGallery = data_get($productSection, 'photo_gallery', []) ?? [];
     @endphp
@@ -17,16 +17,16 @@
             @if ($i === 1)
                 <tr>
             @endif
-            <td class="w-30">
-                <div class="mb-2 @if ($i === 1) pe-2 @endif @if ($i === 3) ps-2 @endif @if ($i === 2) ps-1 pe-1 @endif">
+            <td class="w-50">
+                <div class="mb-2 @if ($i === 1) pe-2 @endif @if ($i === 2) ps-2 @endif">
                     @include('render-image', ['photo' => $photo, 'class' => ['w-100', 'd-block']])
                 </div>
             </td>
-            @if ($i === 3 || $totalCount === count($photoGallery))
+            @if ($i === 2 || $totalCount === count($photoGallery))
                 </tr>
             @endif
             @php
-                if ($i === 3) {
+                if ($i === 2) {
                     $i = 0;
                 }
             @endphp

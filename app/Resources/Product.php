@@ -678,13 +678,18 @@ class Product extends ResourceAbstract
                 'img' => asset('images/resize_layout1.png')
             ],
             [
-                'label' => 'Only Photos 3/1',
-                'value' => 'layout2',
+                'label' => 'Only Photos 1/1',
+                'value' => 'layout4',
                 'img' => asset('images/resize_layout2.png')
             ],
             [
-                'label' => 'Only Photos - one column',
-                'value' => 'layout4',
+                'label' => 'Only Photos 2/1',
+                'value' => 'layout9',
+                'img' => asset('images/resize_layout2.png')
+            ],
+            [
+                'label' => 'Only Photos 3/1',
+                'value' => 'layout2',
                 'img' => asset('images/resize_layout2.png')
             ],
             [

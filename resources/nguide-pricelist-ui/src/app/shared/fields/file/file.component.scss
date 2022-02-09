@@ -3,6 +3,19 @@
 }
 .gallery {
   .gallery-item {
+    position: relative;
+    &:hover {
+      .btn-config {
+        display: block;
+      }
+    }
+
+    .btn-config {
+      display: none;
+      right: 5px;
+      top: 5px;
+      position: absolute
+    }
     .gallery-image {
       width: 100%;
       height: 100px;

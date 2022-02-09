@@ -87,7 +87,7 @@
                         <tr class="page-break-inside-avoid">
                     @endif
                     <td class="@if ($i === 1) pe-2 @endif @if ($i === 3) ps-2 @endif @if ($i === 2) ps-1 pe-1 @endif">
-                        <div class="photo-gallery-item">
+                        <div class="photo-gallery-item mb-2">
                             @include('render-image', ['photo' => $photo])
                         </div>
                     </td>

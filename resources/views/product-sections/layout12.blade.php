@@ -29,7 +29,7 @@
                     @endphp
                     <div class="photo-gallery">
                         @foreach ($photoGalleryUrls as $url)
-                            <div class="photo-gallery-item">
+                            <div class="photo-gallery-item mb-2">
                                 <div class="img"
                                     style="background-image: url('/imgc/a4mw/{{ $url }}')"></div>
                             </div>

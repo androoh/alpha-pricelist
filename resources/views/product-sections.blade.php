@@ -7,7 +7,7 @@
                 $hideTitle = data_get($productSection, 'hideTitle', false);
                 $pageBreakBefore = data_get($productSection, 'pageBreakBefore', false);
             @endphp
-            <div class="product-section w-100 repeating-container @if($pageBreakBefore) page-break-before @endif" id="product-{{ $hash }}">
+            <div class="product-section mb-4 w-100 repeating-container @if($pageBreakBefore) page-break-before @endif" id="product-{{ $hash }}">
                 @if ($productSectionTitle && !$hideTitle)
                     <div class="product-section-title text-center text-uppercase repeating-header">
                         {{ $productSectionTitle }}</div>
@@ -64,6 +64,10 @@
                         @break
                         @case('layout15')
                             @include('product-sections.layout15', ['productSection' => $productSection, 'prices' => $prices,
+                            'parentProduct' => $parentProduct])
+                        @break
+                        @case('layout9')
+                            @include('product-sections.layout9', ['productSection' => $productSection, 'prices' => $prices,
                             'parentProduct' => $parentProduct])
                         @break
                         @default

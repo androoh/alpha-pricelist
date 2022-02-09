@@ -26,6 +26,7 @@ export interface ImageResponse {
 export class FileComponent extends FieldType implements OnInit {
   public uploader: FileUploader;
   public currentValue: ImageResponse[] = [];
+  public expandConfig:Map<number, boolean> = new Map<number, boolean>();
   public displayType: any[] = [
     {value: 'img', label: 'Full Image'},
     {value: 'cropped', label: 'Cropped Image'}
@@ -38,6 +39,8 @@ export class FileComponent extends FieldType implements OnInit {
     'right top',
     'right center',
     'right bottom',
+    'top left',
+    'top right',
     'center top',
     'center center',
     'center bottom',
@@ -85,7 +88,20 @@ export class FileComponent extends FieldType implements OnInit {
   }
 
   onChange(data: any) {
+
   }
+  expandedConfig(i: number): void {
+    if (!this.expandConfig.has(i)) {
+        this.expandConfig.set(i, true);
+    } else {
+      this.expandConfig.set(i, !this.expandConfig.get(i));
+    }
+  }
+
+  configExpanded(i: number): boolean | undefined {
+    return this.expandConfig.get(i);
+  }
+
 
   getImageUrl(item: any): SafeStyle | null {
     if (item?.file?.rawFile) {

@@ -1,6 +1,6 @@
 <div class="layout-6">
     @foreach (data_get($productSection, 'product_option_sections', []) as $productOptionSection)
-        <div class="mb-1">
+        <div class="mb-1 page-break-inside-avoid">
             @php
                 $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
                 $photoGalleryUrls = [];
@@ -35,10 +35,10 @@
                             <tr class="page-break-inside-avoid">
                         @endif
                         <td style="width: {{ 100 / count($photoGalleryUrls) }}%" class="{{ $class }}">
-                            <div class="photo-gallery-item"
+                            <div class="photo-gallery-item mb-2"
                                 style="background-image: url('/imgc/a4mw/{{ $url }}');"></div>
                         </td>
-                        @if ($i === 3 || $totalCount === count($photoGalleryUrls))
+                        @if ($i === 2 || $totalCount === count($photoGalleryUrls))
                             </tr>
                         @endif
                         @php

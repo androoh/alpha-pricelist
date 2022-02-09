@@ -36,7 +36,7 @@
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">
                                 @endif
-                                <td class="@if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
+                                <td class="w-30 @if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)

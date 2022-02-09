@@ -44,14 +44,15 @@
   <div
     class="gallery-item mt-2 me-2"
     style="width: 25%"
-    *ngFor="let item of currentValue"
+    *ngFor="let item of currentValue; let i = index"
   >
+    <button *ngIf="to?.showConfig" type="button" class="btn btn-light btn-config" (click)="expandedConfig(i)"><i class="bi bi-gear-fill"></i></button>
     <div
       class="border gallery-image"
       [style.background-image]="getValueUrl(item)"
       [title]="item.name"
     ></div>
-    <div class="image-config" *ngIf="to?.showConfig">
+    <div class="image-config" *ngIf="to?.showConfig && configExpanded(i)">
       <div class="row mt-2">
         <label class="form-label col">
           Label
@@ -92,6 +93,16 @@
           <select [(ngModel)]="item['position']" class="form-select form-select-sm">
             <option *ngFor="let position of positions" [ngValue]="position">{{position}}</option>
           </select>
+        </label>
+      </div>
+      <div class="row" *ngIf="item['type'] === 'cropped'">
+        <label class="form-label col">
+          Background Size (width height, cover)
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            [(ngModel)]="item['backgroundSize']"
+          />
         </label>
       </div>
     </div>
