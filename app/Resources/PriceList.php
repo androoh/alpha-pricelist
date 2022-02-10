@@ -688,6 +688,14 @@ class PriceList extends ResourceAbstract
                                     ],
                                 ]),
                                 new FormlyFieldConfig([
+                                    'key' => 'photosSizeCover',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                    'templateOptions' => [
+                                        'label' => 'Display photos as cover'
+                                    ],
+                                    'hideExpression' => "field.parent.parent.parent.model.layout !== 'layout7' && field.parent.parent.parent.model.layout !== 'layout13'"
+                                ]),
+                                new FormlyFieldConfig([
                                     'key' => 'product_options',
                                     'type' => FormlyFieldConfig::FIELD_TYPE_HAS_MANY,
                                     'templateOptions' => [

@@ -10,6 +10,7 @@
                     $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
                     $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
                     $productOptions = data_get($productOptionSection, 'product_options', []);
+                    $photosSizeCover = data_get($productOptionSection, 'photosSizeCover', null);
                 @endphp
                 @foreach($productOptions as $productOption)
                     @php
@@ -40,7 +41,10 @@
                                     <div class="product-item mb-1">
                                         <div class="product-item-img"
                                              @if($productOptionPhotoUrl)
-                                             style="background-image: url('/imgc/a4mw/{{$productOptionPhotoUrl}}')"
+                                             style="
+                                             background-image: url('/imgc/a4mw/{{$productOptionPhotoUrl}}');
+                                             @if ($photosSizeCover) background-size: cover; @endif
+                                             "
                                             @endif
                                         ></div>
                                         <div class="product-item-title text-start">

@@ -422,6 +422,14 @@ class Product extends ResourceAbstract
                                     //     ],
                                     // ]),
                                     new FormlyFieldConfig([
+                                        'key' => 'photosSizeCover',
+                                        'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                                        'templateOptions' => [
+                                            'label' => 'Display photos as cover'
+                                        ],
+                                        'hideExpression' => "field.parent.parent.parent.model.layout !== 'layout7' && field.parent.parent.parent.model.layout !== 'layout13'"
+                                    ]),
+                                    new FormlyFieldConfig([
                                         'key' => 'info_note',
                                         'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                                         'templateOptions' => [
