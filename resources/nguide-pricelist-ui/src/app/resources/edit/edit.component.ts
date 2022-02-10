@@ -67,7 +67,6 @@ export class EditComponent implements OnInit {
               this.languageControl.setValue(this.defaultLocale);
               this.model = response.data || {};
               this.fields = this.mapFields(response.schema, this.languageControl.value);
-              console.log(this.fields);
             });
           } else {
             this.resourcesService.getCreateResourceSchema(this.resourceName).subscribe((response: CreateEditResponse) => {

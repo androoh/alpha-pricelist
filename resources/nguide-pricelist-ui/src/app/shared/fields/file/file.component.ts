@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FieldType} from '@ngx-formly/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
@@ -21,7 +21,8 @@ export interface ImageResponse {
 @Component({
   selector: 'app-file',
   templateUrl: './file.component.html',
-  styleUrls: ['./file.component.scss']
+  styleUrls: ['./file.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileComponent extends FieldType implements OnInit {
   public uploader: FileUploader;
