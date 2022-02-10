@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FieldType, FormlyFieldConfig} from '@ngx-formly/core';
 import {ColumnMode} from '@swimlane/ngx-datatable';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
@@ -19,8 +19,7 @@ import {Subscription} from "rxjs";
     TableService,
     ResourcesService,
   ],
-  styleUrls: ['./has-many-cascade.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./has-many-cascade.component.scss']
 })
 export class HasManyCascadeComponent extends FieldType implements OnInit, OnDestroy {
   private bsModalRef: BsModalRef | null = null;

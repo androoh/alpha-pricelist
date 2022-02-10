@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {FieldArrayType} from '@ngx-formly/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { environment } from 'src/environments/environment';
@@ -7,8 +7,7 @@ import {FormlyFieldConfigCustom} from '../../formly-field-config-custom';
 @Component({
   selector: 'app-repeat',
   templateUrl: './repeat.component.html',
-  styleUrls: ['./repeat.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./repeat.component.scss']
 })
 export class RepeatComponent extends FieldArrayType<FormlyFieldConfigCustom> {
   drop(event: CdkDragDrop<string[]>) {
