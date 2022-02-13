@@ -39,7 +39,7 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
     }
 }
 @endphp
-<div class="product-options-page" id="delivery-installation">
+<div class="product-options-page page-break-before" id="delivery-installation">
     <div class="left-header">
     </div>
     <div class="right-header">
