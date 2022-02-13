@@ -24,4 +24,5 @@
         @include('category', ['treeItem' => $treeItem])
     @endforeach
     @include('options-accessories-page', ['resourceData' => $resourceData])
+    @include('delivery-installation', ['resourceData' => $resourceData])
 @endsection

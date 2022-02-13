@@ -113,7 +113,7 @@ class Product extends ResourceAbstract
                                 ],
                             ]
                         ],
-                    ]),
+                    ])
                 ]
             ]),
             new FormlyFieldConfig([
@@ -285,6 +285,32 @@ class Product extends ResourceAbstract
                         ]
                     ]
                 ],
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'price_options',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Price options'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'has_instalation_delivery_costs',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                        'defaultValue' => true,
+                        'templateOptions' => [
+                            'label' => 'Has Installation and Delivery Costs'
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'delivery_cost_details',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Delivery cost\'s details',
+                            'translatable' => true,
+                        ],
+                        'hideExpression' => "!model.has_instalation_delivery_costs",
+                    ]),
+                ]
             ]),
             new FormlyFieldConfig([
                 'key' => 'product_models',

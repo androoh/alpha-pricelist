@@ -19,6 +19,7 @@ import {TranslatableComponent} from '../shared/wrappers/translatable/translatabl
 import {ReactiveFormsModule} from '@angular/forms';
 import {InputComponent} from '../shared/fields/input/input.component';
 import {HasManyCascadeComponent} from "../shared/fields/has-many-cascade/has-many-cascade.component";
+import { CustomInputComponent } from '../shared/fields/custom-input/custom-input.component';
 
 const routes: Routes = [
   {path: ':name', component: ListComponent},
@@ -54,6 +55,7 @@ const routes: Routes = [
         { name: 'hasManyCascade', component: HasManyCascadeComponent },
         { name: 'translatable-textarea', component: TextareaComponent},
         { name: 'translatable-input', component: InputComponent},
+        { name: 'input', component: CustomInputComponent},
       ],
     }),
   ]

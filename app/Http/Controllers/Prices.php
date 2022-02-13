@@ -26,11 +26,29 @@ class Prices extends Controller
             foreach (data_get($treeItem, 'main_products', []) as $product) {
                 if ($productId = data_get($product, 'id', false)) {
                     if ($productModel = \App\Models\Product::find($productId)) {
+                        $priceKey = getPriceKey($categoryId, $productModel->getKey());
+                        $name = [];
+                        if ($categoryName) {
+                            $name[] = $categoryName;
+                        }
+                        $name[] = translateFromPath($productModel, 'name', '');
+                        $hasInstalationDeliveryCosts = data_get($productModel,'mainProductFields.price_options.has_instalation_delivery_costs', false);
+                        if ($hasInstalationDeliveryCosts) {
+                            $result[$priceKey] = [
+                                'id' => $priceKey,
+                                'name' =>  implode(' -> ', $name),
+                                'sku' => $productModel->sku,
+                                'type' => $productModel->type,
+                                'price' => [
+                                    'delivery_price' => data_get($prices, $priceKey . '.delivery_price', 0),
+                                    'installation_price' => data_get($prices, $priceKey . '.installation_price', 0)
+                                ],
+                            ];
+                        }
                         if ($productModel->child_product_ids) {
                             $childProducts = Product::find($productModel->child_product_ids);
                             foreach ($childProducts as $childProduct) {
                                 $priceKey = getPriceKey($categoryId, $productModel->getKey(), $childProduct->getkey());
-                                $priceId = getPriceKey($childProduct->getkey(), $productModel->getKey(), $categoryId);
                                 if (!isset($result[$priceKey])) {
                                     $name = [];
                                     if ($categoryName) {
@@ -43,11 +61,10 @@ class Prices extends Controller
                                         'name' =>  implode(' -> ', $name),
                                         'sku' => $childProduct->sku,
                                         'type' => $childProduct->type,
-                                        // 'price' => [
-                                        //     'value' => data_get($prices, $product->getKey() . '#' . $childProduct->getkey(), 0),
-                                        //     'onDemand' => false,
-                                        // ],
-                                        'price' => data_get($prices, $priceKey, 0)
+                                        'price' => [
+                                            'value' => data_get($prices, $priceKey . '.value', 0),
+                                            'onDemand' => data_get($prices, $priceKey . '.onDemand', false)
+                                        ],
                                     ];
                                 }
                             }
@@ -60,6 +77,26 @@ class Prices extends Controller
         }
         $productSections = data_get($priceList, 'optionsAndAccessoriesPage.product_options_sections', false);
         $this->getFromProductSections($result, null, $productSections, $prices);
+
+        $additionalCosts = data_get($priceList, 'additionalCostsPage.additional_costs_items', []);
+        foreach ($additionalCosts as $additionalCost) {
+            $name = [];
+            $name[] = 'Additional costs';
+            $name[] = translateFromPath($additionalCost, 'name', '');
+            $priceKey = data_get($additionalCost, 'id', false);
+            if ($priceKey) {
+                $result[$priceKey] = [
+                    'id' => $priceKey,
+                    'name' => implode(' -> ', $name),
+                    'sku' => $priceKey,
+                    'type' => 'additional_cost',
+                    'price' => [
+                        'value' => data_get($prices, $priceKey . '.value', 0),
+                        'onDemand' => data_get($prices, $priceKey . '.onDemand', false)
+                    ],
+                ];
+            }
+        }
         return response([
             'defaultLocale' => config('app.locale'),
             'data' => array_values($result)
@@ -88,10 +125,10 @@ class Prices extends Controller
                             'name' =>  implode(' -> ', $name),
                             'sku' => $productOptionData->sku,
                             'type' => $productOptionData->type,
-                            // 'price' => [
-                            //     'value' => data_get($prices, $productOptionData->getkey(), 0),
-                            //     'onDemand' => false,
-                            // ],
+                            'price' => [
+                                'value' => data_get($prices, $priceKey . '.value', 0),
+                                'onDemand' => data_get($prices, $priceKey . '.onDemand', false)
+                            ],
                             'price' => data_get($prices, $priceKey, 0)
                         ];
                     }

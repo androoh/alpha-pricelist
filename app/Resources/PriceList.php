@@ -519,6 +519,141 @@ class PriceList extends ResourceAbstract
                     $this->getProductOptionSections()
                 ]
             ]),
+            new FormlyFieldConfig([
+                'key' => 'deliveryInstallationPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Delivery and Installation',
+                    'preview' => 'delivery-installation'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'delivery_details',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Delivery details',
+                            'translatable' => true,
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'priceType',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                        'defaultValue' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_UNIT,
+                        'templateOptions' => [
+                            'label' => 'Pricing Type',
+                            'required' => true,
+                            'options' => [
+                                [
+                                    'label' => 'Price per unit',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_UNIT
+                                ],
+                                [
+                                    'label' => 'Price per squared meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_SQM
+                                ],
+                                [
+                                    'label' => 'Price per linear meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_LM
+                                ],
+                                [
+                                    'label' => 'Price per running meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_RM
+                                ],
+                                [
+                                    'label' => 'Price per kg',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_KG
+                                ],
+                            ]
+                        ],
+                    ]),
+                ]
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'additionalCostsPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Additional costs',
+                    'preview' => 'additional-costs'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'title',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Title',
+                            'translatable' => true,
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'info_note',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Info note',
+                            'translatable' => true,
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'priceType',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_SELECT,
+                        'defaultValue' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_UNIT,
+                        'templateOptions' => [
+                            'label' => 'Pricing Type',
+                            'required' => true,
+                            'options' => [
+                                [
+                                    'label' => 'Price per unit',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_UNIT
+                                ],
+                                [
+                                    'label' => 'Price per squared meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_SQM
+                                ],
+                                [
+                                    'label' => 'Price per linear meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_LM
+                                ],
+                                [
+                                    'label' => 'Price per running meter',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_RM
+                                ],
+                                [
+                                    'label' => 'Price per kg',
+                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_KG
+                                ],
+                            ]
+                        ],
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'additional_costs_items',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_REPEAT,
+                        'templateOptions' => [
+                            'label' => 'Additional costs items',
+                            'addText' => 'Add Additional Cost',
+                        ],
+                        'fieldArray' => new FormlyFieldConfig([
+                            'fieldGroup' => [
+                                new FormlyFieldConfig([
+                                    'key' => 'id',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                    'templateOptions' => [
+                                        'label' => '',
+                                        'type' => 'hidden'
+                                    ],
+                                ]),
+                                new FormlyFieldConfig([
+                                    'key' => 'name',
+                                    'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                                    'templateOptions' => [
+                                        'label' => 'Name',
+                                        'translatable' => true,
+                                        'required' => true
+                                    ]
+                                ])
+                            ]
+                        ])
+                    ])
+                ]
+            ])
 
         ];
     }

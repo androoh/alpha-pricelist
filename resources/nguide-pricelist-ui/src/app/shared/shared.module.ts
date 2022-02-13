@@ -31,6 +31,7 @@ import {TranslatableComponent} from './wrappers/translatable/translatable.compon
 import {InputComponent} from './fields/input/input.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { HasManyCascadeComponent } from './fields/has-many-cascade/has-many-cascade.component';
+import { CustomInputComponent } from './fields/custom-input/custom-input.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HasManyCascadeComponent } from './fields/has-many-cascade/has-many-casc
     DropdownWrapperComponent,
     TranslatableComponent,
     InputComponent,
-    HasManyCascadeComponent
+    HasManyCascadeComponent,
+    CustomInputComponent
   ],
   imports: [
     CommonModule,
@@ -93,7 +95,8 @@ import { HasManyCascadeComponent } from './fields/has-many-cascade/has-many-casc
     TextareaComponent,
     DropdownWrapperComponent,
     TranslatableComponent,
-    InputComponent
+    InputComponent,
+    CustomInputComponent
   ]
 })
 export class SharedModule {

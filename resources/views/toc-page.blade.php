@@ -49,5 +49,8 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
                 @endphp
             @endforeach
         </div>
+        <div class="category-section mb-2 page-break-inside-avoid">
+            <h3 class="category-item"><a href="#delivery-installation">Delivery & Installation</a></h3>
+        </div>
     </div>
 </div>

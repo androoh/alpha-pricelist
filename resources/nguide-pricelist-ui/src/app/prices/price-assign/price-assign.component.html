@@ -11,7 +11,7 @@
   <tr>
     <th>Name</th>
     <th>Sku</th>
-    <th>Price</th>
+    <th style="width: 200px;">Price</th>
     <th>On Demand</th>
   </tr>
   </thead>
@@ -19,8 +19,19 @@
   <tr *ngFor="let priceList of priceLists">
     <td>{{priceList.name || '-'}}</td>
     <td>{{priceList.sku}}</td>
-    <td><input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].value"/></td>
-    <td><input class="form-check-input" type="checkbox" [(ngModel)]="pricesModel[priceList.id].onDemand"/></td>
+    <ng-container *ngIf="priceList.type === 'product_main'">
+    <td>
+      <label>Delivery price</label>
+      <input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].delivery_price"/>
+      <label>Installation price</label>
+      <input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].installation_price"/>
+    </td>
+    <td></td>
+  </ng-container>
+    <ng-container *ngIf="priceList.type !== 'product_main'">
+      <td><input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].value"/></td>
+      <td><input class="form-check-input" type="checkbox" [(ngModel)]="pricesModel[priceList.id].onDemand"/></td>
+    </ng-container>
   </tr>
   </tbody>
 </table>
