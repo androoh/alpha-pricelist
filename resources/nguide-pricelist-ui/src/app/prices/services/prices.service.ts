@@ -10,7 +10,14 @@ export interface PricesResult {
   name: string;
   sku: string;
   type: string;
-  price: {value: number | string, onDemand: boolean; delivery_price: number | string, installation_price: number | string};
+  price: {
+    value: number | string;
+    onDemand: boolean;
+    delivery_price: number | string;
+    installation_price: number | string;
+    delivery_price_on_demand: boolean,
+    installation_price_on_demand: boolean
+  };
 }
 
 export interface PricesResponse {

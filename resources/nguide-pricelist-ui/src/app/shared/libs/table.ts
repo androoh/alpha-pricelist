@@ -13,6 +13,7 @@ export class Table {
   public filtersData: any = {};
   public defaultLocale = 'nl';
   public onLoaded: BehaviorSubject<ResourceListListResponse | null> = new BehaviorSubject<ResourceListListResponse | null>(null);
+  public config: any;
 
   constructor(public resourcesService: ResourcesService,
               public tableService: TableService) {
@@ -26,6 +27,7 @@ export class Table {
         this.columns = columns;
         this.defaultLocale = result.defaultLocale;
         this.listResponse = result;
+        this.config = result.config;
         this.onLoaded.next(result);
       }
       this.loadingIndicator = false;

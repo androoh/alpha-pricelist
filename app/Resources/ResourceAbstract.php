@@ -16,12 +16,16 @@ abstract class ResourceAbstract
 
     abstract public function fields($request);
 
-    public function beforeSave($request, $model) {
-
+    public function config($request)
+    {
     }
 
-    public function afterSave($request, $model) {
+    public function beforeSave($request, $model)
+    {
+    }
 
+    public function afterSave($request, $model)
+    {
     }
 
 

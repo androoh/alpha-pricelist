@@ -7,6 +7,10 @@ export class TranslatableType extends  FieldType {
   language = '';
   translatable = false;
 
+  getDefaultTranslation(): string {
+    return this.formControl.value[this.to.defaultLocale];
+  }
+
   onInit(): void {
     this.translatable = true;
     this.language = this.to.defaultLocale;

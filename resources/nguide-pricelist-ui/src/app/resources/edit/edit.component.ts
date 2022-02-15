@@ -8,6 +8,7 @@ import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
 import {BehaviorSubject} from 'rxjs';
 import {FormlyFieldConfigCustom} from '../../shared/formly-field-config-custom';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Component({
   selector: 'app-edit',
@@ -23,15 +24,18 @@ export class EditComponent implements OnInit {
   languageControl = new FormControl('');
   options: FormlyFormOptions = {};
   model: any = {};
+  originalSchema: any;
   fields: FormlyFieldConfigCustom[] | null = [];
   language = 'en';
   locales: any[] = [];
   defaultLocale = 'nl';
+  hideForm = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private formlyConfig: FormlyConfig,
               private formService: DynamicFormService,
+              private loadingService: LoadingService,
               private alertsService: AlertsService,
               private breadcrumbService: BreadcrumbService,
               private resourcesService: ResourcesService) {
@@ -44,8 +48,13 @@ export class EditComponent implements OnInit {
       this.loadData();
     });
     this.languageControl.valueChanges.subscribe((language: string) => {
-      if (language && this.fields && this.fields.length > 0) {
-        this.fields = this.mapFields(this.fields, language);
+      if (language && this.originalSchema && this.originalSchema.length > 0) {
+        this.loadingService.startLoading('select-language');
+        setTimeout(() => {
+          this.fields = this.mapFields(JSON.parse(JSON.stringify(this.originalSchema)), language);
+          this.loadingService.endLoading('select-language');
+        }, 100);
+
       }
     });
   }
@@ -66,7 +75,8 @@ export class EditComponent implements OnInit {
               this.defaultLocale = response.defaultLocale;
               this.languageControl.setValue(this.defaultLocale);
               this.model = response.data || {};
-              this.fields = this.mapFields(response.schema, this.languageControl.value);
+              this.originalSchema = response.schema;
+              this.fields = this.mapFields(JSON.parse(JSON.stringify(response.schema)), this.languageControl.value);
             });
           } else {
             this.resourcesService.getCreateResourceSchema(this.resourceName).subscribe((response: CreateEditResponse) => {
@@ -74,7 +84,8 @@ export class EditComponent implements OnInit {
               this.defaultLocale = response.defaultLocale;
               this.languageControl.setValue(this.defaultLocale, {emitEvent: false});
               this.model = {};
-              this.fields = this.mapFields(response.schema, this.languageControl.value);
+              this.originalSchema = response.schema;
+              this.fields = this.mapFields(JSON.parse(JSON.stringify(response.schema)), this.languageControl.value);
             });
           }
         }
@@ -97,18 +108,21 @@ export class EditComponent implements OnInit {
     return (this.resourceId) ? 'edit' : 'create';
   }
 
-
   /**
    * Adjust the JSON fields loaded from the server.
    */
   mapFields(fields: FormlyFieldConfig[], language: string) {
-
     return fields.map((f: any) => {
       if (f.hasOwnProperty('fieldGroup')) {
-
         f.fieldGroup = this.mapFields(f.fieldGroup, language);
       } else if (f.type === 'repeat') {
         f.fieldArray.fieldGroup = this.mapFields(f.fieldArray.fieldGroup, language);
+      }
+
+      if (language !== this.defaultLocale) {
+        if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {
+          f.templateOptions.required = false;
+        }
       }
 
       if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {

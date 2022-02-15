@@ -6,6 +6,7 @@ import {TableService} from '../../shared/services/table.service';
 import {Table} from '../../shared/libs/table';
 import {combineLatest} from 'rxjs';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +16,7 @@ import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrum
 export class ListComponent extends Table implements OnInit {
 
   resourceInfo: ResourcesResponse | undefined;
+  public ColumnMode = ColumnMode;
 
   constructor(private activatedRoute: ActivatedRoute,
               public resourcesService: ResourcesService,
@@ -85,6 +87,24 @@ export class ListComponent extends Table implements OnInit {
       } as BreadcrumbItem
     ]);
     this.breadcrumbService.update();
+  }
+
+  clone(id: number): void {
+    if (confirm('Are you sure you want to clone this item?')) {
+      if (this.resourceName) {
+        this.resourcesService.cloneResrouce(this.resourceName, id).subscribe((result: any) => {
+          if (this.resourceName) {
+            this.alertsService.show(AlertType.success, 'Resource Cloned!');
+            this.resourcesService.onTableData.next(new TableRequestData({
+              resource: this.resourceName,
+              sorting: this.sort,
+              page: this.page,
+              filters: this.filters
+            }));
+          }
+        });
+      }
+    }
   }
 
 }

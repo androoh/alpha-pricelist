@@ -88,11 +88,20 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
                                 <td class="text-start" style="width: 50% !important;">@t($productItem['product'], 'name',
                                     '')</td>
                                 <td class="fw-bold text-center" style="width: 20% !important;">
-                                    @price($productItem['price']['installation_price'] * 100, $formatType)
+                                    @if ($productItem['price']['installation_price_on_demand'])
+                                        on demand
+                                    @else
+                                        @price($productItem['price']['installation_price'] * 100, $formatType)
+                                    @endif
                                 </td>
                                 <td class="fw-bold" style="width: 30% !important;">
-                                    @price($productItem['price']['delivery_price'] * 100, $formatType)
-                                    {{ $productItem['deliveryCostDetails'] }}</td>
+                                    @if ($productItem['price']['delivery_price_on_demand'])
+                                        on demand
+                                    @else
+                                        @price($productItem['price']['delivery_price'] * 100, $formatType)
+                                        {{ $productItem['deliveryCostDetails'] }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     @endforeach

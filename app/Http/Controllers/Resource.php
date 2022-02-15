@@ -77,6 +77,7 @@ class Resource extends Controller
         $result['filters'] = $filters;
         $result['columns'] = $columns;
         $result['defaultLocale'] = config('app.locale');
+        $result['config'] = $resource->config($request);
         $result['sort'] = [
             'sortBy' => $sortBy,
             'sortDir' => $sortDir
@@ -96,6 +97,7 @@ class Resource extends Controller
         return response([
             'schema' => $request->getResource($resourceName)->fieldsToArray($request),
             'data' => [],
+            'config' => $request->getResource($resourceName)->config($request),
             'defaultLocale' => config('app.locale'),
             'locales' => config('app.locales')
         ]);
@@ -110,6 +112,7 @@ class Resource extends Controller
         return response([
             'schema' => $request->getResource($resourceName)->fieldsToArray($request),
             'data' => $resourceData,
+            'config' => $request->getResource($resourceName)->config($request),
             'defaultLocale' => config('app.locale'),
             'locales' => config('app.locales')
         ]);
@@ -153,6 +156,15 @@ class Resource extends Controller
         $resource = $request->getResource($resourceName);
         $model = $resource::model();
         $model::find($id)->forceDelete();
+        return response(['ok']);
+    }
+
+    public function clone(ResourceRequest $request, $resourceName, $id)
+    {
+        $resource = $request->getResource($resourceName);
+        $model = $resource::model();
+        $replicatedModel = $model::find($id)->replicate();
+        $replicatedModel->save();
         return response(['ok']);
     }
 }

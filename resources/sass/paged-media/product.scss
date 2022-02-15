@@ -518,7 +518,8 @@ table.options-table {
 .first-page,
 .second-page,
 .icons-page-left,
-.icons-page-right {
+.icons-page-right,
+.last-page {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -541,6 +542,28 @@ table.options-table {
     font-weight: bold;
     width: 260pt;
 
+    .title {
+    }
+
+    .type {
+      font-weight: lighter;
+    }
+  }
+}
+
+.last-page {
+  page: lastPage;
+  position: relative;
+  color: white;
+  page-break-before: always;
+
+  .page-info {
+    position: absolute;
+    left: 160pt;
+    bottom: 100pt;
+    font-weight: bold;
+    width: 260pt;
+    text-align: center;
     .title {
     }
 
@@ -578,6 +601,10 @@ table.options-table {
 }
 
 @page firstPage {
+  margin: 0;
+}
+
+@page lastPage {
   margin: 0;
 }
 
@@ -956,5 +983,5 @@ ul {
   background-size: 100%;
 }
 .packaging-transport-image {
-    margin: 0 auto;
+  margin: 0 auto;
 }

@@ -26,7 +26,7 @@
       </button>
     </div>
   </div>
-  <form [formGroup]="form" (ngSubmit)="submit()" class="mt-2">
+  <form *ngIf="!hideForm" [formGroup]="form" (ngSubmit)="submit()" class="mt-2">
     <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
   </form>
 </ng-container>

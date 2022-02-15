@@ -22,17 +22,17 @@ export class LoadingInterceptorService {
         url: this.cleanUrl(request.url)
       }));
     }
-    this.loadingService.startLoading(request.url);
+    this.loadingService.startLoading(request.urlWithParams);
     return next.handle(request)
       .pipe(
         map((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            this.loadingService.endLoading(request.url);
+            this.loadingService.endLoading(request.urlWithParams);
           }
           return event;
         }),
         catchError((error: HttpErrorResponse) => {
-          this.loadingService.endLoading(request.url);
+          this.loadingService.endLoading(request.urlWithParams);
           return throwError(error);
         }));
   }

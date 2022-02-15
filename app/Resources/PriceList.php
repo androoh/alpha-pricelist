@@ -146,6 +146,13 @@ class PriceList extends ResourceAbstract
         return $options;
     }
 
+    public function config($request)
+    {
+        return [
+            'clonable' => true
+        ];
+    }
+
     public function fields($request)
     {
         $languages = config('app.locales');
@@ -653,7 +660,34 @@ class PriceList extends ResourceAbstract
                         ])
                     ])
                 ]
-            ])
+            ]),
+            new FormlyFieldConfig([
+                'key' => 'lastPage',
+                'wrappers' => ['panel'],
+                'templateOptions' => [
+                    'label' => 'Last page',
+                    'preview' => 'last-page'
+                ],
+                'fieldGroup' => [
+                    new FormlyFieldConfig([
+                        'key' => 'photo',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_IMAGES,
+                        'templateOptions' => [
+                            'label' => 'Last page photo',
+                            'accept' => ['image/*']
+                        ]
+                    ]),
+                    new FormlyFieldConfig([
+                        'key' => 'details',
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
+                        'templateOptions' => [
+                            'label' => 'Details',
+                            'translatable' => true,
+                            'html' => true
+                        ]
+                    ]),
+                ]
+            ]),
 
         ];
     }

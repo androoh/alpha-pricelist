@@ -32,6 +32,7 @@ import {InputComponent} from './fields/input/input.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { HasManyCascadeComponent } from './fields/has-many-cascade/has-many-cascade.component';
 import { CustomInputComponent } from './fields/custom-input/custom-input.component';
+import { FieldsService } from '../resources/services/fields.service';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ export class SharedModule {
         ResourcesService,
         BreadcrumbService,
         LoadingService,
+        FieldsService,
         {
           provide: HTTP_INTERCEPTORS,
           useClass: ApiService,

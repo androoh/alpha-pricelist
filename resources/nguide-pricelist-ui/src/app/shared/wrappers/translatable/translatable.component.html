@@ -1,14 +1,44 @@
 <div class="form-group" [class.has-error]="showError">
-  <label *ngIf="to.label && to.hideLabel !== true" [attr.for]="id" class="w-100 mt-1">
-    {{ to.label }}
-    <span *ngIf="to.required && to.hideRequiredMarker !== true">*</span>
-    <span class="language badge bg-secondary ms-2 float-end" *ngIf="to?.translatable && language">
-      {{language.toUpperCase()}}
-    </span>
-  </label>
+  <div class="position-relative row">
+    <label
+      *ngIf="to.label && to.hideLabel !== true"
+      [attr.for]="id"
+      class="col-8 mt-1"
+    >
+      {{ to.label }}
+      <span *ngIf="to.required && to.hideRequiredMarker !== true">*</span>
+    </label>
+    <div class="col-4 mt-1 pb-1 text-end">
+      <span
+        class="language badge bg-secondary ms-2 cursor-pointer bg-light text-dark"
+        *ngIf="to?.defaultLocale && language !== to?.defaultLocale"
+        placement="left"
+        [popover]="popTemplate"
+        [outsideClick]="true"
+        >{{ to.defaultLocale.toUpperCase() }}</span
+      >
+      <ng-template #popTemplate
+        ><div
+          *ngIf="defaultTranslation.length > 0"
+          [innerHtml]="defaultTranslation"
+        ></div>
+        <div
+          *ngIf="defaultTranslation.length === 0"
+        >No default translation</div>
+      </ng-template>
+      <span
+        class="language badge bg-secondary ms-2"
+        *ngIf="to?.translatable && language"
+      >
+        {{ language.toUpperCase() }}
+      </span>
+    </div>
+  </div>
   <ng-template #fieldComponent></ng-template>
   <div *ngIf="showError" class="invalid-feedback" [style.display]="'block'">
     <formly-validation-message [field]="field"></formly-validation-message>
   </div>
-  <small *ngIf="to.description" class="form-text text-muted">{{ to.description }}</small>
+  <small *ngIf="to.description" class="form-text text-muted">{{
+    to.description
+  }}</small>
 </div>

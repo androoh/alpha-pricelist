@@ -27,6 +27,7 @@ Route::get('/resources/{resourceName}/{id}', [Resource::class, 'edit']);
 Route::get('/resources/{resourceName}/{id}/html', [\App\Http\Controllers\PagedMedia::class, 'renderResource']);
 Route::post('/resources/{resourceName}', [Resource::class, 'store']);
 Route::put('/resources/{resourceName}/{id}', [Resource::class, 'update']);
+Route::get('/resources/{resourceName}/{id}/clone', [Resource::class, 'clone']);
 Route::delete('/resources/{resourceName}/{id}', [Resource::class, 'remove']);
 Route::post('/files', [\App\Http\Controllers\File::class, 'uploadFile']);
 Route::get('/files/{id}', [\App\Http\Controllers\File::class, 'getFileById'])->name('get_file_by_id');

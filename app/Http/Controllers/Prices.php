@@ -41,7 +41,9 @@ class Prices extends Controller
                                 'type' => $productModel->type,
                                 'price' => [
                                     'delivery_price' => data_get($prices, $priceKey . '.delivery_price', 0),
-                                    'installation_price' => data_get($prices, $priceKey . '.installation_price', 0)
+                                    'delivery_price_on_demand' => data_get($prices, $priceKey . '.delivery_price_on_demand', 0),
+                                    'installation_price' => data_get($prices, $priceKey . '.installation_price', 0),
+                                    'installation_price_on_demand' => data_get($prices, $priceKey . '.installation_price_on_demand', 0)
                                 ],
                             ];
                         }

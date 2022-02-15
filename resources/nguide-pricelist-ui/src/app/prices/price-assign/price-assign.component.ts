@@ -41,9 +41,16 @@ export class PriceAssignComponent implements OnInit {
       this.defaultLocale = priceLists.defaultLocale;
       for (let item of this.priceLists) {
         if (item.type === 'product_main') {
-          const price: {delivery_price: number | string; installation_price: number | string} = {
+          const price: {
+            delivery_price: number | string;
+            installation_price: number | string;
+            delivery_price_on_demand: boolean;
+            installation_price_on_demand: boolean;
+          } = {
             delivery_price: item.price?.delivery_price || 0,
-            installation_price: item.price?.installation_price || 0
+            installation_price: item.price?.installation_price || 0,
+            delivery_price_on_demand: item.price?.delivery_price_on_demand || false,
+            installation_price_on_demand: item.price?.installation_price_on_demand || false
           };
           this.pricesModel[item.id] = price;
         } else {

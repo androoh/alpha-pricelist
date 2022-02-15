@@ -1,37 +1,81 @@
 <div class="pt-4 row sticky-top bg-white overflow-hidden pb-2 border-bottom">
   <h2 class="col-9">Assign Prices</h2>
   <div class="col-3 text-end">
-    <button type="button" class="btn btn-primary submit-button" (click)="submit()" [disabled]="!priceListId"><i
-      class="bi bi-save"></i> Save
+    <button
+      type="button"
+      class="btn btn-primary submit-button"
+      (click)="submit()"
+      [disabled]="!priceListId"
+    >
+      <i class="bi bi-save"></i> Save
     </button>
   </div>
 </div>
 <table class="table mt-2" *ngIf="priceLists.length > 0">
   <thead>
-  <tr>
-    <th>Name</th>
-    <th>Sku</th>
-    <th style="width: 200px;">Price</th>
-    <th>On Demand</th>
-  </tr>
+    <tr>
+      <th>Name</th>
+      <th>Sku</th>
+      <th style="width: 200px">Price</th>
+      <th>On Demand</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let priceList of priceLists">
-    <td>{{priceList.name || '-'}}</td>
-    <td>{{priceList.sku}}</td>
-    <ng-container *ngIf="priceList.type === 'product_main'">
-    <td>
-      <label>Delivery price</label>
-      <input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].delivery_price"/>
-      <label>Installation price</label>
-      <input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].installation_price"/>
-    </td>
-    <td></td>
-  </ng-container>
-    <ng-container *ngIf="priceList.type !== 'product_main'">
-      <td><input class="form-control form-control-sm" type="number" [(ngModel)]="pricesModel[priceList.id].value"/></td>
-      <td><input class="form-check-input" type="checkbox" [(ngModel)]="pricesModel[priceList.id].onDemand"/></td>
-    </ng-container>
-  </tr>
+    <tr *ngFor="let priceList of priceLists">
+      <td>{{ priceList.name || "-" }}</td>
+      <td>{{ priceList.sku }}</td>
+      <ng-container *ngIf="priceList.type === 'product_main'">
+        <td>
+          <label>Delivery price</label>
+          <input
+            class="form-control form-control-sm"
+            type="number"
+            [(ngModel)]="pricesModel[priceList.id].delivery_price"
+          />
+          <label>Installation price</label>
+          <input
+            class="form-control form-control-sm"
+            type="number"
+            [(ngModel)]="pricesModel[priceList.id].installation_price"
+          />
+        </td>
+        <td>
+          <label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="pricesModel[priceList.id].delivery_price_on_demand"
+            />
+            Delivery price
+          </label>
+          <label>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="
+                pricesModel[priceList.id].installation_price_on_demand
+              "
+            />
+            Installation price
+          </label>
+        </td>
+      </ng-container>
+      <ng-container *ngIf="priceList.type !== 'product_main'">
+        <td>
+          <input
+            class="form-control form-control-sm"
+            type="number"
+            [(ngModel)]="pricesModel[priceList.id].value"
+          />
+        </td>
+        <td>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [(ngModel)]="pricesModel[priceList.id].onDemand"
+          />
+        </td>
+      </ng-container>
+    </tr>
   </tbody>
 </table>

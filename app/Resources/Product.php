@@ -12,6 +12,12 @@ class Product extends ResourceAbstract
     protected static $searchBy = ['name'];
     protected static $icon = '<i class="bi bi-box"></i>';
 
+    public function config($request)
+    {
+        return [
+            'clonable' => true
+        ];
+    }
 
     public function fields($request)
     {

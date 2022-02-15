@@ -9,6 +9,10 @@ import {FieldWrapper} from '@ngx-formly/core';
 export class TranslatableComponent extends FieldWrapper implements OnInit {
   language = '';
 
+  get defaultTranslation(): string {
+    return this.formControl.value[this.to.defaultLocale];
+  }
+
   ngOnInit(): void {
     if (this.to?.translatable && this.to?.language) {
       this.to.language.subscribe((language: string) => {

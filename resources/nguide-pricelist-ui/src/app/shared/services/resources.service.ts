@@ -24,6 +24,7 @@ export class ResourceListListResponse {
   to: number;
   total: number;
   defaultLocale: string;
+  config: any;
 
   constructor(props?: any) {
     this.columns = props?.columns ?? null;
@@ -40,6 +41,7 @@ export class ResourceListListResponse {
     this.prev_page_url = props?.prev_page_url ?? null;
     this.to = props?.to ?? null;
     this.filters = props?.filters ?? {};
+    this.config = props?.config ?? {};
     this.total = props?.total ?? null;
     this.sort = props?.sort ?? null;
     this.defaultLocale = props?.defaultLocale ?? 'nl';
@@ -256,6 +258,10 @@ export class ResourcesService {
       }
     }
     return nr;
+  }
+
+  cloneResrouce(resource: string, id: number): Observable<any> {
+    return this.http.get(environment.apiBaseURL + 'resources/' + resource + '/' + id + '/clone');
   }
 
   clear(): void {
