@@ -2,7 +2,7 @@
 $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage', false);
 @endphp
 <div class="toc-page">
-    <h1>Table of <strong>CONTENTS</strong></h1>
+    <h1>{!!__('Table of <strong>CONTENTS</strong>')!!}</h1>
     <div class="columns-count-2">
         @foreach (data_get($resourceData, 'mainProductsPage.categories') as $treeItem)
             @php
@@ -50,7 +50,7 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
             @endforeach
         </div>
         <div class="category-section mb-2 page-break-inside-avoid">
-            <h3 class="category-item"><a href="#delivery-installation">Delivery & Installation</a></h3>
+            <h3 class="category-item"><a href="#delivery-installation">{{__('Delivery & Installation')}}</a></h3>
         </div>
     </div>
 </div>

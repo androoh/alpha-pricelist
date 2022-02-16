@@ -52,12 +52,12 @@
             <table class="options-table w-100">
                 <thead>
                     <tr>
-                        <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
+                        <th class="text-start">@t($productOptionSection, 'title', __('Options'))</th>
                         @if ($displayMinOrderQty)
-                            <th style="width: 15%">Min. order qty</th>
+                            <th style="width: 15%">{{__('Min. order qty')}}</th>
                         @endif
-                        <th class="text-center">Art. No.</th>
-                        <th class="text-end">TP</th>
+                        <th class="text-center">{{__('Art. No.')}}</th>
+                        <th class="text-end">{{__('TP')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,7 +106,7 @@
                                 <td class="sku">{{ data_get($productOptionData, 'sku', '') }}</td>
                                 <td class="price">
                                     @if ($price['onDemand'])
-                                        on demand
+                                        {{__('on demand')}}
                                     @else
                                         @price($price['value'] * 100, $formatType)
                                     @endif

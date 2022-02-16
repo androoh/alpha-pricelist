@@ -32,10 +32,10 @@
         <thead>
         <tr>
             @foreach($columns as $column)
-                <th>{{$column}}</th>
+                <th>{{__($column)}}</th>
             @endforeach
-            <th>Art. No.</th>
-            <th>TP</th>
+            <th>{{__('Art. No.')}}</th>
+            <th>{{__('TP')}}</th>
         </tr>
         </thead>
         <tbody>
@@ -57,7 +57,7 @@
                 <td class="sku">{{data_get($row, 'data.sku', '')}}</td>
                 <td class="price">
                     @if ($price['onDemand'])
-                        on demand
+                        {{__('on demand')}}
                     @else
                         @price($price['value'] * 100, $formatType)
                     @endif

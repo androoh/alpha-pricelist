@@ -36,3 +36,5 @@ Route::get('/html', [\App\Http\Controllers\PagedMedia::class, 'html']);
 Route::post('/category/html', [\App\Http\Controllers\PagedMedia::class, 'category']);
 Route::get('/prices/{priceListId}', [\App\Http\Controllers\Prices::class, 'index']);
 Route::put('/prices/{priceListId}', [\App\Http\Controllers\Prices::class, 'store']);
+Route::get('/translations', [\App\Http\Controllers\Translations::class, 'index']);
+Route::put('/translations', [\App\Http\Controllers\Translations::class, 'store']);

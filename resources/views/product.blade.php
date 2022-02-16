@@ -1,14 +1,14 @@
 <div class="product-page" id="product-{{$product->getKey()}}">
     <div class="left-header">
         <div class="d-flex justify-content-start">
-            <div class="price-list-type">@t($resourceData, 'firstPage.type', 'Trade')</div>
-            <div class="product-complexity ms-4">{{data_get($product, 'mainProductFields.complexity', 'Basic')}}</div>
+            <div class="price-list-type">@t($resourceData, 'firstPage.type', __('Trade'))</div>
+            <div class="product-complexity ms-4">{{data_get($product, 'mainProductFields.complexity', __('Basic'))}}</div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>
         </div>
     </div>
     <div class="right-header">
         <div class="d-flex justify-content-end">
-            <div class="product-complexity me-4">{{data_get($product, 'mainProductFields.complexity', 'Basic')}}</div>
+            <div class="product-complexity me-4">{{data_get($product, 'mainProductFields.complexity', __('Basic'))}}</div>
             <div class="category-name">@t($category, 'name', '-')</div>
         </div>
     </div>
@@ -60,19 +60,19 @@
                 <td style="vertical-align: top;">
                     <h1 class="product-title">@t($product, 'name', '')</h1>
                     <div class="standard-equipment">
-                        <h3 class="title">Standard Equipment</h3>
+                        <h3 class="title">{{__('Standard Equipment')}}</h3>
                         <div class="description mb-2">
                             @t($product, 'mainProductFields.standard_equipment', '')
                         </div>
                         @if ($clientSuply)
                         <div class="client-suply mb-2 description">
-                            <strong>The client to supply:</strong>
+                            <strong>{{__('The client to supply:')}}</strong>
                             {!!$clientSuply!!}
                         </div>
                         @endif
                         @if ($infoNote)
                         <div class="info-note mb-2 fst-italic fw-bolder">
-                            <div>Info Note</div>
+                            <div>{{__('Info Note')}}</div>
                             {!!$infoNote!!}
                         </div>
                         @endif
@@ -104,7 +104,7 @@
         @include('product-models-packaging-transport', ['product' => $product])
         @if (count($awardsPhotos) > 0)
             <div class="awards-photots-section page-break-inside-avoid">
-                <h3>Winner</h3>
+                <h3>{{__('Winner')}}</h3>
                 <div class="awards-photots">
                 @foreach ($awardsPhotos as $awardPhoto)
                     @include('render-image', ['photo' => $awardPhoto, 'class' => ['me-2', 'mb-2', 'd-inline-block']])

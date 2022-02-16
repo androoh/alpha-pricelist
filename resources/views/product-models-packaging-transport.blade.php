@@ -33,7 +33,7 @@
         <div class="packaging-transport @if($i === 0 && $pageBreakBefore === 'yes') page-break-before @endif">
             <div class="packaging-transport-item mb-3 page-break-inside-avoid">
                 <div class="packaging-transport-title pt-1 ps-2 pb-1 mb-2">
-                    Model - @t($productModelData, 'name', '')
+                    {{__('Model - :name', ['name' => translateFromPath($productModelData, 'name', '')])}}
                 </div>
                 @if($packagingTransport)
                     <div class="mb-4">

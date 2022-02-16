@@ -7,6 +7,7 @@ use App\Models\PriceList;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ResourceRequest;
+use Illuminate\Support\Facades\App;
 
 class PagedMedia extends Controller
 {
@@ -80,7 +81,7 @@ class PagedMedia extends Controller
         $resource = $request->getResource($resourceName);
         $model = $resource::model();
         $resourceData = $model::find($id);
-        $locale = $request->query('locale', config('app.locale'));
+        $locale = $request->query('locale', config('app.fallback_locale'));
         $pageSize = $request->query('pageSize', 'A4');
         $pageOrientation = $request->query('pageOrientation', 'portrait');
         $showCropBorders = $request->query('showCropBorders');
@@ -94,7 +95,7 @@ class PagedMedia extends Controller
             throw new \Exception('Template not specified');
         }
         $treeItem = data_get($resourceData, $path, null);
-
+        App::setLocale($locale);
         return view('template-preview', [
             'resourceData' => $resourceData,
             'treeItem' => $treeItem,

@@ -65,14 +65,14 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
     </div>
     <div class="delivery-installation repeating-container">
         <div class="text-center text-uppercase repeating-header" style="font-size: 15pt">
-            DELIVERY & INSTALLATION</div>
+            {{__('DELIVERY & INSTALLATION')}}</div>
         <div class="repeating-container-body">
             <table class="options-table w-100 mb-2 repeating-container">
                 <thead class="repeating-header">
                     <tr style="border-bottom: 2pt #4D545E solid;">
-                        <th>Description</th>
-                        <th>Installation costs</th>
-                        <th>Delivery Costs <span class="delivery-details fst-italic">{{ $deliveryDetails }}</span>
+                        <th>{{__('Description')}}</th>
+                        <th>{{__('Installation costs')}}</th>
+                        <th>{{__('Delivery Costs')}} <span class="delivery-details fst-italic">{{ $deliveryDetails }}</span>
                         </th>
                     </tr>
                 </thead>
@@ -96,14 +96,14 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
                                 </td>
                                 <td class="fw-bold text-center" style="width: 20% !important;">
                                     @if ($installationPriceOnDemand)
-                                        on demand
+                                        {{__('on demand')}}
                                     @else
                                         @price($installationPrice * 100, $formatType)
                                     @endif
                                 </td>
                                 <td class="fw-bold" style="width: 30% !important;">
                                     @if ($deliveryPriceOnDemand)
-                                        on demand
+                                        {{__('on demand')}}
                                     @else
                                         @price($deliveryPrice * 100, $formatType)
                                         {{ $productItem['deliveryCostDetails'] }}

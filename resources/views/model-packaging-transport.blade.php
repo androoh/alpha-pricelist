@@ -10,16 +10,16 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th class="text-start">Depth</th>
-                    <th class="text-center">Width</th>
-                    <th class="text-center">Height</th>
-                    <th class="text-end">Weight</th>
+                    <th class="text-start">{{__('Depth')}}</th>
+                    <th class="text-center">{{__('Width')}}</th>
+                    <th class="text-center">{{__('Height')}}</th>
+                    <th class="text-end">{{__('Weight')}}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td class="text-start">
-                        <div class="packaging-transport-label">Packaging & Transport</div>
+                        <div class="packaging-transport-label">{{__('Packaging & Transport')}}</div>
                     </td>
                     <td class="text-start">{{data_get($part, 'depth', '-')}} cm</td>
                     <td class="text-center">{{data_get($part, 'width', '-')}} cm</td>
@@ -34,12 +34,12 @@
             <thead>
             <tr class="border-bottom">
                 <th class="text-start">
-                    <div class="packaging-transport-label">Packaging & Transport</div>
+                    <div class="packaging-transport-label">{{__('Packaging & Transport')}}</div>
                 </th>
-                <th class="text-start">Depth</th>
-                <th class="text-center">Width</th>
-                <th class="text-center">Height</th>
-                <th class="text-end">Weight</th>
+                <th class="text-start">{{__('Depth')}}</th>
+                <th class="text-center">{{__('Width')}}</th>
+                <th class="text-center">{{__('Height')}}</th>
+                <th class="text-end">{{__('Weight')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@
                 <tr>
                     <td class="text-start">
                         @if($loop->index === 0)
-                            <div class="packaging-notice">divided into {{count($parts)}} parts</div>
+                            <div class="packaging-notice">{{__('divided into :count_parts parts', ['count_parts' => count($parts)])}}</div>
                         @endif
                     </td>
                     <td class="text-start">{{data_get($part, 'depth', '-')}} cm</td>

@@ -14,7 +14,7 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
         </div>
         <div class="right-header">
             <div class="d-flex justify-content-end">
-                <div class="category-name">@t($resourceData, 'firstPage.type', 'Trade')</div>
+                <div class="category-name">@t($resourceData, 'firstPage.type', __('Trade'))</div>
             </div>
         </div>
         <div class="product-options-page-footer-left product-options-page-footer">

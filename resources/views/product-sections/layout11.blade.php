@@ -8,12 +8,12 @@
         <table class="options-table w-100">
             <thead class="page-break-after-avoid">
                 <tr>
-                    <th>@t($productOptionSection, 'title', 'Options')</th>
+                    <th>@t($productOptionSection, 'title', __('Options'))</th>
                     @if ($displayMinOrderQty)
-                        <th style="width: 15%">Min. order qty</th>
+                        <th style="width: 15%">{{__('Min. order qty')}}</th>
                     @endif
-                    <th>Art. No.</th>
-                    <th>TP</th>
+                    <th>{{__('Art. No.')}}</th>
+                    <th>{{__('TP')}}</th>
                 </tr>
             </thead>
             @php
@@ -50,7 +50,7 @@
                             <td class="sku">{{ data_get($productOptionData, 'sku', '') }}</td>
                             <td class="price">
                                 @if ($price['onDemand'])
-                                    on demand
+                                    {{__('on demand')}}
                                 @else
                                     @price($price['value'] * 100, $formatType)
                                 @endif

@@ -18,6 +18,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {SharedModule} from '../shared/shared.module';
 import { PagedjsComponent } from './pagedjs/pagedjs.component';
 import {LoadingComponent} from './loading/loading.component';
+import { TranslationsComponent } from './translations/translations.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {LoadingComponent} from './loading/loading.component';
     BreadcrumbsComponent,
     DashboardComponent,
     PagedjsComponent,
-    LoadingComponent
+    LoadingComponent,
+    TranslationsComponent
   ],
   exports: [
     LayoutComponent
@@ -44,7 +47,8 @@ import {LoadingComponent} from './loading/loading.component';
         MatListModule,
         FlexLayoutModule,
         RouterModule,
-        SharedModule
+        SharedModule,
+        FormsModule
     ]
 })
 export class MainModule {

@@ -16,9 +16,20 @@ if (!function_exists('setGlobalCurrency')) {
 
 if (!function_exists('translateFromPath')) {
     function translateFromPath($data, $path = '', $defaultValue = null, $locale = null) {
-        $locale = $locale ? $locale : config('app.template.locale', config('app.locale'));
-        $path = strlen($path) > 0 ? $path . '.' . $locale : $locale;
-        return data_get($data, $path, $defaultValue);
+        $defaultLocale = config('app.template.locale', config('app.fallback_locale'));
+        $locale = $locale ? $locale : $defaultLocale;
+        $localePath = strlen($path) > 0 ? $path . '.' . $locale : $locale;
+        $value = data_get($data, $localePath, null);
+        if (!$value) {
+            $defaultLocale = config('app.fallback_locale');
+            $defaultPath = strlen($path) > 0 ? $path . '.' . $defaultLocale : $defaultLocale;
+            $value = data_get($data, $defaultPath, null);
+            if (!$value) {
+                $value = $defaultValue;
+            }
+        }
+
+        return $value;
     }
 }
 

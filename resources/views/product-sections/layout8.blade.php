@@ -23,12 +23,12 @@
                         @endforeach
                     </th>
                 @endif
-                <th class="text-start">@t($productOptionSection, 'title', 'Options')</th>
+                <th class="text-start">@t($productOptionSection, 'title', __('Options'))</th>
                 @if ($displayMinOrderQty)
-                    <th style="width: 15%">Min. order qty</th>
+                    <th style="width: 15%">{{__('Min. order qty')}}</th>
                 @endif
-                <th style="width: 15%">Art. No.</th>
-                <th style="width: 15%">TP</th>
+                <th style="width: 15%">{{__('Art. No.')}}</th>
+                <th style="width: 15%">{{__('TP')}}</th>
             </tr>
             @foreach($productOptions as $productOption)
                 @php
@@ -75,7 +75,7 @@
                         <td>{{data_get($productOptionData, 'sku', '')}}</td>
                         <td class="price">
                             @if ($price['onDemand'])
-                                on demand
+                                {{__('on demand')}}
                             @else
                                 @price($price['value'] * 100, $formatType)
                             @endif

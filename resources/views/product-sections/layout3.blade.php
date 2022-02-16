@@ -2,9 +2,9 @@
     <table class="options-table w-100">
         <thead>
             <tr>
-                <th>Description</th>
-                <th>Art. No.</th>
-                <th>TP</th>
+                <th>{{__('Description')}}</th>
+                <th>{{__('Art. No.')}}</th>
+                <th>{{__('TP')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +62,7 @@
                             <td class="sku">{{ data_get($productOptionData, 'sku', '') }}</td>
                             <td class="price">
                                 @if ($price['onDemand'])
-                                    on demand
+                                    {{__('on demand')}}
                                 @else
                                     @price($price['value'] * 100, $formatType)
                                 @endif

@@ -48,7 +48,7 @@
                                             {{data_get($productOptionData, 'sku', '')}}
                                             <span class="price">
                                                 @if ($price['onDemand'])
-                                                    on demand
+                                                    {{__('on demand')}}
                                                 @else
                                                     @price($price['value'] * 100, $formatType)
                                                 @endif

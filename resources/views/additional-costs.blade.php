@@ -24,7 +24,7 @@ $infoNote = translateFromPath($additionalCostsPage, 'info_note', null);
                     </td>
                     <td class="price">
                         @if ($price['onDemand'])
-                            on demand
+                            {{__('on demand')}}
                         @else
                             @price($price['value'] * 100, $formatType)
                         @endif
@@ -35,7 +35,7 @@ $infoNote = translateFromPath($additionalCostsPage, 'info_note', null);
     </table>
     @if ($infoNote)
         <div class="info-note">
-            Info Note <br/>
+            {{__('Info Note')}} <br/>
             {{$infoNote}}
         </div>
     @endif
