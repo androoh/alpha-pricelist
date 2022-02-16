@@ -84,21 +84,28 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
                             </td>
                         </tr>
                         @foreach ($item['items'] as $productItem)
+                            @php
+                                $installationPriceOnDemand = data_get($productItem, 'price.installation_price_on_demand', false);
+                                $deliveryPriceOnDemand = data_get($productItem, 'price.delivery_price_on_demand', false);
+                                $installationPrice = data_get($productItem, 'price.installation_price', 0);
+                                $deliveryPrice = data_get($productItem, 'price.delivery_price', 0);
+                            @endphp
                             <tr>
-                                <td class="text-start" style="width: 50% !important;">@t($productItem['product'], 'name',
-                                    '')</td>
+                                <td class="text-start" style="width: 50% !important;">
+                                    @t($productItem['product'], 'name','')
+                                </td>
                                 <td class="fw-bold text-center" style="width: 20% !important;">
-                                    @if ($productItem['price']['installation_price_on_demand'])
+                                    @if ($installationPriceOnDemand)
                                         on demand
                                     @else
-                                        @price($productItem['price']['installation_price'] * 100, $formatType)
+                                        @price($installationPrice * 100, $formatType)
                                     @endif
                                 </td>
                                 <td class="fw-bold" style="width: 30% !important;">
-                                    @if ($productItem['price']['delivery_price_on_demand'])
+                                    @if ($deliveryPriceOnDemand)
                                         on demand
                                     @else
-                                        @price($productItem['price']['delivery_price'] * 100, $formatType)
+                                        @price($deliveryPrice * 100, $formatType)
                                         {{ $productItem['deliveryCostDetails'] }}
                                     @endif
                                 </td>

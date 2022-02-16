@@ -25,6 +25,7 @@ export class FiltersComponent implements OnInit, OnChanges {
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] | null = [];
   defaultLocale = 'nl';
+  originalSchema: any;
 
   constructor(private resourcesService: ResourcesService) {
   }
@@ -34,16 +35,14 @@ export class FiltersComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(
-        debounceTime(700),
-        distinctUntilChanged()
-      )
-      .subscribe((value: any) => {
-        if (value && this.fields) {
-          this.filtersChange.emit(this.resourcesService.getFilterableOptions(value, this.fields));
-        }
-      })
+    // this.form.valueChanges
+    //   .pipe(
+    //     debounceTime(700),
+    //     distinctUntilChanged()
+    //   )
+    //   .subscribe((value: any) => {
+
+    //   })
   }
 
 
@@ -51,7 +50,8 @@ export class FiltersComponent implements OnInit, OnChanges {
     if (changes?.resourceName?.currentValue) {
       this.resourcesService.getFilters(changes.resourceName.currentValue).subscribe((response: {schema: any[]; defaultLocale: string}) => {
         this.defaultLocale = response.defaultLocale;
-        this.fields = this.mapFields(response.schema, this.defaultLocale);
+        this.originalSchema = response.schema;
+        this.fields = this.mapFields(JSON.parse(JSON.stringify(response.schema)), this.defaultLocale);
       });
     }
   }
@@ -82,16 +82,14 @@ export class FiltersComponent implements OnInit, OnChanges {
   }
 
   reset(): void {
-    for (const key in this.model) {
-      if (this.model.hasOwnProperty(key)) {
-        this.model[key] = null;
-      }
-    }
-    this.form.patchValue(this.model);
+    this.form.reset();
+    this.submit();
   }
 
   submit(): void {
-
+    if (this.form.value && this.fields) {
+      this.filtersChange.emit(this.resourcesService.getFilterableOptions(this.form.value, this.fields));
+    }
   }
 
 }
