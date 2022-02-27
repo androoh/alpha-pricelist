@@ -2,15 +2,8 @@
     @foreach (data_get($productSection, 'product_option_sections', []) as $productOptionSection)
         <div class="mb-1 page-break-inside-avoid">
             @php
-                $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
-                $photoGalleryUrls = [];
+                $photoGallery = getImagesFromPath($productOptionSection, 'product_options_group_photo', []);
                 $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
-                foreach ($photoGallery as $photo) {
-                    $photoUrl = data_get($photo, 'name', false);
-                    if ($photoUrl) {
-                        $photoGalleryUrls[] = $photoUrl;
-                    }
-                }
                 $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
             @endphp
             <div class="photo-gallery-2 w-100">
@@ -19,11 +12,11 @@
                         $i = 0;
                         $totalCount = 0;
                     @endphp
-                    @foreach ($photoGalleryUrls as $url)
+                    @foreach ($photoGallery as $photo)
                         @php
                             $i++;
                             $class = '';
-                            if ($i === 1 && count($photoGalleryUrls) > 1) {
+                            if ($i === 1 && count($photoGallery) > 1) {
                                 $class = 'pe-1';
                             }
                             if ($i === 2) {
@@ -34,11 +27,10 @@
                         @if ($i === 1)
                             <tr class="page-break-inside-avoid">
                         @endif
-                        <td style="width: {{ 100 / count($photoGalleryUrls) }}%" class="{{ $class }}">
-                            <div class="photo-gallery-item mb-2"
-                                style="background-image: url('/imgc/a4mw/{{ $url }}');"></div>
+                        <td style="width: {{ 100 / count($photoGallery) }}%" class="{{ $class }}">
+                            @include('render-image', ['photo' => $photo, 'class' => ['photo-gallery-item', 'mb-2'], 'type' => 'cropped'])
                         </td>
-                        @if ($i === 2 || $totalCount === count($photoGalleryUrls))
+                        @if ($i === 2 || $totalCount === count($photoGallery))
                             </tr>
                         @endif
                         @php
@@ -73,15 +65,14 @@
                             @php
                                 $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                                 $formatType = data_get($productOptionData, 'price_options.type', null);
-                                $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                                $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
+                                $productPhoto = getImagesFromPath($productOptionData, 'optionProductFields.option_photo', null);
                             @endphp
                             <tr>
                                 <td>
                                     @switch($displayTitleType)
                                         @case('photo')
-                                            @if ($photoUrl)
-                                                <img src="/imgc/a4mw/{{ $photoUrl }}" class="w-100 d-block mb-1" />
+                                            @if ($productPhoto)
+                                                @include('render-image', ['photo' => data_get($productPhoto, '0'), 'class' => ['w-100', 'd-block', 'mb-1']])
                                             @else
                                                 @t($productOptionData, 'name', '')
                                             @endif

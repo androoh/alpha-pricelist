@@ -19,12 +19,15 @@
       >
       <ng-template #popTemplate
         ><div
-          *ngIf="defaultTranslation.length > 0"
+          *ngIf="defaultTranslation && defaultTranslation.length > 0 && field.type !== 'images'"
           [innerHtml]="defaultTranslation"
         ></div>
-        <div
-          *ngIf="defaultTranslation.length === 0"
-        >No default translation</div>
+        <div *ngIf="defaultTranslation && defaultTranslation.length > 0 && field.type === 'images'">
+          No preview
+        </div>
+        <div *ngIf="!defaultTranslation || defaultTranslation.length === 0">
+          No default translation
+        </div>
       </ng-template>
       <span
         class="language badge bg-secondary ms-2"

@@ -4,16 +4,18 @@ $categoryId = data_get($treeItem, 'category', null);
 if ($categoryId) {
     $category = \App\Models\Category::find($categoryId);
 }
+$leftPagePhoto = getImagesFromPath($treeItem, 'left_page_photo');
+$rightPagePhoto = getImagesFromPath($treeItem, 'right_page_photo');
 @endphp
 @if ($category)
-    @if (data_get($treeItem, 'left_page_photo.0.name'))
+    @if (data_get($leftPagePhoto, '0.name'))
         <div class="category-page-left"
-            style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'left_page_photo.0.name') }}')">
+            style="background-image: url('/imgc/a4lw/{{ data_get($leftPagePhoto, '0.name') }}')">
         </div>
     @endif
-    @if (data_get($treeItem, 'right_page_photo.0.name'))
+    @if (data_get($rightPagePhoto, '0.name'))
         <div class="category-page-right"
-            style="background-image: url('/imgc/a4lw/{{ data_get($treeItem, 'right_page_photo.0.name') }}')">
+            style="background-image: url('/imgc/a4lw/{{ data_get($rightPagePhoto, '0.name') }}')">
             <div class="title">@t($treeItem, 'title')</div>
         </div>
     @endif

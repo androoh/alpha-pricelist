@@ -120,12 +120,13 @@ export class EditComponent implements OnInit {
       }
 
       if (language !== this.defaultLocale) {
-        if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {
+        if (f.type === 'translatable-input' || f.type === 'translatable-textarea' ||  f.type === 'images') {
           f.templateOptions.required = false;
         }
       }
 
-      if (f.type === 'translatable-input' || f.type === 'translatable-textarea') {
+      if (f.type === 'translatable-input' || f.type === 'translatable-textarea' || f.type === 'images') {
+        f.templateOptions['translatable'] = true;
         if (!f.templateOptions?.language) {
           f.templateOptions.language = new BehaviorSubject(language);
         } else {

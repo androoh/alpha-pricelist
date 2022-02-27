@@ -1,6 +1,6 @@
 <div class="layout-2 pt-2">
     @php
-        $photoGallery = data_get($productSection, 'photo_gallery', []) ?? [];
+        $photoGallery = getImagesFromPath($productSection, 'photo_gallery', []) ?? [];
     @endphp
     <table class="w-100">
         <tbody>

@@ -18,7 +18,8 @@
                             $productOptionData = \App\Models\Product::find($productOptionId);
                             if ($productOptionData) {
                                 $i++;
-                                $productOptionPhotoUrl = data_get($productOptionData, 'optionProductFields.option_photo.0.name');
+                                $productOptionPhoto = getImagesFromPath($productOptionData, 'optionProductFields.option_photo');
+                                $productOptionPhotoUrl = data_get($productOptionPhoto, '0.name');
                             }
                         }
                         $totalCount++;
@@ -27,8 +28,6 @@
                         @php
                             $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                             $formatType = data_get($productOptionData, 'price_options.type', null);
-                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         @if($i === 1)
                             <tr class="page-break-inside-avoid">

@@ -29,15 +29,18 @@
                         @php
                             $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                             $formatType = data_get($productOptionData, 'price_options.type', null);
-                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
+                            $productPhoto = getImagesFromPath($productOptionData, 'optionProductFields.option_photo', null);
                         @endphp
                         <tr>
                             <td>
                                 @switch($displayTitleType)
                                     @case('photo')
-                                        @if ($photoUrl)
-                                            <img src="/imgc/a4mw/{{ $photoUrl }}" class="w-100 d-block mb-1" />
+                                        @if ($productPhoto)
+                                            @include('render-image', ['photo' => data_get($productPhoto, '0'), 'class' => [
+                                                'w-100',
+                                                'd-block',
+                                                'mb-1'
+                                            ]])
                                         @else
                                             @t($productOptionData, 'name', '')
                                         @endif

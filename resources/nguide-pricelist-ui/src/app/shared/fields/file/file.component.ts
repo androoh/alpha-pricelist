@@ -5,6 +5,9 @@ import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from "../../../../environments/environment";
+import { TranslatableType } from '../translatable-type';
+import { requiredTranslated } from '../../directives/required-translated.directive';
+import { FormControl } from '@angular/forms';
 
 export const API_URL = '/api/files';
 export const API_GET_FILE_URL = '/api/files/n/';
@@ -24,6 +27,8 @@ export interface ImageResponse {
   styleUrls: ['./file.component.scss']
 })
 export class FileComponent extends FieldType implements OnInit {
+  public language = '';
+  public translatable = false;
   public uploader: FileUploader;
   public currentValue: ImageResponse[] = [];
   public expandConfig:Map<number, boolean> = new Map<number, boolean>();
@@ -31,6 +36,7 @@ export class FileComponent extends FieldType implements OnInit {
     {value: 'img', label: 'Full Image'},
     {value: 'cropped', label: 'Cropped Image'}
   ];
+  public valueControl = new FormControl('');
 
   public positions: any[] = [
     'left top',
@@ -70,8 +76,9 @@ export class FileComponent extends FieldType implements OnInit {
       } else {
         this.currentValue = [response];
       }
-
-      this.formControl.setValue(this.currentValue);
+      const newValue = this.formControl.value;
+      newValue[this.language] =  this.currentValue;
+      this.formControl.setValue(newValue);
     });
   }
 
@@ -84,7 +91,43 @@ export class FileComponent extends FieldType implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentValue = this.formControl.value || [];
+    this.translatable = true;
+    this.language = this.to.defaultLocale;
+    if (this.to?.language) {
+      this.to.language.subscribe((language: string) => {
+        if (language) {
+          const validators = [];
+          this.language = language;
+          if (this.to.required) {
+            validators.push(requiredTranslated(language));
+          }
+          this.formControl.setValidators(validators);
+          this.formControl.updateValueAndValidity();
+          if (!this.formControl.value) {
+            const newValue: any = {};
+            newValue[this.language] = [];
+            this.formControl.setValue(newValue, {emitEvent: false});
+          }
+          if (Array.isArray(this.formControl.value)) {
+            const newValue: any = {};
+            newValue[this.language] = this.formControl.value;
+            this.formControl.setValue(newValue, {emitEvent: false});
+          }
+          this.updateValue();
+        }
+      });
+    }
+  }
+
+  updateValue(): void {
+    let value = [];
+    if (this.formControl.value
+      && this.formControl.value.hasOwnProperty(this.language)
+      && typeof this.formControl.value === 'object'
+      && !Array.isArray(this.formControl.value)) {
+      value = this.formControl.value[this.language] || [];
+    };
+    this.currentValue = value;
   }
 
   onChange(data: any) {

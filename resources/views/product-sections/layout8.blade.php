@@ -1,14 +1,7 @@
 <div class="layout-8">
     @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
         @php
-            $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
-            $photoGalleryUrls = [];
-            foreach($photoGallery as $photo) {
-                $photoUrl = data_get($photo, 'name', false);
-                if ($photoUrl) {
-                    $photoGalleryUrls[] = $photoUrl;
-                }
-            }
+            $photoGallery = getImagesFromPath($productOptionSection, 'product_options_group_photo', []);
             $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
             $displayPhotoInsteadTitle = data_get($productOptionSection, 'displayPhotoInsteadTitle', false);
             $productOptions = data_get($productOptionSection, 'product_options', []);
@@ -16,10 +9,10 @@
         @endphp
         <table class="options-table w-100">
             <tr class="thead">
-                @if(count($photoGalleryUrls) > 0)
+                @if(count($photoGallery) > 0)
                     <th rowspan="{{count($productOptions) + 1}}" class="images-column">
-                        @foreach($photoGalleryUrls as $url)
-                            <img src="/imgc/a4mw/{{$url}}" class="w-100 d-block"/>
+                        @foreach($photoGallery as $photo)
+                            @include('render-image', ['photo' => $photo, 'class' => ['w-100', 'd-block']])
                         @endforeach
                     </th>
                 @endif
@@ -42,15 +35,14 @@
                     @php
                         $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                         $formatType = data_get($productOptionData, 'price_options.type', null);
-                        $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                        $photoUrl = $productPhoto ? data_get($productPhoto, 'url', null) : null;
+                        $productPhoto = getImagesFromPath($productOptionData, 'optionProductFields.option_photo', null);
                     @endphp
                     <tr>
                         <td class="text-start">
                             @switch($displayTitleType)
                                 @case('photo')
-                                        @if ($photoUrl)
-                                            <img src="/imgc/a4mw/{{$photoUrl}}" class="w-100 d-block mb-1"/>
+                                        @if ($productPhoto)
+                                            @include('render-image', ['photo' => $productPhoto, 'class' => ['w-100', 'd-block', 'mb-1']])
                                         @else
                                             @t($productOptionData, 'name', '')
                                         @endif

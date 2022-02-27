@@ -1,12 +1,14 @@
 @php
 $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage', false);
+$leftPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'left_page_photo');
+$rightPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'right_page_photo');
 @endphp
 @if ($optionsAndAccessoriesPage)
     <div class="category-page-left"
-        style="background-image: url('/imgc/a4lw/{{ data_get($optionsAndAccessoriesPage, 'left_page_photo.0.name') }}')">
+        style="background-image: url('/imgc/a4lw/{{ data_get($leftPathPhoto, '0.name') }}')">
     </div>
     <div class="category-page-right"
-        style="background-image: url('/imgc/a4lw/{{ data_get($optionsAndAccessoriesPage, 'right_page_photo.0.name') }}')">
+        style="background-image: url('/imgc/a4lw/{{ data_get($rightPathPhoto, '0.name') }}')">
         <div class="title">@t($optionsAndAccessoriesPage, 'title')</div>
     </div>
     <div class="product-options-page">

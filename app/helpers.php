@@ -33,6 +33,24 @@ if (!function_exists('translateFromPath')) {
     }
 }
 
+if (!function_exists('getImagesFromPath')) {
+    function getImagesFromPath($data, $path = '', $defaultValue = [], $locale = null) {
+        $defaultLocale = config('app.template.locale', config('app.fallback_locale'));
+        $locale = $locale ? $locale : $defaultLocale;
+        $localePath = strlen($path) > 0 ? $path . '.' . $locale : $locale;
+        $value = data_get($data, $localePath, null);
+        if (!$value) {
+            $defaultLocale = config('app.fallback_locale');
+            $defaultPath = strlen($path) > 0 ? $path . '.' . $defaultLocale : $defaultLocale;
+            $value = data_get($data, $defaultPath, null);
+        }
+        if (!$value) {
+            $value = data_get($data, $path, $defaultValue);
+        }
+        return $value;
+    }
+}
+
 if (!function_exists('getPriceKey')) {
     function getPriceKey(...$modelsKeys) {
         $result = [];

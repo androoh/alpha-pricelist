@@ -10826,3 +10826,7 @@ ul {
 .packaging-transport-image {
   margin: 0 auto;
 }
+
+.photo-cover {
+  background-size: cover;
+}

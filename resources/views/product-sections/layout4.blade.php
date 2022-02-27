@@ -1,6 +1,6 @@
 <div class="layout-4 pt-2 photo-gallery-background">
     @php
-        $photoGallery = data_get($productSection, 'photo_gallery', []) ?? [];
+        $photoGallery = getImagesFromPath($productSection, 'photo_gallery', []) ?? [];
     @endphp
     @foreach ($photoGallery as $photo)
         @php

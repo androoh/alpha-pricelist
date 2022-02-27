@@ -18,20 +18,12 @@
             <td class="w-50 valign-top @if ($i === 1) pe-2 @endif @if ($i === 2) ps-2 @endif">
                 <div class="mb-1 w-100">
                     @php
-                        $photoGallery = data_get($productOptionSection, 'product_options_group_photo', []);
-                        $photoGalleryUrls = [];
-                        foreach ($photoGallery as $photo) {
-                            $photoUrl = data_get($photo, 'name', false);
-                            if ($photoUrl) {
-                                $photoGalleryUrls[] = $photoUrl;
-                            }
-                        }
+                        $photoGallery = getImagesFromPath($productOptionSection, 'product_options_group_photo', []);
                     @endphp
                     <div class="photo-gallery">
-                        @foreach ($photoGalleryUrls as $url)
+                        @foreach ($photoGallery as $photo)
                             <div class="photo-gallery-item mb-2">
-                                <div class="img"
-                                    style="background-image: url('/imgc/a4mw/{{ $url }}')"></div>
+                                @include('render-image', ['photo' => $photo, 'class' => ['img']])
                             </div>
                         @endforeach
                     </div>
@@ -59,16 +51,18 @@
                                     @php
                                         $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                                         $formatType = data_get($productOptionData, 'price_options.type', null);
-                                        $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                                        $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
+                                        $productPhoto = getImagesFromPath($productOptionData, 'optionProductFields.option_photo', null);
                                     @endphp
                                     <tr>
                                         <td>
                                             @switch($displayTitleType)
                                                 @case('photo')
-                                                    @if ($photoUrl)
-                                                        <img src="/imgc/a4mw/{{ $photoUrl }}"
-                                                            class="w-100 d-block mb-1" />
+                                                    @if ($productPhoto)
+                                                        @include('render-image', ['photo' => data_get($productPhoto, '0'), 'class' => [
+                                                            'w-100',
+                                                            'd-block',
+                                                            'mb-1'
+                                                        ]])
                                                     @else
                                                         @t($productOptionData, 'name', '')
                                                     @endif

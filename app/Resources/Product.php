@@ -207,6 +207,14 @@ class Product extends ResourceAbstract
                         [
                             'label' => 'Premium',
                             'value' => 'Premium'
+                        ],
+                        [
+                            'label' => 'Private',
+                            'value' => 'Private'
+                        ],
+                        [
+                            'label' => 'Professional',
+                            'value' => 'Professional'
                         ]
                     ]
                 ],

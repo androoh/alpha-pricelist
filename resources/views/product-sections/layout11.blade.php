@@ -34,8 +34,6 @@
                         @php
                             $price = data_get($prices, getPriceKey($categoryId, $parentProduct, $productOptionData), ['value' => 0, 'onDemand' => false]);
                             $formatType = data_get($productOptionData, 'price_options.type', null);
-                            $productPhoto = data_get($productOptionData, 'optionProductFields.option_photo.0', null);
-                            $photoUrl = $productPhoto ? data_get($productPhoto, 'name', null) : null;
                         @endphp
                         <tr class="page-break-inside-avoid page-break-after-avoid">
                             <td colspan="3" class="title-row fw-bold">

@@ -20,11 +20,11 @@
                 $packagingTransportAdditional = data_get($productModelData, 'modelProductFields.packagingTransportAdditional', null);
                 $parts = data_get($packagingTransport, 'parts', []);
                 if ($packagingTransport) {
-                    $packagingImages = data_get($packagingTransport, 'technical_design', []) ?? [];
+                    $packagingImages = getImagesFromPath($packagingTransport, 'technical_design', []) ?? [];
                 }
                 $partsAdditional = data_get($packagingTransportAdditional, 'parts', []);
                 if ($packagingTransportAdditional) {
-                    $packagingImagesAdditional = data_get($packagingTransportAdditional, 'technical_design', []) ?? [];
+                    $packagingImagesAdditional = getImagesFromPath($packagingTransportAdditional, 'technical_design', []) ?? [];
                 }
             }
         }

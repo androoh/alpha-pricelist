@@ -217,6 +217,10 @@ class PriceList extends ResourceAbstract
                             'label' => 'Trade',
                             'value' => 'Trade'
                         ],
+                        [
+                            'label' => 'Retail',
+                            'value' => 'Retail'
+                        ],
                     ]
                 ]
             ]),
@@ -536,10 +540,11 @@ class PriceList extends ResourceAbstract
                 'fieldGroup' => [
                     new FormlyFieldConfig([
                         'key' => 'delivery_details',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Delivery details',
                             'translatable' => true,
+                            'html' => true
                         ]
                     ]),
                     new FormlyFieldConfig([
