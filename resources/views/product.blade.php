@@ -1,7 +1,7 @@
 <div class="product-page" id="product-{{ $product->getKey() }}">
     <div class="left-header">
         <div class="d-flex justify-content-start">
-            <div class="price-list-type">{{__(data_get($resourceData, 'type', 'Trade'))}}</div>
+            <div class="price-list-type">{{ __(data_get($resourceData, 'type', 'Trade')) }}</div>
             <div class="product-complexity ms-4">{{ data_get($product, 'mainProductFields.complexity', __('Basic')) }}
             </div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>
@@ -52,7 +52,8 @@
                     @endphp
                     @if ($mainPhoto)
                         <div class="main-photo w-100 p-4">
-                            @include('render-image', ['photo' => data_get($mainPhoto, '0'), 'class' => ['w-100', 'd-block']])
+                            @include('render-image', ['photo' => data_get($mainPhoto, '0'), 'class' => ['w-100',
+                            'd-block']])
                             @if ($mainPhotoInfoNote)
                                 <div class="info-note">{{ $mainPhotoInfoNote }}</div>
                             @endif
@@ -95,17 +96,30 @@
                     @endphp
                     <div class="info-icons">
                         @foreach ($infoIconsArr as $infoIconPhoto)
-                            @include('render-image', ['photo' => data_get($infoIconPhoto, '0'), 'style' => 'height: 35pt'])
+                            @include('render-image', ['photo' => data_get($infoIconPhoto, '0'), 'style' => 'height:
+                            35pt'])
                         @endforeach
                     </div>
                 </td>
             </tr>
         </table>
-        @include('product-models', ['categoryId' => $categoryId, 'product' => $product, 'prices' =>
-        data_get($resourceData, 'prices', [])])
-        @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => $product,'productSections' =>
-        data_get($product, 'mainProductFields.product_sections', []), 'prices' => data_get($resourceData, 'prices',
-        [])])
+        @php
+            $pricelistType = data_get($resourceData, 'type', 'Trade');
+            $pricelistTypeAcr = ($pricelistType === 'Trade') ? 'TP' : 'RP';
+         @endphp
+        @include('product-models', [
+            'categoryId' => $categoryId,
+            'product' => $product,
+            'prices' => data_get($resourceData, 'prices', []),
+            'pricelistTypeAcr' => $pricelistTypeAcr
+        ])
+        @include('product-sections', [
+            'categoryId' => $categoryId,
+            'parentProduct' => $product,
+            'pricelistTypeAcr' => $pricelistTypeAcr,
+            'productSections' => data_get($product, 'mainProductFields.product_sections', []),
+            'prices' => data_get($resourceData, 'prices', [])
+        ])
         @include('product-models-packaging-transport', ['product' => $product])
         @if (count($awardsPhotos) > 0)
             <div class="awards-photots-section page-break-inside-avoid">

@@ -35,7 +35,7 @@
                 <th>{{__($column)}}</th>
             @endforeach
             <th>{{__('Art. No.')}}</th>
-            <th>{{__('TP')}}</th>
+            <th>{{__($pricelistTypeAcr ?? 'TP')}}</th>
         </tr>
         </thead>
         <tbody>

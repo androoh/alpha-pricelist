@@ -13,7 +13,7 @@
                         <th style="width: 15%">{{__('Min. order qty')}}</th>
                     @endif
                     <th>{{__('Art. No.')}}</th>
-                    <th>{{__('TP')}}</th>
+                    <th>{{__($pricelistTypeAcr ?? 'TP')}}</th>
                 </tr>
             </thead>
             @php

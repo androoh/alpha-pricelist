@@ -2,6 +2,8 @@
 $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage', false);
 $leftPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'left_page_photo');
 $rightPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'right_page_photo');
+$pricelistType = data_get($resourceData, 'type', 'Trade');
+$pricelistTypeAcr = ($pricelistType === 'Trade') ? 'TP' : 'RP';
 @endphp
 @if ($optionsAndAccessoriesPage)
     <div class="category-page-left"
@@ -35,9 +37,11 @@ $rightPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'right_page_phot
             <div class="footer-text-3">@t($optionsAndAccessoriesPage, 'footer_text_3', '')</div>
             <div class="page-counter"></div>
         </div>
-        @include('product-sections', ['categoryId' => null, 'parentProduct' => null, 'productSections' =>
-        data_get($optionsAndAccessoriesPage, 'product_options_sections', []), 'prices' => data_get($resourceData,
-        'prices',
-        [])])
+        @include('product-sections', [
+            'categoryId' => null,
+            'parentProduct' => null,
+            'pricelistTypeAcr' => $pricelistTypeAcr,
+            'productSections' => data_get($optionsAndAccessoriesPage, 'product_options_sections', []),
+            'prices' => data_get($resourceData, 'prices', [])])
     </div>
 @endif

@@ -21,7 +21,7 @@
                     <th style="width: 15%">{{__('Min. order qty')}}</th>
                 @endif
                 <th style="width: 15%">{{__('Art. No.')}}</th>
-                <th style="width: 15%">{{__('TP')}}</th>
+                <th style="width: 15%">{{__($pricelistTypeAcr ?? 'TP')}}</th>
             </tr>
             @foreach($productOptions as $productOption)
                 @php
