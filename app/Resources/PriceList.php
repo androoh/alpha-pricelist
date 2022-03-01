@@ -598,10 +598,11 @@ class PriceList extends ResourceAbstract
                     ]),
                     new FormlyFieldConfig([
                         'key' => 'info_note',
-                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
+                        'type' => FormlyFieldConfig::FIELD_TYPE_TEXTAREA_TRANSLATABLE,
                         'templateOptions' => [
                             'label' => 'Info note',
                             'translatable' => true,
+                            'html' => true
                         ]
                     ]),
                     new FormlyFieldConfig([
