@@ -1,7 +1,7 @@
 <div class="product-page" id="product-{{ $product->getKey() }}">
     <div class="left-header">
         <div class="d-flex justify-content-start">
-            <div class="price-list-type">@t($resourceData, 'firstPage.type', __('Trade'))</div>
+            <div class="price-list-type">{{__(data_get($resourceData, 'type', 'Trade'))}}</div>
             <div class="product-complexity ms-4">{{ data_get($product, 'mainProductFields.complexity', __('Basic')) }}
             </div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>

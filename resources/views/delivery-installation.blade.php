@@ -44,7 +44,7 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
     </div>
     <div class="right-header">
         <div class="d-flex justify-content-end">
-            <div class="category-name">@t($resourceData, 'firstPage.type', 'Trade')</div>
+            <div class="category-name">{{__(data_get($resourceData, 'type', 'Trade'))}}</div>
         </div>
     </div>
     <div class="product-options-page-footer-left product-options-page-footer">

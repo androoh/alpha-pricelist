@@ -16,7 +16,7 @@ $rightPathPhoto = getImagesFromPath($optionsAndAccessoriesPage, 'right_page_phot
         </div>
         <div class="right-header">
             <div class="d-flex justify-content-end">
-                <div class="category-name">@t($resourceData, 'firstPage.type', __('Trade'))</div>
+                <div class="category-name">{{__(data_get($resourceData, 'type', 'Trade'))}}</div>
             </div>
         </div>
         <div class="product-options-page-footer-left product-options-page-footer">
