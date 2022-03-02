@@ -71,6 +71,7 @@ export class FileComponent extends FieldType implements OnInit {
 
 
     this.uploader.response.pipe(map((result: string) => JSON.parse(result))).subscribe((response: ImageResponse) => {
+      console.log(response);
       if (this.to.multiple === true) {
         this.currentValue.push(response);
       } else {
@@ -162,6 +163,8 @@ export class FileComponent extends FieldType implements OnInit {
 
   removeValue(item: ImageResponse) {
     this.currentValue = this.currentValue.filter((image: ImageResponse) => image.id !== item.id);
-    this.formControl.setValue(this.currentValue);
+    const currentValue = this.formControl.value;
+    currentValue[this.language] = this.currentValue;
+    this.formControl.setValue(currentValue);
   }
 }

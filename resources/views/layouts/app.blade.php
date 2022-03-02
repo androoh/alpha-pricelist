@@ -41,7 +41,6 @@
                     const lastChild = sourceBody[sourceBody.length - 1];
 
                     if (!firstChild) {
-                        console.log("blin", firstChild);
                         table.style.visibility = "hidden";
                         table.style.position = "absolute";
                         let lineSpacer = table.nextSibling;
@@ -52,13 +51,11 @@
                     }
 
                     if (firstChild && this.emptyRow(firstChild)) {
-                        console.log("first child", firstChild);
                         firstChild.style.visibility = "hidden";
                         firstChild.style.display = "none";
                     }
 
                     if (lastChild && this.emptyRow(lastChild)) {
-                        console.log("last child", firstChild);
                         lastChild.style.visibility = "hidden";
                         lastChild.style.display = "none";
                     }

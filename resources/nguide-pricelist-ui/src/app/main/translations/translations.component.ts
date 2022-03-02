@@ -12,11 +12,17 @@ export class TranslationsComponent implements OnInit {
   public defaultLocale: string = 'en';
   public locales: any[] = [];
   public translations: {_id: string; group: string; key: string; text: any}[] = [];
+  public translationsDelete: {_id: string; group: string; key: string; text: any}[] = [];
 
   constructor(private breadcrumbService: BreadcrumbService, private translationsService: TranslationsService, private alertsService: AlertsService) { }
 
   ngOnInit(): void {
     this.initBreadcrumb();
+    this.getTranslations();
+  }
+
+  getTranslations(): void {
+    this.translationsDelete = [];
     this.translationsService.getTranslations().subscribe((translationResults: TranslationsResponse) => {
       this.translations = translationResults.translations.map((translation: any) => {
         if (translation?.text && Array.isArray(translation.text)) {
@@ -26,7 +32,7 @@ export class TranslationsComponent implements OnInit {
       });
       this.defaultLocale = translationResults.defaultLocale;
       this.locales = this.mapLocales(translationResults.locales);
-    })
+    });
   }
 
   initBreadcrumb(): void {
@@ -51,8 +57,9 @@ export class TranslationsComponent implements OnInit {
         return;
       }
     }
-    this.translationsService.saveTranslations(this.translations).subscribe((result: any) => {
+    this.translationsService.saveTranslations(this.translations, this.translationsDelete).subscribe((result: any) => {
       this.alertsService.show(AlertType.success, 'Translations updated!');
+      this.getTranslations();
     });
   }
 
@@ -63,5 +70,10 @@ export class TranslationsComponent implements OnInit {
       group: '*',
       text: {}
     });
+  }
+
+  remove(translation: any): void {
+    this.translations = this.translations.filter((translationItem: any) => translationItem.key !== translation.key);
+    this.translationsDelete.push(translation);
   }
 }

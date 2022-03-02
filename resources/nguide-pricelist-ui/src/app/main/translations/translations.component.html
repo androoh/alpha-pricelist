@@ -13,6 +13,7 @@
         <th style="min-width: 200px" *ngFor="let locale of locales">
           {{ locale.value }}
         </th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
             [(ngModel)]="translation.text[locale.key]"
           />
         </td>
+        <td><button type="button" class="btn btn-danger btn-sm text-nowrap" (click)="remove(translation)"><i class="bi bi-trash"></i> Remove</button></td>
       </tr>
     </tbody>
   </table>

@@ -28,7 +28,7 @@ export class TranslationsService {
     return this.http.get<TranslationsResponse>(environment.apiBaseURL + 'translations');
   }
 
-  saveTranslations(translations: {_id: string; group: string; key: string; text: any}[]): Observable<any> {
-    return this.http.put(environment.apiBaseURL + 'translations', {translations: translations});
+  saveTranslations(translations: {_id: string; group: string; key: string; text: any}[], translationsDelete: {_id: string; group: string; key: string; text: any}[]): Observable<any> {
+    return this.http.put(environment.apiBaseURL + 'translations', {translations, translationsDelete});
   }
 }

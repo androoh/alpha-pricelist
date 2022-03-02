@@ -230,7 +230,6 @@ class PriceList extends ResourceAbstract
                 'defaultValue' => date('Y'),
                 'templateOptions' => [
                     'label' => 'Year',
-                    'required' => true,
                     'showInGrid' => true
                 ],
             ]),
