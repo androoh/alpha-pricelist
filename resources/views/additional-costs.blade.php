@@ -36,7 +36,7 @@ $infoNote = translateFromPath($additionalCostsPage, 'info_note', null);
     @if ($infoNote)
         <div class="info-note">
             {{__('Info Note')}} <br/>
-            {{$infoNote}}
+            {!!$infoNote!!}
         </div>
     @endif
 </div>

@@ -72,7 +72,7 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
                     <tr style="border-bottom: 2pt #4D545E solid;">
                         <th>{{__('Description')}}</th>
                         <th>{{__('Installation costs')}}</th>
-                        <th>{{__('Delivery Costs')}} <span class="delivery-details fst-italic">{{ $deliveryDetails }}</span>
+                        <th>{{__('Delivery Costs')}} <span class="delivery-details fst-italic">{!! $deliveryDetails !!}</span>
                         </th>
                     </tr>
                 </thead>
