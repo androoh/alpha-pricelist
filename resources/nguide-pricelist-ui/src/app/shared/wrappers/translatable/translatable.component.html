@@ -11,7 +11,7 @@
     <div class="col-4 mt-1 pb-1 text-end">
       <span
         class="language badge bg-secondary ms-2 cursor-pointer bg-light text-dark"
-        *ngIf="to?.defaultLocale && language !== to?.defaultLocale"
+        *ngIf="to?.translatable && to?.defaultLocale && language !== to?.defaultLocale"
         placement="left"
         [popover]="popTemplate"
         [outsideClick]="true"

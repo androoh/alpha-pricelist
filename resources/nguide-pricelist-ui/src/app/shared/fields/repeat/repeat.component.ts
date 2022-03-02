@@ -10,6 +10,18 @@ import {FormlyFieldConfigCustom} from '../../formly-field-config-custom';
   styleUrls: ['./repeat.component.scss']
 })
 export class RepeatComponent extends FieldArrayType<FormlyFieldConfigCustom> {
+  language = 'en';
+
+  ngOnInit(): void {
+    if (this.to?.language) {
+      this.to.language.subscribe((language: string) => {
+        if (language) {
+          this.language = language;
+        }
+      })
+    }
+  }
+
   drop(event: CdkDragDrop<string[]>) {
     if (this.field.fieldGroup) {
       const currentValue = this.formControl.value;
@@ -25,7 +37,7 @@ export class RepeatComponent extends FieldArrayType<FormlyFieldConfigCustom> {
     event.stopPropagation();
     let path = this.field.path.join('.');
     path += '.' + i;
-    const url = environment.apiBaseURL + 'resources/' + this.field.resourceName + '/' + this.field.resourceId + '/html?path=' + path + '&template=' + this.to.preview;
+    const url = environment.apiBaseURL + 'resources/' + this.field.resourceName + '/' + this.field.resourceId + '/html?path=' + path + '&template=' + this.to.preview + '&locale=' + this.language;
     window.open(url, '_blank')?.focus();
   }
 }
