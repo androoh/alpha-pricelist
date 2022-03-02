@@ -127,13 +127,13 @@ export class EditComponent implements OnInit {
 
       if (f.type === 'translatable-input' || f.type === 'translatable-textarea' || f.type === 'images') {
         f.templateOptions['translatable'] = true;
+        f.wrappers = [...(f.wrappers || []), 'translatable'];
       }
-      if (!f.templateOptions?.language) {
-        f.templateOptions.language = new BehaviorSubject(language);
-      } else {
-        f.templateOptions.language.next(language);
-      }
-      f.wrappers = [...(f.wrappers || []), 'translatable'];
+        if (!f.templateOptions?.language) {
+          f.templateOptions.language = new BehaviorSubject(language);
+        } else {
+          f.templateOptions.language.next(language);
+        }
       f.resourceId = this.resourceId;
       f.resourceName = this.resourceName;
       f.templateOptions['defaultLocale'] = this.defaultLocale;
