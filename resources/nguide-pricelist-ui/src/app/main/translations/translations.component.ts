@@ -73,7 +73,7 @@ export class TranslationsComponent implements OnInit {
   }
 
   remove(translation: any): void {
-    this.translations = this.translations.filter((translationItem: any) => translationItem.key !== translation.key);
+    this.translations = this.translations.filter((translationItem: any) => translationItem._id + translationItem.key  !== translation._id + translation.key);
     this.translationsDelete.push(translation);
   }
 }
