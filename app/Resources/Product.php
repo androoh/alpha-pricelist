@@ -106,10 +106,6 @@ class Product extends ResourceAbstract
                                     'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_PER_SQM
                                 ],
                                 [
-                                    'label' => 'Price per linear meter',
-                                    'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_LM
-                                ],
-                                [
                                     'label' => 'Price per running meter',
                                     'value' => \App\Models\Product::PRODUCT_PRICE_TYPE_RM
                                 ],
@@ -310,7 +306,6 @@ class Product extends ResourceAbstract
                     new FormlyFieldConfig([
                         'key' => 'has_instalation_delivery_costs',
                         'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
-                        'defaultValue' => true,
                         'templateOptions' => [
                             'label' => 'Has Installation and Delivery Costs'
                         ]

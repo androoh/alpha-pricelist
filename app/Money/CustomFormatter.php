@@ -27,7 +27,7 @@ class CustomFormatter implements \Money\MoneyFormatter
             return $floatAmount. ' '. $currency . '/m';
         }
         if ($this->formatType === Product::PRODUCT_PRICE_TYPE_RM) {
-            return $floatAmount. ' '. $currency . '/rm';
+            return $floatAmount. ' '. $currency . '/' . __('rm');
         }
         return money($money->getAmount());
     }
