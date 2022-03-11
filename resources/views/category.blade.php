@@ -33,11 +33,17 @@ $rightPagePhoto = getImagesFromPath($treeItem, 'right_page_photo');
     @endforeach
     @php
         $productSections = data_get($treeItem, 'product_options_sections', []) ?? [];
+        $pricelistType = data_get($resourceData, 'type', 'Trade');
+        $pricelistTypeAcr = ($pricelistType === 'Trade') ? 'TP' : 'RP';
     @endphp
     @if (count($productSections) > 0)
         <div class="product-page">
-            @include('product-sections', ['categoryId' => $categoryId, 'parentProduct' => null, 'productSections' =>
-            $productSections, 'prices' => data_get($resourceData, 'prices', [])])
+            @include('product-sections', [
+                'categoryId' => $categoryId,
+                'parentProduct' => null,
+                'pricelistTypeAcr' => $pricelistTypeAcr,
+                'productSections' => $productSections, 'prices' => data_get($resourceData, 'prices', [])
+            ])
         </div>
     @endif
 @endif

@@ -21,7 +21,7 @@
     @include('toc-page', ['resourceData' => $resourceData])
     @include('info-icons-page', ['resourceData' => $resourceData])
     @foreach(data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem)
-        @include('category', ['treeItem' => $treeItem])
+        @include('category', ['treeItem' => $treeItem, 'resourceData' => $resourceData])
     @endforeach
     @include('options-accessories-page', ['resourceData' => $resourceData])
     @include('delivery-installation', ['resourceData' => $resourceData])
