@@ -573,9 +573,10 @@ class Product extends ResourceAbstract
                                 'fieldGroup' => [
                                     new FormlyFieldConfig([
                                         'key' => 'info_value',
-                                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT,
+                                        'type' => FormlyFieldConfig::FIELD_TYPE_INPUT_TRANSLATABLE,
                                         'templateOptions' => [
                                             'label' => 'Info value',
+                                            'translatable' => true
                                         ]
                                     ]),
                                 ]
