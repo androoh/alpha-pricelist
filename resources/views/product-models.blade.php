@@ -12,7 +12,7 @@
                 $columns[] = 'Model';
             }
             $row['data'] = $productModelData;
-            $row['Model'] = [['info_value' => translateFromPath($productModelData, 'name', '')]];
+            $row['Model'] = [['info_value' => data_get($productModelData, 'name', null)]];
             foreach ($additionalInformation as $info) {
                 $infoType = data_get($info, 'info_type', false);
                 $infoValues = data_get($info, 'info_values', []);
