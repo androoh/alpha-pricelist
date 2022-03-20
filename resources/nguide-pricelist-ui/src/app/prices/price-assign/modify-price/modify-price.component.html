@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h5 class="modal-title">Modify prices</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  ></button>
+</div>
+<div class="modal-body">
+  <label for="actionType">Action Type</label>
+  <select
+    class="form-select"
+    id="actionType"
+    name="actionType"
+    [(ngModel)]="selectedPriceModifier.type"
+  >
+    <option value="increase" [ngValue]="'increase'">Increase</option>
+    <option value="discount" [ngValue]="'discount'">Discount</option>
+  </select>
+  <label for="value">Value</label>
+  <input id="value" type="number" class="form-control" [(ngModel)]="selectedPriceModifier.value" />
+  <label for="actionType">Value Type</label>
+  <select
+    class="form-select"
+    id="actionType"
+    name="actionType"
+    [(ngModel)]="selectedPriceModifier.valueType"
+  >
+    <option value="%" [ngValue]="'%'">%</option>
+    <option value="value" [ngValue]="'value'">value</option>
+  </select>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="modifyPrices()">
+    Apply
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">
+    Cancel
+  </button>
+</div>

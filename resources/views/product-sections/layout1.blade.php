@@ -12,7 +12,9 @@
                         <th style="width: 15%">{{ __('Min. order qty') }}</th>
                     @endif
                     <th>{{ __('Art. No.') }}</th>
+                    @if (!$hidePrices)
                     <th>{{ __($pricelistTypeAcr ?? 'TP') }}</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +64,7 @@
                                 <td>{{ data_get($productOptionData, 'optionProductFields.min_order_qty', 1) }}</td>
                             @endif
                             <td class="sku">{{ data_get($productOptionData, 'sku', '') }}</td>
+                            @if (!$hidePrices)
                             <td class="price">
                                 @if ($price['onDemand'])
                                     {{ __('on demand') }}
@@ -69,6 +72,7 @@
                                     @price($price['value'] * 100, $formatType)
                                 @endif
                             </td>
+                            @endif
                         </tr>
                     @endif
                 @endforeach

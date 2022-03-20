@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {SelectionType} from '@swimlane/ngx-datatable';

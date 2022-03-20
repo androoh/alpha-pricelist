@@ -4,6 +4,8 @@ import {PricesResponse, PricesResult, PricesService} from '../services/prices.se
 import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {ActivatedRoute} from '@angular/router';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModifyPriceComponent, PriceModifier } from './modify-price/modify-price.component';
 
 @Component({
   selector: 'app-price-assign',
@@ -16,8 +18,10 @@ export class PriceAssignComponent implements OnInit {
   pricesModel: any = {};
   priceListId: string | null = null;
   defaultLocale: string = 'nl';
+  bsModalRef: BsModalRef;
 
   constructor(private resourcesService: ResourcesService,
+              private modalService: BsModalService,
               private activatedRoute: ActivatedRoute,
               private pricesService: PricesService,
               private breadcrumbService: BreadcrumbService,
@@ -42,11 +46,13 @@ export class PriceAssignComponent implements OnInit {
       for (let item of this.priceLists) {
         if (item.type === 'product_main') {
           const price: {
+            selected: boolean;
             delivery_price: number | string;
             installation_price: number | string;
             delivery_price_on_demand: boolean;
             installation_price_on_demand: boolean;
           } = {
+            selected: false,
             delivery_price: item.price?.delivery_price || 0,
             installation_price: item.price?.installation_price || 0,
             delivery_price_on_demand: item.price?.delivery_price_on_demand || false,
@@ -54,7 +60,8 @@ export class PriceAssignComponent implements OnInit {
           };
           this.pricesModel[item.id] = price;
         } else {
-          const price: {value: number | string; onDemand: boolean} = {
+          const price: {value: number | string; onDemand: boolean; selected: boolean;} = {
+            selected: false,
             value: item.price?.value || 0,
             onDemand: item.price?.onDemand || false
           };
@@ -62,6 +69,46 @@ export class PriceAssignComponent implements OnInit {
         }
       }
     });
+  }
+
+  selectAll(data: any): void {
+    for (const itemId in this.pricesModel) {
+      if (this.pricesModel.hasOwnProperty(itemId)) {
+        this.pricesModel[itemId].selected = data.target.checked;
+      }
+    }
+  }
+
+  modifyPrices(): void {
+    this.bsModalRef = this.modalService.show(ModifyPriceComponent, {initialState: {}, class: 'modal-lg'});
+    this.bsModalRef.content.priceModifier.subscribe((modifier: PriceModifier) => {
+      if (modifier) {
+        for (const itemId in this.pricesModel) {
+          if (this.pricesModel.hasOwnProperty(itemId) && this.pricesModel[itemId].selected) {
+            if (this.pricesModel[itemId].hasOwnProperty('delivery_price') || this.pricesModel[itemId].hasOwnProperty('installation_price')) {
+              this.pricesModel[itemId].delivery_price = this.applyModifier(Number(this.pricesModel[itemId].delivery_price), modifier);
+              this.pricesModel[itemId].installation_price = this.applyModifier(Number(this.pricesModel[itemId].installation_price), modifier);
+            } else {
+              this.pricesModel[itemId].value = this.applyModifier(Number(this.pricesModel[itemId].value), modifier);
+            }
+          }
+        }
+        this.bsModalRef.hide();
+      }
+    });
+  }
+
+  applyModifier(value: number, modifier: PriceModifier): number {
+    let modifierValue = Number(modifier.value);
+    if (modifier.valueType === '%') {
+      modifierValue = modifierValue * value / 100;
+    }
+    if (modifier.type === 'discount') {
+      value -= modifierValue;
+    } else {
+      value += modifierValue;
+    }
+    return value < 0 ? 0 : value;
   }
 
   submit() {

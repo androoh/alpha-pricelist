@@ -4,7 +4,9 @@
             <tr>
                 <th>{{ __('Description') }}</th>
                 <th>{{ __('Art. No.') }}</th>
+                @if (!$hidePrices)
                 <th>{{ __($pricelistTypeAcr ?? 'TP') }}</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -63,6 +65,7 @@
                                 @endswitch
                             </td>
                             <td class="sku">{{ data_get($productOptionData, 'sku', '') }}</td>
+                            @if (!$hidePrices)
                             <td class="price">
                                 @if ($price['onDemand'])
                                     {{ __('on demand') }}
@@ -70,6 +73,7 @@
                                     @price($price['value'] * 100, $formatType)
                                 @endif
                             </td>
+                            @endif
                         </tr>
                     @endif
                 @endforeach

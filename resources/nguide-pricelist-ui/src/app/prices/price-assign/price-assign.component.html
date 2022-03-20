@@ -3,6 +3,14 @@
   <div class="col-3 text-end">
     <button
       type="button"
+      class="btn btn-primary submit-button me-2"
+      (click)="modifyPrices()"
+      [disabled]="!priceListId"
+    >
+      <i class="bi bi-save"></i> Modify prices
+    </button>
+    <button
+      type="button"
       class="btn btn-primary submit-button"
       (click)="submit()"
       [disabled]="!priceListId"
@@ -14,6 +22,7 @@
 <table class="table mt-2" *ngIf="priceLists.length > 0">
   <thead>
     <tr>
+      <th><input type="checkbox" (input)="selectAll($event)"/></th>
       <th>Name</th>
       <th>Sku</th>
       <th style="width: 200px">Price</th>
@@ -22,6 +31,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let priceList of priceLists">
+      <td><input type="checkbox" [(ngModel)]="pricesModel[priceList.id].selected" title="Select All"/></td>
       <td>{{ priceList.name || "-" }}</td>
       <td>{{ priceList.sku }}</td>
       <ng-container *ngIf="priceList.type === 'product_main'">

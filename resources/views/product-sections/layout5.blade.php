@@ -45,6 +45,7 @@
                                         </div>
                                         <div class="product-item-footer text-end float-end">
                                             {{data_get($productOptionData, 'sku', '')}}
+                                            @if (!$hidePrices)
                                             <span class="price">
                                                 @if ($price['onDemand'])
                                                     {{__('on demand')}}
@@ -52,6 +53,7 @@
                                                     @price($price['value'] * 100, $formatType)
                                                 @endif
                                             </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

@@ -49,8 +49,10 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
                 @endphp
             @endforeach
         </div>
+        @if (!$hidePrices)
         <div class="category-section mb-2 page-break-inside-avoid">
             <h3 class="category-item"><a href="#delivery-installation">{{__('Delivery & Installation')}}</a></h3>
         </div>
+        @endif
     </div>
 </div>

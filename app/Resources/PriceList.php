@@ -245,6 +245,13 @@ class PriceList extends ResourceAbstract
                 ]
             ]),
             new FormlyFieldConfig([
+                'key' => 'hidePrices',
+                'type' => FormlyFieldConfig::FIELD_TYPE_CHECKBOX,
+                'templateOptions' => [
+                    'label' => 'Hide prices'
+                ]
+            ]),
+            new FormlyFieldConfig([
                 'key' => 'firstPage',
                 'wrappers' => ['panel'],
                 'templateOptions' => [

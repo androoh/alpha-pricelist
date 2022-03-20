@@ -13,6 +13,7 @@ import {RepeatComponent} from '../shared/fields/repeat/repeat.component';
 import {HasManyComponent} from '../shared/fields/has-many/has-many.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PreviewComponent } from './preview/preview.component';
+import { ModifyPriceComponent } from './price-assign/modify-price/modify-price.component';
 
 const routes: Routes = [
   {path: ':id', component: PriceAssignComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PriceAssignComponent,
-    PreviewComponent
+    PreviewComponent,
+    ModifyPriceComponent
   ],
   imports: [
     CommonModule,

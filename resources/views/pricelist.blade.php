@@ -15,6 +15,7 @@
         $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage', false);
         $currency = data_get($resourceData, 'currency', 'EUR');
         setGlobalCurrency($currency);
+        $hidePrices = data_get($resourceData, 'hidePrices', false);
     @endphp
     @include('first-page', ['resourceData' => $resourceData])
     @include('second-page', ['resourceData' => $resourceData])
@@ -24,6 +25,8 @@
         @include('category', ['treeItem' => $treeItem, 'resourceData' => $resourceData])
     @endforeach
     @include('options-accessories-page', ['resourceData' => $resourceData])
-    @include('delivery-installation', ['resourceData' => $resourceData])
+    @if (!$hidePrices)
+        @include('delivery-installation', ['resourceData' => $resourceData])
+    @endif
     @include('last-page', ['resourceData' => $resourceData])
 @endsection
