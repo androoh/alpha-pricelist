@@ -105,7 +105,7 @@ foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem
                                     @if ($deliveryPriceOnDemand)
                                         {{__('on demand')}}
                                     @else
-                                        @price($deliveryPrice * 100, $formatType)
+                                        @price(round($deliveryPrice * 100), $formatType)
                                         {{ $productItem['deliveryCostDetails'] }}
                                     @endif
                                 </td>

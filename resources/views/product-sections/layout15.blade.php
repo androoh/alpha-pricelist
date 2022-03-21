@@ -61,7 +61,7 @@
                                                     @if ($price['onDemand'])
                                                         {{__('on demand')}}
                                                     @else
-                                                        @price($price['value'] * 100, $formatType)
+                                                        @price(round($price['value'] * 100), $formatType)
                                                     @endif
                                                 </td>
                                                 @endif
