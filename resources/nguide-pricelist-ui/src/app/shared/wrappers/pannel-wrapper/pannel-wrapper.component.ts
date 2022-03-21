@@ -10,6 +10,7 @@ import {FormlyFieldConfigCustom} from '../../formly-field-config-custom';
 })
 export class PannelWrapperComponent extends FieldWrapper<FormlyFieldConfigCustom> {
   language = 'en';
+  show = false;
 
   ngOnInit(): void {
     if (this.to?.language) {
