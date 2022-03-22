@@ -104,7 +104,8 @@ class PagedMedia extends Controller
             'pageSize' => $pageSize,
             'pageOrientation' => $pageOrientation,
             'showCropBorders' => $showCropBorders,
-            'showCross' => $showCross
+            'showCross' => $showCross,
+            'hidePrices' => data_get($resourceData, 'hidePrices', false)
         ]);
     }
 }
