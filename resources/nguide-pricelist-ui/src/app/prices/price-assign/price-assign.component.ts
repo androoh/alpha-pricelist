@@ -109,10 +109,12 @@ export class PriceAssignComponent implements OnInit {
       value += modifierValue;
     }
     value = Math.round(value);
-    if (value % 10 >= 5) {
-      value = Math.round(value / 10) * 10;
-    } else {
-      value = Math.round(value / 5) * 5;
+    if (value >= 100) {
+      if (value % 10 > 5) {
+        value = Math.round(value / 10) * 10;
+      } else if (value % 10 < 5) {
+        value = Math.round(value / 5) * 5;
+      }
     }
     return value < 0 ? 0 : value;
   }
