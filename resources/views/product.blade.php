@@ -2,14 +2,14 @@
     <div class="left-header">
         <div class="d-flex justify-content-start">
             <div class="price-list-type">{{ __(data_get($resourceData, 'type', 'Trade')) }}</div>
-            <div class="product-complexity ms-4">{{ data_get($product, 'mainProductFields.complexity', __('Basic')) }}
+            <div class="product-complexity ms-4">{{ __(data_get($product, 'mainProductFields.complexity', 'Basic')) }}
             </div>
             <div class="category-name ms-3">@t($category, 'name', '-')</div>
         </div>
     </div>
     <div class="right-header">
         <div class="d-flex justify-content-end">
-            <div class="product-complexity me-4">{{ data_get($product, 'mainProductFields.complexity', __('Basic')) }}
+            <div class="product-complexity me-4">{{  __(data_get($product, 'mainProductFields.complexity','Basic')) }}
             </div>
             <div class="category-name">@t($category, 'name', '-')</div>
         </div>
