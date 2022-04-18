@@ -681,7 +681,8 @@ class Product extends ResourceAbstract
                 'templateOptions' => [
                     'label' => 'Option Photos',
                     'accept' => ['image/*'],
-                    'multiple' => true
+                    'multiple' => true,
+                    'showConfig' => true
                 ]
             ]),
             new FormlyFieldConfig([
