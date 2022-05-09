@@ -24,9 +24,11 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
                                     $product = \App\Models\Product::find($productId);
                                 }
                             @endphp
-                            <div class="category-item"><a href="#product-{{ $product->getKey() }}">@t($product,
-                                    'name',
-                                    '')</a></div>
+                            @if ($product)
+                                <div class="category-item"><a href="#product-{{ $product->getKey() }}">@t($product,
+                                        'name',
+                                        '')</a></div>
+                            @endif
                         @endforeach
                     </div>
                 @endif
