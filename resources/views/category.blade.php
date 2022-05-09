@@ -27,14 +27,20 @@ $rightPagePhoto = getImagesFromPath($treeItem, 'right_page_photo');
                 $product = \App\Models\Product::find($productId);
             }
         @endphp
-        @include('product', ['treeItem' => $treeItem, 'categoryId' => $categoryId, 'product' => $product, 'resourceData'
-        => $resourceData, 'category'
-        => $category])
+        @if ($product)
+            @include('product', [
+                'treeItem' => $treeItem,
+                'categoryId' => $categoryId,
+                'product' => $product,
+                'resourceData' => $resourceData,
+                'category' => $category,
+            ])
+        @endif
     @endforeach
     @php
         $productSections = data_get($treeItem, 'product_options_sections', []) ?? [];
         $pricelistType = data_get($resourceData, 'type', 'Trade');
-        $pricelistTypeAcr = ($pricelistType === 'Trade') ? 'TP' : 'RP';
+        $pricelistTypeAcr = $pricelistType === 'Trade' ? 'TP' : 'RP';
     @endphp
     @if (count($productSections) > 0)
         <div class="product-page">
@@ -42,7 +48,8 @@ $rightPagePhoto = getImagesFromPath($treeItem, 'right_page_photo');
                 'categoryId' => $categoryId,
                 'parentProduct' => null,
                 'pricelistTypeAcr' => $pricelistTypeAcr,
-                'productSections' => $productSections, 'prices' => data_get($resourceData, 'prices', [])
+                'productSections' => $productSections,
+                'prices' => data_get($resourceData, 'prices', []),
             ])
         </div>
     @endif
