@@ -490,8 +490,6 @@ table.options-table {
         padding-right: 7pt;
 
         &::after {
-          position: absolute;
-          right: 0;
           background-color: white;
           padding-left: 3pt;
           content: target-counter(attr(href), page);

@@ -10399,8 +10399,6 @@ table.options-table .title-row {
   padding-right: 7pt;
 }
 .toc-page .category-section .category-item a::after {
-  position: absolute;
-  right: 0;
   background-color: white;
   padding-left: 3pt;
   content: target-counter(attr(href), page);
