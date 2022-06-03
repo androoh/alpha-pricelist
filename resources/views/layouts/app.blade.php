@@ -2,7 +2,7 @@
 <head>
     <title>{{translateFromPath($resourceData, 'name', 'Price List')}}</title>
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
-    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <script src="{{ asset('js/paged.polyfill.js') }}"></script>
     <script>
         class RepeatingTableHeaders extends Paged.Handler {
 
