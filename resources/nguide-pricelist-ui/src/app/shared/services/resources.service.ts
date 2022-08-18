@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription, timer} from 'rxjs';
 import {FieldsService} from '../../resources/services/fields.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {FormlyFieldConfig} from '@ngx-formly/core';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap, share, retry, takeUntil} from 'rxjs/operators';
+import { RUN_IN_BACKGROUND } from '../interceptors/loading-interceptor.service';
 
 export class ResourceListListResponse {
   columns: Column[];
@@ -267,4 +268,16 @@ export class ResourcesService {
   clear(): void {
     this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
   }
+
+  pollDownload(id: string, language = 'en'): Observable<any> {
+    return timer(0, 10000).pipe(
+      switchMap(() => this.http.get<any>( environment.apiBaseURL + '/' + RUN_IN_BACKGROUND + 'pricelist/' + id + '/' + language + '/pdf/url')),
+      retry(),
+      share()
+   );
+ }
+
+ startProcessing(id: string, language = 'en'): Observable<any> {
+  return this.http.get<any>(environment.apiBaseURL + 'pricelist/' + id + '/' + language + '/pdf/process');
+ }
 }

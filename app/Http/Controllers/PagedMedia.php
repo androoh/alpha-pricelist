@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\PriceList;
 use App\Models\Product;
+use App\Models\PricelistProcessing;
 use Illuminate\Http\Request;
 use App\Http\Requests\ResourceRequest;
+use App\Jobs\GeneratePdf;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class PagedMedia extends Controller
 {
@@ -73,7 +76,41 @@ class PagedMedia extends Controller
 
     public function opetionSection(Request $request)
     {
+    }
 
+    public function getPdfUrl($id, $language = 'en')
+    {
+        $processKey = PricelistProcessing::PRICELIST_TO_PDF_KEY . '-' . $language . '-' . $id;
+        $processing = PricelistProcessing::where('resourceKey', $processKey)->first();
+        if ($processing) {
+            if ($processing->status === PricelistProcessing::STATUS_SUCCESS) {
+                $path = "/pdf/pricelist-{$language}-{$id}.pdf";
+                if (Storage::exists($path)) {
+                    return ['status' => 'success', 'url' => config('app.url') .$path];
+                }
+            }
+            return ['status' => $processing->status];
+        }
+        return ['status' => PricelistProcessing::STATUS_FAILED];
+    }
+
+    public function renderPdfResource($id, $language = 'en')
+    {
+        $processKey = PricelistProcessing::PRICELIST_TO_PDF_KEY . '-' . $language . '-' . $id;
+        $processing = PricelistProcessing::where('resourceKey', $processKey)->first();
+        if (!$processing || $processing->status !== PricelistProcessing::STATUS_PROGRESS) {
+            $priceList = PriceList::find($id);
+            if ($priceList) {
+                if (!$processing) {
+                    $processing = PricelistProcessing::create(['resourceKey' => $processKey, 'status' => PricelistProcessing::STATUS_PROGRESS]);
+                } else {
+                    $processing->status = PricelistProcessing::STATUS_PROGRESS;
+                    $processing->save();
+                }
+                GeneratePdf::dispatch($priceList, $processing, $language)->onQueue('pdf-processing');
+            }
+        }
+        return ['processing' => $processing];
     }
 
     public function renderResource(ResourceRequest $request, $resourceName, $id)

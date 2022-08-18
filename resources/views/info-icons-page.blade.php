@@ -1,7 +1,7 @@
 @php
 $iconsPagePhoto = getImagesFromPath($resourceData, 'iconsPage.photo_left_page', []);
 @endphp
-<div class="icons-page-left page-break-before" @if (data_get($iconsPagePhoto, '0.name', null))style="background-image: url('/imgc/a4lh/{{ data_get($iconsPagePhoto, '0.name') }}')"@endif>
+<div class="icons-page-left page-break-before" @if (data_get($iconsPagePhoto, '0.name', null))style="background-image: url('{{url('/imgc/a4lh/'.data_get($iconsPagePhoto, '0.name')) }}')"@endif>
     <div class="page-info">
         <h2 class="title p-0 m-0">@t($resourceData, 'iconsPage.title', 'Title placeholder')</h2>
         <div class="short-description p-0 m-0">@t($resourceData, 'iconsPage.short_description', 'Title placeholder')

@@ -25,6 +25,8 @@ Route::get('/resources/{resourceName}/list', [Resource::class, 'resourceList']);
 Route::get('/resources/{resourceName}', [Resource::class, 'create']);
 Route::get('/resources/{resourceName}/{id}', [Resource::class, 'edit']);
 Route::get('/resources/{resourceName}/{id}/html', [\App\Http\Controllers\PagedMedia::class, 'renderResource']);
+Route::get('/pricelist/{id}/{language}/pdf/process', [\App\Http\Controllers\PagedMedia::class, 'renderPdfResource']);
+Route::get('/pricelist/{id}/{language}/pdf/url', [\App\Http\Controllers\PagedMedia::class, 'getPdfUrl']);
 Route::post('/resources/{resourceName}', [Resource::class, 'store']);
 Route::put('/resources/{resourceName}/{id}', [Resource::class, 'update']);
 Route::get('/resources/{resourceName}/{id}/clone', [Resource::class, 'clone']);

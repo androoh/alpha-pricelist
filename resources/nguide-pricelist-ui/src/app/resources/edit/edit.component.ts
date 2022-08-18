@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {FormlyConfig, FormlyFieldConfig, FormlyFormOptions} from '@ngx-formly/core';
@@ -6,7 +6,7 @@ import {DynamicFormService} from '@ng-dynamic-forms/core';
 import {CreateEditResponse, ResourcesResponse, ResourcesService} from '../../shared/services/resources.service';
 import {AlertsService, AlertType} from '../../shared/services/alerts.service';
 import {BreadcrumbItem, BreadcrumbService} from '../../shared/services/breadcrumb.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {FormlyFieldConfigCustom} from '../../shared/formly-field-config-custom';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 
@@ -15,7 +15,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
 
   private resourceName: string | null = null;
   private resourceId: string | null = null;
@@ -30,6 +30,10 @@ export class EditComponent implements OnInit {
   locales: any[] = [];
   defaultLocale = 'nl';
   hideForm = false;
+  isProcessing = true;
+  canDownload = false;
+  downloadUrl = '';
+  poll$: Subscription | null = null;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -54,7 +58,25 @@ export class EditComponent implements OnInit {
           this.fields = this.mapFields(JSON.parse(JSON.stringify(this.originalSchema)), language);
           this.loadingService.endLoading('select-language');
         }, 100);
-
+      }
+      if (language && this.isPriceList && this.resourceId) {
+        this.poll$?.unsubscribe();
+        this.poll$ = this.resourcesService.pollDownload(this.resourceId, language).subscribe((data: any) => {
+          if (data) {
+            if (data?.status === 'success' && data?.url) {
+              this.canDownload = true;
+              this.downloadUrl = data.url;
+            } else {
+              this.canDownload = false;
+              this.downloadUrl = '';
+            }
+            if (data?.status === 'progress') {
+              this.isProcessing = true;
+            } else {
+              this.isProcessing = false;
+            }
+          }
+        })
       }
     });
   }
@@ -162,9 +184,6 @@ export class EditComponent implements OnInit {
     this.router.navigate(['/price-assign', this.resourceId]);
   }
 
-  preview(): void {
-    this.router.navigate(['/price-assign/preview', this.resourceId]);
-  }
   initBreadcrumb(): void {
     this.breadcrumbService.setBreadcrumb([
       {
@@ -181,5 +200,22 @@ export class EditComponent implements OnInit {
       } as BreadcrumbItem
     ]);
     this.breadcrumbService.update();
+  }
+
+  generatePdf(): void {
+    if (this.resourceId) {
+      this.resourcesService.startProcessing(this.resourceId, this.languageControl.value).toPromise().then((data: any) => {
+        this.isProcessing = true;
+        this.canDownload = false;
+      });
+    }
+  }
+
+  download(): void {
+    window.open(this.downloadUrl,'_blank');
+  }
+
+  ngOnDestroy(): void {
+      this.poll$?.unsubscribe();
   }
 }

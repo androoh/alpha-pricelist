@@ -10,12 +10,12 @@ $rightPagePhoto = getImagesFromPath($treeItem, 'right_page_photo');
 @if ($category)
     @if (data_get($leftPagePhoto, '0.name'))
         <div class="category-page-left"
-            style="background-image: url('/imgc/a4lw/{{ data_get($leftPagePhoto, '0.name') }}')">
+            style="background-image: url('{{url('/imgc/a4lw/'.data_get($leftPagePhoto, '0.name')) }}')">
         </div>
     @endif
     @if (data_get($rightPagePhoto, '0.name'))
         <div class="category-page-right"
-            style="background-image: url('/imgc/a4lw/{{ data_get($rightPagePhoto, '0.name') }}')">
+            style="background-image: url('{{url('/imgc/a4lw/'.data_get($rightPagePhoto, '0.name')) }}')">
             <div class="title">@t($treeItem, 'title')</div>
         </div>
     @endif
