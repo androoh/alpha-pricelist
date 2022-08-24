@@ -1,4 +1,4 @@
-@extends('layouts.pagedjs')
+@extends('layouts.app')
 @section('styles')
     <style>
         @media print {
