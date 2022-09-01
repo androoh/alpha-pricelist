@@ -4,7 +4,7 @@ $optionsAndAccessoriesPage = data_get($resourceData, 'optionsAndAccessoriesPage'
 <div class="toc-page">
     <div style="min-height: 29cm">
         <h1>{!! __('Table of CONTENTS') !!}</h1>
-        <div class="columns-count-2">
+        <div class="columns-count-2 page-break-inside-avoid">
             @foreach (data_get($resourceData, 'mainProductsPage.categories', []) as $treeItem)
                 @php
                     $category = null;
