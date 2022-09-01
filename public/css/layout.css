@@ -10372,12 +10372,12 @@ table.options-table .title-row {
   font-weight: bold;
 }
 .toc-page .category-section .category-title {
-  font-size: 11pt;
+  font-size: 10pt;
   font-weight: bold;
   border-bottom: 1pt #58595b solid;
   margin: 0;
   padding: 0;
-  margin-bottom: 4pt;
+  margin-bottom: 2pt;
 }
 .toc-page .category-section .category-item {
   padding-left: 15pt;
@@ -10389,10 +10389,10 @@ table.options-table .title-row {
   float: left;
   width: 0;
   letter-spacing: 2pt;
-  font-size: 10pt;
+  font-size: 8pt;
 }
 .toc-page .category-section .category-item a {
-  font-size: 10pt;
+  font-size: 8pt;
   text-decoration: none;
   color: #97999c;
   background-color: white;
