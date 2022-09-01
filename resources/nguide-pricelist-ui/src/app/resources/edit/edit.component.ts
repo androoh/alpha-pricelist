@@ -215,6 +215,10 @@ export class EditComponent implements OnInit, OnDestroy {
     window.open(this.downloadUrl,'_blank');
   }
 
+  preview(): void {
+    this.router.navigate(['/price-assign/preview', this.resourceId]);
+  }
+
   ngOnDestroy(): void {
       this.poll$?.unsubscribe();
   }

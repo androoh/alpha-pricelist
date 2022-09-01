@@ -10363,22 +10363,21 @@ table.options-table .title-row {
   color: #58595b;
 }
 .toc-page h1 {
-  font-size: 20pt;
+  font-size: 24pt;
   border-bottom: 1pt #4D545E solid;
   margin-top: 0;
   margin-bottom: 5pt;
-  display: block;
 }
 .toc-page h1 strong {
   font-weight: bold;
 }
 .toc-page .category-section .category-title {
-  font-size: 10pt;
+  font-size: 12pt;
   font-weight: bold;
   border-bottom: 1pt #58595b solid;
   margin: 0;
   padding: 0;
-  margin-bottom: 2pt;
+  margin-bottom: 5pt;
 }
 .toc-page .category-section .category-item {
   padding-left: 15pt;
@@ -10390,10 +10389,10 @@ table.options-table .title-row {
   float: left;
   width: 0;
   letter-spacing: 2pt;
-  font-size: 8pt;
+  font-size: 10pt;
 }
 .toc-page .category-section .category-item a {
-  font-size: 8pt;
+  font-size: 10pt;
   text-decoration: none;
   color: #97999c;
   background-color: white;
