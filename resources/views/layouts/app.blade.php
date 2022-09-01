@@ -3,7 +3,7 @@
 <head>
     <title>{{ translateFromPath($resourceData, 'name', 'Price List') }}</title>
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
-    @if ($ignorePagedjs)
+    @if (!$ignorePagedjs)
         <script src="{{ asset('js/paged.polyfill.js') }}"></script>
         <script>
             class RepeatingTableHeaders extends Paged.Handler {
