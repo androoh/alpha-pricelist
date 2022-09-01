@@ -10367,6 +10367,7 @@ table.options-table .title-row {
   border-bottom: 1pt #4D545E solid;
   margin-top: 0;
   margin-bottom: 5pt;
+  page-break-after: avoid;
 }
 .toc-page h1 strong {
   font-weight: bold;

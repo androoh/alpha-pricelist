@@ -453,6 +453,7 @@ table.options-table {
     border-bottom: 1pt $main solid;
     margin-top: 0;
     margin-bottom: 5pt;
+    page-break-after: avoid;
 
     strong {
       font-weight: bold;
