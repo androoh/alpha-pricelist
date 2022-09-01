@@ -127,6 +127,7 @@ class PagedMedia extends Controller
         $showCross = $showCross === 'true';
         $path = $request->query('path', null);
         $template = $request->query('template', null);
+        $ignorePagedjs = $request->query('ignorePagedjs', false);
         config(['app.template.locale' => $locale]);
         if (!$template) {
             throw new \Exception('Template not specified');
@@ -134,6 +135,7 @@ class PagedMedia extends Controller
         $treeItem = data_get($resourceData, $path, null);
         App::setLocale($locale);
         return view('template-preview', [
+            'ignorePagedjs' => $ignorePagedjs,
             'resourceData' => $resourceData,
             'treeItem' => $treeItem,
             'template' => $template,

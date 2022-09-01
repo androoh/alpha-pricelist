@@ -24,7 +24,7 @@ class GeneratePdf implements ShouldQueue, ShouldBeUnique
     public $pagedJsCli;
     public $apiUrl;
     public $language = 'en';
-    public $cmd = "PAGEDJS_CLI 'APP_URL/api/resources/priceList/PRICELIST_ID/html?path=&template=pricelist&locale=LANGUAGE&pageSize=A4&showCropBorders=false&showCross=false&pageOrientation=portrait' -o PAGEDJS_OUTPUT_PATH/pricelist-LANGUAGE-PRICELIST_ID.pdf -t 600000 --additional-script 'PAGEDJS_HANDLERS'";
+    public $cmd = "PAGEDJS_CLI 'APP_URL/api/resources/priceList/PRICELIST_ID/html?path=&template=pricelist&locale=LANGUAGE&pageSize=A4&showCropBorders=false&showCross=false&pageOrientation=portrait&ignorePagedjs=true' -o PAGEDJS_OUTPUT_PATH/pricelist-LANGUAGE-PRICELIST_ID.pdf -t 600000 --additional-script 'PAGEDJS_HANDLERS'";
 
     /**
      * Create a new job instance.
