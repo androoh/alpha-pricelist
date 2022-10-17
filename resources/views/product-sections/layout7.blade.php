@@ -4,7 +4,7 @@
             $i = 0;
             $totalCount = 0;
         @endphp
-        <table class="w-100">
+        <div class="w-100">
             @foreach(data_get($productSection, 'product_option_sections', []) as $productOptionSection)
                 @php
                     $displayMinOrderQty = data_get($productOptionSection, 'displayMinOrderQty', false);
@@ -32,15 +32,15 @@
                             $formatType = data_get($productOptionData, 'price_options.type', null);
                         @endphp
                         @if($i === 1)
-                            <tr class="page-break-inside-avoid">
+                            <div class="page-break-inside-avoid row">
                                 @endif
-                                <td class="w-30 valign-top @if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
+                                <div class="w-30 col-4 valign-top @if($i === 1) pe-2 @endif @if($i === 3) ps-2 @endif @if($i === 2) ps-1 pe-1 @endif">
                                     <div class="product-item mb-1">
                                         @include('render-image', ['photo' => data_get($productOptionPhoto, 0), 'class' => ['product-item-img'], 'type' => 'cropped'])
                                         <div class="product-item-title text-start">
                                             @t($productOptionData, 'name', '')
                                         </div>
-                                        <table class="options-table">
+                                        <table class="options-table" style="page-break-before: avoid;">
                                             <thead>
                                             <tr>
                                                 @if ($displayMinOrderQty)
@@ -71,9 +71,9 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </td>
+                                </div>
                                 @if($i === 3 || $totalCount === count($productOptions))
-                            </tr>
+                            </div>
                         @endif
                         @php
                             if($i === 3) {
@@ -83,6 +83,6 @@
                     @endif
                 @endforeach
             @endforeach
-        </table>
+        </div>
     </div>
 </div>
