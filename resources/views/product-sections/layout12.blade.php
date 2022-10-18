@@ -4,7 +4,7 @@
         $totalCount = 0;
         $productOptionSections = data_get($productSection, 'product_option_sections', []);
     @endphp
-    <table class="w-100">
+    <div class="w-100">
         @foreach ($productOptionSections as $productOptionSection)
             @php
                 $i++;
@@ -13,9 +13,9 @@
                 $displayTitleType = data_get($productOptionSection, 'titleDisplayType', 'title');
             @endphp
             @if ($i === 1)
-                <tr class="page-break-inside-avoid">
+                <div class="page-break-inside-avoid row">
             @endif
-            <td class="w-50 valign-top @if ($i === 1) pe-2 @endif @if ($i === 2) ps-2 @endif">
+            <div class="col-6 valign-top @if ($i === 1) pe-2 @endif @if ($i === 2) ps-2 @endif">
                 <div class="mb-1 w-100">
                     @php
                         $photoGallery = getImagesFromPath($productOptionSection, 'product_options_group_photo', []);
@@ -103,9 +103,9 @@
                         </tbody>
                     </table>
                 </div>
-            </td>
+            </div>
             @if ($i === 2 || $totalCount === count($productOptionSections))
-                </tr>
+                </div>
             @endif
             @php
                 if ($i === 2) {
@@ -113,5 +113,5 @@
                 }
             @endphp
         @endforeach
-    </table>
+    </div>
 </div>
