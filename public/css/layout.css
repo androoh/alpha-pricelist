@@ -10211,7 +10211,7 @@ table.options-table .title-row {
 .product-grid-4 .product-item .product-item-img {
   display: block;
   width: 100%;
-  height: 100pt;
+  height: 90pt;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -10815,7 +10815,7 @@ ul {
 }
 
 .img-cropped {
-  min-height: 100pt;
+  min-height: 90pt;
   width: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
