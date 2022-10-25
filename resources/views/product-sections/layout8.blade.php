@@ -18,7 +18,7 @@
                 @endif
                 <th class="text-start">@t($productOptionSection, 'title', __('Options'))</th>
                 @if ($displayMinOrderQty)
-                    <th style="width: 15%">{{__('Min. order qty')}}</th>
+                    <th style="width: 16%">{{__('Min. order qty')}}</th>
                 @endif
                 <th style="width: 15%">{{__('Art. No.')}}</th>
                 @if (!$hidePrices)

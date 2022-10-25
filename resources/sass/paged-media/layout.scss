@@ -11,6 +11,10 @@ $main: #4D545E;
     //    margin : 0;
     //    background-color: transparent;
     //}
+    .pagedjs_pagebox > .pagedjs_area {
+        padding: 0;
+    }
+
 }
 @media screen {
     body {

@@ -9925,6 +9925,11 @@
   text-align: right;
 }
 
+@media print {
+  .pagedjs_pagebox > .pagedjs_area {
+    padding: 0;
+  }
+}
 @media screen {
   body {
     background-color: #4a5568;
@@ -10048,7 +10053,7 @@ img {
 
 table.options-table {
   font-weight: 100;
-  border-bottom: 2pt #4D545E solid;
+  border-bottom: 2px #4D545E solid;
 }
 table.options-table thead tr,
 table.options-table tr.thead {
@@ -10072,7 +10077,7 @@ table.options-table th {
 table.options-table td,
 table.options-table th {
   padding: 0 2pt 2pt 2pt;
-  border-right: 2pt #4D545E solid;
+  border-right: 2px #4D545E solid;
   text-align: center;
 }
 table.options-table td.price,
@@ -10409,7 +10414,7 @@ table.options-table .title-row {
   page: productOptionsPage;
 }
 .product-options-page table.options-table td {
-  border-bottom: 2pt solid #4D545E;
+  border-bottom: 2px solid #4D545E;
   padding-top: 2pt;
 }
 

@@ -44,7 +44,7 @@ $gray3: #8f989b;
 
 table.options-table {
   font-weight: 100;
-  border-bottom: 2pt $main solid;
+  border-bottom: 2px $main solid;
 
   thead tr,
   tr.thead {
@@ -73,7 +73,7 @@ table.options-table {
   td,
   th {
     padding: 0 2pt 2pt 2pt;
-    border-right: 2pt $main solid;
+    border-right: 2px $main solid;
     text-align: center;
     &.price {
       width: 60pt;
@@ -505,7 +505,7 @@ table.options-table {
 
   table.options-table {
     td {
-      border-bottom: 2pt solid $main;
+      border-bottom: 2px solid $main;
       padding-top: 2pt;
     }
   }
