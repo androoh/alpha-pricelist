@@ -24,10 +24,10 @@ export class RepeatComponent extends FieldArrayType<FormlyFieldConfigCustom> {
 
   drop(event: CdkDragDrop<string[]>) {
     if (this.field.fieldGroup) {
-      const currentValue = this.formControl.value;
+      let currentValue = this.formControl.value;
       moveItemInArray(this.field.fieldGroup, event.previousIndex, event.currentIndex);
       moveItemInArray(currentValue, event.previousIndex, event.currentIndex);
-      this.formControl.setValue(currentValue);
+      // this.formControl.setValue([...currentValue]);
     }
   }
 
